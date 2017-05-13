@@ -1,0 +1,11 @@
+//
+//  CommonCrypto.xcconfig
+//  Ed25519
+//
+//  Created by pebble8888 on 2017/05/13.
+//  Copyright © 2017年 pebble8888. All rights reserved.
+//
+
+MODULEMAP_FILE[sdk=iphoneos*]        = $(SRCROOT)/CommonCrypto/iphoneos.modulemap
+MODULEMAP_FILE[sdk=iphonesimulator*] = $(SRCROOT)/CommonCrypto/iphonesimulator.modulemap
+MODULEMAP_FILE[sdk=macosx*]          = $(SRCROOT)/CommonCrypto/macosx.modulemap
