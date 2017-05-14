@@ -21,10 +21,10 @@ while 1:
   pk = ed25519.publickey(sk)
   m = binascii.unhexlify(x[2])
   s = ed25519.signature(m,sk,pk)
-  print "sk:" + binascii.b2a_hex(sk)
-  print "pk:" + binascii.b2a_hex(pk)
-  print "m:" + binascii.b2a_hex(m)
-  print "s:" + binascii.b2a_hex(s)
+  #print "sk:" + binascii.b2a_hex(sk)
+  #print "pk:" + binascii.b2a_hex(pk)
+  #print "m:" + binascii.b2a_hex(m)
+  #print "s:" + binascii.b2a_hex(s)
   ed25519.checkvalid(s,m,pk)
   forgedsuccess = 0
   try:
@@ -42,3 +42,4 @@ while 1:
   assert x[1] == binascii.hexlify(pk)
   assert x[3] == binascii.hexlify(s + m)
   print "."
+  break

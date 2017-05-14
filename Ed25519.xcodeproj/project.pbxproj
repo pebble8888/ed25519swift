@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2294333B187FEBF285296251 /* Pods_Ed25519iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3264F45C8E45C0EEA6B28894 /* Pods_Ed25519iOS.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		7AB7C585BC13CB429AA3602F /* Pods_Ed25519iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5443A5962331252EC23D6F2 /* Pods_Ed25519iOSTests.framework */; };
+		A22F451E1EC8625000A0BC64 /* BigInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */; };
 		A24C41061EC71DC800B24AAF /* Ed25519iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24C40FD1EC71DC700B24AAF /* Ed25519iOS.framework */; };
 		A24C410B1EC71DC800B24AAF /* Ed25519iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24C410A1EC71DC800B24AAF /* Ed25519iOSTests.swift */; };
 		A24C410D1EC71DC800B24AAF /* Ed25519iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A24C40FF1EC71DC700B24AAF /* Ed25519iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,6 +39,7 @@
 		3264F45C8E45C0EEA6B28894 /* Pods_Ed25519iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4817CDEFFA75184F476C44C9 /* Pods-Ed25519iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519iOS/Pods-Ed25519iOS.release.xcconfig"; sourceTree = "<group>"; };
 		8BAFDC0F7463E39E59C5783C /* Pods-Ed25519iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519iOSTests/Pods-Ed25519iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt+Extension.swift"; sourceTree = "<group>"; };
 		A24C40FD1EC71DC700B24AAF /* Ed25519iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ed25519iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24C40FF1EC71DC700B24AAF /* Ed25519iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ed25519iOS.h; sourceTree = "<group>"; };
 		A24C41001EC71DC700B24AAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		A24C41141EC71E2A00B24AAF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */,
 				A24C41151EC71E2A00B24AAF /* Ed25519.swift */,
 			);
 			path = Sources;
@@ -392,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A24C41161EC71E2A00B24AAF /* Ed25519.swift in Sources */,
+				A22F451E1EC8625000A0BC64 /* BigInt+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +680,7 @@
 				A2BA80A01EC7249B00D66A14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -31,8 +31,6 @@
 		9BB41C7AD21ECF10EA2FDF1F9CF2E32D /* Pods-Ed25519iOSTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECF2DF895F66F3D1F95CD1036B72AEF /* Pods-Ed25519iOSTests-dummy.m */; };
 		9D74C35CC9D1E5B9407AC38BA1F9300D /* BigUInt Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B38D94BB798FF7C6B3453D45201958 /* BigUInt Addition.swift */; };
 		A1770840725526993BA2A21DB18FB9ED /* BigUInt Subtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B1AAC489DA8A5D9CB940319A681A9 /* BigUInt Subtraction.swift */; };
-		A2BA80AA1EC72C0A00D66A14 /* BigInt Exponentiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA80A91EC72C0900D66A14 /* BigInt Exponentiation.swift */; };
-		A2BA80AC1EC72DDC00D66A14 /* BigInt Bitwise Ops.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA80AB1EC72DDC00D66A14 /* BigInt Bitwise Ops.swift */; };
 		A342B22D08178445EC448AA5475D256D /* BigUInt Multiplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1807837FBC8B6C3F84DEA29C2C815B7E /* BigUInt Multiplication.swift */; };
 		A59A79D530450A3468C745F3D4E660FA /* BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A4A1F2CACD127711B871AF646DD242 /* BigUInt.swift */; };
 		A6B2535DAB08A05E7F989E23318CA705 /* SipHasher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD31E46225B73AECFA51C25BE10175 /* SipHasher.swift */; };
@@ -128,8 +126,6 @@
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		96FFC95B3EB0D813258621BC590F9228 /* Bitwise Hacks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bitwise Hacks.swift"; path = "sources/Bitwise Hacks.swift"; sourceTree = "<group>"; };
 		A0038613DE9D19EB63E1687042A4FC3D /* SipHash-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SipHash-dummy.m"; sourceTree = "<group>"; };
-		A2BA80A91EC72C0900D66A14 /* BigInt Exponentiation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BigInt Exponentiation.swift"; path = "sources/BigInt Exponentiation.swift"; sourceTree = "<group>"; };
-		A2BA80AB1EC72DDC00D66A14 /* BigInt Bitwise Ops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt Bitwise Ops.swift"; sourceTree = "<group>"; };
 		A5E0B872472E5C7F98DA8511782080EA /* SipHash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SipHash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A715591F1D8E61506A75AE5DFC417B1C /* Pods-Ed25519iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Ed25519iOS.modulemap"; sourceTree = "<group>"; };
 		AA09FD1F01D0230AECF3DD80E0CE14F4 /* Pods-Ed25519iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Ed25519iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -228,8 +224,6 @@
 				96FFC95B3EB0D813258621BC590F9228 /* Bitwise Hacks.swift */,
 				11B28529E0EB2E6CDEEF11C6BAEFF8CB /* ShiftOperations.swift */,
 				0F1DA8F7F4679E7682BE47B2790AC8F6 /* Support Files */,
-				A2BA80A91EC72C0900D66A14 /* BigInt Exponentiation.swift */,
-				A2BA80AB1EC72DDC00D66A14 /* BigInt Bitwise Ops.swift */,
 			);
 			path = BigInt;
 			sourceTree = "<group>";
@@ -530,7 +524,6 @@
 				658EFDA0C105F6AB694AF725EAD5699E /* BigInt.swift in Sources */,
 				9D74C35CC9D1E5B9407AC38BA1F9300D /* BigUInt Addition.swift in Sources */,
 				4B4C4810D88838815629134BB9A63C70 /* BigUInt Bitwise Ops.swift in Sources */,
-				A2BA80AC1EC72DDC00D66A14 /* BigInt Bitwise Ops.swift in Sources */,
 				270A3EE7FCC20CA2AB7361E2D762A124 /* BigUInt Comparison.swift in Sources */,
 				6208C31B014EF85CDCCD625E1CDA7AD1 /* BigUInt Data.swift in Sources */,
 				7A1F44D8D2B0880BA65EAB76D34623FC /* BigUInt Division.swift in Sources */,
@@ -538,7 +531,6 @@
 				44E2786195B7D1758895A56153AC27B3 /* BigUInt GCD.swift in Sources */,
 				E1F06583145095EDCF60986D68B1E8F2 /* BigUInt Hashing.swift in Sources */,
 				A342B22D08178445EC448AA5475D256D /* BigUInt Multiplication.swift in Sources */,
-				A2BA80AA1EC72C0A00D66A14 /* BigInt Exponentiation.swift in Sources */,
 				DFD5EA8B4495E1D6733F57E8DEE0C997 /* BigUInt Prime Test.swift in Sources */,
 				F3411A4775E52E790195A9BF2AAA2B93 /* BigUInt Radix Conversion.swift in Sources */,
 				ADBC243E04192FA975113FE2EFE07F19 /* BigUInt Random.swift in Sources */,

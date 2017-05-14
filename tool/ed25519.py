@@ -1,18 +1,12 @@
 import hashlib
 
-#
 b = 256
-#
 q = 2**255 - 19
-#
 l = 2**252 + 27742317777372353535851937790883648493
 
 def H(m):
   return hashlib.sha512(m).digest()
 
-# b
-# e
-# m
 def expmod(b,e,m):
   if e == 0: return 1
   t = expmod(b,e/2,m)**2 % m
@@ -27,9 +21,31 @@ I = expmod(2,(q-1)/4,q)
 
 def xrecover(y):
   xx = (y*y-1) * inv(d*y*y+1)
+  print "xx:"
+  print xx
   x = expmod(xx,(q+3)/8,q)
-  if (x*x - xx) % q != 0: x = (x*I) % q
-  if x % 2 != 0: x = q-x
+  print "x1:"
+  print x
+  #print "I:"
+  #print I
+  print "q:"
+  print q
+
+  #print "x*x:"
+  #print x*x
+  print "(x*x - xx) % q : "
+  print (x*x - xx) % q
+
+  if ((x*x - xx) % q) != 0:
+    x = (x*I) % q
+    print "x2:"
+    print x
+
+  if x % 2 != 0:
+    x = q-x
+
+  print "x3:"
+  print x
   return x
 
 By = 4 * inv(5)
@@ -45,9 +61,6 @@ def edwards(P,Q):
   y3 = (y1*y2+x1*x2) * inv(1-d*x1*x2*y1*y2)
   return [x3 % q,y3 % q]
 
-# P
-# e : Int?
-# -> 
 def scalarmult(P,e):
   if e == 0: return [0,1]
   Q = scalarmult(P,e/2)
@@ -72,8 +85,22 @@ def bit(h,i):
 #
 def publickey(sk):
   h = H(sk)
+  #print "h:"
+  #print h.encode("hex")
   a = 2**(b-2) + sum(2**i * bit(h,i) for i in range(3,b-2))
+  print "a:"
+  print a
+  print "By:"
+  print By
+  print "Bx:"
+  print Bx
+  print "Bx % q:"
+  print Bx % q
+  print "B:"
+  print B
   A = scalarmult(B,a)
+  print "A:"
+  print A
   return encodepoint(A)
 
 # -> BigUInt
@@ -106,15 +133,38 @@ def decodepoint(s):
   if not isoncurve(P): raise Exception("decoding point that is not on curve")
   return P
 
-# s
-# m
-# pk
 def checkvalid(s,m,pk):
   if len(s) != b/4: raise Exception("signature length is wrong")
   if len(pk) != b/8: raise Exception("public-key length is wrong")
+
+  #D1 = d
+  #print "D1:"
+  #print D1
+
+  #E1 = expmod(123, 456, 789)
+  #print "E1:"
+  #print E1
+
+  #E2 = inv(-63071608575235754152816114216420641339846018691767810910708400832114223588254292410448319)
+  #print "E2:"
+  #print E2
+
+  EE = edwards([123,456], [789, 12])
+  # ok
+  print "EE:"
+  print EE
+
   R = decodepoint(s[0:b/8])
+  #print "R:"
+  #print R
   A = decodepoint(pk)
+  #print "A:"
+  #print A
   S = decodeint(s[b/8:b/4])
+  #print "S:"
+  #print S
   h = Hint(encodepoint(R) + pk + m)
+  #print "h:"
+  #print h
   if scalarmult(B,S) != edwards(R,scalarmult(A,h)):
     raise Exception("signature does not pass verification")
