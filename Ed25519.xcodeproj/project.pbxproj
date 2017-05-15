@@ -14,6 +14,7 @@
 		A24C410B1EC71DC800B24AAF /* Ed25519iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24C410A1EC71DC800B24AAF /* Ed25519iOSTests.swift */; };
 		A24C410D1EC71DC800B24AAF /* Ed25519iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A24C40FF1EC71DC700B24AAF /* Ed25519iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A24C41161EC71E2A00B24AAF /* Ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24C41151EC71E2A00B24AAF /* Ed25519.swift */; };
+		A2833AF21EC9646F000654A7 /* BigInt+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2833AF11EC9646F000654A7 /* BigInt+ExtensionTests.swift */; };
 		A2BA80A81EC725E700D66A14 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		A24C410A1EC71DC800B24AAF /* Ed25519iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ed25519iOSTests.swift; sourceTree = "<group>"; };
 		A24C410C1EC71DC800B24AAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A24C41151EC71E2A00B24AAF /* Ed25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519.swift; sourceTree = "<group>"; };
+		A2833AF11EC9646F000654A7 /* BigInt+ExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt+ExtensionTests.swift"; sourceTree = "<group>"; };
 		A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2BA80911EC7249A00D66A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2BA80A51EC7250100D66A14 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				A24C410A1EC71DC800B24AAF /* Ed25519iOSTests.swift */,
 				A24C410C1EC71DC800B24AAF /* Info.plist */,
+				A2833AF11EC9646F000654A7 /* BigInt+ExtensionTests.swift */,
 			);
 			path = Ed25519iOSTests;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2833AF21EC9646F000654A7 /* BigInt+ExtensionTests.swift in Sources */,
 				A24C410B1EC71DC800B24AAF /* Ed25519iOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
