@@ -19,20 +19,23 @@ public struct Ed25519 {
         return sha512(m).digest()
     }
     
+    // return val is less than m
     static func expmod(_ b:BigInt, _ e:BigInt, _ m:BigInt) -> BigInt {
         if e == 0 { return 1 }
         var t = expmod(b, e.divide(2), m).power(2).modulo(m)
-        if e.odd() != 0 {
+        if e.parity() != 0 {
             t = (t*b).modulo(m)
         }
         return t
     }
     
+    // return val is less than q
     static func inv(_ x:BigInt) -> BigInt {
         return expmod(x,q-2,q)
     }
     
     static let d:BigInt = BigInt(-121665) * inv(BigInt(121666)) 
+    // return val is less than q
     static let I:BigInt = expmod(2, (q-1).divide(4), q)
     
     static func xrecover(_ y:BigInt) -> BigInt {
@@ -67,7 +70,7 @@ public struct Ed25519 {
         }
         var Q = scalarmult(P, e.divide(2))
         Q = edwards(Q, Q)
-        if e.odd() != 0 {
+        if e.parity() != 0 {
             Q = edwards(Q, P)
         }
         return Q
@@ -76,7 +79,7 @@ public struct Ed25519 {
     static func encodeint(_ y:BigInt) -> [UInt8] {
         var bits:[Int] = []
         for i in 0 ..< b {
-            bits.append((y.abs >> i).odd())
+            bits.append((y.abs >> i).parity())
         }
         var s:[UInt8] = []
         for i in 0 ..< b/8 {
@@ -90,9 +93,9 @@ public struct Ed25519 {
         let y = P[1]
         var bits:[Int] = []
         for i in 0 ..< b-1 {
-            bits.append((y.abs >> i).odd())
+            bits.append((y.abs >> i).parity())
         }
-        bits.append(x.odd())
+        bits.append(x.parity())
         var s:[UInt8] = [] 
         for i in 0 ..< b/8 {
             s.append(UInt8( (0..<8).map({ bits[i*8 + $0] << $0 }).sum() ))
@@ -104,7 +107,7 @@ public struct Ed25519 {
         return BigInt((h[i/8] >> UInt8(i%8)) & 1)
     }
     
-    static func publickey(_ sk:[UInt8] ) -> [UInt8] {
+    public static func publickey(_ sk:[UInt8] ) -> [UInt8] {
         let h:[UInt8] = H(sk)
         let a:BigInt = BigInt(2).power(b-2) + (3..<b-2).map({BigInt(2).power($0) * bit(h, $0)}).sum()
         let A = scalarmult(B, a)
@@ -116,7 +119,7 @@ public struct Ed25519 {
         return (0..<2*b).map({BigInt(2).power($0) * bit(h, $0)}).sum()
     }
     
-    static func signature(_ m:[UInt8] , _ sk:[UInt8], _ pk:[UInt8]) -> [UInt8] {
+    public static func signature(_ m:[UInt8] , _ sk:[UInt8], _ pk:[UInt8]) -> [UInt8] {
         let h:[UInt8] = H(sk)
         let a = BigInt(2).power(b-2) + (3..<b-2).map({BigInt(2).power($0) * bit(h, $0)}).sum() 
         var s:[UInt8] = [] 
@@ -147,7 +150,7 @@ public struct Ed25519 {
     static func decodepoint(_ s:[UInt8]) -> [BigInt] {
         let y = (0..<b-1).map({BigInt(2).power($0) * bit(s, $0)}).sum()
         var x = xrecover(y)
-        if BigInt(x.odd()) != bit(s, b-1) {
+        if BigInt(x.parity()) != bit(s, b-1) {
             x = q-x
         }
         let P = [x,y]
@@ -157,7 +160,7 @@ public struct Ed25519 {
         return P
     }
     
-    static func checkvalid(_ s:[UInt8], _ m:[UInt8], _ pk:[UInt8]) -> Bool {
+    public static func checkvalid(_ s:[UInt8], _ m:[UInt8], _ pk:[UInt8]) -> Bool {
         if s.count != b/4 {
             // signature length is wrong
             return false
@@ -210,7 +213,7 @@ extension BigInt: Summable {
 }
 
 extension String {
-    func unhexlify() -> [UInt8] {
+    public func unhexlify() -> [UInt8] {
         var pos = startIndex
         return (0..<characters.count/2).flatMap { _ in
             defer { pos = index(pos, offsetBy: 2) }
@@ -220,7 +223,7 @@ extension String {
 }
 
 extension Collection where Iterator.Element == UInt8 {
-    func hexDescription() -> String {
+    public func hexDescription() -> String {
         return self.map({ String(format: "%02x", $0) }).joined()
     }
 }

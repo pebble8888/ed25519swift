@@ -10,14 +10,14 @@ import BigInt
 
 extension BigInt {
     // 0 or 1
-    public func odd() -> Int {
-        return self.abs.odd()
+    public func parity() -> Int {
+        return self.abs.parity()
     }
 }
 
 extension BigUInt {
     // return value: 0 or 1
-    public func odd() -> Int {
+    public func parity() -> Int {
         let a:UIntMax = self[0]
         let b:UIntMax = a & 1
         return Int(b)
@@ -99,4 +99,28 @@ extension BigInt {
             }
         }
     }
+}
+
+extension BigInt
+{
+    static func <<(a: BigInt, b: Int) -> BigInt
+    {
+        return BigInt(abs:a.abs << b, negative:a.negative)
+    }
+    
+    static func >>(a: BigInt, b: Int) -> BigInt
+    {
+        return BigInt(abs:a.abs >> b, negative:a.negative)
+    }
+    
+    static func <<=(a: inout BigInt, b: Int)
+    {
+        a.abs <<= b 
+    }
+    
+    static func >>=(a: inout BigInt, b: Int)
+    {
+        a.abs >>= b
+    }
+    
 }
