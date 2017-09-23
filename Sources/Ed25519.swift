@@ -79,7 +79,7 @@ public struct Ed25519 {
     static func encodeint(_ y:BigInt) -> [UInt8] {
         var bits:[Int] = []
         for i in 0 ..< b {
-            bits.append((y.abs >> i).parity())
+            bits.append((y.magnitude >> i).parity())
         }
         var s:[UInt8] = []
         for i in 0 ..< b/8 {
@@ -93,7 +93,7 @@ public struct Ed25519 {
         let y = P[1]
         var bits:[Int] = []
         for i in 0 ..< b-1 {
-            bits.append((y.abs >> i).parity())
+            bits.append((y.magnitude >> i).parity())
         }
         bits.append(x.parity())
         var s:[UInt8] = [] 

@@ -1,14 +1,13 @@
 //
 //  Ed25519macOSTests.swift
-//  Ed25519macOSTests
 //
-//  Created by pebble8888 on 2017/05/19.
+//  Created by pebble8888 on 2017/05/13.
 //  Copyright © 2017年 pebble8888. All rights reserved.
 //
 
 import XCTest
 import BigInt
-import Ed25519macOS
+@testable import Ed25519macOS
 
 class Ed25519macOSTests: XCTestCase {
     
@@ -19,6 +18,12 @@ class Ed25519macOSTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
+    /*
+    func test_000() {
+        let q:BigInt = BigInt(2).power(255) - 19
+        Ed25519.expmod(5, q-2, q)
+    }
+     */
     
     func test0() {
         let x0 = "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
@@ -28,18 +33,16 @@ class Ed25519macOSTests: XCTestCase {
         let sk = String(Array(x0.characters)[0..<64]).unhexlify()
         print("sk:\(sk.hexDescription())")
         let pk = Ed25519.publickey(sk) 
+        print("pk:\(pk.hexDescription())")
         let m = x2.unhexlify()
-        //let s = Ed25519.signature(m, sk, pk)
-        
+        print("m:\(m.hexDescription())")
+        let s = Ed25519.signature(m, sk, pk)
+        print("s:\(s.hexDescription())")
+        let forgedm:[UInt8] = [0x78]
+        XCTAssert(Ed25519.checkvalid(s, forgedm, pk))
         XCTAssertEqual(x0, (sk + pk).hexDescription())
         XCTAssertEqual(x1, pk.hexDescription())
-        //XCTAssertEqual(x3, (s + m).hexDescription())
-        
-        #if false 
-        // 一致しないことを確認
-        let forgedm:[UInt8] = [0x78]
-        XCTAssert(!Ed25519.checkvalid(s, forgedm, pk))
-        #endif
+        XCTAssertEqual(x3, s.hexDescription())
     }
     
     func test1() {
@@ -50,27 +53,17 @@ class Ed25519macOSTests: XCTestCase {
         let sk = String(Array(x0.characters)[0..<64]).unhexlify()
         print("sk:\(sk.hexDescription())")
         let pk = Ed25519.publickey(sk) 
-        //print("pk:\(pk.hexDescription())")
+        print("pk:\(pk.hexDescription())")
         let m = x2.unhexlify()
-        //print("m:\(m.hexDescription())")
+        print("m:\(m.hexDescription())")
         let s = Ed25519.signature(m, sk, pk)
-        //print("s:\(s.hexDescription())")
+        print("s:\(s.hexDescription())")
         
+        let forgedm:[UInt8] = m.enumerated().map({ $0.1 + (($0.0 == m.count - 1) ? UInt8(1) : UInt8(0)) }) 
+        XCTAssert(Ed25519.checkvalid(s, forgedm, pk))
         XCTAssertEqual(x0, (sk + pk).hexDescription())
         XCTAssertEqual(x1, pk.hexDescription())
-        XCTAssertEqual(x3, (s + m).hexDescription())
-        
-        // 一致しないことを確認
-        let forgedm:[UInt8] = m.enumerated().map({ $0.1 + (($0.0 == m.count - 1) ? UInt8(1) : UInt8(0)) }) 
-        XCTAssert(!Ed25519.checkvalid(s, forgedm, pk))
-    }
-    
-    
-    func testPerformanceExample() {
-        self.measure {
-            let q:BigUInt = BigUInt(1024).power(1024) 
-            print("q:\(q)")
-        }
+        XCTAssertEqual(x3, s.hexDescription())
     }
     
 }

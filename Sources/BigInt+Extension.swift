@@ -11,29 +11,36 @@ import BigInt
 extension BigInt {
     // 0 or 1
     public func parity() -> Int {
-        return self.abs.parity()
+        return self.magnitude.parity()
+    }
+    
+    public init(word: Word) {
+        let m = BigUInt(word)
+        self.init(sign: word >= 0 ? .plus : .minus, magnitude: m)
     }
 }
 
 extension BigUInt {
     // return value: 0 or 1
     public func parity() -> Int {
-        let a:UIntMax = self[0]
-        let b:UIntMax = a & 1
+        let a = self % BigUInt(2)
+        let b = a & 1
         return Int(b)
     }
 }
 
 extension BigInt {
+    /*
     public func power(_ exponent: Int) -> BigInt {
         assert(exponent >= 0)
-        let val = self.abs.power(exponent)
+        let val = self.magnitude.power(exponent)
         if exponent % 2 == 0 {
-            return BigInt(abs:val) 
+            return BigInt(sign:.plus, magnitude:val)
         } else {
-            return BigInt(abs:val, negative:self.negative)
+            return BigInt(sign:.minus, magnitude:val)
         }
     }
+     */
     
     /* python, ruby
     >>> 7 % 3
@@ -46,21 +53,21 @@ extension BigInt {
     -1
      */
     public func modulo(_ divider:BigInt) -> BigInt {
-        let v = self.abs % divider.abs
+        let v = self.magnitude % divider.magnitude
         if v == 0 {
             return 0
         }
-        if !self.negative {
-            if !divider.negative {
-                return BigInt(abs:v)
+        if self.sign == .plus {
+            if divider.sign == .plus {
+                return BigInt(sign:.plus, magnitude:v)
             } else {
-                return BigInt(abs:v) + divider
+                return BigInt(sign:.plus, magnitude:v) + divider
             }
         } else {
-            if !divider.negative {
-                return BigInt(abs:v, negative:true) + divider
+            if divider.sign == .plus {
+                return BigInt(sign:.minus, magnitude:v) + divider
             } else {
-                return BigInt(abs:v, negative:true)
+                return BigInt(sign:.minus, magnitude:v)
             }
         }
     }
@@ -76,51 +83,27 @@ extension BigInt {
     3
     */
     public func divide(_ divider:BigInt) -> BigInt {
-        let v = self.abs / divider.abs
-        if !self.negative {
-            if !divider.negative {
-                return BigInt(abs:v)
+        let v = self.magnitude / divider.magnitude
+        if self.sign == .plus {
+            if divider.sign == .plus {
+                return BigInt(sign:.plus, magnitude:v)
             } else {
-                if (self.abs % divider.abs) == 0 {
-                    return BigInt(abs:v, negative:true)
+                if (self.magnitude % divider.magnitude) == 0 {
+                    return BigInt(sign:.minus, magnitude:v)
                 } else {
-                    return BigInt(abs:v+1, negative:true)
+                    return BigInt(sign:.minus, magnitude:v+1)
                 }
             }
         } else {
-            if !divider.negative {
-                if (self.abs % divider.abs) == 0 {
-                    return BigInt(abs:v, negative:true)
+            if divider.sign == .plus {
+                if (self.magnitude % divider.magnitude) == 0 {
+                    return BigInt(sign:.minus, magnitude:v)
                 } else {
-                    return BigInt(abs:v+1, negative:true)
+                    return BigInt(sign:.minus, magnitude:v+1)
                 }
             } else {
-                return BigInt(abs:v)
+                return BigInt(sign:.plus, magnitude:v)
             }
         }
     }
-}
-
-extension BigInt
-{
-    static func <<(a: BigInt, b: Int) -> BigInt
-    {
-        return BigInt(abs:a.abs << b, negative:a.negative)
-    }
-    
-    static func >>(a: BigInt, b: Int) -> BigInt
-    {
-        return BigInt(abs:a.abs >> b, negative:a.negative)
-    }
-    
-    static func <<=(a: inout BigInt, b: Int)
-    {
-        a.abs <<= b 
-    }
-    
-    static func >>=(a: inout BigInt, b: Int)
-    {
-        a.abs >>= b
-    }
-    
 }
