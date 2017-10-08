@@ -7,19 +7,14 @@
 //
 
 import Foundation
-import CommonCrypto
+
 import BigInt
 
 //
 // Ed25519 :
-// - x^2 + y^2 = 1 - (121665/121666) * x^2 * y^2
+//  - x^2 + y^2 = 1 + d * x^2 * y^2
 //
-// d = -121665/121666 と取ると
-//
-// - x^2 + y^2 = 1 + d * x^2 * y^2
-//
-//
-//
+//  d = -121665/121666
 //
 public struct Ed25519 {
     public static let b:Int = 256
@@ -33,7 +28,6 @@ public struct Ed25519 {
     public static func expmod(_ b:BigInt, _ e:BigInt, _ m:BigInt) -> BigInt {
         if e == 0 { return 1 }
         var t = expmod(b, e.divide(2), m).power(2).modulo(m)
-        //var t = expmod(b, e.divide(2), m).power(3, modulus: m)
         if e.parity() != 0 {
             t = (t*b).modulo(m)
         }
@@ -66,7 +60,7 @@ public struct Ed25519 {
     static let Bx:BigInt = xrecover(By)
     public static let B:[BigInt] = [Bx.modulo(q), By.modulo(q)]
     
-    // 加法
+    // Addition
     public static func edwards(_ P:[BigInt], _ Q:[BigInt]) -> [BigInt] {
         let x1 = P[0]
         let y1 = P[1]
@@ -120,7 +114,7 @@ public struct Ed25519 {
         return BigInt((h[i/8] >> UInt8(i%8)) & 1)
     }
     
-    // secret キーをpublicキーに変換する
+    // transform secret key to public key
     public static func publickey(_ sk:[UInt8] ) -> [UInt8] {
         let h:[UInt8] = H(sk)
         let a:BigInt = BigInt(2).power(b-2) + (3..<b-2).map({BigInt(2).power($0) * bit(h, $0)}).sum()
@@ -150,7 +144,6 @@ public struct Ed25519 {
         return encodepoint(R) + encodeint(S)
     }
     
-    // @brief 点P がEdward曲線上にあるかどうかを返す
     public static func isoncurve(_ P:[BigInt]) -> Bool {
         let x = P[0]
         let y = P[1]
@@ -209,50 +202,4 @@ public struct Ed25519 {
             return data.map({ String(format: "%02x", $0) }).joined()
         }
     }
-    
-}
-
-protocol Summable {
-    static var Zero: Self { get }
-    static func +(lhs: Self, rhs: Self) -> Self
-}
-
-extension Sequence where Iterator.Element: Summable {
-    func sum() -> Iterator.Element {
-        return self.reduce(Iterator.Element.Zero, +)
-    }
-}
-
-extension Int: Summable {
-    static var Zero: Int { return 0 }
-}
-
-extension BigInt: Summable {
-    static var Zero: BigInt { return BigInt(0) }
-}
-
-extension String {
-    public func unhexlify() -> [UInt8] {
-        var pos = startIndex
-        return (0..<characters.count/2).flatMap { _ in
-            defer { pos = index(pos, offsetBy: 2) }
-            return UInt8(self[pos...index(after: pos)], radix: 16)
-        }
-    }
-}
-
-extension Collection where Iterator.Element == UInt8 {
-    public func hexDescription() -> String {
-        return self.map({ String(format: "%02x", $0) }).joined()
-    }
-}
-
-
-func sha512(_ s:[UInt8]) -> Ed25519.Digest {
-    let data = Data(bytes:s)
-    var digest = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
-    data.withUnsafeBytes({
-        _ = CC_SHA512($0, CC_LONG(data.count), &digest)
-    })
-    return Ed25519.Digest(data: digest, length: Int(CC_SHA512_DIGEST_LENGTH))
 }
