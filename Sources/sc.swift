@@ -1,14 +1,16 @@
 //
-//  sc25519.swift
+//  sc.swift
 //  Ed25519
 //
 //  Created by pebble8888 on 2017/05/21.
 //  Copyright © 2017年 pebble8888. All rights reserved.
 //
+//  Code is ported from NaCl (http://nacl.cr.yp.to/)
+//
 
 import Foundation
 
-struct sc25519 {
+struct sc {
     var v:[UInt32]
     init(){
         v = [UInt32](repeating:0, count:32)
@@ -23,7 +25,7 @@ struct sc25519 {
     0xEB, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F]
     
     /* Reduce coefficients of r before calling reduce_add_sub */
-    static func reduce_add_sub(_ r:inout sc25519)
+    static func reduce_add_sub(_ r:inout sc)
     {
         var b:Int = 0
         var pb:Int = 0
@@ -44,7 +46,7 @@ struct sc25519 {
     }
     
     /* Reduce coefficients of x before calling barrett_reduce */
-    static func barrett_reduce(_ r:inout sc25519, _ x:[UInt32] /* 64 */)
+    static func barrett_reduce(_ r:inout sc, _ x:[UInt32] /* 64 */)
     {
         /* See HAC, Alg. 14.42 */
         var q2:[UInt32] = [UInt32](repeating:0, count:66)
@@ -97,36 +99,36 @@ struct sc25519 {
     }
 }
     
-func sc25519_from32bytes(_ r:inout sc25519, _ x:[UInt8] /* 32 */)
+func sc25519_from32bytes(_ r:inout sc, _ x:[UInt8] /* 32 */)
 {
     var t:[UInt32] = [UInt32](repeating:0, count:64)
     for i in 0..<32 {
         t[i] = UInt32(x[i])
     }
-    sc25519.barrett_reduce(&r, t)
+    sc.barrett_reduce(&r, t)
 }
 
- func sc25519_from64bytes(_ r:inout sc25519, _ x:[UInt8] /* 64 */)
+ func sc25519_from64bytes(_ r:inout sc, _ x:[UInt8] /* 64 */)
 {
     var t:[UInt32] = [UInt32](repeating:0, count:64)
     for i in 0..<64 {
         t[i] = UInt32(x[i])
     }
-    sc25519.barrett_reduce(&r, t)
+    sc.barrett_reduce(&r, t)
 }
 
 /* XXX: What we actually want for crypto_group is probably just something like
  * void sc25519_frombytes(sc25519 *r, const unsigned char *x, size_t xlen)
  */
 
- func sc25519_to32bytes(_ r:inout [UInt8] /* 32 */, _ x:sc25519)
+ func sc25519_to32bytes(_ r:inout [UInt8] /* 32 */, _ x:sc)
 {
     for i in 0..<32 {
         r[i] = UInt8(x.v[i])
     }
 }
 
- func sc25519_add(_ r:inout sc25519, _ x:sc25519, _ y:sc25519)
+ func sc25519_add(_ r:inout sc, _ x:sc, _ y:sc)
 {
     var carry:UInt32
     for i in 0..<32 {
@@ -137,10 +139,10 @@ func sc25519_from32bytes(_ r:inout sc25519, _ x:[UInt8] /* 32 */)
         r.v[i+1] += carry
         r.v[i] &= 0xff
     }
-    sc25519.reduce_add_sub(&r)
+    sc.reduce_add_sub(&r)
 }
 
- func sc25519_mul(_ r:inout sc25519, _ x:sc25519, _ y:sc25519)
+ func sc25519_mul(_ r:inout sc, _ x:sc, _ y:sc)
 {
     var carry:UInt32
     var t:[UInt32] = [UInt32](repeating:0, count:64)
@@ -161,10 +163,10 @@ func sc25519_from32bytes(_ r:inout sc25519, _ x:[UInt8] /* 32 */)
         t[i] &= 0xff
     }
     
-    sc25519.barrett_reduce(&r, t)
+    sc.barrett_reduce(&r, t)
 }
 
-func sc25519_square(_ r:inout sc25519, _ x:sc25519)
+func sc25519_square(_ r:inout sc, _ x:sc)
 {
     sc25519_mul(&r, x, x);
 } 

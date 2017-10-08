@@ -5,6 +5,8 @@
 //  Created by pebble8888 on 2017/05/21.
 //  Copyright © 2017年 pebble8888. All rights reserved.
 //
+//  Code is ported from NaCl (http://nacl.cr.yp.to/)
+//
 
 import Foundation
 
@@ -13,12 +15,12 @@ let CRYPTO_PUBLICKEYBYTES = 32
 let CRYPTO_BYTES = 64
 let crypto_hash_sha512_BYTES = 64
 
-func crypto_hash_sha512(_ r:inout [UInt8], _ k:[UInt8], _ len:Int)
+func crypto_hash_sha512(_ r:inout [UInt8], _ k:[UInt8], len:Int)
 {
     r = sha512(Array(k[0..<len])).digest()
 }
 
-func randombytes(_ r:inout [UInt8], _ len:Int)
+func randombytes(_ r:inout [UInt8], len:Int)
 {
     r = [UInt8](repeating:0, count:len)
     let result = SecRandomCopyBytes(kSecRandomDefault, len, &r)
@@ -27,7 +29,6 @@ func randombytes(_ r:inout [UInt8], _ len:Int)
 
 func crypto_verify_32(_ x:[UInt8], _ y:[UInt8]) -> Bool
 {
-    /*
     if x.count != 32 || y.count != 32 {
         return false
     }
@@ -37,30 +38,35 @@ func crypto_verify_32(_ x:[UInt8], _ y:[UInt8]) -> Bool
         }
     }
     return true
-    */
+     /*
     var differentbits:UInt8 = 0
     for i in 0..<32 {
         differentbits |= x[i] ^ y[i]
     }
     let a:Int32 = (1 & ((Int32(differentbits) - 1) >> 8)) - 1
     return a == 0
+     */
 }
 
 // -----------
 
 public func crypto_sign_keypair() -> (pk:[UInt8], sk:[UInt8])
 {
-    var scsk = sc25519()
-    var gepk = ge25519()
+    var scsk = sc()
+    var gepk = ge()
     var pk:[UInt8] = [UInt8](repeating:0, count:32)
     var sk:[UInt8] = [UInt8](repeating:0, count:32)
     
-    randombytes(&sk, 32)
-    crypto_hash_sha512(&sk, sk, 32)
-    sk[0] &= 248
-    sk[31] &= 127
-    sk[31] |= 64
-    
+    // create secret key 32byte
+    randombytes(&sk, len:32)
+
+    // sha512 of sk
+    crypto_hash_sha512(&sk, sk, len:32)
+
+    // calc public key
+    sk[0] &= 248 // clear lowest 3bit
+    sk[31] &= 127 // clear highest bit
+    sk[31] |= 64 // set bit
     sc25519_from32bytes(&scsk,sk)
     
     ge25519_scalarmult_base(&gepk, scsk)
@@ -77,10 +83,10 @@ public func crypto_sign(_ m:[UInt8], _ sk:[UInt8]) -> [UInt8]
     let mlen:Int = m.count
     let smlen = mlen+64
     var sm:[UInt8] = [UInt8](repeating:0, count: smlen)
-    var sck = sc25519()
-    var scs = sc25519()
-    var scsk = sc25519()
-    var ger = ge25519()
+    var sck = sc()
+    var scs = sc()
+    var scsk = sc()
+    var ger = ge()
     var r:[UInt8] = [UInt8](repeating: 0, count:32)
     var s:[UInt8] = [UInt8](repeating: 0, count:32)
     var hmg:[UInt8] = [UInt8](repeating: 0, count: crypto_hash_sha512_BYTES)
@@ -92,7 +98,7 @@ public func crypto_sign(_ m:[UInt8], _ sk:[UInt8]) -> [UInt8]
     for i in 0..<32 {
         sm[i] = sk[32+i]
     }
-    crypto_hash_sha512(&hmg, sm, mlen+32) /* Generate k as h(m,sk[32],...,sk[63]) */
+    crypto_hash_sha512(&hmg, sm, len: mlen+32) /* Generate k as h(m,sk[32],...,sk[63]) */
     
     sc25519_from64bytes(&sck, hmg)
     ge25519_scalarmult_base(&ger, sck)
@@ -102,7 +108,7 @@ public func crypto_sign(_ m:[UInt8], _ sk:[UInt8]) -> [UInt8]
         sm[i] = r[i]
     }
     
-    crypto_hash_sha512(&hmr, sm, mlen+32) /* Compute h(m,r) */
+    crypto_hash_sha512(&hmr, sm, len: mlen+32) /* Compute h(m,r) */
     sc25519_from64bytes(&scs, hmr)
     sc25519_mul(&scs, scs, sck)
     
@@ -127,12 +133,12 @@ public func crypto_sign_open(_ sm:[UInt8], _ pk:[UInt8]) throws -> [UInt8] {
     var m:[UInt8] = [UInt8](repeating:0, count: smlen - 64)
     //var t1:[UInt8] = [UInt8](repeating:0, count:32)
     var t2:[UInt8] = [UInt8](repeating:0, count:32)
-    var get1 = ge25519()
-    var get2 = ge25519()
-    var gepk = ge25519()
+    var get1 = ge()
+    var get2 = ge()
+    var gepk = ge()
     
-    //var schmr = sc25519()
-    var scs = sc25519()
+    //var schmr = sc()
+    var scs = sc()
     //var hmr:[UInt8] = [UInt8](repeating:0, count:crypto_hash_sha512_BYTES)
     
     if smlen < 64 { throw DecryptError.general }

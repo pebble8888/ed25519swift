@@ -5,19 +5,21 @@
 //  Created by pebble8888 on 2017/05/20.
 //  Copyright © 2017年 pebble8888. All rights reserved.
 //
+//  Code is ported from NaCl (http://nacl.cr.yp.to/)
+//
 
 import Foundation
 
-struct ge25519 {
-    var x:fe25519
-    var y:fe25519
-    var z:fe25519
-    var t:fe25519
+struct ge {
+    var x:fe
+    var y:fe
+    var z:fe
+    var t:fe
     init(){
-        x = fe25519()
-        y = fe25519()
-        z = fe25519()
-        t = fe25519()
+        x = fe() // zero
+        y = fe() // zero
+        z = fe() // zero
+        t = fe() // zero
     }
 
     var toP2:P2 {
@@ -37,28 +39,28 @@ struct ge25519 {
      */
     
     struct P1P2 {
-        var x:fe25519
-        var y:fe25519
-        var z:fe25519
-        var t:fe25519
+        var x:fe
+        var y:fe
+        var z:fe
+        var t:fe
         init(){
-            x = fe25519()
-            y = fe25519()
-            z = fe25519()
-            t = fe25519()
+            x = fe()
+            y = fe()
+            z = fe()
+            t = fe()
         }
     } 
     
     struct P2 {
-        var x:fe25519
-        var y:fe25519
-        var z:fe25519
+        var x:fe
+        var y:fe
+        var z:fe
         init(){
-            x = fe25519()
-            y = fe25519()
-            z = fe25519()
+            x = fe()
+            y = fe()
+            z = fe()
         }
-        init(x:fe25519, y:fe25519, z:fe25519){
+        init(x:fe, y:fe, z:fe){
             self.x = x
             self.y = y
             self.z = z
@@ -96,7 +98,7 @@ struct ge25519 {
         fe25519_mul(&r.z, p.z, p.t)
     }
     
-    static func p1p1_to_p3(_ r:inout ge25519, _ p:P1P2)
+    static func p1p1_to_p3(_ r:inout ge, _ p:P1P2)
     {
         var p2 = P2()
         p1p1_to_p2(&p2, p)
@@ -105,7 +107,7 @@ struct ge25519 {
     }
     
     /* Constant-time version of: if(b) r = p */
-    static func cmov_p3(_ r:inout ge25519, _ p: ge25519, _ b:UInt8)
+    static func cmov_p3(_ r:inout ge, _ p: ge, _ b:UInt8)
     {
         fe25519_cmov(&r.x, p.x, b)
         fe25519_cmov(&r.y, p.y, b)
@@ -116,10 +118,10 @@ struct ge25519 {
     /* See http://www.hyperelliptic.org/EFD/g1p/auto-twisted-extended-1.html#doubling-dbl-2008-hwcd */
     static func dbl_p1p1(_ r:inout P1P2, _ p:P2)
     {
-        var a = fe25519()
-        var b = fe25519()
-        var c = fe25519()
-        var d = fe25519()
+        var a = fe()
+        var b = fe()
+        var c = fe()
+        var d = fe()
         fe25519_square(&a, p.x)
         fe25519_square(&b, p.y)
         fe25519_square(&c, p.z)
@@ -135,14 +137,14 @@ struct ge25519 {
         fe25519_sub(&r.y, d, b)
     }
     
-    static func add_p1p1(_ r:inout P1P2, _ p:ge25519, _ q:ge25519)
+    static func add_p1p1(_ r:inout P1P2, _ p:ge, _ q:ge)
     {
-        var a = fe25519()
-        var b = fe25519()
-        var c = fe25519()
-        var d = fe25519()
-        var t = fe25519()
-        var fd = fe25519()
+        var a = fe()
+        var b = fe()
+        var c = fe()
+        var d = fe()
+        var t = fe()
+        var fd = fe()
         fe25519_unpack(&fd, ecd)
         
         fe25519_sub(&a, p.y, p.x) // A = (Y1-X1)*(Y2-X2)
@@ -167,13 +169,13 @@ struct ge25519 {
  *                    EXPORTED FUNCTIONS
  ******************************************************************** */
 
-func ge25519_unpack_vartime(_ r:inout ge25519, _ p:[UInt8] /* 32 */) -> Bool
+func ge25519_unpack_vartime(_ r:inout ge, _ p:[UInt8] /* 32 */) -> Bool
 {
     var ret:Bool
-    var t = fe25519()
-    var fd = fe25519()
+    var t = fe()
+    var fd = fe()
     fe25519_setone(&r.z)
-    fe25519_unpack(&fd, ge25519.ecd)
+    fe25519_unpack(&fd, ge.ecd)
     let par:UInt8 = p[31] >> 7
     fe25519_unpack(&r.y, p)
     fe25519_square(&r.x, r.y)
@@ -187,11 +189,11 @@ func ge25519_unpack_vartime(_ r:inout ge25519, _ p:[UInt8] /* 32 */) -> Bool
     return ret
 }
 
-func ge25519_pack(_ r:inout [UInt8] /* 32 */, _ p:ge25519)
+func ge25519_pack(_ r:inout [UInt8] /* 32 */, _ p:ge)
 {
-    var tx = fe25519()
-    var ty = fe25519()
-    var zi = fe25519()
+    var tx = fe()
+    var ty = fe()
+    var zi = fe()
     fe25519_invert(&zi, p.z) 
     fe25519_mul(&tx, p.x, zi)
     fe25519_mul(&ty, p.y, zi)
@@ -199,31 +201,32 @@ func ge25519_pack(_ r:inout [UInt8] /* 32 */, _ p:ge25519)
     r[31] ^= fe25519_getparity(tx) << 7
 }
 
-func ge25519_add(_ r:inout ge25519, _ p:ge25519, _ q:ge25519)
+func ge25519_add(_ r:inout ge, _ p:ge, _ q:ge)
 {
-    var grp1p1 = ge25519.P1P2()
-    ge25519.add_p1p1(&grp1p1, p, q)
-    ge25519.p1p1_to_p3(&r, grp1p1)
+    var grp1p1 = ge.P1P2()
+    ge.add_p1p1(&grp1p1, p, q)
+    ge.p1p1_to_p3(&r, grp1p1)
 }
 
- func ge25519_double(_ r:inout ge25519, _ p:ge25519)
+ func ge25519_double(_ r:inout ge, _ p:ge)
 {
-    var grp1p1 = ge25519.P1P2()
-    ge25519.dbl_p1p1(&grp1p1, p.toP2)
-    ge25519.p1p1_to_p3(&r, grp1p1)
+    var grp1p1 = ge.P1P2()
+    ge.dbl_p1p1(&grp1p1, p.toP2)
+    ge.p1p1_to_p3(&r, grp1p1)
 }
 
- func ge25519_scalarmult(_ r:inout ge25519, _ p:ge25519, _ s:sc25519)
+// ベースポイントから
+func ge25519_scalarmult(_ r:inout ge, _ p:ge, _ s:sc)
 {
-    var g = ge25519()
-    fe25519_unpack(&g.x, ge25519.neutral_x)
-    fe25519_unpack(&g.y, ge25519.neutral_y)
-    fe25519_unpack(&g.z, ge25519.neutral_z)
-    fe25519_unpack(&g.t, ge25519.neutral_t)
+    var g = ge()
+    fe25519_unpack(&g.x, ge.neutral_x)
+    fe25519_unpack(&g.y, ge.neutral_y)
+    fe25519_unpack(&g.z, ge.neutral_z)
+    fe25519_unpack(&g.t, ge.neutral_t)
     
-    var pre:[ge25519] = [ge25519](repeating:ge25519(), count:(1 << ge25519.WINDOWSIZE))
-    var t:ge25519
-    var tp1p1 = ge25519.P1P2()
+    var pre:[ge] = [ge](repeating:ge(), count:(1 << ge.WINDOWSIZE))
+    var t:ge
+    var tp1p1 = ge.P1P2()
     var w:UInt8
     var sb:[UInt8] = [UInt8](repeating:0, count:32)
     sc25519_to32bytes(&sb, s)
@@ -231,43 +234,43 @@ func ge25519_add(_ r:inout ge25519, _ p:ge25519, _ q:ge25519)
     // Precomputation
     pre[0] = g
     pre[1] = p
-    for i in stride(from:2, to:1<<ge25519.WINDOWSIZE, by:2)
+    for i in stride(from:2, to:1<<ge.WINDOWSIZE, by:2)
     {
-        ge25519.dbl_p1p1(&tp1p1, pre[i/2].toP2)
-        ge25519.p1p1_to_p3(&pre[i], tp1p1)
-        ge25519.add_p1p1(&tp1p1, pre[i], pre[1])
-        ge25519.p1p1_to_p3(&pre[i+1], tp1p1)
+        ge.dbl_p1p1(&tp1p1, pre[i/2].toP2)
+        ge.p1p1_to_p3(&pre[i], tp1p1)
+        ge.add_p1p1(&tp1p1, pre[i], pre[1])
+        ge.p1p1_to_p3(&pre[i+1], tp1p1)
     }
     
     // Fixed-window scalar multiplication
     for i in stride(from:32, to:0, by: -1)
     {
-        for j in stride(from:8-ge25519.WINDOWSIZE, through:0, by:-ge25519.WINDOWSIZE)
+        for j in stride(from:8-ge.WINDOWSIZE, through:0, by:-ge.WINDOWSIZE)
         {
-            for _ in 0..<ge25519.WINDOWSIZE-1
+            for _ in 0..<ge.WINDOWSIZE-1
             {
-                ge25519.dbl_p1p1(&tp1p1, g.toP2)
-                var tt = ge25519.P2()
-                ge25519.p1p1_to_p2(&tt, tp1p1)
+                ge.dbl_p1p1(&tp1p1, g.toP2)
+                var tt = ge.P2()
+                ge.p1p1_to_p2(&tt, tp1p1)
                 g.setFromP2(tt)
             }
-            ge25519.dbl_p1p1(&tp1p1, g.toP2)
-            ge25519.p1p1_to_p3(&g, tp1p1)
+            ge.dbl_p1p1(&tp1p1, g.toP2)
+            ge.p1p1_to_p3(&g, tp1p1)
             // Cache-timing resistant loading of precomputed value:
-            w = (sb[i-1]>>UInt8(j)) & UInt8(ge25519.WINDOWMASK)
+            w = (sb[i-1]>>UInt8(j)) & UInt8(ge.WINDOWMASK)
             t = pre[0]
-            for k in 1..<(1<<ge25519.WINDOWSIZE) {
-                ge25519.cmov_p3(&t, pre[k], UInt8(k)==w ? 1 : 0)
+            for k in 1..<(1<<ge.WINDOWSIZE) {
+                ge.cmov_p3(&t, pre[k], UInt8(k)==w ? 1 : 0)
             }
         
-            ge25519.add_p1p1(&tp1p1, g, t)
+            ge.add_p1p1(&tp1p1, g, t)
             if j != 0 {
-                var tt = ge25519.P2()
-                ge25519.p1p1_to_p2(&tt, tp1p1)
+                var tt = ge.P2()
+                ge.p1p1_to_p2(&tt, tp1p1)
                 g.setFromP2(tt)
             }
             else {
-                ge25519.p1p1_to_p3(&g, tp1p1) /* convert to p3 representation at the end */
+                ge.p1p1_to_p3(&g, tp1p1) /* convert to p3 representation at the end */
             }
         }
     }
@@ -277,13 +280,14 @@ func ge25519_add(_ r:inout ge25519, _ p:ge25519, _ q:ge25519)
     r.t = g.t
 }
 
- func ge25519_scalarmult_base(_ r:inout ge25519, _ s:sc25519)
+
+func ge25519_scalarmult_base(_ r:inout ge, _ s:sc)
 {
     /* XXX: Better algorithm for known-base-point scalar multiplication */
-    var t = ge25519()
-    fe25519_unpack(&t.x, ge25519.base_x)
-    fe25519_unpack(&t.y, ge25519.base_y)
-    fe25519_unpack(&t.z, ge25519.base_z)
-    fe25519_unpack(&t.t, ge25519.base_t)
+    var t = ge()
+    fe25519_unpack(&t.x, ge.base_x)
+    fe25519_unpack(&t.y, ge.base_y)
+    fe25519_unpack(&t.z, ge.base_z)
+    fe25519_unpack(&t.t, ge.base_t)
     ge25519_scalarmult(&r, t, s)          
 }

@@ -5,10 +5,12 @@
 //  Created by pebble8888 on 2017/05/20.
 //  Copyright © 2017年 pebble8888. All rights reserved.
 //
+//  Code is ported from NaCl (http://nacl.cr.yp.to/)
+//
 
 import Foundation
 
-struct fe25519 {
+struct fe {
     var v:[UInt32] // size:32
     init(){
         v = [UInt32](repeating:0, count:32)
@@ -17,7 +19,7 @@ struct fe25519 {
     static let WINDOWSIZE:Int = 4 /* Should be 1,2, or 4 */
     static let WINDOWMASK:Int = ((1<<WINDOWSIZE)-1)
 
-    static func reduce_add_sub(_ r:inout fe25519)
+    static func reduce_add_sub(_ r:inout fe)
     {
         var t:uint32
         for _ in 0..<4
@@ -35,7 +37,7 @@ struct fe25519 {
         }
     }
 
-    static func reduce_mul(_ r:inout fe25519)
+    static func reduce_mul(_ r:inout fe)
     {
         var t:UInt32
         for _ in 0..<2
@@ -54,7 +56,7 @@ struct fe25519 {
     }
 
     /* reduction modulo 2^255-19 */
-    static func freeze(_ r:inout fe25519) 
+    static func freeze(_ r:inout fe) 
     {
         var m:UInt32 = (r.v[31] == 127 ? 1 : 0)
         for i in 2...30 {
@@ -70,7 +72,7 @@ struct fe25519 {
     }
 
     /*freeze input before calling isone*/
-    static func isone(_ x:fe25519) -> Bool
+    static func isone(_ x:fe) -> Bool
     {
         var r = (x.v[0] == 1)
         for i in 1..<32 {
@@ -80,7 +82,7 @@ struct fe25519 {
     }
 
     /*freeze input before calling iszero*/
-    static func iszero(_ x:fe25519) -> Bool
+    static func iszero(_ x:fe) -> Bool
     {
         var r = (x.v[0] == 0)
         for i in 1..<32 {
@@ -89,9 +91,9 @@ struct fe25519 {
         return r
     }
 
-    static func issquare(_ x:fe25519) -> Bool {
+    static func issquare(_ x:fe) -> Bool {
         let e:[UInt8] = [0xf6,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0x3f] /* (p-1)/2 */
-        var t = fe25519()
+        var t = fe()
 
         fe25519_pow(&t,x,e)
         freeze(&t)
@@ -99,7 +101,7 @@ struct fe25519 {
     }
 }
 
-func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
+func fe25519_unpack(_ r:inout fe, _ x:[UInt8]/* 32 */)
 {
     for i in 0..<32 {
         r.v[i] = UInt32(x[i])
@@ -108,7 +110,7 @@ func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
 }
 
 /* Assumes input x being reduced mod 2^255 */
- func fe25519_pack(_ r:inout [UInt8] /* 32 */ , _ x:fe25519)
+ func fe25519_pack(_ r:inout [UInt8] /* 32 */ , _ x:fe)
 {
     for i in 0..<32 {
         r[i] = UInt8(x.v[i])
@@ -126,7 +128,7 @@ func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
     r[0] -= m*237
 }
 
- func fe25519_cmov(_ r:inout fe25519, _ x:fe25519, _ b:UInt8)
+ func fe25519_cmov(_ r:inout fe, _ x:fe, _ b:UInt8)
 {
     let nb:UInt8 = 1-b
     for i in 0..<32 {
@@ -135,19 +137,19 @@ func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
 }
 
 // odd or not
- func fe25519_getparity(_ x:fe25519) -> UInt8
+ func fe25519_getparity(_ x:fe) -> UInt8
 {
-    var t = fe25519()
+    var t = fe()
     // copy
     for i in 0..<32 {
         t.v[i] = x.v[i]
     }
-    fe25519.freeze(&t)
+    fe.freeze(&t)
     return UInt8(t.v[0] & 1)
 }
 
 // set 1
- func fe25519_setone(_ r:inout fe25519)
+ func fe25519_setone(_ r:inout fe)
 {
     r.v[0] = 1
     for i in 1..<32 {
@@ -156,16 +158,16 @@ func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
 }
 
 // set 0
- func fe25519_setzero(_ r:inout fe25519)
+ func fe25519_setzero(_ r:inout fe)
 {
     for i in 0..<32 {
         r.v[i]=0
     }
 }
 
- func fe25519_neg(_ r:inout fe25519, _ x:fe25519)
+ func fe25519_neg(_ r:inout fe, _ x:fe)
 {
-    var t = fe25519()
+    var t = fe()
     for i in 0..<32 {
         t.v[i] = x.v[i]
     }
@@ -173,25 +175,25 @@ func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
     fe25519_sub(&r, r, t)
 }
 
- func fe25519_add(_ r:inout fe25519, _ x:fe25519, _ y:fe25519)
+ func fe25519_add(_ r:inout fe, _ x:fe, _ y:fe)
 {
     for i in 0..<32 {
         r.v[i] = x.v[i] + y.v[i]
     }
-    fe25519.reduce_add_sub(&r)
+    fe.reduce_add_sub(&r)
 }
 
- func fe25519_sub(_ r:inout fe25519, _ x:fe25519, _ y:fe25519)
+ func fe25519_sub(_ r:inout fe, _ x:fe, _ y:fe)
 {
     var t:[UInt32] = [UInt32](repeating:0, count:32)
     t[0] = x.v[0] + 0x1da
     t[31] = x.v[31] + 0xfe
     for i in 1..<31 { t[i] = x.v[i] + 0x1fe }
     for i in 0..<32 { r.v[i] = t[i] - y.v[i] }
-    fe25519.reduce_add_sub(&r)
+    fe.reduce_add_sub(&r)
 }
 
- func fe25519_mul(_ r:inout fe25519, _ x:fe25519, _ y:fe25519)
+ func fe25519_mul(_ r:inout fe, _ x:fe, _ y:fe)
 {
     var t:[UInt32] = [UInt32](repeating:0, count:63)
     for i in 0..<63 {
@@ -209,27 +211,27 @@ func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
     }
     r.v[31] = t[31] /* result now in r[0]...r[31] */
     
-    fe25519.reduce_mul(&r)
+    fe.reduce_mul(&r)
 }
 
- func fe25519_square(_ r:inout fe25519, _ x:fe25519)
+ func fe25519_square(_ r:inout fe, _ x:fe)
 {
     fe25519_mul(&r, x, x)
 }
 
 /*XXX: Make constant time! */
- func fe25519_pow(_ r:inout fe25519, _ x:fe25519, _ e:[UInt8])
+ func fe25519_pow(_ r:inout fe, _ x:fe, _ e:[UInt8])
 {
-    var g = fe25519()
+    var g = fe()
     fe25519_setone(&g)
-    var pre:[fe25519] = [fe25519](repeating:fe25519(), count:(1 << fe25519.WINDOWSIZE))
-    var t:fe25519
+    var pre:[fe] = [fe](repeating:fe(), count:(1 << fe.WINDOWSIZE))
+    var t:fe
     var w:UInt8
     
     // Precomputation
     fe25519_setone(&pre[0])
     pre[1] = x 
-    for i in stride(from: 2, to: 1<<fe25519.WINDOWSIZE, by: 2) {
+    for i in stride(from: 2, to: 1<<fe.WINDOWSIZE, by: 2) {
         fe25519_square(&pre[i], pre[i/2])
         fe25519_mul(&pre[i+1], pre[i], pre[1])
     }
@@ -237,15 +239,15 @@ func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
     // Fixed-window scalar multiplication
     for i in stride(from:32, to:0, by:-1)
     {
-        for j in stride(from:8-fe25519.WINDOWSIZE, to: 0, by: -fe25519.WINDOWSIZE)
+        for j in stride(from:8-fe.WINDOWSIZE, to: 0, by: -fe.WINDOWSIZE)
         {
-            for _ in 0 ..< fe25519.WINDOWSIZE {
+            for _ in 0 ..< fe.WINDOWSIZE {
                 fe25519_square(&g, g)
             }
             // Cache-timing resistant loading of precomputed value:
-            w = (e[i-1]>>UInt8(j)) & UInt8(fe25519.WINDOWMASK)
+            w = (e[i-1]>>UInt8(j)) & UInt8(fe.WINDOWMASK)
             t = pre[0]
-            for k in 1 ..< (1<<fe25519.WINDOWSIZE) {
+            for k in 1 ..< (1<<fe.WINDOWSIZE) {
                 fe25519_cmov(&t, pre[k], UInt8(k)==w ? 1 : 0)
             }
             fe25519_mul(&g, g, t)
@@ -254,20 +256,20 @@ func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
     r = g
 }
 
- func fe25519_sqrt_vartime(_ r:inout fe25519, _ x:fe25519, _ parity:UInt8) -> Bool
+ func fe25519_sqrt_vartime(_ r:inout fe, _ x:fe, _ parity:UInt8) -> Bool
 {
     /* See HAC, Alg. 3.37 */
-    if (!fe25519.issquare(x)) {
+    if (!fe.issquare(x)) {
         return false
     }
     let e:[UInt8] = [0xfb,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0x1f] /* (p-1)/4 */
     let e2:[UInt8] = [0xfe,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0x0f] /* (p+3)/8 */
     let e3:[UInt8] = [0xfd,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0x0f] /* (p-5)/8 */
-    let p:fe25519 = fe25519()
-    var d:fe25519 = fe25519()
+    let p:fe = fe()
+    var d:fe = fe()
     fe25519_pow(&d,x,e)
-    fe25519.freeze(&d)
-    if(fe25519.isone(d)){
+    fe.freeze(&d)
+    if(fe.isone(d)){
         fe25519_pow(&r,x,e2)
     }
     else
@@ -281,7 +283,7 @@ func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
         }
         fe25519_mul(&r,r,d)
     }
-    fe25519.freeze(&r)
+    fe.freeze(&r)
     if(UInt8(r.v[0] & 1) != (parity & 1))
     {
         fe25519_sub(&r,p,r)
@@ -289,18 +291,18 @@ func fe25519_unpack(_ r:inout fe25519, _ x:[UInt8]/* 32 */)
     return true
 }
 
- func fe25519_invert(_ r:inout fe25519, _ x:fe25519)
+ func fe25519_invert(_ r:inout fe, _ x:fe)
 {
-    var z2 = fe25519()
-    var z9 = fe25519()
-    var z11 = fe25519()
-    var z2_5_0 = fe25519()
-    var z2_10_0 = fe25519()
-    var z2_20_0 = fe25519()
-    var z2_50_0 = fe25519()
-    var z2_100_0 = fe25519()
-    var t0 = fe25519()
-    var t1 = fe25519()
+    var z2 = fe()
+    var z9 = fe()
+    var z11 = fe()
+    var z2_5_0 = fe()
+    var z2_10_0 = fe()
+    var z2_20_0 = fe()
+    var z2_50_0 = fe()
+    var z2_100_0 = fe()
+    var t0 = fe()
+    var t1 = fe()
     
     /* 2 */ fe25519_square(&z2,x)
     /* 4 */ fe25519_square(&t1,z2)
