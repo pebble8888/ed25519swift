@@ -15,6 +15,7 @@
 		A263769A1ECF280700EDC62D /* Ed25519macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A263768C1ECF280700EDC62D /* Ed25519macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A2BB194A1F7696050056EC72 /* BigInt+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */; };
 		A2BB194B1F7696050056EC72 /* Ed25519macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */; };
+		A2D235F41ECFFD2600BAD20C /* Ed25519Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */; };
 		ADFD9C4D73C562B438BDBCC9 /* Pods_Ed25519macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258E772EA9450417954ECBA1 /* Pods_Ed25519macOSTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		A2D235DF1ECF44AD00BAD20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2D235E81ECF44AD00BAD20C /* Ed25519macOSSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ed25519macOSSampleTests.swift; sourceTree = "<group>"; };
 		A2D235EA1ECF44AD00BAD20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519Utility.swift; sourceTree = "<group>"; };
 		BE530EFC5913BFBAD042C462 /* Pods-Ed25519macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C33CD4F1CB9434DF4B31582E /* Pods-Ed25519macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOS/Pods-Ed25519macOS.release.xcconfig"; sourceTree = "<group>"; };
 		D5443A5962331252EC23D6F2 /* Pods_Ed25519iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 			children = (
 				A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */,
 				A24C41151EC71E2A00B24AAF /* Ed25519.swift */,
+				A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2D235F41ECFFD2600BAD20C /* Ed25519Utility.swift in Sources */,
 				A24BAC231ECF2AB4005064A6 /* BigInt+Extension.swift in Sources */,
 				A24BAC241ECF2AB4005064A6 /* Ed25519.swift in Sources */,
 			);
