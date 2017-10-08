@@ -14,6 +14,10 @@
 		A26376931ECF280700EDC62D /* Ed25519macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A263768A1ECF280700EDC62D /* Ed25519macOS.framework */; };
 		A263769A1ECF280700EDC62D /* Ed25519macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A263768C1ECF280700EDC62D /* Ed25519macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A2BB194A1F7696050056EC72 /* BigInt+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */; };
+		A27AECA41ED083E000A1B09F /* fe25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA21ED083E000A1B09F /* fe25519.swift */; };
+		A27AECA71ED084B100A1B09F /* ge25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA51ED084B100A1B09F /* ge25519.swift */; };
+		A27AECAA1ED094E100A1B09F /* sc25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA81ED094E100A1B09F /* sc25519.swift */; };
+		A27AECAD1ED09ECA00A1B09F /* sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECAB1ED09ECA00A1B09F /* sign.swift */; };
 		A2BB194B1F7696050056EC72 /* Ed25519macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */; };
 		A2D235F41ECFFD2600BAD20C /* Ed25519Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */; };
 		ADFD9C4D73C562B438BDBCC9 /* Pods_Ed25519macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258E772EA9450417954ECBA1 /* Pods_Ed25519macOSTests.framework */; };
@@ -48,6 +52,10 @@
 		A263768D1ECF280700EDC62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A26376921ECF280700EDC62D /* Ed25519macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ed25519macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A26376991ECF280700EDC62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A27AECA21ED083E000A1B09F /* fe25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fe25519.swift; sourceTree = "<group>"; };
+		A27AECA51ED084B100A1B09F /* ge25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ge25519.swift; sourceTree = "<group>"; };
+		A27AECA81ED094E100A1B09F /* sc25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sc25519.swift; sourceTree = "<group>"; };
+		A27AECAB1ED09ECA00A1B09F /* sign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sign.swift; sourceTree = "<group>"; };
 		A29F64101ECF318E00289744 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/lib/system/libcommonCrypto.tbd; sourceTree = DEVELOPER_DIR; };
 		A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2BA80911EC7249A00D66A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -131,6 +139,10 @@
 				A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */,
 				A24C41151EC71E2A00B24AAF /* Ed25519.swift */,
 				A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */,
+				A27AECA21ED083E000A1B09F /* fe25519.swift */,
+				A27AECA51ED084B100A1B09F /* ge25519.swift */,
+				A27AECA81ED094E100A1B09F /* sc25519.swift */,
+				A27AECAB1ED09ECA00A1B09F /* sign.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -423,8 +435,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2D235F41ECFFD2600BAD20C /* Ed25519Utility.swift in Sources */,
+				A27AECAA1ED094E100A1B09F /* sc25519.swift in Sources */,
+				A27AECA71ED084B100A1B09F /* ge25519.swift in Sources */,
 				A24BAC231ECF2AB4005064A6 /* BigInt+Extension.swift in Sources */,
 				A24BAC241ECF2AB4005064A6 /* Ed25519.swift in Sources */,
+				A27AECAD1ED09ECA00A1B09F /* sign.swift in Sources */,
+				A27AECA41ED083E000A1B09F /* fe25519.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
