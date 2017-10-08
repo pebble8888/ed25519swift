@@ -22,18 +22,18 @@ import BigInt
 //
 //
 public struct Ed25519 {
-    
-    static let b:Int = 256
-    static let q:BigInt = BigInt(2).power(255) - 19
-    static let l:BigInt = BigInt(2).power(252) + BigInt("27742317777372353535851937790883648493")!
-    static func H(_ m:[UInt8]) -> [UInt8] {
+    public static let b:Int = 256
+    public static let q:BigInt = BigInt(2).power(255) - 19
+    public static let L:BigInt = BigInt(2).power(252) + BigInt("27742317777372353535851937790883648493")!
+    public static func H(_ m:[UInt8]) -> [UInt8] {
         return sha512(m).digest()
     }
     
     // return val is less than m
-    static func expmod(_ b:BigInt, _ e:BigInt, _ m:BigInt) -> BigInt {
+    public static func expmod(_ b:BigInt, _ e:BigInt, _ m:BigInt) -> BigInt {
         if e == 0 { return 1 }
         var t = expmod(b, e.divide(2), m).power(2).modulo(m)
+        //var t = expmod(b, e.divide(2), m).power(3, modulus: m)
         if e.parity() != 0 {
             t = (t*b).modulo(m)
         }
@@ -41,15 +41,16 @@ public struct Ed25519 {
     }
     
     // return val is less than q
-    static func inv(_ x:BigInt) -> BigInt {
+    public static func inv(_ x:BigInt) -> BigInt {
         return expmod(x,q-2,q)
     }
     
-    static let d:BigInt = BigInt(-121665) * inv(BigInt(121666)) 
-    // return val is less than q
-    static let I:BigInt = expmod(2, (q-1).divide(4), q)
+    public static let d:BigInt = BigInt(-121665) * inv(BigInt(121666))
     
-    static func xrecover(_ y:BigInt) -> BigInt {
+    // return val is less than q
+    public static let I:BigInt = expmod(2, (q-1).divide(4), q)
+    
+    public static func xrecover(_ y:BigInt) -> BigInt {
         let xx = (y*y-1) * inv(d*y*y+1)
         var x = expmod(xx,(q+3).divide(8),q)
         if (x*x - xx).modulo(q) != 0 {
@@ -63,10 +64,10 @@ public struct Ed25519 {
     
     static let By:BigInt = 4 * inv(5)
     static let Bx:BigInt = xrecover(By)
-    static let B:[BigInt] = [Bx.modulo(q), By.modulo(q)]  
+    public static let B:[BigInt] = [Bx.modulo(q), By.modulo(q)]
     
     // 加法
-    static func edwards(_ P:[BigInt], _ Q:[BigInt]) -> [BigInt] {
+    public static func edwards(_ P:[BigInt], _ Q:[BigInt]) -> [BigInt] {
         let x1 = P[0]
         let y1 = P[1]
         let x2 = Q[0]
@@ -76,7 +77,7 @@ public struct Ed25519 {
         return [x3.modulo(q), y3.modulo(q)]
     }
     
-    static func scalarmult(_ P:[BigInt], _ e:BigInt) -> [BigInt] {
+    public static func scalarmult(_ P:[BigInt], _ e:BigInt) -> [BigInt] {
         if e == 0 {
             return [0, 1]
         }
@@ -145,12 +146,12 @@ public struct Ed25519 {
         }
         let r = Hint(s+m)
         let R = scalarmult(B,r)
-        let S = (r + Hint(encodepoint(R) + pk + m) * a).modulo(l)
+        let S = (r + Hint(encodepoint(R) + pk + m) * a).modulo(L)
         return encodepoint(R) + encodeint(S)
     }
     
     // @brief 点P がEdward曲線上にあるかどうかを返す
-    static func isoncurve(_ P:[BigInt]) -> Bool {
+    public static func isoncurve(_ P:[BigInt]) -> Bool {
         let x = P[0]
         let y = P[1]
         let z1 = -x*x

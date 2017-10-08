@@ -30,17 +30,6 @@ extension BigUInt {
 }
 
 extension BigInt {
-    /*
-    public func power(_ exponent: Int) -> BigInt {
-        assert(exponent >= 0)
-        let val = self.magnitude.power(exponent)
-        if exponent % 2 == 0 {
-            return BigInt(sign:.plus, magnitude:val)
-        } else {
-            return BigInt(sign:.minus, magnitude:val)
-        }
-    }
-     */
     
     /* python, ruby
     >>> 7 % 3

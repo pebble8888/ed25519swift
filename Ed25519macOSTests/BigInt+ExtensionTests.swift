@@ -20,19 +20,16 @@ class BigInt_ExtensionTests: XCTestCase {
         super.tearDown()
     }
     
-
-
-    
     func testFundamental_0() {
         let x = BigInt(sign:.minus, magnitude:1)
         let y = BigInt(sign:.plus, magnitude:2)
-        let z = x % y
+        let _ = x % y
     }
 
     func testFundamental_1() {
         let x = BigUInt(1)
         let y = BigUInt(2)
-        let z = x % y
+        let _ = x % y
     }
     
     func testModulo() {

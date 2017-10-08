@@ -6,7 +6,7 @@ target 'Ed25519macOS' do
   use_frameworks!
 
   # Pods for Ed25519macOS
-  pod 'BigInt', :git => 'https://github.com/attaswift/BigInt.git', :branch => 'swift4'
+  pod 'BigInt', :git => 'https://github.com/attaswift/BigInt.git'
 
   target 'Ed25519macOSTests' do
     inherit! :search_paths

@@ -7,8 +7,7 @@
 
 import XCTest
 import BigInt
-
-@testable import Ed25519macOS
+import Ed25519macOS
 
 class Ed25519macOSTests: XCTestCase {
     
@@ -33,11 +32,11 @@ class Ed25519macOSTests: XCTestCase {
     }
     
     func test_l_lbound() {
-        XCTAssert( Ed25519.l >= BigInt(2).power(Ed25519.b-4))
+        XCTAssert( Ed25519.L >= BigInt(2).power(Ed25519.b-4))
     }
     
     func test_l_ubound() {
-        XCTAssert( Ed25519.l <= BigInt(2).power(Ed25519.b-3))
+        XCTAssert( Ed25519.L <= BigInt(2).power(Ed25519.b-3))
     }
     
     func test_expmod_d() {
@@ -52,10 +51,16 @@ class Ed25519macOSTests: XCTestCase {
         XCTAssert(Ed25519.isoncurve(Ed25519.B))
     }
     
+    // 100sec swift debug
+    // 3sec swift release
+    // 1sec for python
     func test_scalarmul() {
-        XCTAssert(Ed25519.scalarmult(Ed25519.B, Ed25519.l) == [0,1])
+        XCTAssert(Ed25519.scalarmult(Ed25519.B, Ed25519.L) == [0,1])
     }
     
+    // 1000sec swift debug
+    // 39sec swift release
+    // 7sec for python
     func test0() {
         let x0 = "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
         let x1 = "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
@@ -79,6 +84,9 @@ class Ed25519macOSTests: XCTestCase {
         XCTAssertEqual(x3, s.hexDescription())
     }
     
+    // 1000sec swift debug
+    // 33sec swift release
+    // 7sec for python
     func test1() {
         let x0 = "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
         let x1 = "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
