@@ -10,6 +10,17 @@ import Foundation
 import CommonCrypto
 import BigInt
 
+//
+// Ed25519 :
+// - x^2 + y^2 = 1 - (121665/121666) * x^2 * y^2
+//
+// d = -121665/121666 と取ると
+//
+// - x^2 + y^2 = 1 + d * x^2 * y^2
+//
+//
+//
+//
 public struct Ed25519 {
     
     static let b:Int = 256
@@ -54,6 +65,7 @@ public struct Ed25519 {
     static let Bx:BigInt = xrecover(By)
     static let B:[BigInt] = [Bx.modulo(q), By.modulo(q)]  
     
+    // 加法
     static func edwards(_ P:[BigInt], _ Q:[BigInt]) -> [BigInt] {
         let x1 = P[0]
         let y1 = P[1]
@@ -107,6 +119,7 @@ public struct Ed25519 {
         return BigInt((h[i/8] >> UInt8(i%8)) & 1)
     }
     
+    // secret キーをpublicキーに変換する
     public static func publickey(_ sk:[UInt8] ) -> [UInt8] {
         let h:[UInt8] = H(sk)
         let a:BigInt = BigInt(2).power(b-2) + (3..<b-2).map({BigInt(2).power($0) * bit(h, $0)}).sum()
@@ -119,6 +132,10 @@ public struct Ed25519 {
         return (0..<2*b).map({BigInt(2).power($0) * bit(h, $0)}).sum()
     }
     
+    // @brief
+    // @param m  : message
+    // @param sk : secret key
+    // @param pk : public key
     public static func signature(_ m:[UInt8] , _ sk:[UInt8], _ pk:[UInt8]) -> [UInt8] {
         let h:[UInt8] = H(sk)
         let a = BigInt(2).power(b-2) + (3..<b-2).map({BigInt(2).power($0) * bit(h, $0)}).sum() 
@@ -132,6 +149,7 @@ public struct Ed25519 {
         return encodepoint(R) + encodeint(S)
     }
     
+    // @brief 点P がEdward曲線上にあるかどうかを返す
     static func isoncurve(_ P:[BigInt]) -> Bool {
         let x = P[0]
         let y = P[1]

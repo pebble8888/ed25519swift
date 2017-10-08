@@ -28,21 +28,19 @@ while 1:
 
   ed25519.checkvalid(s,m,pk)
 
-  #forgedsuccess = 0
-  #try:
-  #  if len(m) == 0:
-  #    forgedm = "x"
-  #  else:
-  #    forgedmlen = len(m)
-  #    forgedm = ''.join([chr(ord(m[i])+(i==forgedmlen-1)) for i in range(forgedmlen)])
-  #  ed25519.checkvalid(s,forgedm,pk)
-  #  forgedsuccess = 1
-  #except:
-  #  pass
-  #assert not forgedsuccess
+  forgedsuccess = 0
+  try:
+    if len(m) == 0:
+      forgedm = "x"
+    else:
+      forgedmlen = len(m)
+      forgedm = ''.join([chr(ord(m[i])+(i==forgedmlen-1)) for i in range(forgedmlen)])
+    ed25519.checkvalid(s,forgedm,pk)
+    forgedsuccess = 1
+  except:
+    pass
+  assert not forgedsuccess
 
   assert x[0] == binascii.hexlify(sk + pk)
   assert x[1] == binascii.hexlify(pk)
   assert x[3] == binascii.hexlify(s + m)
-  print "."
-  break
