@@ -10,12 +10,9 @@ import Foundation
 
 import BigInt
 
-//
 // Ed25519 :
 //  - x^2 + y^2 = 1 + d * x^2 * y^2
-//
 //  d = -121665/121666
-//
 public struct Ed25519 {
     public static let b:Int = 256
     public static let q:BigInt = BigInt(2).power(255) - 19
@@ -127,7 +124,6 @@ public struct Ed25519 {
         return (0..<2*b).map({BigInt(2).power($0) * bit(h, $0)}).sum()
     }
     
-    // @brief
     // @param m  : message
     // @param sk : secret key
     // @param pk : public key

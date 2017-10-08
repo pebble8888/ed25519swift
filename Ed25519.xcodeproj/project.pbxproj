@@ -54,15 +54,7 @@
 		A2BA80A51EC7250100D66A14 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt+ExtensionTests.swift"; sourceTree = "<group>"; };
 		A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519macOSTests.swift; sourceTree = "<group>"; };
-		A2D235C51ECF42C500BAD20C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A2D235CC1ECF435600BAD20C /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = "../../Users/pebble8888/Library/Developer/Xcode/DerivedData/Ed25519-bgavysfvnlntnkhevpvsigfomvie/Build/Products/Debug/BigInt-OSX/BigInt.framework"; sourceTree = "<group>"; };
-		A2D235D61ECF44AD00BAD20C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A2D235D81ECF44AD00BAD20C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A2D235DA1ECF44AD00BAD20C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A2D235DD1ECF44AD00BAD20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A2D235DF1ECF44AD00BAD20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A2D235E81ECF44AD00BAD20C /* Ed25519macOSSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ed25519macOSSampleTests.swift; sourceTree = "<group>"; };
-		A2D235EA1ECF44AD00BAD20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519Utility.swift; sourceTree = "<group>"; };
 		BE530EFC5913BFBAD042C462 /* Pods-Ed25519macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C33CD4F1CB9434DF4B31582E /* Pods-Ed25519macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOS/Pods-Ed25519macOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,9 +109,6 @@
 				A2BA808F1EC7249A00D66A14 /* CommonCrypto */,
 				A263768B1ECF280700EDC62D /* Ed25519macOS */,
 				A26376961ECF280700EDC62D /* Ed25519macOSTests */,
-				A2D235C41ECF42C500BAD20C /* Ed25519Command */,
-				A2D235D51ECF44AD00BAD20C /* Ed25519macOSSample */,
-				A2D235E71ECF44AD00BAD20C /* Ed25519macOSSampleTests */,
 				A24C40DF1EC71DA200B24AAF /* Products */,
 				92DCB316AAC6D13CF681FF20 /* Pods */,
 				E0F1840553068BE08294F334 /* Frameworks */,
@@ -172,35 +161,6 @@
 				A2BA80A51EC7250100D66A14 /* CommonCrypto.xcconfig */,
 			);
 			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
-		A2D235C41ECF42C500BAD20C /* Ed25519Command */ = {
-			isa = PBXGroup;
-			children = (
-				A2D235C51ECF42C500BAD20C /* main.swift */,
-			);
-			path = Ed25519Command;
-			sourceTree = "<group>";
-		};
-		A2D235D51ECF44AD00BAD20C /* Ed25519macOSSample */ = {
-			isa = PBXGroup;
-			children = (
-				A2D235D61ECF44AD00BAD20C /* AppDelegate.swift */,
-				A2D235D81ECF44AD00BAD20C /* ViewController.swift */,
-				A2D235DA1ECF44AD00BAD20C /* Assets.xcassets */,
-				A2D235DC1ECF44AD00BAD20C /* Main.storyboard */,
-				A2D235DF1ECF44AD00BAD20C /* Info.plist */,
-			);
-			path = Ed25519macOSSample;
-			sourceTree = "<group>";
-		};
-		A2D235E71ECF44AD00BAD20C /* Ed25519macOSSampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				A2D235E81ECF44AD00BAD20C /* Ed25519macOSSampleTests.swift */,
-				A2D235EA1ECF44AD00BAD20C /* Info.plist */,
-			);
-			path = Ed25519macOSSampleTests;
 			sourceTree = "<group>";
 		};
 		E0F1840553068BE08294F334 /* Frameworks */ = {
@@ -498,17 +458,6 @@
 			targetProxy = A26376941ECF280700EDC62D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		A2D235DC1ECF44AD00BAD20C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A2D235DD1ECF44AD00BAD20C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A24C40F01EC71DA300B24AAF /* Debug */ = {
