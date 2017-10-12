@@ -17,6 +17,20 @@
 		A27AECA71ED084B100A1B09F /* ge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA51ED084B100A1B09F /* ge.swift */; };
 		A27AECAA1ED094E100A1B09F /* sc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA81ED094E100A1B09F /* sc.swift */; };
 		A27AECAD1ED09ECA00A1B09F /* sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECAB1ED09ECA00A1B09F /* sign.swift */; };
+		A2A5595D1F8F779700E396B5 /* api.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539ED1F8F777B00E396B5 /* api.h */; };
+		A2A5595E1F8F779700E396B5 /* fe25519.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539EE1F8F777B00E396B5 /* fe25519.c */; };
+		A2A5595F1F8F779700E396B5 /* fe25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539EF1F8F777B00E396B5 /* fe25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2A559601F8F779700E396B5 /* ge25519.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F01F8F777B00E396B5 /* ge25519.cpp */; };
+		A2A559611F8F779700E396B5 /* ge25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539F11F8F777B00E396B5 /* ge25519.h */; };
+		A2A559621F8F779700E396B5 /* ge25519_base.data in Resources */ = {isa = PBXBuildFile; fileRef = A2A539F21F8F777B00E396B5 /* ge25519_base.data */; };
+		A2A559641F8F779700E396B5 /* keypair.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F41F8F777B00E396B5 /* keypair.c */; };
+		A2A559651F8F779700E396B5 /* open.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F51F8F777B00E396B5 /* open.c */; };
+		A2A559661F8F779700E396B5 /* sc25519.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F61F8F777B00E396B5 /* sc25519.c */; };
+		A2A559671F8F779700E396B5 /* sc25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539F71F8F777B00E396B5 /* sc25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2A559681F8F779700E396B5 /* sign.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F81F8F777B00E396B5 /* sign.c */; };
+		A2A559931F8F890C00E396B5 /* sign.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A559921F8F881800E396B5 /* sign.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2A559961F8F9E6000E396B5 /* ref_test.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A559951F8F9E6000E396B5 /* ref_test.m */; };
+		A2A559981F8FB19300E396B5 /* ge_constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A559971F8FB19300E396B5 /* ge_constant.swift */; };
 		A2BB194A1F7696050056EC72 /* BigInt+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */; };
 		A2BB194B1F7696050056EC72 /* Ed25519macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */; };
 		A2D235F41ECFFD2600BAD20C /* Ed25519Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */; };
@@ -57,6 +71,21 @@
 		A27AECA81ED094E100A1B09F /* sc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sc.swift; sourceTree = "<group>"; };
 		A27AECAB1ED09ECA00A1B09F /* sign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sign.swift; sourceTree = "<group>"; };
 		A29F64101ECF318E00289744 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/lib/system/libcommonCrypto.tbd; sourceTree = DEVELOPER_DIR; };
+		A2A539ED1F8F777B00E396B5 /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
+		A2A539EE1F8F777B00E396B5 /* fe25519.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fe25519.c; sourceTree = "<group>"; };
+		A2A539EF1F8F777B00E396B5 /* fe25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fe25519.h; sourceTree = "<group>"; };
+		A2A539F01F8F777B00E396B5 /* ge25519.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ge25519.cpp; sourceTree = "<group>"; };
+		A2A539F11F8F777B00E396B5 /* ge25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ge25519.h; sourceTree = "<group>"; };
+		A2A539F21F8F777B00E396B5 /* ge25519_base.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ge25519_base.data; sourceTree = "<group>"; };
+		A2A539F41F8F777B00E396B5 /* keypair.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = keypair.c; sourceTree = "<group>"; };
+		A2A539F51F8F777B00E396B5 /* open.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = open.c; sourceTree = "<group>"; };
+		A2A539F61F8F777B00E396B5 /* sc25519.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sc25519.c; sourceTree = "<group>"; };
+		A2A539F71F8F777B00E396B5 /* sc25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sc25519.h; sourceTree = "<group>"; };
+		A2A539F81F8F777B00E396B5 /* sign.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sign.c; sourceTree = "<group>"; };
+		A2A559921F8F881800E396B5 /* sign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sign.h; sourceTree = "<group>"; };
+		A2A559941F8F9E6000E396B5 /* Ed25519macOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ed25519macOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		A2A559951F8F9E6000E396B5 /* ref_test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ref_test.m; sourceTree = "<group>"; };
+		A2A559971F8FB19300E396B5 /* ge_constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ge_constant.swift; sourceTree = "<group>"; };
 		A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2BA80911EC7249A00D66A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2BA80A51EC7250100D66A14 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
@@ -113,6 +142,7 @@
 		A24C40D41EC71DA200B24AAF = {
 			isa = PBXGroup;
 			children = (
+				A2A516061F8F777500E396B5 /* ref_supercop */,
 				A24C41141EC71E2A00B24AAF /* Sources */,
 				A2BA808F1EC7249A00D66A14 /* CommonCrypto */,
 				A263768B1ECF280700EDC62D /* Ed25519macOS */,
@@ -141,6 +171,7 @@
 				A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */,
 				A27AECA21ED083E000A1B09F /* fe.swift */,
 				A27AECA51ED084B100A1B09F /* ge.swift */,
+				A2A559971F8FB19300E396B5 /* ge_constant.swift */,
 				A27AECA81ED094E100A1B09F /* sc.swift */,
 				A27AECAB1ED09ECA00A1B09F /* sign.swift */,
 			);
@@ -162,8 +193,53 @@
 				A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */,
 				A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */,
 				A26376991ECF280700EDC62D /* Info.plist */,
+				A2A559951F8F9E6000E396B5 /* ref_test.m */,
+				A2A559941F8F9E6000E396B5 /* Ed25519macOSTests-Bridging-Header.h */,
 			);
 			path = Ed25519macOSTests;
+			sourceTree = "<group>";
+		};
+		A2A516061F8F777500E396B5 /* ref_supercop */ = {
+			isa = PBXGroup;
+			children = (
+				A2A539EA1F8F777B00E396B5 /* crypto_sign */,
+			);
+			path = ref_supercop;
+			sourceTree = "<group>";
+		};
+		A2A539EA1F8F777B00E396B5 /* crypto_sign */ = {
+			isa = PBXGroup;
+			children = (
+				A2A539EB1F8F777B00E396B5 /* ed25519 */,
+			);
+			path = crypto_sign;
+			sourceTree = "<group>";
+		};
+		A2A539EB1F8F777B00E396B5 /* ed25519 */ = {
+			isa = PBXGroup;
+			children = (
+				A2A539EC1F8F777B00E396B5 /* ref */,
+			);
+			path = ed25519;
+			sourceTree = "<group>";
+		};
+		A2A539EC1F8F777B00E396B5 /* ref */ = {
+			isa = PBXGroup;
+			children = (
+				A2A539ED1F8F777B00E396B5 /* api.h */,
+				A2A539EE1F8F777B00E396B5 /* fe25519.c */,
+				A2A539EF1F8F777B00E396B5 /* fe25519.h */,
+				A2A539F01F8F777B00E396B5 /* ge25519.cpp */,
+				A2A539F11F8F777B00E396B5 /* ge25519.h */,
+				A2A539F21F8F777B00E396B5 /* ge25519_base.data */,
+				A2A539F41F8F777B00E396B5 /* keypair.c */,
+				A2A539F51F8F777B00E396B5 /* open.c */,
+				A2A539F61F8F777B00E396B5 /* sc25519.c */,
+				A2A539F71F8F777B00E396B5 /* sc25519.h */,
+				A2A539F81F8F777B00E396B5 /* sign.c */,
+				A2A559921F8F881800E396B5 /* sign.h */,
+			);
+			path = ref;
 			sourceTree = "<group>";
 		};
 		A2BA808F1EC7249A00D66A14 /* CommonCrypto */ = {
@@ -196,6 +272,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A263769A1ECF280700EDC62D /* Ed25519macOS.h in Headers */,
+				A2A5595F1F8F779700E396B5 /* fe25519.h in Headers */,
+				A2A559671F8F779700E396B5 /* sc25519.h in Headers */,
+				A2A5595D1F8F779700E396B5 /* api.h in Headers */,
+				A2A559611F8F779700E396B5 /* ge25519.h in Headers */,
+				A2A559931F8F890C00E396B5 /* sign.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +402,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2A559621F8F779700E396B5 /* ge25519_base.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,8 +517,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2D235F41ECFFD2600BAD20C /* Ed25519Utility.swift in Sources */,
+				A2A559651F8F779700E396B5 /* open.c in Sources */,
 				A27AECAA1ED094E100A1B09F /* sc.swift in Sources */,
+				A2A559681F8F779700E396B5 /* sign.c in Sources */,
+				A2A559601F8F779700E396B5 /* ge25519.cpp in Sources */,
+				A2A5595E1F8F779700E396B5 /* fe25519.c in Sources */,
+				A2A559641F8F779700E396B5 /* keypair.c in Sources */,
 				A27AECA71ED084B100A1B09F /* ge.swift in Sources */,
+				A2A559661F8F779700E396B5 /* sc25519.c in Sources */,
+				A2A559981F8FB19300E396B5 /* ge_constant.swift in Sources */,
 				A24BAC231ECF2AB4005064A6 /* BigInt+Extension.swift in Sources */,
 				A24BAC241ECF2AB4005064A6 /* Ed25519.swift in Sources */,
 				A27AECAD1ED09ECA00A1B09F /* sign.swift in Sources */,
@@ -448,6 +537,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2A559961F8F9E6000E396B5 /* ref_test.m in Sources */,
 				A2BB194A1F7696050056EC72 /* BigInt+ExtensionTests.swift in Sources */,
 				A2BB194B1F7696050056EC72 /* Ed25519macOSTests.swift in Sources */,
 			);
@@ -656,6 +746,7 @@
 			baseConfigurationReference = BE530EFC5913BFBAD042C462 /* Pods-Ed25519macOSTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Ed25519macOSTests/Info.plist;
@@ -664,6 +755,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pebble8888.Ed25519macOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Ed25519macOSTests/Ed25519macOSTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -674,6 +767,7 @@
 			baseConfigurationReference = 7A0FDF0A8FF5BC3151CCBE0E /* Pods-Ed25519macOSTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Ed25519macOSTests/Info.plist;
@@ -682,6 +776,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pebble8888.Ed25519macOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Ed25519macOSTests/Ed25519macOSTests-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};

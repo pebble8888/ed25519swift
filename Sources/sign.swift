@@ -48,8 +48,7 @@ func crypto_verify_32(_ x:[UInt8], _ y:[UInt8]) -> Bool
      */
 }
 
-// -----------
-
+// pk: 32bytes, sk: 32bytes
 public func crypto_sign_keypair() -> (pk:[UInt8], sk:[UInt8])
 {
     var scsk = sc()
@@ -67,59 +66,88 @@ public func crypto_sign_keypair() -> (pk:[UInt8], sk:[UInt8])
     sk[0] &= 248 // clear lowest 3bit
     sk[31] &= 127 // clear highest bit
     sk[31] |= 64 // set bit
-    sc25519_from32bytes(&scsk,sk)
-    
-    ge25519_scalarmult_base(&gepk, scsk)
-   
-    ge25519_pack(&pk, gepk)
+    sc.sc25519_from32bytes(&scsk,sk)
+    // gepk = a * G
+    ge.ge25519_scalarmult_base(&gepk, scsk)
+    //
+    ge.ge25519_pack(&pk, gepk)
     
     return (pk, sk)
 }
 
-// crypt
 // +64
-public func crypto_sign(_ m:[UInt8], _ sk:[UInt8]) -> [UInt8]
+// signing
+// sm: message length + 64
+// m: message
+// return : R + m + S
+public func crypto_sign(_ sm:inout [UInt8], _ m:[UInt8], _ skpk:[UInt8]) -> UInt8
 {
+    assert(skpk.count == 64)
     let mlen:Int = m.count
-    let smlen = mlen+64
-    var sm:[UInt8] = [UInt8](repeating:0, count: smlen)
+    let _ = sm.count
+    var pk = [UInt8](repeating:0, count:32)
+    var az = [UInt8](repeating:0, count:64)
+    var nonce = [UInt8](repeating:0, count:64)
+    var hram = [UInt8](repeating:0, count:64)
     var sck = sc()
     var scs = sc()
     var scsk = sc()
     var ger = ge()
-    var r:[UInt8] = [UInt8](repeating: 0, count:32)
-    var s:[UInt8] = [UInt8](repeating: 0, count:32)
-    var hmg:[UInt8] = [UInt8](repeating: 0, count: crypto_hash_sha512_BYTES)
-    var hmr:[UInt8] = [UInt8](repeating: 0, count: crypto_hash_sha512_BYTES)
+    for i in 0..<32 {
+        pk[i] = skpk[32+i]
+    }
+    /* pk: 32-byte public key A */
     
+    crypto_hash_sha512(&az, skpk, len: 32)
+    az[0] &= 248
+    az[31] &= 127
+    az[31] |= 64
+    
+    sm = [UInt8](repeating:0, count:mlen+64)
     for i in 0..<mlen {
-        sm[32 + i] = m[i]
+        sm[64+i] = m[i]
     }
     for i in 0..<32 {
-        sm[i] = sk[32+i]
+        sm[32+i] = az[32+i]
     }
-    crypto_hash_sha512(&hmg, sm, len: mlen+32) /* Generate k as h(m,sk[32],...,sk[63]) */
     
-    sc25519_from64bytes(&sck, hmg)
-    ge25519_scalarmult_base(&ger, sck)
-    ge25519_pack(&r, ger)
+    /* az: 32-byte scalar a, 32-byte rendomizer z */
+    let data:[UInt8] = Array(sm[32..<(mlen+64)])
+    crypto_hash_sha512(&nonce, data, len:mlen+32)
+    /* nonce: 64-byte H(z,m) */
+    print("nonce:\(nonce)")
+    // rをsckに詰める
+    sc.sc25519_from64bytes(&sck, nonce)
+    // ベースポイントをr倍する
+    ge.ge25519_scalarmult_base(&ger, sck)
     
+    print("ger:\(ger)")
+    // R
+    ge.ge25519_pack(&sm, ger)
+    
+    // pk を詰める
     for i in 0..<32 {
-        sm[i] = r[i]
+        sm[i+32] = pk[i]
     }
+    // k
+    crypto_hash_sha512(&hram, sm, len: mlen+64)
+    // scsにkを詰める
+    sc.sc25519_from64bytes(&scs, hram)
+    // scskに s を詰める
+    sc.sc25519_from32bytes(&scsk, az)
+    // k * sを計算scsに詰める
+    sc.sc25519_mul(&scs, scs, scsk)
+    // 加算してLでmoduloする
+    sc.sc25519_add(&scs, scs, sck)
     
-    crypto_hash_sha512(&hmr, sm, len: mlen+32) /* Compute h(m,r) */
-    sc25519_from64bytes(&scs, hmr)
-    sc25519_mul(&scs, scs, sck)
-    
-    sc25519_from32bytes(&scsk, sk)
-    sc25519_add(&scs, scs, scsk)
-    
-    sc25519_to32bytes(&s,scs) /* cat s */
+    // S
+    var a:[UInt8] = [UInt8](repeating:0, count:32)
+    sc.sc25519_to32bytes(&a, scs) /* cat s */
+    // Sを詰める
     for i in 0..<32 {
-        sm[mlen+32+i] = s[i] 
+        sm[32+i] = a[i]
     }
-    return sm
+    return 0
 }
 
 public enum DecryptError : Swift.Error {
@@ -128,6 +156,7 @@ public enum DecryptError : Swift.Error {
 
 // decrypt
 // -64
+/*
 public func crypto_sign_open(_ sm:[UInt8], _ pk:[UInt8]) throws -> [UInt8] {
     let smlen = sm.count
     var m:[UInt8] = [UInt8](repeating:0, count: smlen - 64)
@@ -171,3 +200,4 @@ public func crypto_sign_open(_ sm:[UInt8], _ pk:[UInt8]) throws -> [UInt8] {
     */
     return m
 }
+ */

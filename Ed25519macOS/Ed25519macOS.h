@@ -13,3 +13,5 @@ FOUNDATION_EXPORT double Ed25519macOSVersionNumber;
 
 //! Project version string for Ed25519macOS.
 FOUNDATION_EXPORT const unsigned char Ed25519macOSVersionString[];
+
+#include <Ed25519macOS/sign.h>

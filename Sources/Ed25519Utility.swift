@@ -53,3 +53,7 @@ func sha512(_ s:[UInt8]) -> Ed25519.Digest {
     })
     return Ed25519.Digest(data: digest, length: Int(CC_SHA512_DIGEST_LENGTH))
 }
+
+public func sha512digest(_ s:[UInt8]) -> [UInt8] {
+    return sha512(s).digest()
+}

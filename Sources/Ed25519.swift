@@ -127,6 +127,7 @@ public struct Ed25519 {
     // @param m  : message
     // @param sk : secret key
     // @param pk : public key
+    // @return 64bytes
     public static func signature(_ m:[UInt8] , _ sk:[UInt8], _ pk:[UInt8]) -> [UInt8] {
         let h:[UInt8] = H(sk)
         let a = BigInt(2).power(b-2) + (3..<b-2).map({BigInt(2).power($0) * bit(h, $0)}).sum() 
