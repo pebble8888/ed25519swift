@@ -23,10 +23,10 @@ struct sc {
     
     /*Arithmetic modulo the group order n = 2^252 +  27742317777372353535851937790883648493 = 7237005577332262213973186563042994240857116359379907606001950938285454250989 */
     
-    static let m:[UInt32] = [0xED, 0xD3, 0xF5, 0x5C, 0x1A, 0x63, 0x12, 0x58, 0xD6, 0x9C, 0xF7, 0xA2, 0xDE, 0xF9, 0xDE, 0x14, 
+    private static let m:[UInt32] = [0xED, 0xD3, 0xF5, 0x5C, 0x1A, 0x63, 0x12, 0x58, 0xD6, 0x9C, 0xF7, 0xA2, 0xDE, 0xF9, 0xDE, 0x14,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10]
     
-    static let mu:[UInt32] = [0x1B, 0x13, 0x2C, 0x0A, 0xA3, 0xE5, 0x9C, 0xED, 0xA7, 0x29, 0x63, 0x08, 0x5D, 0x21, 0x06, 0x21, 
+    private static let mu:[UInt32] = [0x1B, 0x13, 0x2C, 0x0A, 0xA3, 0xE5, 0x9C, 0xED, 0xA7, 0x29, 0x63, 0x08, 0x5D, 0x21, 0x06, 0x21, 
     0xEB, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F]
     
     private static func lt(_ a:UInt32, _ b:UInt32) -> UInt32 /* 16-bit inputs */
@@ -103,15 +103,15 @@ struct sc {
             let vv:Int64 = Int64(r1[i]) - Int64(pb) + Int64(b<<8)
             assert(vv>=0 && vv <= 0xff)
             r.v[i] = UInt32(vv) 
-            pb = b;
+            pb = b
         }
         
         /* XXX: Can it really happen that r<0?, See HAC, Alg 14.42, Step 3 
          * If so: Handle  it here!
          */
         
-        reduce_add_sub(&r);
-        reduce_add_sub(&r);
+        reduce_add_sub(&r)
+        reduce_add_sub(&r)
     }
 
     static func sc25519_from32bytes(_ r:inout sc, _ x:[UInt8] /* 32 */)
@@ -162,7 +162,7 @@ struct sc {
                 return 0
             }
         }
-        return 1;
+        return 1
     }
 
     static func sc25519_isshort_vartime(_ x:sc) -> Int
@@ -170,24 +170,24 @@ struct sc {
         for i in stride(from:31, to:15, by:-1) {
             if x.v[i] != 0 { return 0 }
         }
-        return 1;
+        return 1
     }
 
     static func sc25519_lt_vartime(_ x:sc, _ y:sc) -> UInt
     {
         for i in stride(from:31, through:0, by:-1)
         {
-            if(x.v[i] < y.v[i]) { return 1; }
-            if(x.v[i] > y.v[i]) { return 0; }
+            if(x.v[i] < y.v[i]) { return 1 }
+            if(x.v[i] > y.v[i]) { return 0 }
         }
-        return 0;
+        return 0
     }
 
     static func sc25519_add(_ r:inout sc, _ x:sc, _ y:sc)
     {
         var carry:UInt32
         for i in 0..<32 {
-            r.v[i] = x.v[i] + y.v[i];
+            r.v[i] = x.v[i] + y.v[i]
         }
         for i in 0..<31 {
             carry = r.v[i] >> 8
@@ -199,13 +199,13 @@ struct sc {
 
     static func sc25519_sub_nored(_ r:inout sc, _ x:sc, _ y:sc)
     {
-        var b:UInt32 = 0;
-        var t:UInt32;
+        var b:UInt32 = 0
+        var t:UInt32
         for i in 0..<32
         {
-            t = x.v[i] - y.v[i] - b;
-            r.v[i] = t & 255;
-            b = (t >> 8) & 1;
+            t = x.v[i] - y.v[i] - b
+            r.v[i] = t & 255
+            b = (t >> 8) & 1
         }
     }
 
@@ -216,7 +216,7 @@ struct sc {
 
         for i in 0..<32 {
             for j in 0..<32 {
-                t[i+j] += x.v[i] * y.v[j];
+                t[i+j] += x.v[i] * y.v[j]
             }
         }
         
@@ -233,7 +233,7 @@ struct sc {
     static func sc25519_mul_shortsc(_ r:inout sc, _ x:sc, _ y:shortsc)
     {
         var t = sc()
-        sc25519_from_shortsc(&t, y);
+        sc25519_from_shortsc(&t, y)
         sc25519_mul(&r, x, t)
     }
 
@@ -306,16 +306,16 @@ struct sc {
         r[8*i+2]  = (Int8(s.v[5*i+1]) >> 2) & 31
         
         /* Making it signed */
-        carry = 0;
+        carry = 0
         for i in 0..<50
         {
-            r[i] += carry;
-            r[i+1] += r[i] >> 5;
-            r[i] &= 31;
+            r[i] += carry
+            r[i+1] += r[i] >> 5
+            r[i] &= 31
             carry = r[i] >> 4
             r[i] -= (carry << 5)
         }
-        r[50] += carry;
+        r[50] += carry
     }
 
     static func sc25519_2interleave2(_ r:inout [UInt8] /* 127 */, _ s1:sc, _ s2:sc)

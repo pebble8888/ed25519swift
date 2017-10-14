@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import BigInt
 
 // ed25519 :
@@ -17,12 +16,12 @@ import BigInt
 // This implementation is easy to understand, but very slow.
 // You should not use this for an actual application.
 //
-public struct ed25519 {
+public struct ed25519s {
     public static let b:Int = 256
     public static let q:BigInt = BigInt(2).power(255) - 19
     public static let L:BigInt = BigInt(2).power(252) + BigInt("27742317777372353535851937790883648493")!
     public static func H(_ m:[UInt8]) -> [UInt8] {
-        return sha512(m).digest()
+        return sha512(m)
     }
     
     // return val is less than m

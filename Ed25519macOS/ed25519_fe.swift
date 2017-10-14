@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal struct fe :CustomStringConvertible {
+struct fe :CustomStringConvertible {
     public var v:[UInt32] // size:32
     
     public var description: String {
@@ -128,6 +128,7 @@ internal struct fe :CustomStringConvertible {
         return r != 0
     }
 
+    // is euqal after freeze
     static func fe25519_iseq_vartime(_ x:fe, _ y:fe) -> Bool
     {
         var t1 = x;

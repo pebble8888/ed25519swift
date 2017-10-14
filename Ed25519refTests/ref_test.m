@@ -8,8 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import <Ed25519ref/Ed25519ref-Swift.h>
-#import <Ed25519ref/fe25519.h>
-#import <Ed25519ref/sc25519.h>
+#import <Ed25519ref/Ed25519ref.h>
 
 @interface ref_test : XCTestCase
 

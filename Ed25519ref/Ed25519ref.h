@@ -16,5 +16,8 @@ FOUNDATION_EXPORT const unsigned char Ed25519refVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Ed25519ref/PublicHeader.h>
 
-#include <Ed25519ref/sign.h>
-#include <Ed25519ref/open.h>
+#import <Ed25519ref/sign.h>
+#import <Ed25519ref/open.h>
+#import <Ed25519ref/fe25519.h>
+#import <Ed25519ref/sc25519.h>
+#import <Ed25519ref/ge25519.h>
