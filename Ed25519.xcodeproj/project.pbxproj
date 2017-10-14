@@ -17,7 +17,6 @@
 		A241E50E1F91AB3E003C435B /* ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24C41151EC71E2A00B24AAF /* ed25519.swift */; };
 		A241E50F1F91AB4E003C435B /* BigInt+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */; };
 		A241E5101F91AB81003C435B /* ed25519Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519Utility.swift */; };
-		A241E5121F91AC47003C435B /* ed25519Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519Utility.swift */; };
 		A24BAC281ECF2CD7005064A6 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A26376931ECF280700EDC62D /* Ed25519macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A263768A1ECF280700EDC62D /* Ed25519macOS.framework */; };
 		A263769A1ECF280700EDC62D /* Ed25519macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A263768C1ECF280700EDC62D /* Ed25519macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -251,7 +250,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A24C41141EC71E2A00B24AAF /* Sources */ = {
+		A263768B1ECF280700EDC62D /* Ed25519macOS */ = {
 			isa = PBXGroup;
 			children = (
 				A2D235F21ECFFD2600BAD20C /* ed25519Utility.swift */,
@@ -260,14 +259,6 @@
 				A27AECA81ED094E100A1B09F /* sc.swift */,
 				A27AECAB1ED09ECA00A1B09F /* sign.swift */,
 				A29895CA1F91A06F000D8206 /* open.swift */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		A263768B1ECF280700EDC62D /* Ed25519macOS */ = {
-			isa = PBXGroup;
-			children = (
-				A24C41141EC71E2A00B24AAF /* Sources */,
 				A263768C1ECF280700EDC62D /* Ed25519macOS.h */,
 				A263768D1ECF280700EDC62D /* Info.plist */,
 			);
@@ -769,7 +760,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A241E5121F91AC47003C435B /* ed25519Utility.swift in Sources */,
 				A294FA071F91B0CA00923D2C /* keypair.c in Sources */,
 				A294FA081F91B0D000923D2C /* open.c in Sources */,
 				A241E50E1F91AB3E003C435B /* ed25519.swift in Sources */,
