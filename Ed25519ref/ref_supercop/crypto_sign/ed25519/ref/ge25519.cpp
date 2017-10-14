@@ -301,19 +301,8 @@ void ge25519_scalarmult_base(ge25519_p3 *r, const sc25519 *s)
   int i;
   ge25519_aff t;
   sc25519_window3(b,s);
-    
-  // window3結果一致しない
-    for (int i = 0; i < 85; ++i){
-        printf("%d ", b[i]);
-    }
-
   choose_t((ge25519_aff *)r, 0, b[0]);
   fe25519_setone(&r->z);
-  
-    for (int i = 0; i < 32; ++i){
-        printf("%02x ", r->x.v[i]);
-    }
-    
   fe25519_mul(&r->t, &r->x, &r->y);
   for(i=1;i<85;i++)
   {

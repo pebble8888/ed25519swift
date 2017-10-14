@@ -12,7 +12,7 @@ typedef struct ge25519
   fe25519 t;
 } ge25519;
 
-//const ge25519 ge25519_base;
+extern const ge25519 ge25519_base;
 
 #ifdef __cplusplus
 extern "C" {

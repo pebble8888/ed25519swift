@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1859D1335D12CCB01240147C /* Pods_Ed25519refTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A10F4BC828B83FBE10B438 /* Pods_Ed25519refTests.framework */; };
+		3C8499EBFAB5A803775B2DDF /* Pods_Ed25519ref.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6082939BC80F8643CC3DCEF4 /* Pods_Ed25519ref.framework */; };
 		86EB8AE0FC9102418C68A0B4 /* Pods_Ed25519macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F59917A0CF8FCDB27CDF7F3 /* Pods_Ed25519macOS.framework */; };
-		A24BAC231ECF2AB4005064A6 /* BigInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */; };
-		A24BAC241ECF2AB4005064A6 /* Ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24C41151EC71E2A00B24AAF /* Ed25519.swift */; };
+		A241E4FE1F91AB11003C435B /* Ed25519ref.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A241E4F51F91AB11003C435B /* Ed25519ref.framework */; };
+		A241E5031F91AB11003C435B /* Ed25519refTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A241E5021F91AB11003C435B /* Ed25519refTests.swift */; };
+		A241E5051F91AB11003C435B /* Ed25519ref.h in Headers */ = {isa = PBXBuildFile; fileRef = A241E4F71F91AB11003C435B /* Ed25519ref.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A241E50C1F91AB3E003C435B /* BigInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */; };
+		A241E50E1F91AB3E003C435B /* ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24C41151EC71E2A00B24AAF /* ed25519.swift */; };
+		A241E50F1F91AB4E003C435B /* BigInt+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */; };
+		A241E5101F91AB81003C435B /* ed25519Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519Utility.swift */; };
+		A241E5121F91AC47003C435B /* ed25519Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519Utility.swift */; };
 		A24BAC281ECF2CD7005064A6 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A26376931ECF280700EDC62D /* Ed25519macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A263768A1ECF280700EDC62D /* Ed25519macOS.framework */; };
 		A263769A1ECF280700EDC62D /* Ed25519macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A263768C1ECF280700EDC62D /* Ed25519macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,27 +25,38 @@
 		A27AECA71ED084B100A1B09F /* ge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA51ED084B100A1B09F /* ge.swift */; };
 		A27AECAA1ED094E100A1B09F /* sc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA81ED094E100A1B09F /* sc.swift */; };
 		A27AECAD1ED09ECA00A1B09F /* sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECAB1ED09ECA00A1B09F /* sign.swift */; };
+		A2896FDD1F918BFD008A2029 /* hash_sha512.h in Headers */ = {isa = PBXBuildFile; fileRef = A2896FDB1F918BFD008A2029 /* hash_sha512.h */; };
+		A2896FE11F918D74008A2029 /* verify.h in Headers */ = {isa = PBXBuildFile; fileRef = A2896FDF1F918D74008A2029 /* verify.h */; };
+		A294FA021F91AED600923D2C /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; };
+		A294FA051F91B0C000923D2C /* fe25519.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539EE1F8F777B00E396B5 /* fe25519.c */; };
+		A294FA061F91B0C400923D2C /* ge25519.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F01F8F777B00E396B5 /* ge25519.cpp */; };
+		A294FA071F91B0CA00923D2C /* keypair.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F41F8F777B00E396B5 /* keypair.c */; };
+		A294FA081F91B0D000923D2C /* open.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F51F8F777B00E396B5 /* open.c */; };
+		A294FA091F91B0D400923D2C /* sc25519.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F61F8F777B00E396B5 /* sc25519.c */; };
+		A294FA0A1F91B0D800923D2C /* sign.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F81F8F777B00E396B5 /* sign.c */; };
+		A294FA0B1F91B0DC00923D2C /* hash_sha512.c in Sources */ = {isa = PBXBuildFile; fileRef = A2896FDA1F918BFD008A2029 /* hash_sha512.c */; };
+		A294FA0C1F91B0E000923D2C /* verify.c in Sources */ = {isa = PBXBuildFile; fileRef = A2896FDE1F918D74008A2029 /* verify.c */; };
+		A294FA0D1F91B18100923D2C /* ref_test.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A559951F8F9E6000E396B5 /* ref_test.m */; };
+		A294FA0E1F91B21E00923D2C /* open.h in Headers */ = {isa = PBXBuildFile; fileRef = A2896FE21F91914F008A2029 /* open.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A294FA0F1F91B22800923D2C /* sign.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A559921F8F881800E396B5 /* sign.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A294FA101F91B29C00923D2C /* fe25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539EF1F8F777B00E396B5 /* fe25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A294FA111F91B2A300923D2C /* sc25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539F71F8F777B00E396B5 /* sc25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A29895CB1F91A06F000D8206 /* open.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29895CA1F91A06F000D8206 /* open.swift */; };
 		A2A5595D1F8F779700E396B5 /* api.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539ED1F8F777B00E396B5 /* api.h */; };
-		A2A5595E1F8F779700E396B5 /* fe25519.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539EE1F8F777B00E396B5 /* fe25519.c */; };
-		A2A5595F1F8F779700E396B5 /* fe25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539EF1F8F777B00E396B5 /* fe25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2A559601F8F779700E396B5 /* ge25519.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F01F8F777B00E396B5 /* ge25519.cpp */; };
 		A2A559611F8F779700E396B5 /* ge25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539F11F8F777B00E396B5 /* ge25519.h */; };
 		A2A559621F8F779700E396B5 /* ge25519_base.data in Resources */ = {isa = PBXBuildFile; fileRef = A2A539F21F8F777B00E396B5 /* ge25519_base.data */; };
-		A2A559641F8F779700E396B5 /* keypair.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F41F8F777B00E396B5 /* keypair.c */; };
-		A2A559651F8F779700E396B5 /* open.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F51F8F777B00E396B5 /* open.c */; };
-		A2A559661F8F779700E396B5 /* sc25519.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F61F8F777B00E396B5 /* sc25519.c */; };
-		A2A559671F8F779700E396B5 /* sc25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539F71F8F777B00E396B5 /* sc25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2A559681F8F779700E396B5 /* sign.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F81F8F777B00E396B5 /* sign.c */; };
-		A2A559931F8F890C00E396B5 /* sign.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A559921F8F881800E396B5 /* sign.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2A559961F8F9E6000E396B5 /* ref_test.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A559951F8F9E6000E396B5 /* ref_test.m */; };
-		A2A559981F8FB19300E396B5 /* ge_constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A559971F8FB19300E396B5 /* ge_constant.swift */; };
-		A2BB194A1F7696050056EC72 /* BigInt+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */; };
 		A2BB194B1F7696050056EC72 /* Ed25519macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */; };
-		A2D235F41ECFFD2600BAD20C /* Ed25519Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */; };
 		ADFD9C4D73C562B438BDBCC9 /* Pods_Ed25519macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258E772EA9450417954ECBA1 /* Pods_Ed25519macOSTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A241E4FF1F91AB11003C435B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A24C40D51EC71DA200B24AAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A241E4F41F91AB11003C435B;
+			remoteInfo = Ed25519ref;
+		};
 		A24BAC261ECF2CD2005064A6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A24C40D51EC71DA200B24AAF /* Project object */;
@@ -52,15 +71,33 @@
 			remoteGlobalIDString = A26376891ECF280700EDC62D;
 			remoteInfo = Ed25519macOS;
 		};
+		A294FA031F91AFA600923D2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A24C40D51EC71DA200B24AAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2BA808D1EC7249A00D66A14;
+			remoteInfo = CommonCrypto;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		258E772EA9450417954ECBA1 /* Pods_Ed25519macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3264F45C8E45C0EEA6B28894 /* Pods_Ed25519iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EB84485ACB772BEEE3B828A /* Pods-Ed25519ref.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519ref.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519ref/Pods-Ed25519ref.release.xcconfig"; sourceTree = "<group>"; };
 		3F59917A0CF8FCDB27CDF7F3 /* Pods_Ed25519macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4305AF2EA076DA6FE7F292FE /* Pods-Ed25519refTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519refTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests.release.xcconfig"; sourceTree = "<group>"; };
+		4A8B1CF5218753DB804CD13F /* Pods-Ed25519refTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519refTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests.debug.xcconfig"; sourceTree = "<group>"; };
+		56872B5A89A926B4E4B1DE03 /* Pods-Ed25519ref.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519ref.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519ref/Pods-Ed25519ref.debug.xcconfig"; sourceTree = "<group>"; };
+		6082939BC80F8643CC3DCEF4 /* Pods_Ed25519ref.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519ref.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63A10F4BC828B83FBE10B438 /* Pods_Ed25519refTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519refTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0FDF0A8FF5BC3151CCBE0E /* Pods-Ed25519macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt+Extension.swift"; sourceTree = "<group>"; };
-		A24C41151EC71E2A00B24AAF /* Ed25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519.swift; sourceTree = "<group>"; };
+		A241E4F51F91AB11003C435B /* Ed25519ref.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ed25519ref.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A241E4F71F91AB11003C435B /* Ed25519ref.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ed25519ref.h; sourceTree = "<group>"; };
+		A241E4F81F91AB11003C435B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A241E4FD1F91AB11003C435B /* Ed25519refTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ed25519refTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A241E5021F91AB11003C435B /* Ed25519refTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ed25519refTests.swift; sourceTree = "<group>"; };
+		A241E5041F91AB11003C435B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A24C41151EC71E2A00B24AAF /* ed25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519.swift; sourceTree = "<group>"; };
 		A263768A1ECF280700EDC62D /* Ed25519macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ed25519macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A263768C1ECF280700EDC62D /* Ed25519macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ed25519macOS.h; sourceTree = "<group>"; };
 		A263768D1ECF280700EDC62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,6 +107,12 @@
 		A27AECA51ED084B100A1B09F /* ge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ge.swift; sourceTree = "<group>"; };
 		A27AECA81ED094E100A1B09F /* sc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sc.swift; sourceTree = "<group>"; };
 		A27AECAB1ED09ECA00A1B09F /* sign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sign.swift; sourceTree = "<group>"; };
+		A2896FDA1F918BFD008A2029 /* hash_sha512.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hash_sha512.c; sourceTree = "<group>"; };
+		A2896FDB1F918BFD008A2029 /* hash_sha512.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hash_sha512.h; sourceTree = "<group>"; };
+		A2896FDE1F918D74008A2029 /* verify.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = verify.c; sourceTree = "<group>"; };
+		A2896FDF1F918D74008A2029 /* verify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = verify.h; sourceTree = "<group>"; };
+		A2896FE21F91914F008A2029 /* open.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = open.h; sourceTree = "<group>"; };
+		A29895CA1F91A06F000D8206 /* open.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = open.swift; sourceTree = "<group>"; };
 		A29F64101ECF318E00289744 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/lib/system/libcommonCrypto.tbd; sourceTree = DEVELOPER_DIR; };
 		A2A539ED1F8F777B00E396B5 /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
 		A2A539EE1F8F777B00E396B5 /* fe25519.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fe25519.c; sourceTree = "<group>"; };
@@ -85,21 +128,37 @@
 		A2A559921F8F881800E396B5 /* sign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sign.h; sourceTree = "<group>"; };
 		A2A559941F8F9E6000E396B5 /* Ed25519macOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ed25519macOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2A559951F8F9E6000E396B5 /* ref_test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ref_test.m; sourceTree = "<group>"; };
-		A2A559971F8FB19300E396B5 /* ge_constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ge_constant.swift; sourceTree = "<group>"; };
 		A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2BA80911EC7249A00D66A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2BA80A51EC7250100D66A14 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt+ExtensionTests.swift"; sourceTree = "<group>"; };
 		A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519macOSTests.swift; sourceTree = "<group>"; };
 		A2D235CC1ECF435600BAD20C /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = "../../Users/pebble8888/Library/Developer/Xcode/DerivedData/Ed25519-bgavysfvnlntnkhevpvsigfomvie/Build/Products/Debug/BigInt-OSX/BigInt.framework"; sourceTree = "<group>"; };
-		A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519Utility.swift; sourceTree = "<group>"; };
+		A2D235F21ECFFD2600BAD20C /* ed25519Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519Utility.swift; sourceTree = "<group>"; };
 		BE530EFC5913BFBAD042C462 /* Pods-Ed25519macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C33CD4F1CB9434DF4B31582E /* Pods-Ed25519macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOS/Pods-Ed25519macOS.release.xcconfig"; sourceTree = "<group>"; };
-		D5443A5962331252EC23D6F2 /* Pods_Ed25519iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E13849EFEAF6E30E29E82F99 /* Pods-Ed25519macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOS/Pods-Ed25519macOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A241E4F11F91AB11003C435B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A294FA021F91AED600923D2C /* CommonCrypto.framework in Frameworks */,
+				3C8499EBFAB5A803775B2DDF /* Pods_Ed25519ref.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A241E4FA1F91AB11003C435B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A241E4FE1F91AB11003C435B /* Ed25519ref.framework in Frameworks */,
+				1859D1335D12CCB01240147C /* Pods_Ed25519refTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A26376861ECF280700EDC62D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -135,18 +194,45 @@
 				C33CD4F1CB9434DF4B31582E /* Pods-Ed25519macOS.release.xcconfig */,
 				BE530EFC5913BFBAD042C462 /* Pods-Ed25519macOSTests.debug.xcconfig */,
 				7A0FDF0A8FF5BC3151CCBE0E /* Pods-Ed25519macOSTests.release.xcconfig */,
+				56872B5A89A926B4E4B1DE03 /* Pods-Ed25519ref.debug.xcconfig */,
+				3EB84485ACB772BEEE3B828A /* Pods-Ed25519ref.release.xcconfig */,
+				4A8B1CF5218753DB804CD13F /* Pods-Ed25519refTests.debug.xcconfig */,
+				4305AF2EA076DA6FE7F292FE /* Pods-Ed25519refTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A241E4F61F91AB11003C435B /* Ed25519ref */ = {
+			isa = PBXGroup;
+			children = (
+				A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */,
+				A24C41151EC71E2A00B24AAF /* ed25519.swift */,
+				A2A516061F8F777500E396B5 /* ref_supercop */,
+				A241E4F71F91AB11003C435B /* Ed25519ref.h */,
+				A241E4F81F91AB11003C435B /* Info.plist */,
+			);
+			path = Ed25519ref;
+			sourceTree = "<group>";
+		};
+		A241E5011F91AB11003C435B /* Ed25519refTests */ = {
+			isa = PBXGroup;
+			children = (
+				A2A559951F8F9E6000E396B5 /* ref_test.m */,
+				A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */,
+				A241E5021F91AB11003C435B /* Ed25519refTests.swift */,
+				A241E5041F91AB11003C435B /* Info.plist */,
+			);
+			path = Ed25519refTests;
 			sourceTree = "<group>";
 		};
 		A24C40D41EC71DA200B24AAF = {
 			isa = PBXGroup;
 			children = (
-				A2A516061F8F777500E396B5 /* ref_supercop */,
-				A24C41141EC71E2A00B24AAF /* Sources */,
 				A2BA808F1EC7249A00D66A14 /* CommonCrypto */,
 				A263768B1ECF280700EDC62D /* Ed25519macOS */,
 				A26376961ECF280700EDC62D /* Ed25519macOSTests */,
+				A241E4F61F91AB11003C435B /* Ed25519ref */,
+				A241E5011F91AB11003C435B /* Ed25519refTests */,
 				A24C40DF1EC71DA200B24AAF /* Products */,
 				92DCB316AAC6D13CF681FF20 /* Pods */,
 				E0F1840553068BE08294F334 /* Frameworks */,
@@ -159,6 +245,8 @@
 				A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */,
 				A263768A1ECF280700EDC62D /* Ed25519macOS.framework */,
 				A26376921ECF280700EDC62D /* Ed25519macOSTests.xctest */,
+				A241E4F51F91AB11003C435B /* Ed25519ref.framework */,
+				A241E4FD1F91AB11003C435B /* Ed25519refTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,14 +254,12 @@
 		A24C41141EC71E2A00B24AAF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */,
-				A24C41151EC71E2A00B24AAF /* Ed25519.swift */,
-				A2D235F21ECFFD2600BAD20C /* Ed25519Utility.swift */,
+				A2D235F21ECFFD2600BAD20C /* ed25519Utility.swift */,
 				A27AECA21ED083E000A1B09F /* fe.swift */,
 				A27AECA51ED084B100A1B09F /* ge.swift */,
-				A2A559971F8FB19300E396B5 /* ge_constant.swift */,
 				A27AECA81ED094E100A1B09F /* sc.swift */,
 				A27AECAB1ED09ECA00A1B09F /* sign.swift */,
+				A29895CA1F91A06F000D8206 /* open.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -181,6 +267,7 @@
 		A263768B1ECF280700EDC62D /* Ed25519macOS */ = {
 			isa = PBXGroup;
 			children = (
+				A24C41141EC71E2A00B24AAF /* Sources */,
 				A263768C1ECF280700EDC62D /* Ed25519macOS.h */,
 				A263768D1ECF280700EDC62D /* Info.plist */,
 			);
@@ -190,10 +277,8 @@
 		A26376961ECF280700EDC62D /* Ed25519macOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */,
 				A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */,
 				A26376991ECF280700EDC62D /* Info.plist */,
-				A2A559951F8F9E6000E396B5 /* ref_test.m */,
 				A2A559941F8F9E6000E396B5 /* Ed25519macOSTests-Bridging-Header.h */,
 			);
 			path = Ed25519macOSTests;
@@ -234,10 +319,15 @@
 				A2A539F21F8F777B00E396B5 /* ge25519_base.data */,
 				A2A539F41F8F777B00E396B5 /* keypair.c */,
 				A2A539F51F8F777B00E396B5 /* open.c */,
+				A2896FE21F91914F008A2029 /* open.h */,
 				A2A539F61F8F777B00E396B5 /* sc25519.c */,
 				A2A539F71F8F777B00E396B5 /* sc25519.h */,
 				A2A539F81F8F777B00E396B5 /* sign.c */,
 				A2A559921F8F881800E396B5 /* sign.h */,
+				A2896FDA1F918BFD008A2029 /* hash_sha512.c */,
+				A2896FDB1F918BFD008A2029 /* hash_sha512.h */,
+				A2896FDE1F918D74008A2029 /* verify.c */,
+				A2896FDF1F918D74008A2029 /* verify.h */,
 			);
 			path = ref;
 			sourceTree = "<group>";
@@ -256,10 +346,10 @@
 			children = (
 				A2D235CC1ECF435600BAD20C /* BigInt.framework */,
 				A29F64101ECF318E00289744 /* libcommonCrypto.tbd */,
-				3264F45C8E45C0EEA6B28894 /* Pods_Ed25519iOS.framework */,
-				D5443A5962331252EC23D6F2 /* Pods_Ed25519iOSTests.framework */,
 				3F59917A0CF8FCDB27CDF7F3 /* Pods_Ed25519macOS.framework */,
 				258E772EA9450417954ECBA1 /* Pods_Ed25519macOSTests.framework */,
+				6082939BC80F8643CC3DCEF4 /* Pods_Ed25519ref.framework */,
+				63A10F4BC828B83FBE10B438 /* Pods_Ed25519refTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -267,16 +357,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		A241E4F21F91AB11003C435B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A294FA101F91B29C00923D2C /* fe25519.h in Headers */,
+				A294FA0E1F91B21E00923D2C /* open.h in Headers */,
+				A241E5051F91AB11003C435B /* Ed25519ref.h in Headers */,
+				A294FA0F1F91B22800923D2C /* sign.h in Headers */,
+				A294FA111F91B2A300923D2C /* sc25519.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A26376871ECF280700EDC62D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A263769A1ECF280700EDC62D /* Ed25519macOS.h in Headers */,
-				A2A5595F1F8F779700E396B5 /* fe25519.h in Headers */,
-				A2A559671F8F779700E396B5 /* sc25519.h in Headers */,
+				A2896FDD1F918BFD008A2029 /* hash_sha512.h in Headers */,
+				A2896FE11F918D74008A2029 /* verify.h in Headers */,
 				A2A5595D1F8F779700E396B5 /* api.h in Headers */,
 				A2A559611F8F779700E396B5 /* ge25519.h in Headers */,
-				A2A559931F8F890C00E396B5 /* sign.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +391,48 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		A241E4F41F91AB11003C435B /* Ed25519ref */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A241E5061F91AB11003C435B /* Build configuration list for PBXNativeTarget "Ed25519ref" */;
+			buildPhases = (
+				38592C94CE09275F74EE5A0B /* [CP] Check Pods Manifest.lock */,
+				A241E4F01F91AB11003C435B /* Sources */,
+				A241E4F11F91AB11003C435B /* Frameworks */,
+				A241E4F21F91AB11003C435B /* Headers */,
+				A241E4F31F91AB11003C435B /* Resources */,
+				EBB94233F69836B90B24476A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A294FA041F91AFA600923D2C /* PBXTargetDependency */,
+			);
+			name = Ed25519ref;
+			productName = Ed25519ref;
+			productReference = A241E4F51F91AB11003C435B /* Ed25519ref.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A241E4FC1F91AB11003C435B /* Ed25519refTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A241E5091F91AB11003C435B /* Build configuration list for PBXNativeTarget "Ed25519refTests" */;
+			buildPhases = (
+				BC61F28383D35532A0E9D054 /* [CP] Check Pods Manifest.lock */,
+				A241E4F91F91AB11003C435B /* Sources */,
+				A241E4FA1F91AB11003C435B /* Frameworks */,
+				A241E4FB1F91AB11003C435B /* Resources */,
+				49F31C7A961085C01C571C04 /* [CP] Embed Pods Frameworks */,
+				85BED3E5E602039EEEB32B0C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A241E5001F91AB11003C435B /* PBXTargetDependency */,
+			);
+			name = Ed25519refTests;
+			productName = Ed25519refTests;
+			productReference = A241E4FD1F91AB11003C435B /* Ed25519refTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A26376891ECF280700EDC62D /* Ed25519macOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A263769F1ECF280700EDC62D /* Build configuration list for PBXNativeTarget "Ed25519macOS" */;
@@ -356,10 +499,18 @@
 		A24C40D51EC71DA200B24AAF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = pebble8888;
 				TargetAttributes = {
+					A241E4F41F91AB11003C435B = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					A241E4FC1F91AB11003C435B = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
 					A26376891ECF280700EDC62D = {
 						CreatedOnToolsVersion = 8.3.2;
 						LastSwiftMigration = 0900;
@@ -393,11 +544,27 @@
 				A26376891ECF280700EDC62D /* Ed25519macOS */,
 				A26376911ECF280700EDC62D /* Ed25519macOSTests */,
 				A2BA808D1EC7249A00D66A14 /* CommonCrypto */,
+				A241E4F41F91AB11003C435B /* Ed25519ref */,
+				A241E4FC1F91AB11003C435B /* Ed25519refTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A241E4F31F91AB11003C435B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A241E4FB1F91AB11003C435B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A26376881ECF280700EDC62D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -441,6 +608,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		38592C94CE09275F74EE5A0B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ed25519ref-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		42DE74C56617A26AA0A38E0D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -459,6 +644,41 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		49F31C7A961085C01C571C04 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85BED3E5E602039EEEB32B0C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8FFD5DB21D54BDA51D440775 /* [CP] Check Pods Manifest.lock */ = {
@@ -509,27 +729,80 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BC61F28383D35532A0E9D054 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ed25519refTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBB94233F69836B90B24476A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519ref/Pods-Ed25519ref-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A241E4F01F91AB11003C435B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A241E5121F91AC47003C435B /* ed25519Utility.swift in Sources */,
+				A294FA071F91B0CA00923D2C /* keypair.c in Sources */,
+				A294FA081F91B0D000923D2C /* open.c in Sources */,
+				A241E50E1F91AB3E003C435B /* ed25519.swift in Sources */,
+				A294FA061F91B0C400923D2C /* ge25519.cpp in Sources */,
+				A241E50C1F91AB3E003C435B /* BigInt+Extension.swift in Sources */,
+				A294FA091F91B0D400923D2C /* sc25519.c in Sources */,
+				A294FA0A1F91B0D800923D2C /* sign.c in Sources */,
+				A294FA051F91B0C000923D2C /* fe25519.c in Sources */,
+				A294FA0B1F91B0DC00923D2C /* hash_sha512.c in Sources */,
+				A294FA0C1F91B0E000923D2C /* verify.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A241E4F91F91AB11003C435B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A294FA0D1F91B18100923D2C /* ref_test.m in Sources */,
+				A241E50F1F91AB4E003C435B /* BigInt+ExtensionTests.swift in Sources */,
+				A241E5031F91AB11003C435B /* Ed25519refTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A26376851ECF280700EDC62D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2D235F41ECFFD2600BAD20C /* Ed25519Utility.swift in Sources */,
-				A2A559651F8F779700E396B5 /* open.c in Sources */,
+				A241E5101F91AB81003C435B /* ed25519Utility.swift in Sources */,
 				A27AECAA1ED094E100A1B09F /* sc.swift in Sources */,
-				A2A559681F8F779700E396B5 /* sign.c in Sources */,
-				A2A559601F8F779700E396B5 /* ge25519.cpp in Sources */,
-				A2A5595E1F8F779700E396B5 /* fe25519.c in Sources */,
-				A2A559641F8F779700E396B5 /* keypair.c in Sources */,
 				A27AECA71ED084B100A1B09F /* ge.swift in Sources */,
-				A2A559661F8F779700E396B5 /* sc25519.c in Sources */,
-				A2A559981F8FB19300E396B5 /* ge_constant.swift in Sources */,
-				A24BAC231ECF2AB4005064A6 /* BigInt+Extension.swift in Sources */,
-				A24BAC241ECF2AB4005064A6 /* Ed25519.swift in Sources */,
 				A27AECAD1ED09ECA00A1B09F /* sign.swift in Sources */,
 				A27AECA41ED083E000A1B09F /* fe.swift in Sources */,
+				A29895CB1F91A06F000D8206 /* open.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,8 +810,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2A559961F8F9E6000E396B5 /* ref_test.m in Sources */,
-				A2BB194A1F7696050056EC72 /* BigInt+ExtensionTests.swift in Sources */,
 				A2BB194B1F7696050056EC72 /* Ed25519macOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,6 +824,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A241E5001F91AB11003C435B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A241E4F41F91AB11003C435B /* Ed25519ref */;
+			targetProxy = A241E4FF1F91AB11003C435B /* PBXContainerItemProxy */;
+		};
 		A24BAC271ECF2CD2005064A6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A2BA808D1EC7249A00D66A14 /* CommonCrypto */;
@@ -563,9 +839,103 @@
 			target = A26376891ECF280700EDC62D /* Ed25519macOS */;
 			targetProxy = A26376941ECF280700EDC62D /* PBXContainerItemProxy */;
 		};
+		A294FA041F91AFA600923D2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2BA808D1EC7249A00D66A14 /* CommonCrypto */;
+			targetProxy = A294FA031F91AFA600923D2C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		A241E5071F91AB11003C435B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56872B5A89A926B4E4B1DE03 /* Pods-Ed25519ref.debug.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Ed25519ref/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519ref;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		A241E5081F91AB11003C435B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EB84485ACB772BEEE3B828A /* Pods-Ed25519ref.release.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Ed25519ref/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519ref;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		A241E50A1F91AB11003C435B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A8B1CF5218753DB804CD13F /* Pods-Ed25519refTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Ed25519refTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519refTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		A241E50B1F91AB11003C435B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4305AF2EA076DA6FE7F292FE /* Pods-Ed25519refTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Ed25519refTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519refTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		A24C40F01EC71DA300B24AAF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -825,6 +1195,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A241E5061F91AB11003C435B /* Build configuration list for PBXNativeTarget "Ed25519ref" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A241E5071F91AB11003C435B /* Debug */,
+				A241E5081F91AB11003C435B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A241E5091F91AB11003C435B /* Build configuration list for PBXNativeTarget "Ed25519refTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A241E50A1F91AB11003C435B /* Debug */,
+				A241E50B1F91AB11003C435B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A24C40D81EC71DA200B24AAF /* Build configuration list for PBXProject "Ed25519" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

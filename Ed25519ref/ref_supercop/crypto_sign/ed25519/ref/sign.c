@@ -1,15 +1,6 @@
 #include <string.h>
-//#include "crypto_sign.h"
-//#include "crypto_hash_sha512.h"
 #include "ge25519.h"
-#include <CommonCrypto/CommonDigest.h>
-
-static void crypto_hash_sha512(unsigned char *out,
-                               const unsigned char *in,
-                               unsigned long long inlen)
-{
-    CC_SHA512(in, (CC_LONG)inlen, out);
-}
+#include "hash_sha512.h"
 
 int crypto_sign(
     unsigned char *sm,unsigned long long *smlen, /* out */
@@ -26,18 +17,14 @@ int crypto_sign(
   memmove(pk,sk + 32,32);
 
   /* az: 32-byte scalar a, 32-byte randomizer z */
-  // azは64バイト
+  // az is 64 bytes
   crypto_hash_sha512(az,sk,32);
-  // 整える
+  //
   az[0] &= 248;
   az[31] &= 127;
   az[31] |= 64;
 
-  // az -> s
-
-  // mlen = 0
-
-  // sm は 先頭32バイトR, 次の32バイトS, ...  
+  // sm = R 32 bytes + S 32bytes + ...
 
   *smlen = mlen + 64; // out length
   memmove(sm + 64, m, mlen);
@@ -47,11 +34,6 @@ int crypto_sign(
   crypto_hash_sha512(nonce, sm + 32, mlen+32);
   /* nonce: 64-byte H(z,m) */
     
-    printf("nonce:\n");
-    for (int i = 0; i < 64; ++i){
-        printf("%d ", nonce[i]);
-    }
-
   sc25519 sck;
   sc25519_from64bytes(&sck, nonce);
 

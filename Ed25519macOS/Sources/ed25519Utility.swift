@@ -1,5 +1,5 @@
 //
-//  Ed25519Other.swift
+//  ed25519Utility.swift
 //  Ed25519
 //
 //  Created by pebble8888 on 2017/05/20.
@@ -45,13 +45,24 @@ extension Collection where Iterator.Element == UInt8 {
     }
 }
 
-func sha512(_ s:[UInt8]) -> Ed25519.Digest {
+struct CryptoData {
+    var data:[UInt8]
+    var length:Int
+    func digest() -> [UInt8] {
+        return data
+    }
+    func hexdiegst() -> String {
+        return data.map({ String(format: "%02x", $0) }).joined()
+    }
+}
+
+func sha512(_ s:[UInt8]) -> CryptoData {
     let data = Data(bytes:s)
     var digest = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
     data.withUnsafeBytes({
         _ = CC_SHA512($0, CC_LONG(data.count), &digest)
     })
-    return Ed25519.Digest(data: digest, length: Int(CC_SHA512_DIGEST_LENGTH))
+    return CryptoData(data: digest, length: Int(CC_SHA512_DIGEST_LENGTH))
 }
 
 public func sha512digest(_ s:[UInt8]) -> [UInt8] {

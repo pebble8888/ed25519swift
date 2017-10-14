@@ -1,5 +1,5 @@
 //
-//  Ed25519.swift
+//  ed25519.swift
 //  Ed25519
 //
 //  Created by pebble8888 on 2017/05/13.
@@ -10,10 +10,14 @@ import Foundation
 
 import BigInt
 
-// Ed25519 :
+// ed25519 :
 //  - x^2 + y^2 = 1 + d * x^2 * y^2
 //  d = -121665/121666
-public struct Ed25519 {
+//
+// This implementation is easy to understand, but very slow.
+// You should not use this for an actual application.
+//
+public struct ed25519 {
     public static let b:Int = 256
     public static let q:BigInt = BigInt(2).power(255) - 19
     public static let L:BigInt = BigInt(2).power(252) + BigInt("27742317777372353535851937790883648493")!
@@ -189,14 +193,4 @@ public struct Ed25519 {
         return true
     }
     
-    struct Digest {
-        var data:[UInt8]
-        var length:Int
-        func digest() -> [UInt8] {
-            return data
-        }
-        func hexdiegst() -> String {
-            return data.map({ String(format: "%02x", $0) }).joined()
-        }
-    }
 }

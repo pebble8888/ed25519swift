@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Ed25519macOS
+import Ed25519ref
 import BigInt
 
 class BigInt_ExtensionTests: XCTestCase {

@@ -19,77 +19,6 @@ class Ed25519macOSTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_b() {
-        XCTAssert(Ed25519.b >= 10)
-    }
-    
-    func test_hash() {
-        XCTAssertEqual(8 * Ed25519.H("hash input".unhexlify()).count, 2 * Ed25519.b)
-    }
-    
-    func test_expmod_l() {
-        XCTAssertEqual( Ed25519.expmod(2, Ed25519.q - 1, Ed25519.q), 1)
-    }
-    
-    func test_l_lbound() {
-        XCTAssert( Ed25519.L >= BigInt(2).power(Ed25519.b-4))
-    }
-    
-    func test_l_ubound() {
-        XCTAssert( Ed25519.L <= BigInt(2).power(Ed25519.b-3))
-    }
-    
-    func test_expmod_d() {
-        XCTAssertEqual(Ed25519.expmod(Ed25519.d, (Ed25519.q-1)/2, Ed25519.q), Ed25519.q-1)
-    }
-    
-    func test_expmod_I() {
-        XCTAssertEqual(Ed25519.expmod(Ed25519.I, 2, Ed25519.q), Ed25519.q-1)
-    }
-    
-    func test_b_isoncurve() {
-        XCTAssert(Ed25519.isoncurve(Ed25519.B))
-    }
-    
-    // 100sec swift debug
-    // 3sec swift release
-    // 1sec for python
-    /*
-    func test_scalarmul() {
-        XCTAssert(Ed25519.scalarmult(Ed25519.B, Ed25519.L) == [0,1])
-    }
-    */
-    
-    /*
-    // 1000sec swift debug
-    // 39sec swift release
-    // 7sec for python
-    func test0() {
-        // sk + pk
-        let x0 = "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
-        // pk
-        let x1 = "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
-        let x2 = ""
-        let x3 = "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b"
-        let sk = String(Array(x0.characters)[0..<64]).unhexlify()
-        print("sk:\(sk.hexDescription())")
-        let pk = Ed25519.publickey(sk)
-        print("pk:\(pk.hexDescription())")
-        let m = x2.unhexlify()
-        print("m:\(m.hexDescription())")
-        let s = Ed25519.signature(m, sk, pk)
-        print("s:\(s.hexDescription())")
-        XCTAssert(Ed25519.checkvalid(s, m, pk))
-        
-        let forgedm:[UInt8] = [0x78]
-        XCTAssert(!Ed25519.checkvalid(s, forgedm, pk))
-        
-        XCTAssertEqual(x0, (sk + pk).hexDescription())
-        XCTAssertEqual(x1, pk.hexDescription())
-        XCTAssertEqual(x3, s.hexDescription())
-    }
- */
-    
     func test0_count() {
         XCTAssertEqual( ge.ge25519_base_multiples_affine.count, 425)
     }
@@ -103,32 +32,24 @@ class Ed25519macOSTests: XCTestCase {
         let x3 = "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b"
         let sk = String(Array(x0.characters)[0..<64]).unhexlify()
         let skpk:[UInt8] = x0.unhexlify()
-        var c:[UInt8] = [UInt8](repeating:0, count:64)
-        let d = crypto_sign(&c, x2.unhexlify(), skpk)
+        //let pk = Ed25519.publickey(sk)
+        let m = x2.unhexlify()
+        var sm:[UInt8] = [UInt8](repeating:0, count:64)
+        let d = crypto_sign(&sm, x2.unhexlify(), skpk)
         XCTAssertEqual(d, 0)
-        XCTAssertEqual(c.count, 64)
-        XCTAssertEqual(x3, c.hexDescription())
+        XCTAssertEqual(sm.count, 64)
+
+        let pk:[UInt8] = x1.unhexlify()
+        do {
+            let rm = try crypto_sign_open(sm, pk);
+        } catch {
+            XCTFail()
+        }
+
+        XCTAssertEqual(x3, sm.hexDescription())
     }
     
-    func test0_ref() {
-        // sk + pk
-        let x0 = "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
-        // pk
-        let x1 = "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
-        let x2 = ""
-        let x3 = "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b"
-        let sk:[UInt8] = String(Array(x0.characters)[0..<64]).unhexlify()
-        var c:[UInt8] = [UInt8](repeating:0, count:64)
-        var cc:UInt64 = 0
-        let m:[UInt8] = x2.unhexlify()
-        let skpk:[UInt8] = x0.unhexlify()
-        let d = crypto_sign(&c, &cc, m, UInt64(m.count), skpk)
-        XCTAssertEqual(d, 0)
-        XCTAssertEqual(cc, 64)
-        XCTAssertEqual(c.count, 64)
-        XCTAssertEqual(x3, c.hexDescription())
-    }
-    
+    /*
     func test_cmov() {
         var f:fe = fe()
         var a:fe = fe()
@@ -195,33 +116,7 @@ class Ed25519macOSTests: XCTestCase {
         XCTAssertEqual(r[14], 0x01);
         XCTAssertEqual(r[15], 0);
     }
+     */
     
-   /*
-    // 1000sec swift debug
-    // 33sec swift release
-    // 7sec for python
-    func test1() {
-        let x0 = "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
-        let x1 = "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
-        let x2 = "72"
-        let x3 = "92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072"
-        let sk = String(Array(x0.characters)[0..<64]).unhexlify()
-        print("sk:\(sk.hexDescription())")
-        let pk = Ed25519.publickey(sk)
-        print("pk:\(pk.hexDescription())")
-        let m = x2.unhexlify()
-        print("m:\(m.hexDescription())")
-        let s = Ed25519.signature(m, sk, pk)
-        print("s:\(s.hexDescription())")
-        XCTAssert(Ed25519.checkvalid(s, m, pk))
-        
-        let forgedm:[UInt8] = m.enumerated().map({ $0.1 + (($0.0 == m.count - 1) ? UInt8(1) : UInt8(0)) })
-        XCTAssert(!Ed25519.checkvalid(s, forgedm, pk))
-        
-        XCTAssertEqual(x0, (sk + pk).hexDescription())
-        XCTAssertEqual(x1, pk.hexDescription())
-        XCTAssertEqual(x3, (s+m).hexDescription())
-    }
- */
-    
+
 }

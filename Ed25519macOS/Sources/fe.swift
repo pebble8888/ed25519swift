@@ -5,13 +5,10 @@
 //  Created by pebble8888 on 2017/05/20.
 //  Copyright © 2017年 pebble8888. All rights reserved.
 //
-//  Code is ported from NaCl (http://nacl.cr.yp.to/)
-//
 
 import Foundation
 
-
-public struct fe :CustomStringConvertible {
+internal struct fe :CustomStringConvertible {
     public var v:[UInt32] // size:32
     
     public var description: String {

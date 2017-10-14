@@ -1,10 +1,10 @@
-#include <string.h>
-//#include "crypto_sign.h"
-//#include "crypto_verify_32.h"
-//#include "crypto_hash_sha512.h"
-//#include "ge25519.h"
 
-/*
+#include "open.h"
+#include <string.h>
+#include "ge25519.h"
+#include "hash_sha512.h"
+#include "verify.h"
+
 int crypto_sign_open(
     unsigned char *m,unsigned long long *mlen,
     const unsigned char *sm,unsigned long long smlen,
@@ -20,7 +20,10 @@ int crypto_sign_open(
 
   if (smlen < 64) goto badsig;
   if (sm[63] & 224) goto badsig;
-  if (ge25519_unpackneg_vartime(&get1,pk)) goto badsig;
+  if (ge25519_unpackneg_vartime(&get1,pk)){
+    // -1 fail
+    goto badsig;
+  }
 
   memmove(pkcopy,pk,32);
   memmove(rcopy,sm,32);
@@ -48,5 +51,4 @@ badsig:
   memset(m,0,smlen);
   return -1;
 }
- */
 

@@ -5,8 +5,6 @@
 //  Created by pebble8888 on 2017/05/21.
 //  Copyright © 2017年 pebble8888. All rights reserved.
 //
-//  Code is ported from NaCl (http://nacl.cr.yp.to/)
-//
 
 import Foundation
 
@@ -154,50 +152,4 @@ public enum DecryptError : Swift.Error {
     case general
 }
 
-// decrypt
-// -64
-/*
-public func crypto_sign_open(_ sm:[UInt8], _ pk:[UInt8]) throws -> [UInt8] {
-    let smlen = sm.count
-    var m:[UInt8] = [UInt8](repeating:0, count: smlen - 64)
-    //var t1:[UInt8] = [UInt8](repeating:0, count:32)
-    var t2:[UInt8] = [UInt8](repeating:0, count:32)
-    var get1 = ge()
-    var get2 = ge()
-    var gepk = ge()
-    
-    //var schmr = sc()
-    var scs = sc()
-    //var hmr:[UInt8] = [UInt8](repeating:0, count:crypto_hash_sha512_BYTES)
-    
-    if smlen < 64 { throw DecryptError.general }
-    if ge25519_unpack_vartime(&get1, sm) { throw DecryptError.general }
-    if ge25519_unpack_vartime(&gepk, pk) { throw DecryptError.general }
-    
-    //crypto_hash_sha512(&hmr,sm,smlen-32)
-    
-    //sc25519_from64bytes(&schmr, hmr)
-    //ge25519_scalarmult(&get1, get1, schmr)
-    //ge25519_add(&get1, get1, gepk)
-    //ge25519_pack(&t1, get1)
-    
-    sc25519_from32bytes(&scs, Array(sm[smlen-32..<smlen]))
-    ge25519_scalarmult_base(&get2, scs)
-    ge25519_pack(&t2, get2)
-    
-    for i in 0..<smlen-64 {
-        m[i] = sm[i + 32]
-    }
-    
-    //print("m:\(m.utf8Description())")
-    
-    /*
-    if !crypto_verify_32(t1, t2) {
-        print("t1:\(t1.hexDescription())")
-        print("t2:\(t2.hexDescription())")
-        throw DecryptError.general
-    }
-    */
-    return m
-}
- */
+
