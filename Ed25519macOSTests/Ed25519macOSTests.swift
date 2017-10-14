@@ -29,11 +29,11 @@ class Ed25519macOSTests: XCTestCase {
         //let sk = String(Array(x0.characters)[0..<64]).unhexlify()
         let skpk:[UInt8] = x0.unhexlify()
         //let pk = Ed25519.publickey(sk)
-        //let m = x2.unhexlify()
+        let m = x2.unhexlify()
         var sm:[UInt8] = [UInt8](repeating:0, count:0)
         let d = ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
         XCTAssertEqual(d, 0)
-        XCTAssertEqual(sm.count, 64)
+        XCTAssertEqual(sm.count, 64 + m.count)
 
         let pk:[UInt8] = x1.unhexlify()
         let result = ed25519.crypto_sign_open(sm, pk);
@@ -42,4 +42,80 @@ class Ed25519macOSTests: XCTestCase {
         XCTAssertEqual(x3, sm.hexDescription())
     }
     
+    func test1_fastlogic() {
+        // sk + pk
+        let x0 = "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
+        // pk
+        let x1 = "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
+        let x2 = "72"
+        let x3 = "92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072"
+        //let sk = String(Array(x0.characters)[0..<64]).unhexlify()
+        let skpk:[UInt8] = x0.unhexlify()
+        //let pk = Ed25519.publickey(sk)
+        let m = x2.unhexlify()
+        var sm:[UInt8] = [UInt8](repeating:0, count:0)
+        let d = ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
+        XCTAssertEqual(d, 0)
+        XCTAssertEqual(sm.count, 64 + m.count)
+        
+        let pk:[UInt8] = x1.unhexlify()
+        let result = ed25519.crypto_sign_open(sm, pk);
+        XCTAssert(result)
+        
+        XCTAssertEqual(x3, sm.hexDescription())
+    }
+    
+    // Debug: 558sec
+    // Release : 11sec
+    func test1024_fastlogic() {
+        guard let url = Bundle(for: type(of:self)).resourceURL else { XCTFail(); return }
+        do {
+            let s = try String(contentsOf: url.appendingPathComponent("input.txt"))
+            let lines = s.components(separatedBy: "\n")
+            for line in lines {
+                let ary = line.components(separatedBy: ":")
+                if ary.count == 5 {
+                    // sk + pk
+                    let x0 = ary[0]
+                    // pk
+                    let x1 = ary[1]
+                    let x2 = ary[2]
+                    let x3 = ary[3]
+                    let sk:[UInt8] = String(Array(x0.characters)[0..<64]).unhexlify()
+                    XCTAssert(sk.count == 32)
+                    let skpk:[UInt8] = x0.unhexlify()
+                    //let pk = Ed25519.publickey(sk)
+                    let m = x2.unhexlify()
+                    var sm:[UInt8] = [UInt8](repeating:0, count:0)
+                    let d = ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
+                    XCTAssertEqual(d, 0)
+                    XCTAssertEqual(sm.count, 64 + m.count)
+                    
+                    let pk:[UInt8] = x1.unhexlify()
+                    let result = ed25519.crypto_sign_open(sm, pk);
+                    XCTAssert(result)
+                    
+                    XCTAssertEqual(x3, sm.hexDescription())
+                    
+                    let r2 = ed25519.crypto_isvalid_keypair(pk, sk)
+                    XCTAssert(r2)
+                    
+                    print(".", terminator:"")
+                }
+            }
+        } catch {
+            XCTFail()
+        }
+    }
+    
+    // Release
+    // Debug: 62 sec
+    func test256_create_keypair() {
+        for _ in 0..<256 {
+            let pair = ed25519.crypto_sign_keypair()
+            let result = ed25519.crypto_isvalid_keypair(pair.pk, pair.sk)
+            XCTAssert(result)
+            print(">", terminator:"")
+        }
+    }
 }

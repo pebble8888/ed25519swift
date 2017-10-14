@@ -47,6 +47,7 @@
 		A29895CB1F91A06F000D8206 /* ed25519_open.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29895CA1F91A06F000D8206 /* ed25519_open.swift */; };
 		A2A5595D1F8F779700E396B5 /* api.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539ED1F8F777B00E396B5 /* api.h */; };
 		A2A559621F8F779700E396B5 /* ge25519_base.data in Resources */ = {isa = PBXBuildFile; fileRef = A2A539F21F8F777B00E396B5 /* ge25519_base.data */; };
+		A2B45C931F91E1CB00249454 /* input.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2B45C921F91E1CB00249454 /* input.txt */; };
 		A2BB194B1F7696050056EC72 /* Ed25519macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */; };
 		ADFD9C4D73C562B438BDBCC9 /* Pods_Ed25519macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258E772EA9450417954ECBA1 /* Pods_Ed25519macOSTests.framework */; };
 /* End PBXBuildFile section */
@@ -132,6 +133,7 @@
 		A2A559921F8F881800E396B5 /* sign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sign.h; sourceTree = "<group>"; };
 		A2A559941F8F9E6000E396B5 /* Ed25519macOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ed25519macOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2A559951F8F9E6000E396B5 /* ref_test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ref_test.m; sourceTree = "<group>"; };
+		A2B45C921F91E1CB00249454 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = input.txt; path = tool/input.txt; sourceTree = SOURCE_ROOT; };
 		A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2BA80911EC7249A00D66A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2BA80A51EC7250100D66A14 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		A26376961ECF280700EDC62D /* Ed25519macOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				A2B45C921F91E1CB00249454 /* input.txt */,
 				A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */,
 				A26376991ECF280700EDC62D /* Info.plist */,
 				A2A559941F8F9E6000E396B5 /* Ed25519macOSTests-Bridging-Header.h */,
@@ -575,6 +578,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2B45C931F91E1CB00249454 /* input.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1092,6 +1096,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = Ed25519macOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

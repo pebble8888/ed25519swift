@@ -261,10 +261,6 @@ struct sc {
         r[8*i+3]  = Int8(bitPattern:UInt8((s.v[3*i+1] >> 1) & 7))
         r[8*i+4]  = Int8(bitPattern:UInt8((s.v[3*i+1] >> 4) & 7))
         
-        for i in 0..<85 {
-            print("\(r[i]) ", terminator:"")
-        }
-        
         /* Making it signed */
         var carry:Int8 = 0
         for i in 0..<84

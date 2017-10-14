@@ -22,6 +22,7 @@ public struct ed25519 {
     private static func randombytes(_ r:inout [UInt8], len:Int)
     {
         r = [UInt8](repeating:0, count:len)
+        // @note Apple API
         let result = SecRandomCopyBytes(kSecRandomDefault, len, &r)
         assert(result == 0)
     }
@@ -39,31 +40,53 @@ public struct ed25519 {
         return true
     }
 
-    // pk: 32bytes, sk: 32bytes
+    // create keypair
+    // @param pk: 32bytes
+    // @param sk: 32bytes
     public static func crypto_sign_keypair() -> (pk:[UInt8], sk:[UInt8])
     {
-        var scsk = sc()
-        var gepk = ge()
-        var pk:[UInt8] = [UInt8](repeating:0, count:32)
         var sk:[UInt8] = [UInt8](repeating:0, count:32)
-        
         // create secret key 32byte
         randombytes(&sk, len:32)
-
+        let pk = crypto_pk(sk)
+        return (pk, sk)
+    }
+    
+    // calc public key from secret key
+    // @param sk : secret key
+    private static func crypto_pk(_ sk:[UInt8]) -> [UInt8]
+    {
+        assert(sk.count == 32)
+        var scsk = sc()
+        var gepk = ge()
+        var az:[UInt8] = [UInt8](repeating:0, count:64)
+        var pk:[UInt8] = [UInt8](repeating:0, count:32)
+        //var sk:[UInt8] = [UInt8](repeating:0, count:32)
         // sha512 of sk
-        crypto_hash_sha512(&sk, sk, len:32)
-
+        crypto_hash_sha512(&az, sk, len:32)
         // calc public key
-        sk[0] &= 248 // clear lowest 3bit
-        sk[31] &= 127 // clear highest bit
-        sk[31] |= 64 // set bit
-        sc.sc25519_from32bytes(&scsk,sk)
+        az[0] &= 248 // clear lowest 3bit
+        az[31] &= 127 // clear highest bit
+        az[31] |= 64 // set bit
+        
+        sc.sc25519_from32bytes(&scsk,az)
+        
         // gepk = a * G
         ge.ge25519_scalarmult_base(&gepk, scsk)
-        //
         ge.ge25519_pack(&pk, gepk)
-        
-        return (pk, sk)
+        assert(pk.count == 32)
+        return pk
+    }
+    
+    public static func crypto_isvalid_keypair(_ pk:[UInt8], _ sk:[UInt8]) -> Bool
+    {
+        if pk.count != 32 { return false }
+        if sk.count != 32 { return false }
+        let calc_pk = crypto_pk(sk)
+        for i in 0..<32 {
+            if calc_pk[i] != pk[i] { return false }
+        }
+        return true
     }
 
     // signing
