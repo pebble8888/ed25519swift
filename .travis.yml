@@ -1,3 +1,3 @@
 language: objective-c
-xcode_project: Ed25519.xcodeproj 
+xcode_workspace: Ed25519.xcworkspace
 xcode_scheme: Ed25519macOSTests 
