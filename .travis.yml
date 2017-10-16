@@ -1,0 +1,3 @@
+language: swift
+xcode_project: Ed25519.xcodeproj 
+xcode_scheme: Ed25519macOSTests 
