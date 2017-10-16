@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/pebble8888/ed25519swift.svg?branch=master)](https://travis-ci.org/pebble8888/ed25519swift)
-
 # Ed25519
 Ed25519 by pure swift
 
