@@ -54,7 +54,7 @@ public struct ed25519 {
     
     // calc public key from secret key
     // @param sk : secret key
-    private static func crypto_pk(_ sk:[UInt8]) -> [UInt8]
+    public static func crypto_pk(_ sk:[UInt8]) -> [UInt8]
     {
         assert(sk.count == 32)
         var scsk = sc()
@@ -93,7 +93,7 @@ public struct ed25519 {
     // sm: 64 bytes + message length
     // m: message
     // return : R + m + S
-    public static func crypto_sign(_ sm:inout [UInt8], _ m:[UInt8], _ skpk:[UInt8]) -> UInt8
+    public static func crypto_sign(_ sm:inout [UInt8], _ m:[UInt8], _ skpk:[UInt8])
     {
         assert(skpk.count == 64)
         let mlen:Int = m.count
@@ -158,6 +158,5 @@ public struct ed25519 {
         for i in 0..<32 {
             sm[32+i] = a[i]
         }
-        return 0
     }
 }

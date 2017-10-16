@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import BigInt
 @testable import Ed25519macOS
 
 class Ed25519macOSTests: XCTestCase {
