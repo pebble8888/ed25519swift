@@ -4,7 +4,7 @@ Ed25519 by pure swift
 [ed25519](https://ed25519.cr.yp.to)
 
 ## License
-Ed25519 can be used, distributed and modified user the MIT license.
+Ed25519 can be used, distributed and modified user the zlib license.
 
 ## Requirements
 Ed25519 requires Swift 4.
