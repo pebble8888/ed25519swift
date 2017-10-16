@@ -28,7 +28,7 @@ static func crypto_sign(_ sm:inout [UInt8], _ m:[UInt8], _ skpk:[UInt8])
 
 ### Validation
 ``` swift
-public static func crypto_sign_open(_ sm:[UInt8], _ pk:[UInt8]) -> Bool
+static func crypto_sign_open(_ sm:[UInt8], _ pk:[UInt8]) -> Bool
 ```
 
 ## Implemantation
