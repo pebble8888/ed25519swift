@@ -11,7 +11,7 @@ import CommonCrypto
 extension String {
     public func unhexlify() -> [UInt8] {
         var pos = startIndex
-        return (0..<characters.count/2).flatMap { _ in
+        return (0..<count/2).flatMap { _ in
             defer { pos = index(pos, offsetBy: 2) }
             return UInt8(self[pos...index(after: pos)], radix: 16)
         }
