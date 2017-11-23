@@ -36,6 +36,7 @@ By = 4 * inv(5)
 Bx = xrecover(By)
 B = [Bx % q,By % q]
 
+# two points addition 
 def edwards(P,Q):
   x1 = P[0]
   y1 = P[1]
@@ -45,9 +46,10 @@ def edwards(P,Q):
   y3 = (y1*y2+x1*x2) * inv(1-d*x1*x2*y1*y2)
   return [x3 % q,y3 % q]
 
-def scalarmult(P,e):
+# e * P
+def scalarmult(P, e):
   if e == 0: return [0,1]
-  Q = scalarmult(P,e/2)
+  Q = scalarmult(P, e/2)
   Q = edwards(Q,Q)
   if e & 1: Q = edwards(Q,P)
   return Q
@@ -116,3 +118,5 @@ def checkvalid(s,m,pk):
   if s != e:
     raise Exception("signature does not pass verification")
 
+#T = scalarmult(B, l)
+#print "%x, %x" % (T[0], T[1])

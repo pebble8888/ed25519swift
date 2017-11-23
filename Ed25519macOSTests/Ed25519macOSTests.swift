@@ -35,7 +35,7 @@ class Ed25519macOSTests: XCTestCase {
         XCTAssertEqual(sm.count, 64 + m.count)
 
         let pk:[UInt8] = x1.unhexlify()
-        let result = ed25519.crypto_sign_open(sm, pk);
+        let result = ed25519.crypto_sign_open(sm, pk)
         XCTAssert(result)
 
         XCTAssertEqual(x3, sm.hexDescription())
@@ -58,7 +58,7 @@ class Ed25519macOSTests: XCTestCase {
         XCTAssertEqual(sm.count, 64 + m.count)
         
         let pk:[UInt8] = x1.unhexlify()
-        let result = ed25519.crypto_sign_open(sm, pk);
+        let result = ed25519.crypto_sign_open(sm, pk)
         XCTAssert(result)
         
         XCTAssertEqual(x3, sm.hexDescription())
@@ -91,7 +91,7 @@ class Ed25519macOSTests: XCTestCase {
                     XCTAssertEqual(sm.count, 64 + m.count)
                     
                     let pk:[UInt8] = x1.unhexlify()
-                    let result = ed25519.crypto_sign_open(sm, pk);
+                    let result = ed25519.crypto_sign_open(sm, pk)
                     XCTAssert(result)
                     
                     XCTAssertEqual(x3, sm.hexDescription())

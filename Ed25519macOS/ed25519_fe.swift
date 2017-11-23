@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct fe :CustomStringConvertible {
+struct fe: CustomStringConvertible {
     public var v:[UInt32] // size:32
     
     public var description: String {
@@ -37,12 +37,12 @@ struct fe :CustomStringConvertible {
     
     static func times19(_ a:UInt32) -> UInt32
     {
-        return (a << 4) + (a << 1) + a;
+        return (a << 4) + (a << 1) + a
     }
     
     static func times38(_ a:UInt32) -> UInt32
     {
-        return (a << 5) + (a << 2) + (a << 1);
+        return (a << 5) + (a << 2) + (a << 1)
     }
 
     static func reduce_add_sub(_ r:inout fe)
@@ -131,16 +131,16 @@ struct fe :CustomStringConvertible {
     // is euqal after freeze
     static func fe25519_iseq_vartime(_ x:fe, _ y:fe) -> Bool
     {
-        var t1 = x;
-        var t2 = y;
-        fe.fe25519_freeze(&t1);
-        fe.fe25519_freeze(&t2);
+        var t1 = x
+        var t2 = y
+        fe.fe25519_freeze(&t1)
+        fe.fe25519_freeze(&t2)
         for i in 0..<32 {
             if t1.v[i] != t2.v[i] {
-                return false;
+                return false
             }
         }
-        return true;
+        return true
     }
 
     static func fe25519_cmov(_ r:inout fe, _ x:fe, _ b:UInt8)
@@ -256,32 +256,32 @@ struct fe :CustomStringConvertible {
         
         /* 2^11 - 2^1 */ fe25519_square(&t0,z2_10_0)
         /* 2^12 - 2^2 */ fe25519_square(&t1,t0)
-        /* 2^20 - 2^10 */ for _ in stride(from:2, to:10, by: 2) { fe25519_square(&t0,t1); fe25519_square(&t1,t0) }
+        /* 2^20 - 2^10 */ for _ in stride(from:2, to:10, by: 2) { fe25519_square(&t0,t1) fe25519_square(&t1,t0) }
         /* 2^20 - 2^0 */ fe25519_mul(&z2_20_0,t1,z2_10_0)
         
         /* 2^21 - 2^1 */ fe25519_square(&t0,z2_20_0)
         /* 2^22 - 2^2 */ fe25519_square(&t1,t0)
-        /* 2^40 - 2^20 */ for _ in stride(from:2, to: 20, by: 2) { fe25519_square(&t0,t1); fe25519_square(&t1,t0) }
+        /* 2^40 - 2^20 */ for _ in stride(from:2, to: 20, by: 2) { fe25519_square(&t0,t1) fe25519_square(&t1,t0) }
         /* 2^40 - 2^0 */ fe25519_mul(&t0,t1,z2_20_0)
         
         /* 2^41 - 2^1 */ fe25519_square(&t1,t0)
         /* 2^42 - 2^2 */ fe25519_square(&t0,t1)
-        /* 2^50 - 2^10 */ for _ in stride(from: 2, to: 10, by: 2) { fe25519_square(&t1,t0); fe25519_square(&t0,t1) }
+        /* 2^50 - 2^10 */ for _ in stride(from: 2, to: 10, by: 2) { fe25519_square(&t1,t0) fe25519_square(&t0,t1) }
         /* 2^50 - 2^0 */ fe25519_mul(&z2_50_0,t0,z2_10_0)
         
         /* 2^51 - 2^1 */ fe25519_square(&t0,z2_50_0)
         /* 2^52 - 2^2 */ fe25519_square(&t1,t0)
-        /* 2^100 - 2^50 */ for _ in stride(from: 2, to: 50, by: 2) { fe25519_square(&t0,t1); fe25519_square(&t1,t0) }
+        /* 2^100 - 2^50 */ for _ in stride(from: 2, to: 50, by: 2) { fe25519_square(&t0,t1) fe25519_square(&t1,t0) }
         /* 2^100 - 2^0 */ fe25519_mul(&z2_100_0,t1,z2_50_0)
         
         /* 2^101 - 2^1 */ fe25519_square(&t1,z2_100_0)
         /* 2^102 - 2^2 */ fe25519_square(&t0,t1)
-        /* 2^200 - 2^100 */ for _ in stride(from: 2, to: 100, by: 2) { fe25519_square(&t1,t0); fe25519_square(&t0,t1) }
+        /* 2^200 - 2^100 */ for _ in stride(from: 2, to: 100, by: 2) { fe25519_square(&t1,t0) fe25519_square(&t0,t1) }
         /* 2^200 - 2^0 */ fe25519_mul(&t1,t0,z2_100_0)
         
         /* 2^201 - 2^1 */ fe25519_square(&t0,t1)
         /* 2^202 - 2^2 */ fe25519_square(&t1,t0)
-        /* 2^250 - 2^50 */ for _ in stride(from: 2, to: 50, by: 2) { fe25519_square(&t0,t1); fe25519_square(&t1,t0) }
+        /* 2^250 - 2^50 */ for _ in stride(from: 2, to: 50, by: 2) { fe25519_square(&t0,t1) fe25519_square(&t1,t0) }
         /* 2^250 - 2^0 */ fe25519_mul(&t0,t1,z2_50_0)
         
         /* 2^251 - 2^1 */ fe25519_square(&t1,t0)
@@ -294,55 +294,55 @@ struct fe :CustomStringConvertible {
 
     static func fe25519_pow2523(_ r:inout fe, _ x:fe)
     {
-        var z2 = fe();
-        var z9 = fe();
-        var z11 = fe();
-        var z2_5_0 = fe();
-        var z2_10_0 = fe();
-        var z2_20_0 = fe();
-        var z2_50_0 = fe();
-        var z2_100_0 = fe();
-        var t = fe();
+        var z2 = fe()
+        var z9 = fe()
+        var z11 = fe()
+        var z2_5_0 = fe()
+        var z2_10_0 = fe()
+        var z2_20_0 = fe()
+        var z2_50_0 = fe()
+        var z2_100_0 = fe()
+        var t = fe()
         
-        /* 2 */ fe25519_square(&z2,x);
-        /* 4 */ fe25519_square(&t,z2);
-        /* 8 */ fe25519_square(&t,t);
-        /* 9 */ fe25519_mul(&z9,t,x);
-        /* 11 */ fe25519_mul(&z11,z9,z2);
-        /* 22 */ fe25519_square(&t,z11);
-        /* 2^5 - 2^0 = 31 */ fe25519_mul(&z2_5_0,t,z9);
+        /* 2 */ fe25519_square(&z2,x)
+        /* 4 */ fe25519_square(&t,z2)
+        /* 8 */ fe25519_square(&t,t)
+        /* 9 */ fe25519_mul(&z9,t,x)
+        /* 11 */ fe25519_mul(&z11,z9,z2)
+        /* 22 */ fe25519_square(&t,z11)
+        /* 2^5 - 2^0 = 31 */ fe25519_mul(&z2_5_0,t,z9)
         
-        /* 2^6 - 2^1 */ fe25519_square(&t,z2_5_0);
-        /* 2^10 - 2^5 */ for _ in 1..<5 { fe25519_square(&t,t); }
-        /* 2^10 - 2^0 */ fe25519_mul(&z2_10_0,t,z2_5_0);
+        /* 2^6 - 2^1 */ fe25519_square(&t,z2_5_0)
+        /* 2^10 - 2^5 */ for _ in 1..<5 { fe25519_square(&t,t) }
+        /* 2^10 - 2^0 */ fe25519_mul(&z2_10_0,t,z2_5_0)
         
-        /* 2^11 - 2^1 */ fe25519_square(&t,z2_10_0);
-        /* 2^20 - 2^10 */ for _ in 1..<10 { fe25519_square(&t,t); }
-        /* 2^20 - 2^0 */ fe25519_mul(&z2_20_0,t,z2_10_0);
+        /* 2^11 - 2^1 */ fe25519_square(&t,z2_10_0)
+        /* 2^20 - 2^10 */ for _ in 1..<10 { fe25519_square(&t,t) }
+        /* 2^20 - 2^0 */ fe25519_mul(&z2_20_0,t,z2_10_0)
         
-        /* 2^21 - 2^1 */ fe25519_square(&t,z2_20_0);
-        /* 2^40 - 2^20 */ for _ in 1..<20 { fe25519_square(&t,t); }
-        /* 2^40 - 2^0 */ fe25519_mul(&t,t,z2_20_0);
+        /* 2^21 - 2^1 */ fe25519_square(&t,z2_20_0)
+        /* 2^40 - 2^20 */ for _ in 1..<20 { fe25519_square(&t,t) }
+        /* 2^40 - 2^0 */ fe25519_mul(&t,t,z2_20_0)
         
-        /* 2^41 - 2^1 */ fe25519_square(&t,t);
-        /* 2^50 - 2^10 */ for _ in 1..<10 { fe25519_square(&t,t); }
-        /* 2^50 - 2^0 */ fe25519_mul(&z2_50_0,t,z2_10_0);
+        /* 2^41 - 2^1 */ fe25519_square(&t,t)
+        /* 2^50 - 2^10 */ for _ in 1..<10 { fe25519_square(&t,t) }
+        /* 2^50 - 2^0 */ fe25519_mul(&z2_50_0,t,z2_10_0)
         
-        /* 2^51 - 2^1 */ fe25519_square(&t,z2_50_0);
-        /* 2^100 - 2^50 */ for _ in 1..<50 { fe25519_square(&t,t); }
-        /* 2^100 - 2^0 */ fe25519_mul(&z2_100_0,t,z2_50_0);
+        /* 2^51 - 2^1 */ fe25519_square(&t,z2_50_0)
+        /* 2^100 - 2^50 */ for _ in 1..<50 { fe25519_square(&t,t) }
+        /* 2^100 - 2^0 */ fe25519_mul(&z2_100_0,t,z2_50_0)
         
-        /* 2^101 - 2^1 */ fe25519_square(&t,z2_100_0);
-        /* 2^200 - 2^100 */ for _ in 1..<100 { fe25519_square(&t,t); }
-        /* 2^200 - 2^0 */ fe25519_mul(&t,t,z2_100_0);
+        /* 2^101 - 2^1 */ fe25519_square(&t,z2_100_0)
+        /* 2^200 - 2^100 */ for _ in 1..<100 { fe25519_square(&t,t) }
+        /* 2^200 - 2^0 */ fe25519_mul(&t,t,z2_100_0)
         
-        /* 2^201 - 2^1 */ fe25519_square(&t,t);
-        /* 2^250 - 2^50 */ for _ in 1..<50 { fe25519_square(&t,t); }
-        /* 2^250 - 2^0 */ fe25519_mul(&t,t,z2_50_0);
+        /* 2^201 - 2^1 */ fe25519_square(&t,t)
+        /* 2^250 - 2^50 */ for _ in 1..<50 { fe25519_square(&t,t) }
+        /* 2^250 - 2^0 */ fe25519_mul(&t,t,z2_50_0)
         
-        /* 2^251 - 2^1 */ fe25519_square(&t,t);
-        /* 2^252 - 2^2 */ fe25519_square(&t,t);
-        /* 2^252 - 3 */ fe25519_mul(&r,t,x);
+        /* 2^251 - 2^1 */ fe25519_square(&t,t)
+        /* 2^252 - 2^2 */ fe25519_square(&t,t)
+        /* 2^252 - 3 */ fe25519_mul(&r,t,x)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ge :CustomStringConvertible {
+struct ge: CustomStringConvertible {
     var x:fe
     var y:fe
     var z:fe
