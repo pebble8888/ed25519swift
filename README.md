@@ -1,5 +1,5 @@
 # Ed25519
-Ed25519 by pure swift
+Ed25519 by pure swift (except sha512)
 
 [ed25519](https://ed25519.cr.yp.to)
 
