@@ -8,9 +8,13 @@
 
 import Foundation
 
+// field element
 struct fe: CustomStringConvertible {
-    public var v:[UInt32] // size:32
     
+    // if WINDOWSIZE equal 1, 8bit * 32 = 256bit
+    // size:32
+    public var v:[UInt32]
+
     public var description: String {
         return v.map({ String(format:"%d ", $0)}).joined()
     }
@@ -35,11 +39,13 @@ struct fe: CustomStringConvertible {
         return a >= b ? 1 : 0
     }
     
+    // 19 * a = (2^4 + 2 + 1) * a
     static func times19(_ a:UInt32) -> UInt32
     {
         return (a << 4) + (a << 1) + a
     }
     
+    // 38 * a = (2^5 + 2^2 + 2) * a
     static func times38(_ a:UInt32) -> UInt32
     {
         return (a << 5) + (a << 2) + (a << 1)
@@ -168,14 +174,14 @@ struct fe: CustomStringConvertible {
     }
 
     // set 0
-     static func fe25519_setzero(_ r:inout fe)
+    static func fe25519_setzero(_ r:inout fe)
     {
         for i in 0..<32 {
             r.v[i] = 0
         }
     }
 
-     static func fe25519_neg(_ r:inout fe, _ x:fe)
+    static func fe25519_neg(_ r:inout fe, _ x:fe)
     {
         var t = fe()
         for i in 0..<32 {
@@ -185,7 +191,7 @@ struct fe: CustomStringConvertible {
         fe25519_sub(&r, r, t)
     }
 
-     static func fe25519_add(_ r:inout fe, _ x:fe, _ y:fe)
+    static func fe25519_add(_ r:inout fe, _ x:fe, _ y:fe)
     {
         for i in 0..<32 {
             r.v[i] = x.v[i] + y.v[i]
@@ -193,7 +199,7 @@ struct fe: CustomStringConvertible {
         fe.reduce_add_sub(&r)
     }
 
-     static func fe25519_sub(_ r:inout fe, _ x:fe, _ y:fe)
+    static func fe25519_sub(_ r:inout fe, _ x:fe, _ y:fe)
     {
         var t:[UInt32] = [UInt32](repeating:0, count:32)
         t[0] = x.v[0] + 0x1da
@@ -203,6 +209,7 @@ struct fe: CustomStringConvertible {
         fe.reduce_add_sub(&r)
     }
 
+    // r = x * y
     static func fe25519_mul(_ r:inout fe, _ x:fe, _ y:fe)
     {
         var t:[UInt32] = [UInt32](repeating:0, count:63)
@@ -221,11 +228,15 @@ struct fe: CustomStringConvertible {
         fe.reduce_mul(&r)
     }
 
+    // r = x^2
     static func fe25519_square(_ r:inout fe, _ x:fe)
     {
         fe25519_mul(&r, x, x)
     }
 
+    // q=2^255-19
+    // 1/a = a^(q-2)
+    // q-2 = 2^255-21
     static func fe25519_invert(_ r:inout fe, _ x:fe)
     {
         var z2 = fe()
@@ -292,6 +303,8 @@ struct fe: CustomStringConvertible {
         /* 2^255 - 21 */ fe25519_mul(&r,t1,z11)
     }
 
+    // q = 2^255-19
+    // (q-5)/8 = 2^252 - 3
     static func fe25519_pow2523(_ r:inout fe, _ x:fe)
     {
         var z2 = fe()

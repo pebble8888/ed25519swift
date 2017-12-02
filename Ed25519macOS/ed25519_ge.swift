@@ -8,6 +8,7 @@
 
 import Foundation
 
+// group element
 struct ge: CustomStringConvertible {
     var x:fe
     var y:fe

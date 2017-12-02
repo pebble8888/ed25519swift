@@ -20,45 +20,31 @@ public struct ed25519s {
     public static let b:Int = 256
     public static let q:BigInt = BigInt(2).power(255) - 19
     public static let L:BigInt = BigInt(2).power(252) + BigInt("27742317777372353535851937790883648493")!
+    static let By:BigInt = 4 * BigInt.inv(5, q)
+    static let Bx:BigInt = xrecover(By)
+    public static let B:[BigInt] = [Bx.modulo(q), By.modulo(q)]
+    
     public static func H(_ m:[UInt8]) -> [UInt8] {
         return sha512(m)
     }
     
-    // return val is less than m
-    public static func expmod(_ b:BigInt, _ e:BigInt, _ m:BigInt) -> BigInt {
-        if e == 0 { return 1 }
-        var t = expmod(b, e.divide(2), m).power(2).modulo(m)
-        if e.parity() != 0 {
-            t = (t*b).modulo(m)
-        }
-        return t
-    }
+    public static let d:BigInt = BigInt(-121665) * BigInt.inv(BigInt(121666), q)
     
     // return val is less than q
-    public static func inv(_ x:BigInt) -> BigInt {
-        return expmod(x,q-2,q)
-    }
-    
-    public static let d:BigInt = BigInt(-121665) * inv(BigInt(121666))
-    
-    // return val is less than q
-    public static let I:BigInt = expmod(2, (q-1).divide(4), q)
+    public static let I:BigInt = BigInt.expmod(2, (q-1).divide(4), q)
     
     public static func xrecover(_ y:BigInt) -> BigInt {
-        let xx = (y*y-1) * inv(d*y*y+1)
-        var x = expmod(xx,(q+3).divide(8),q)
+        let xx = (y*y-1) * BigInt.inv(d*y*y+1, q)
+        var x = BigInt.expmod(xx,(q+3).divide(8),q)
         if (x*x - xx).modulo(q) != 0 {
             x = (x*I).modulo(q) 
         }
         if x.modulo(2) != 0 {
+            // odd to even
             x = q-x
         }
         return x
     }
-    
-    static let By:BigInt = 4 * inv(5)
-    static let Bx:BigInt = xrecover(By)
-    public static let B:[BigInt] = [Bx.modulo(q), By.modulo(q)]
     
     // Addition
     public static func edwards(_ P:[BigInt], _ Q:[BigInt]) -> [BigInt] {
@@ -66,8 +52,8 @@ public struct ed25519s {
         let y1 = P[1]
         let x2 = Q[0]
         let y2 = Q[1]
-        let x3 = (x1*y2+x2*y1) * inv(1+d*x1*x2*y1*y2)
-        let y3 = (y1*y2+x1*x2) * inv(1-d*x1*x2*y1*y2)
+        let x3 = (x1*y2+x2*y1) * BigInt.inv(1+d*x1*x2*y1*y2, q)
+        let y3 = (y1*y2+x1*x2) * BigInt.inv(1-d*x1*x2*y1*y2, q)
         return [x3.modulo(q), y3.modulo(q)]
     }
     

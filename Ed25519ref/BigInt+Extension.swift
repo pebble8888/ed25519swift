@@ -95,4 +95,19 @@ extension BigInt {
             }
         }
     }
+    
+    // return val is less than q
+    public static func expmod(_ b:BigInt, _ e:BigInt, _ q:BigInt) -> BigInt {
+        if e == 0 { return 1 }
+        var t = expmod(b, e.divide(2), q).power(2).modulo(q)
+        if e.parity() != 0 {
+            t = (t*b).modulo(q)
+        }
+        return t
+    }
+    
+    // return val is less than q
+    public static func inv(_ x:BigInt, _ q:BigInt) -> BigInt {
+        return expmod(x,q-2,q)
+    }
 }
