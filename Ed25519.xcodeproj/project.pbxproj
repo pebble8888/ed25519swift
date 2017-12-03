@@ -17,7 +17,8 @@
 		A241E50E1F91AB3E003C435B /* ed25519s.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24C41151EC71E2A00B24AAF /* ed25519s.swift */; };
 		A241E50F1F91AB4E003C435B /* BigInt+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */; };
 		A241E5101F91AB81003C435B /* ed25519_utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519_utility.swift */; };
-		A24BAC281ECF2CD7005064A6 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A25152491FD3D19F00898C36 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; };
+		A251524A1FD3D1A300898C36 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; };
 		A26376931ECF280700EDC62D /* Ed25519macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A263768A1ECF280700EDC62D /* Ed25519macOS.framework */; };
 		A263769A1ECF280700EDC62D /* Ed25519macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A263768C1ECF280700EDC62D /* Ed25519macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A27AECA41ED083E000A1B09F /* ed25519_fe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA21ED083E000A1B09F /* ed25519_fe.swift */; };
@@ -26,7 +27,6 @@
 		A27AECAD1ED09ECA00A1B09F /* ed25519_sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECAB1ED09ECA00A1B09F /* ed25519_sign.swift */; };
 		A2896FDD1F918BFD008A2029 /* hash_sha512.h in Headers */ = {isa = PBXBuildFile; fileRef = A2896FDB1F918BFD008A2029 /* hash_sha512.h */; };
 		A2896FE11F918D74008A2029 /* verify.h in Headers */ = {isa = PBXBuildFile; fileRef = A2896FDF1F918D74008A2029 /* verify.h */; };
-		A294FA021F91AED600923D2C /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; };
 		A294FA051F91B0C000923D2C /* fe25519.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539EE1F8F777B00E396B5 /* fe25519.c */; };
 		A294FA061F91B0C400923D2C /* ge25519.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F01F8F777B00E396B5 /* ge25519.cpp */; };
 		A294FA071F91B0CA00923D2C /* keypair.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539F41F8F777B00E396B5 /* keypair.c */; };
@@ -151,7 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A294FA021F91AED600923D2C /* CommonCrypto.framework in Frameworks */,
+				A251524A1FD3D1A300898C36 /* CommonCrypto.framework in Frameworks */,
 				3C8499EBFAB5A803775B2DDF /* Pods_Ed25519ref.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,7 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A24BAC281ECF2CD7005064A6 /* CommonCrypto.framework in Frameworks */,
+				A25152491FD3D19F00898C36 /* CommonCrypto.framework in Frameworks */,
 				86EB8AE0FC9102418C68A0B4 /* Pods_Ed25519macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -636,11 +636,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -656,11 +658,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
