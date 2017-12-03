@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension ed25519 {
+public extension Ed25519 {
     // decrypt
     // @param sm  sinagure 64bytes + message
     // @param pk  primary key 32bytes

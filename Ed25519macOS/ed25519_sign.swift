@@ -12,7 +12,7 @@ import Foundation
  * ed25519 fast calculation implementation
  * ported from SUPERCOP https://bench.cr.yp.to/supercop.html
  */
-public struct ed25519 {
+public struct Ed25519 {
     
     static func crypto_hash_sha512(_ r:inout [UInt8], _ k:[UInt8], len:Int)
     {

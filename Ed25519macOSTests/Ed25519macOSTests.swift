@@ -30,11 +30,11 @@ class Ed25519macOSTests: XCTestCase {
         //let pk = Ed25519.publickey(sk)
         let m = x2.unhexlify()
         var sm:[UInt8] = [UInt8](repeating:0, count:0)
-        ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
+        Ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
         XCTAssertEqual(sm.count, 64 + m.count)
 
         let pk:[UInt8] = x1.unhexlify()
-        let result = ed25519.crypto_sign_open(sm, pk)
+        let result = Ed25519.crypto_sign_open(sm, pk)
         XCTAssert(result)
 
         XCTAssertEqual(x3, sm.hexDescription())
@@ -52,11 +52,11 @@ class Ed25519macOSTests: XCTestCase {
         //let pk = Ed25519.publickey(sk)
         let m = x2.unhexlify()
         var sm:[UInt8] = [UInt8](repeating:0, count:0)
-        ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
+        Ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
         XCTAssertEqual(sm.count, 64 + m.count)
         
         let pk:[UInt8] = x1.unhexlify()
-        let result = ed25519.crypto_sign_open(sm, pk)
+        let result = Ed25519.crypto_sign_open(sm, pk)
         XCTAssert(result)
         
         XCTAssertEqual(x3, sm.hexDescription())
@@ -84,16 +84,16 @@ class Ed25519macOSTests: XCTestCase {
                     //let pk = Ed25519.publickey(sk)
                     let m = x2.unhexlify()
                     var sm:[UInt8] = [UInt8](repeating:0, count:0)
-                    ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
+                    Ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
                     XCTAssertEqual(sm.count, 64 + m.count)
                     
                     let pk:[UInt8] = x1.unhexlify()
-                    let result = ed25519.crypto_sign_open(sm, pk)
+                    let result = Ed25519.crypto_sign_open(sm, pk)
                     XCTAssert(result)
                     
                     XCTAssertEqual(x3, sm.hexDescription())
                     
-                    let r2 = ed25519.crypto_isvalid_keypair(pk, sk)
+                    let r2 = Ed25519.crypto_isvalid_keypair(pk, sk)
                     XCTAssert(r2)
                     
                     print(".", terminator:"")
@@ -108,8 +108,8 @@ class Ed25519macOSTests: XCTestCase {
     // Debug: 62 sec
     func test256_create_keypair() {
         for _ in 0..<256 {
-            let pair = ed25519.crypto_sign_keypair()
-            let result = ed25519.crypto_isvalid_keypair(pair.pk, pair.sk)
+            let pair = Ed25519.crypto_sign_keypair()
+            let result = Ed25519.crypto_isvalid_keypair(pair.pk, pair.sk)
             XCTAssert(result)
             print(">", terminator:"")
         }
