@@ -53,7 +53,7 @@ struct fe: CustomStringConvertible {
 
     static func reduce_add_sub(_ r:inout fe)
     {
-        var t:uint32
+        var t:UInt32
         for _ in 0..<4
         {
             t = r.v[31] >> 7
