@@ -9,12 +9,22 @@ Ed25519 can be used, distributed and modified user the zlib license.
 ## Requirements
 Ed25519 requires Swift 4.
 
+## Install
+
+### CocoaPods
+
+```
+pod 'ed25519swift'
+```
+
 ## How to use
 
 ### Key pair creation
 
 ``` swift
-import Ed25519macOS
+import Ed25519macOS // direct
+or
+import Ed25519 // pods
 
 static func crypto_sign_keypair() -> (pk:[UInt8], sk:[UInt8])
 ```
