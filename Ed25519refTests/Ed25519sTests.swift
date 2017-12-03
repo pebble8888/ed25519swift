@@ -32,7 +32,7 @@ class Ed25519sTests: XCTestCase {
     }
     
     func test_expmod_l() {
-        XCTAssertEqual( ed25519s.expmod(2, ed25519s.q - 1, ed25519s.q), 1)
+        XCTAssertEqual( BigInt.expmod(2, ed25519s.q - 1, ed25519s.q), 1)
     }
     
     func test_l_lbound() {
@@ -44,11 +44,11 @@ class Ed25519sTests: XCTestCase {
     }
     
     func test_expmod_d() {
-        XCTAssertEqual(ed25519s.expmod(ed25519s.d, (ed25519s.q-1)/2, ed25519s.q), ed25519s.q-1)
+        XCTAssertEqual(BigInt.expmod(ed25519s.d, (ed25519s.q-1)/2, ed25519s.q), ed25519s.q-1)
     }
     
     func test_expmod_I() {
-        XCTAssertEqual(ed25519s.expmod(ed25519s.I, 2, ed25519s.q), ed25519s.q-1)
+        XCTAssertEqual(BigInt.expmod(ed25519s.I, 2, ed25519s.q), ed25519s.q-1)
     }
     
     func test_b_isoncurve() {
