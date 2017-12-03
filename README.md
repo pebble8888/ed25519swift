@@ -9,6 +9,8 @@ Ed25519 can be used, distributed and modified user the zlib license.
 ## Requirements
 Ed25519 requires Swift 4.
 
+macOS
+
 ## Install
 
 ### CocoaPods
