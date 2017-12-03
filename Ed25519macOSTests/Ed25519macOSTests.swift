@@ -30,8 +30,7 @@ class Ed25519macOSTests: XCTestCase {
         //let pk = Ed25519.publickey(sk)
         let m = x2.unhexlify()
         var sm:[UInt8] = [UInt8](repeating:0, count:0)
-        let d = ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
-        XCTAssertEqual(d, 0)
+        ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
         XCTAssertEqual(sm.count, 64 + m.count)
 
         let pk:[UInt8] = x1.unhexlify()
@@ -53,8 +52,7 @@ class Ed25519macOSTests: XCTestCase {
         //let pk = Ed25519.publickey(sk)
         let m = x2.unhexlify()
         var sm:[UInt8] = [UInt8](repeating:0, count:0)
-        let d = ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
-        XCTAssertEqual(d, 0)
+        ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
         XCTAssertEqual(sm.count, 64 + m.count)
         
         let pk:[UInt8] = x1.unhexlify()
@@ -86,8 +84,7 @@ class Ed25519macOSTests: XCTestCase {
                     //let pk = Ed25519.publickey(sk)
                     let m = x2.unhexlify()
                     var sm:[UInt8] = [UInt8](repeating:0, count:0)
-                    let d = ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
-                    XCTAssertEqual(d, 0)
+                    ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
                     XCTAssertEqual(sm.count, 64 + m.count)
                     
                     let pk:[UInt8] = x1.unhexlify()
