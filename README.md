@@ -31,7 +31,7 @@ pod 'ed25519swift'
 ``` swift
 import Ed25519macOS // direct
 or
-import Ed25519 // pods
+import ed25519swift // pods
 
 static func crypto_sign_keypair() -> (pk:[UInt8], sk:[UInt8])
 ```
