@@ -129,17 +129,17 @@ struct ge: CustomStringConvertible {
     
     private static func ge25519_mixadd2(_ r: inout ge, _ q:aff)
     {
-        var a = fe()
-        var b = fe()
-        var t1 = fe()
-        var t2 = fe()
-        var c = fe()
-        var d = fe()
-        var e = fe()
-        var f = fe()
-        var g = fe()
-        var h = fe()
-        var qt = fe()
+        var a:fe = fe()
+        var b:fe = fe()
+        var t1:fe = fe()
+        var t2:fe = fe()
+        var c:fe = fe()
+        var d:fe = fe()
+        var e:fe = fe()
+        var f:fe = fe()
+        var g:fe = fe()
+        var h:fe = fe()
+        var qt:fe = fe()
         fe.fe25519_mul(&qt, q.x, q.y)
         fe.fe25519_sub(&a, r.y, r.x) /* A = (Y1-X1)*(Y2-X2) */
         fe.fe25519_add(&b, r.y, r.x) /* B = (Y1+X1)*(Y2+X2) */
@@ -379,11 +379,11 @@ struct ge: CustomStringConvertible {
 
     static func ge25519_scalarmult_base(_ r:inout ge, _ s:sc)
     {
-        var b = [Int8](repeating:0, count:85)
-        var t = ge.aff()
+        var b:[Int8] = [Int8](repeating:0, count:85)
+        var t:aff = ge.aff()
         sc.sc25519_window3(&b, s)
         
-        var tmpaff = ge.aff()
+        var tmpaff:aff = ge.aff()
         ge.choose_t(&tmpaff, 0, b[0])
         r.x = tmpaff.x
         r.y = tmpaff.y

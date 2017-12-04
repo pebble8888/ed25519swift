@@ -34,26 +34,31 @@ struct fe: CustomStringConvertible {
         return a == b ? 1 : 0
     }
     
+    // greater equal
     static func ge(_ a:UInt32 ,_ b:UInt32) -> UInt32 /* 16-bit inputs */
     {
         return a >= b ? 1 : 0
     }
     
-    // 19 * a = (2^4 + 2 + 1) * a
+    // 19 * a = (2^4 + 2^1 + 2^0) * a
     static func times19(_ a:UInt32) -> UInt32
     {
         return (a << 4) + (a << 1) + a
     }
     
-    // 38 * a = (2^5 + 2^2 + 2) * a
+    // 38 * a = (2^5 + 2^2 + 2^1) * a
     static func times38(_ a:UInt32) -> UInt32
     {
         return (a << 5) + (a << 2) + (a << 1)
     }
 
+    // ffff ffff ... ffff
+    // ffff ffff ... ffed
+    // 0xed = 1110 1101
     static func reduce_add_sub(_ r:inout fe)
     {
         var t:UInt32
+        // 32bit / 8bit = 4
         for _ in 0..<4
         {
             t = r.v[31] >> 7
@@ -123,7 +128,7 @@ struct fe: CustomStringConvertible {
         }
     }
 
-    /*freeze input before calling iszero*/
+    // freeze input before calling iszero
     static func fe25519_iszero(_ x:fe) -> Bool {
         var t:fe = x
         fe.fe25519_freeze(&t)
@@ -137,8 +142,8 @@ struct fe: CustomStringConvertible {
     // is euqal after freeze
     static func fe25519_iseq_vartime(_ x:fe, _ y:fe) -> Bool
     {
-        var t1 = x
-        var t2 = y
+        var t1:fe = x
+        var t2:fe = y
         fe.fe25519_freeze(&t1)
         fe.fe25519_freeze(&t2)
         for i in 0..<32 {
@@ -157,6 +162,7 @@ struct fe: CustomStringConvertible {
         }
     }
 
+    // odd:1 even:0
     static func fe25519_getparity(_ x:fe) -> UInt8
     {
         var t:fe = x
@@ -183,7 +189,7 @@ struct fe: CustomStringConvertible {
 
     static func fe25519_neg(_ r:inout fe, _ x:fe)
     {
-        var t = fe()
+        var t:fe = fe()
         for i in 0..<32 {
             t.v[i] = x.v[i]
         }
@@ -199,11 +205,18 @@ struct fe: CustomStringConvertible {
         fe.reduce_add_sub(&r)
     }
 
+    // q = 2 ** 256 - 19
+    /**
+     ffff ffff ffff ffff ffff ffff ffff ffff
+     ffff ffff ffff ffff ffff ffff ffff ffed
+     2 * ff = 1fe
+     2 * ed = 1da
+     */
     static func fe25519_sub(_ r:inout fe, _ x:fe, _ y:fe)
     {
         var t:[UInt32] = [UInt32](repeating:0, count:32)
         t[0] = x.v[0] + 0x1da
-        t[31] = x.v[31] + 0xfe
+        t[31] = x.v[31] + 0xfe // TODO: why not 0x1fe?
         for i in 1..<31 { t[i] = x.v[i] + 0x1fe }
         for i in 0..<32 { r.v[i] = t[i] - y.v[i] }
         fe.reduce_add_sub(&r)
@@ -239,16 +252,16 @@ struct fe: CustomStringConvertible {
     // q-2 = 2^255-21
     static func fe25519_invert(_ r:inout fe, _ x:fe)
     {
-        var z2 = fe()
-        var z9 = fe()
-        var z11 = fe()
-        var z2_5_0 = fe()
-        var z2_10_0 = fe()
-        var z2_20_0 = fe()
-        var z2_50_0 = fe()
-        var z2_100_0 = fe()
-        var t0 = fe()
-        var t1 = fe()
+        var z2:fe = fe()
+        var z9:fe = fe()
+        var z11:fe = fe()
+        var z2_5_0:fe = fe()
+        var z2_10_0:fe = fe()
+        var z2_20_0:fe = fe()
+        var z2_50_0:fe = fe()
+        var z2_100_0:fe = fe()
+        var t0:fe = fe()
+        var t1:fe = fe()
         
         /* 2 */ fe25519_square(&z2,x)
         /* 4 */ fe25519_square(&t1,z2)
@@ -307,15 +320,15 @@ struct fe: CustomStringConvertible {
     // (q-5)/8 = 2^252 - 3
     static func fe25519_pow2523(_ r:inout fe, _ x:fe)
     {
-        var z2 = fe()
-        var z9 = fe()
-        var z11 = fe()
-        var z2_5_0 = fe()
-        var z2_10_0 = fe()
-        var z2_20_0 = fe()
-        var z2_50_0 = fe()
-        var z2_100_0 = fe()
-        var t = fe()
+        var z2:fe = fe()
+        var z9:fe = fe()
+        var z11:fe = fe()
+        var z2_5_0:fe = fe()
+        var z2_10_0:fe = fe()
+        var z2_20_0:fe = fe()
+        var z2_50_0:fe = fe()
+        var z2_100_0:fe = fe()
+        var t:fe = fe()
         
         /* 2 */ fe25519_square(&z2,x)
         /* 4 */ fe25519_square(&t,z2)

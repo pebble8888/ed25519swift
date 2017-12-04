@@ -6,7 +6,11 @@
 //
 
 import XCTest
+#if os(macOS)
 @testable import Ed25519macOS
+#elseif os(iOS)
+@testable import Ed25519iOS
+#endif
 
 class Ed25519macOSTests: XCTestCase {
     
