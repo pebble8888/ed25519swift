@@ -10,7 +10,6 @@
 		1859D1335D12CCB01240147C /* Pods_Ed25519refTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A10F4BC828B83FBE10B438 /* Pods_Ed25519refTests.framework */; };
 		3C8499EBFAB5A803775B2DDF /* Pods_Ed25519ref.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6082939BC80F8643CC3DCEF4 /* Pods_Ed25519ref.framework */; };
 		86EB8AE0FC9102418C68A0B4 /* Pods_Ed25519macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F59917A0CF8FCDB27CDF7F3 /* Pods_Ed25519macOS.framework */; };
-		A223036C1FD5700000CA0FE8 /* Ed25519iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A223036A1FD5700000CA0FE8 /* Ed25519iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A22303721FD5701E00CA0FE8 /* ed25519_utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519_utility.swift */; };
 		A22303731FD5701E00CA0FE8 /* ed25519_fe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA21ED083E000A1B09F /* ed25519_fe.swift */; };
 		A22303741FD5701E00CA0FE8 /* ed25519_ge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA51ED084B100A1B09F /* ed25519_ge.swift */; };
@@ -31,7 +30,6 @@
 		A25152491FD3D19F00898C36 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; };
 		A251524A1FD3D1A300898C36 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; };
 		A26376931ECF280700EDC62D /* Ed25519macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A263768A1ECF280700EDC62D /* Ed25519macOS.framework */; };
-		A263769A1ECF280700EDC62D /* Ed25519macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A263768C1ECF280700EDC62D /* Ed25519macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A27AECA41ED083E000A1B09F /* ed25519_fe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA21ED083E000A1B09F /* ed25519_fe.swift */; };
 		A27AECA71ED084B100A1B09F /* ed25519_ge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA51ED084B100A1B09F /* ed25519_ge.swift */; };
 		A27AECAA1ED094E100A1B09F /* ed25519_sc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA81ED094E100A1B09F /* ed25519_sc.swift */; };
@@ -117,7 +115,6 @@
 		7A0FDF0A8FF5BC3151CCBE0E /* Pods-Ed25519macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		910B0C35171B51643DAD4BF9 /* Pods-Ed25519iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519iOSTests/Pods-Ed25519iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A22303681FD5700000CA0FE8 /* Ed25519iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ed25519iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A223036A1FD5700000CA0FE8 /* Ed25519iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ed25519iOS.h; sourceTree = "<group>"; };
 		A223036B1FD5700000CA0FE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A223037C1FD5723A00CA0FE8 /* Ed25519iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ed25519iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A22303801FD5723A00CA0FE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -131,7 +128,6 @@
 		A241E5041F91AB11003C435B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A24C41151EC71E2A00B24AAF /* ed25519s.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519s.swift; sourceTree = "<group>"; };
 		A263768A1ECF280700EDC62D /* Ed25519macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ed25519macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A263768C1ECF280700EDC62D /* Ed25519macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ed25519macOS.h; sourceTree = "<group>"; };
 		A263768D1ECF280700EDC62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A26376921ECF280700EDC62D /* Ed25519macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ed25519macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A26376991ECF280700EDC62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,7 +156,6 @@
 		A2A539F71F8F777B00E396B5 /* sc25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sc25519.h; sourceTree = "<group>"; };
 		A2A539F81F8F777B00E396B5 /* sign.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sign.c; sourceTree = "<group>"; };
 		A2A559921F8F881800E396B5 /* sign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sign.h; sourceTree = "<group>"; };
-		A2A559941F8F9E6000E396B5 /* Ed25519macOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ed25519macOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2A559951F8F9E6000E396B5 /* ref_test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ref_test.m; sourceTree = "<group>"; };
 		A2B45C921F91E1CB00249454 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = input.txt; path = tool/input.txt; sourceTree = SOURCE_ROOT; };
 		A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,7 +257,6 @@
 		A22303691FD5700000CA0FE8 /* Ed25519iOS */ = {
 			isa = PBXGroup;
 			children = (
-				A223036A1FD5700000CA0FE8 /* Ed25519iOS.h */,
 				A223036B1FD5700000CA0FE8 /* Info.plist */,
 			);
 			path = Ed25519iOS;
@@ -340,7 +334,6 @@
 				A27AECA81ED094E100A1B09F /* ed25519_sc.swift */,
 				A27AECAB1ED09ECA00A1B09F /* ed25519_sign.swift */,
 				A29895CA1F91A06F000D8206 /* ed25519_open.swift */,
-				A263768C1ECF280700EDC62D /* Ed25519macOS.h */,
 				A263768D1ECF280700EDC62D /* Info.plist */,
 			);
 			path = Ed25519macOS;
@@ -352,7 +345,6 @@
 				A2B45C921F91E1CB00249454 /* input.txt */,
 				A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */,
 				A26376991ECF280700EDC62D /* Info.plist */,
-				A2A559941F8F9E6000E396B5 /* Ed25519macOSTests-Bridging-Header.h */,
 			);
 			path = Ed25519macOSTests;
 			sourceTree = "<group>";
@@ -437,7 +429,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A223036C1FD5700000CA0FE8 /* Ed25519iOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,7 +449,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A263769A1ECF280700EDC62D /* Ed25519macOS.h in Headers */,
 				A2896FDD1F918BFD008A2029 /* hash_sha512.h in Headers */,
 				A2896FE11F918D74008A2029 /* verify.h in Headers */,
 				A2A5595D1F8F779700E396B5 /* api.h in Headers */,
