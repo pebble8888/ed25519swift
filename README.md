@@ -57,7 +57,10 @@ You can check the algorithm in these papers and RFC.
 
 ## Performance
 
-On MacBook Pro 2017 2.3Ghz Intel Core i5
+macOS
+  On MacBook Pro 2017 2.3Ghz Intel Core i5
+  11 sec for 1024 message validation   
+  10 msec for a message validation
+iOS
+  no measurement
 
-11 sec for 1024 message validation   
-10 msec for a message validation
