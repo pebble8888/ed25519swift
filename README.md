@@ -9,7 +9,7 @@ Ed25519 can be used, distributed and modified user the zlib license.
 ## Requirements
 Ed25519 requires Swift 4.
 
-macOS
+macOS, iOS
 
 ## Install
 
@@ -18,6 +18,11 @@ macOS
 ```
 pod 'ed25519swift'
 ```
+## Dependency
+
+[CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift) for sha512
+
+[BigInt](https://github.com/attaswift/BigInt) for reference implementation that is not included main Ed25519 library.
 
 ## How to use
 
