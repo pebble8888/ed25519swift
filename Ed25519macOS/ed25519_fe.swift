@@ -12,8 +12,7 @@ import Foundation
 struct fe: CustomStringConvertible {
     
     // if WINDOWSIZE equal 1, 8bit * 32 = 256bit
-    // size:32
-    public var v:[UInt32]
+    public var v:[UInt32] // size:32
 
     public var description: String {
         return v.map({ String(format:"%d ", $0)}).joined()

@@ -217,6 +217,8 @@ struct ge: CustomStringConvertible {
         return b == c ? 1 : 0
     }
     
+    // retval  1: negative
+    // retval  0: zero or positive
     private static func negative(_ b:Int8) -> UInt8
     {
         return b < 0 ? 1 : 0
