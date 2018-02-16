@@ -66,8 +66,8 @@ class Ed25519macOSTests: XCTestCase {
         XCTAssertEqual(x3, sm.hexDescription())
     }
     
-    // Debug: 558sec
-    // Release : 11sec
+    // Debug: 558sec macOS
+    // Release : 11sec macOS
     func test1024_fastlogic() {
         guard let url = Bundle(for: type(of:self)).resourceURL else { XCTFail(); return }
         do {
@@ -108,10 +108,10 @@ class Ed25519macOSTests: XCTestCase {
         }
     }
     
-    // Release
-    // Debug: 62 sec
+    // Release: 5 sec macOS
+    // Debug: 248 sec macOS
     func test256_create_keypair() {
-        for _ in 0..<256 {
+        for _ in 0..<1024 {
             let pair = Ed25519.crypto_sign_keypair()
             let result = Ed25519.crypto_isvalid_keypair(pair.pk, pair.sk)
             XCTAssert(result)
