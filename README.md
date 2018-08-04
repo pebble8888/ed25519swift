@@ -57,11 +57,12 @@ You can check the algorithm in these papers and RFC.
 
 ## Performance
 
-### macOS
-  On MacBook Pro 2017 2.3Ghz Intel Core i5 
-  11 sec for 1024 message validation 
-  10 msec for a message validation  
-  5 sec for 1024 keypair creation
+### macOS  
+  
+  On MacBook Pro 2017 2.3Ghz Intel Core i5  
+  message validation : 10.7 msec per message  
+  keypair creation 4.8 msec per message  
+  
 ### iOS
   no measurement
 
