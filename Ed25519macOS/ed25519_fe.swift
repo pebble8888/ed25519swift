@@ -3,18 +3,18 @@
 //  Ed25519
 //
 //  Created by pebble8888 on 2017/05/20.
-//  Copyright © 2017年 pebble8888. All rights reserved.
+//  Copyright 2017 pebble8888. All rights reserved.
 //
 
 import Foundation
 
 // field element
-struct fe: CustomStringConvertible {
+struct fe: CustomDebugStringConvertible {
     
     // if WINDOWSIZE equal 1, 8bit * 32 = 256bit
     public var v:[UInt32] // size:32
 
-    public var description: String {
+    public var debugDescription: String {
         return v.map({ String(format:"%d ", $0)}).joined()
     }
     

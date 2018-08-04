@@ -3,7 +3,7 @@
 //  Ed25519ref
 //
 //  Created by pebble8888 on 2017/10/14.
-//  Copyright © 2017年 pebble8888. All rights reserved.
+//  Copyright 2017 pebble8888. All rights reserved.
 //
 
 import Foundation

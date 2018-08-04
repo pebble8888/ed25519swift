@@ -2,7 +2,7 @@
 //  Ed25519macOSTests.swift
 //
 //  Created by pebble8888 on 2017/05/13.
-//  Copyright © 2017年 pebble8888. All rights reserved.
+//  Copyright 2017 pebble8888. All rights reserved.
 //
 
 import XCTest
@@ -74,7 +74,7 @@ class Ed25519macOSTests: XCTestCase {
             let s = try String(contentsOf: url.appendingPathComponent("input.txt"))
             let lines = s.components(separatedBy: "\n")
             for line in lines {
-                let ary = line.components(separatedBy: ":")
+				let ary: [String] = line.components(separatedBy: ":")
                 if ary.count == 5 {
                     // sk + pk
                     let x0 = ary[0]
@@ -100,7 +100,7 @@ class Ed25519macOSTests: XCTestCase {
                     let r2 = Ed25519.crypto_isvalid_keypair(pk, sk)
                     XCTAssert(r2)
                     
-                    print(".", terminator:"")
+                    //print(".", terminator:"")
                 }
             }
         } catch {
