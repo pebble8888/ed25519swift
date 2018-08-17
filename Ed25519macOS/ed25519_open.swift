@@ -9,20 +9,20 @@
 import Foundation
 
 public extension Ed25519 {
-    // decrypt
-    // @param sm  sinagure 64bytes + message
-    // @param pk  primary key 32bytes
+    // verify
+    // @param[in] sm  signature 64bytes + message
+    // @param[in] pk  public key 32bytes
     public static func crypto_sign_open(_ sm:[UInt8], _ pk:[UInt8]) -> Bool {
         let smlen = sm.count
         var m:[UInt8] = [UInt8](repeating:0, count: smlen + 64)
-        var pkcopy = [UInt8](repeating:0, count:32)
-        var rcopy = [UInt8](repeating:0, count:32)
-        var hram = [UInt8](repeating:0, count:64)
-        var rcheck = [UInt8](repeating:0, count:32)
-        var get1 = ge()
-        var get2 = ge()
-        var schram = sc()
-        var scs = sc()
+		var pkcopy:[UInt8] = [UInt8](repeating:0, count:32)
+		var rcopy:[UInt8] = [UInt8](repeating:0, count:32)
+		var hram:[UInt8] = [UInt8](repeating:0, count:64)
+		var rcheck:[UInt8] = [UInt8](repeating:0, count:32)
+		var get1:ge = ge()
+		var get2:ge = ge()
+		var schram:sc = sc()
+		var scs:sc = sc()
         
         if pk.count != 32 { return false }
         if smlen < 64 { return false }

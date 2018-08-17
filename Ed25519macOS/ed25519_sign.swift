@@ -61,7 +61,6 @@ public struct Ed25519 {
         var gepk = ge()
         var az:[UInt8] = [UInt8](repeating:0, count:64)
         var pk:[UInt8] = [UInt8](repeating:0, count:32)
-        //var sk:[UInt8] = [UInt8](repeating:0, count:32)
         // sha512 of sk
         crypto_hash_sha512(&az, sk, len:32)
         // calc public key
@@ -77,7 +76,9 @@ public struct Ed25519 {
         assert(pk.count == 32)
         return pk
     }
-    
+	
+	// @param[in] pk: public key 32bytes
+	// @param[in] sk: secret key 32bytes
     public static func crypto_isvalid_keypair(_ pk:[UInt8], _ sk:[UInt8]) -> Bool
     {
         if pk.count != 32 { return false }
@@ -90,14 +91,13 @@ public struct Ed25519 {
     }
 
     // signing
-    // sm: 64 bytes + message length
-    // m: message
-    // return : R + m + S
+	// @param[out]   sm: 64 bytes signature + message
+    // @param[in]     m: message
+	// @param[in]  skpk: 64 bytes secret key + 64 bytes public key
     public static func crypto_sign(_ sm:inout [UInt8], _ m:[UInt8], _ skpk:[UInt8])
     {
         assert(skpk.count == 64)
         let mlen:Int = m.count
-        let _ = sm.count
         var pk = [UInt8](repeating:0, count:32)
         var az = [UInt8](repeating:0, count:64)
         var nonce = [UInt8](repeating:0, count:64)
@@ -132,10 +132,8 @@ public struct Ed25519 {
         sc.sc25519_from64bytes(&sck, nonce)
         // r * B
         ge.ge25519_scalarmult_base(&ger, sck)
-        
         // R
         ge.ge25519_pack(&sm, ger)
-        
         // set pk
         for i in 0..<32 {
             sm[i+32] = pk[i]
@@ -150,7 +148,6 @@ public struct Ed25519 {
         sc.sc25519_mul(&scs, scs, scsk)
         // add, modulo L
         sc.sc25519_add(&scs, scs, sck)
-        
         // S
         var a:[UInt8] = [UInt8](repeating:0, count:32)
         sc.sc25519_to32bytes(&a, scs) /* cat s */

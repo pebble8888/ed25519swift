@@ -82,10 +82,9 @@ class Ed25519macOSTests: XCTestCase {
                     let x1 = ary[1]
                     let x2 = ary[2]
                     let x3 = ary[3]
-                    let sk:[UInt8] = String(Array(x0.characters)[0..<64]).unhexlify()
+                    let sk:[UInt8] = String(x0.prefix(64)).unhexlify()
                     XCTAssert(sk.count == 32)
                     let skpk:[UInt8] = x0.unhexlify()
-                    //let pk = Ed25519.publickey(sk)
                     let m = x2.unhexlify()
                     var sm:[UInt8] = [UInt8](repeating:0, count:0)
                     Ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
