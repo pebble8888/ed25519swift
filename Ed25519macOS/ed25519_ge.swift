@@ -9,12 +9,12 @@
 import Foundation
 
 // group element
-struct ge: CustomStringConvertible {
+struct ge: CustomDebugStringConvertible {
     var x:fe
     var y:fe
     var z:fe
     var t:fe
-    public var description:String {
+    public var debugDescription:String {
         return "x:\(x)\n" + "y:\(y)\n" + "z:\(z)\n" + "t:\(t)\n"
     }
     
@@ -223,7 +223,10 @@ struct ge: CustomStringConvertible {
     {
         return b < 0 ? 1 : 0
     }
-    
+	
+	// t
+	// pos:
+	// b:
     private static func choose_t(_ t:inout aff, _ pos:Int, _ b:Int8)
     {
         /* constant time */
@@ -236,7 +239,7 @@ struct ge: CustomStringConvertible {
         fe.fe25519_neg(&v, t.x)
         fe.fe25519_cmov(&t.x, v, negative(b))
     }
-    
+	
     private static func setneutral(_ r:inout ge)
     {
         fe.fe25519_setzero(&r.x)
@@ -250,7 +253,7 @@ struct ge: CustomStringConvertible {
      *                    EXPORTED FUNCTIONS
      ******************************************************************** */
 
-    /* return 0 on success, -1 otherwise */
+    /* return true on success, false otherwise */
     static func ge25519_unpackneg_vartime(_ r:inout ge, _ p:[UInt8] /* 32 */) -> Bool
     {
         var par:UInt8
@@ -400,6 +403,7 @@ struct ge: CustomStringConvertible {
     }
     
     /* Multiples of the base point in affine representation */
+	// 425 = 85 * 5
     private static let ge25519_base_multiples_affine:[aff] /* 425 */ = [
         aff(fe([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]),

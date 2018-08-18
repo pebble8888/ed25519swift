@@ -118,7 +118,7 @@ struct fe: CustomDebugStringConvertible {
     }
 
     /* Assumes input x being reduced mod 2^255 */
-     static func fe25519_pack(_ r:inout [UInt8] /* 32 */ , _ x:fe)
+    static func fe25519_pack(_ r:inout [UInt8] /* 32 */ , _ x:fe)
     {
         var y:fe = x
         fe.fe25519_freeze(&y)
@@ -153,6 +153,7 @@ struct fe: CustomDebugStringConvertible {
         return true
     }
 
+	// conditional move
     static func fe25519_cmov(_ r:inout fe, _ x:fe, _ b:UInt8)
     {
         let mask:UInt32 = UInt32(bitPattern:Int32(b) * -1)
