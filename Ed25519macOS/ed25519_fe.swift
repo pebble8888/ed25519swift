@@ -11,7 +11,7 @@ import Foundation
 // field element
 struct fe: CustomDebugStringConvertible {
     
-    // if WINDOWSIZE equal 1, 8bit * 32 = 256bit
+    // WINDOWSIZE = 1, 8bit * 32 = 256bit
     public var v:[UInt32] // size:32
 
     public var debugDescription: String {
@@ -21,12 +21,11 @@ struct fe: CustomDebugStringConvertible {
     public init(){
         v = [UInt32](repeating:0, count:32)
     }
+	
     public init(_ v:[UInt32]){
+		assert(v.count == 32)
         self.v = v
     }
-
-    static let WINDOWSIZE:Int = 1 /* Should be 1,2, or 4 */
-    static let WINDOWMASK:Int = ((1<<WINDOWSIZE)-1)
 
     static func equal(_ a:UInt32, _ b:UInt32) -> UInt32  /* 16-bit inputs */
     {
@@ -51,23 +50,25 @@ struct fe: CustomDebugStringConvertible {
         return (a << 5) + (a << 2) + (a << 1)
     }
 
-    // ffff ffff ... ffff
-    // ffff ffff ... ffed
-    // 0xed = 1110 1101
+	// q = 2^255 - 19
+	// 7fff ffff ffff ffff ffff ffff ffff ffff
+	// ffff ffff ffff ffff ffff ffff ffff ffed
+	// 0x7f = 0111 1111
     static func reduce_add_sub(_ r:inout fe)
     {
         var t:UInt32
+		var s:UInt32
         // 32bit / 8bit = 4
         for _ in 0..<4
         {
             t = r.v[31] >> 7
-            r.v[31] &= 127
+            r.v[31] &= 0x7f
             t = times19(t)
             r.v[0] += t
             for i in 0..<31
             {
-                t = r.v[i] >> 8
-                r.v[i+1] += t
+                s = r.v[i] >> 8
+                r.v[i+1] += s
                 r.v[i] &= 255
             }
         }
@@ -170,7 +171,7 @@ struct fe: CustomDebugStringConvertible {
         return UInt8(t.v[0] & 1)
     }
 
-    // set 1
+    // @brief  r = 1
     static func fe25519_setone(_ r:inout fe)
     {
         r.v[0] = 1
@@ -179,7 +180,7 @@ struct fe: CustomDebugStringConvertible {
         }
     }
 
-    // set 0
+    // @brief  r = 0
     static func fe25519_setzero(_ r:inout fe)
     {
         for i in 0..<32 {
@@ -187,6 +188,7 @@ struct fe: CustomDebugStringConvertible {
         }
     }
 
+	// @brief  r = -x
     static func fe25519_neg(_ r:inout fe, _ x:fe)
     {
         var t:fe = fe()
@@ -197,6 +199,7 @@ struct fe: CustomDebugStringConvertible {
         fe25519_sub(&r, r, t)
     }
 
+	// @brief  r = x + y
     static func fe25519_add(_ r:inout fe, _ x:fe, _ y:fe)
     {
         for i in 0..<32 {
@@ -205,24 +208,26 @@ struct fe: CustomDebugStringConvertible {
         fe.reduce_add_sub(&r)
     }
 
-    // q = 2 ** 256 - 19
-    /**
-     ffff ffff ffff ffff ffff ffff ffff ffff
-     ffff ffff ffff ffff ffff ffff ffff ffed
-     2 * ff = 1fe
-     2 * ed = 1da
-     */
+	// @brief  r = x - y
+	//  q = 2 ** 255 - 19
+	//  7fff ffff ffff ffff ffff ffff ffff ffff
+	//  ffff ffff ffff ffff ffff ffff ffff ffed
+	//  2 * 7f = fe
+    //  2 * ff = 1fe
+    //  2 * ed = 1da
     static func fe25519_sub(_ r:inout fe, _ x:fe, _ y:fe)
     {
+		// t = 2 * q + x
         var t:[UInt32] = [UInt32](repeating:0, count:32)
-        t[0] = x.v[0] + 0x1da
-        t[31] = x.v[31] + 0xfe // TODO: why not 0x1fe?
+        t[0] = x.v[0] + 0x1da	// LSB
         for i in 1..<31 { t[i] = x.v[i] + 0x1fe }
+        t[31] = x.v[31] + 0xfe	// MSB
+		// r = t - y
         for i in 0..<32 { r.v[i] = t[i] - y.v[i] }
         fe.reduce_add_sub(&r)
     }
 
-    // r = x * y
+    // @brief r = x * y
     static func fe25519_mul(_ r:inout fe, _ x:fe, _ y:fe)
     {
         var t:[UInt32] = [UInt32](repeating:0, count:63)
@@ -241,13 +246,14 @@ struct fe: CustomDebugStringConvertible {
         fe.reduce_mul(&r)
     }
 
-    // r = x^2
+    // @brief r = x^2
     static func fe25519_square(_ r:inout fe, _ x:fe)
     {
         fe25519_mul(&r, x, x)
     }
 
-    // q=2^255-19
+	// @brief r = 1/x
+    // q = 2^255-19
     // 1/a = a^(q-2)
     // q-2 = 2^255-21
     static func fe25519_invert(_ r:inout fe, _ x:fe)
