@@ -10,8 +10,13 @@ import Foundation
 
 // field element
 struct fe: CustomDebugStringConvertible {
-    
     // WINDOWSIZE = 1, 8bit * 32 = 256bit
+	// val = 2^(31*8) * v[31]
+	//     + 2^(30*8) * v[30]
+	//     + ..
+	//     + 2^(2*8) * v[2]
+	//     + 2^(1*8) * v[1]
+	//     + 2^(0*8) * v[0]
     public var v:[UInt32] // size:32
 
     public var debugDescription: String {
@@ -50,10 +55,11 @@ struct fe: CustomDebugStringConvertible {
         return (a << 5) + (a << 2) + (a << 1)
     }
 
-	// q = 2^255 - 19
+	// q = 2^255 - 19 = 2^(31*8)*(2^7) - 19
 	// 7fff ffff ffff ffff ffff ffff ffff ffff
 	// ffff ffff ffff ffff ffff ffff ffff ffed
-	// 0x7f = 0111 1111
+	// 0x7f = 0111 1111 = 2^7-1
+	// 0xff = 1111 1111 = 2^8-1
     static func reduce_add_sub(_ r:inout fe)
     {
         var t:UInt32
@@ -61,15 +67,17 @@ struct fe: CustomDebugStringConvertible {
         // 32bit / 8bit = 4
         for _ in 0..<4
         {
+			// use q = 2^(31*8)*(2^7) - 19
             t = r.v[31] >> 7
             r.v[31] &= 0x7f
             t = times19(t)
             r.v[0] += t
+			// move up
             for i in 0..<31
             {
                 s = r.v[i] >> 8
                 r.v[i+1] += s
-                r.v[i] &= 255
+                r.v[i] &= 0xff
             }
         }
     }
@@ -77,22 +85,26 @@ struct fe: CustomDebugStringConvertible {
     static func reduce_mul(_ r:inout fe)
     {
         var t:UInt32
+		var s:UInt32
         for _ in 0..<2
         {
+			// use q = 2^(31*8)*(2^7) - 19
             t = r.v[31] >> 7
-            r.v[31] &= 127
+            r.v[31] &= 0x7f
             t = times19(t)
             r.v[0] += t
+			// move up
             for i in 0..<31
             {
-                t = r.v[i] >> 8
-                r.v[i+1] += t
-                r.v[i] &= 255
+                s = r.v[i] >> 8
+                r.v[i+1] += s
+                r.v[i] &= 0xff
             }
         }
     }
 
     /* reduction modulo 2^255-19 */
+	// 0xed = 237
     static func fe25519_freeze(_ r:inout fe) 
     {
         var m:UInt32 = equal(r.v[31], 127)
@@ -237,7 +249,9 @@ struct fe: CustomDebugStringConvertible {
                 t[i+j] += x.v[i] * y.v[j]
             }
         }
-        
+		
+		// 2q = 2^256 - 2*19
+		// so 2^256 = 2*19
         for i in 32..<63 {
             r.v[i-32] = t[i-32] + fe.times38(t[i])
         }
