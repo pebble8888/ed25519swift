@@ -9,6 +9,7 @@
 import Foundation
 
 // group element
+// point 
 struct ge: CustomDebugStringConvertible {
     var x:fe
     var y:fe
@@ -310,6 +311,7 @@ struct ge: CustomDebugStringConvertible {
 
     static func ge25519_pack(_ r:inout [UInt8] /* 32 */, _ p:ge)
     {
+		assert(r.count == 32)
         var tx = fe()
         var ty = fe()
         var zi = fe()

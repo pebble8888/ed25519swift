@@ -104,16 +104,20 @@ struct fe: CustomDebugStringConvertible {
     }
 
     /* reduction modulo 2^255-19 */
+	// 0x7f = 127
+	// 0xff = 255
 	// 0xed = 237
     static func fe25519_freeze(_ r:inout fe) 
     {
+		assert(r.v[31] <= 0xff)
         var m:UInt32 = equal(r.v[31], 127)
         for i in stride(from:30, to:0, by: -1) {
             m &= equal(r.v[i], 255)
         }
         m &= ge(r.v[0], 237)
-        
+		// Here if value is greater than q,  m is 1 or 0.
         m = UInt32(bitPattern:Int32(m) * -1)
+		// m is 0xffffffff or 0x0
         
         r.v[31] -= (m&127)
         for i in stride(from:30, to:0, by: -1) {
@@ -124,6 +128,7 @@ struct fe: CustomDebugStringConvertible {
 
     static func fe25519_unpack(_ r:inout fe, _ x:[UInt8]/* 32 */)
     {
+		assert(x.count == 32)
         for i in 0..<32 {
             r.v[i] = UInt32(x[i])
         }
@@ -133,6 +138,7 @@ struct fe: CustomDebugStringConvertible {
     /* Assumes input x being reduced mod 2^255 */
     static func fe25519_pack(_ r:inout [UInt8] /* 32 */ , _ x:fe)
     {
+		assert(r.count == 32)
         var y:fe = x
         fe.fe25519_freeze(&y)
         for i in 0..<32 {
@@ -141,7 +147,8 @@ struct fe: CustomDebugStringConvertible {
     }
 
     // freeze input before calling iszero
-    static func fe25519_iszero(_ x:fe) -> Bool {
+    static func fe25519_iszero(_ x:fe) -> Bool
+	{
         var t:fe = x
         fe.fe25519_freeze(&t)
         var r = fe.equal(t.v[0], 0)
@@ -151,7 +158,7 @@ struct fe: CustomDebugStringConvertible {
         return r != 0
     }
 
-    // is euqal after freeze
+    // is equal after freeze
     static func fe25519_iseq_vartime(_ x:fe, _ y:fe) -> Bool
     {
         var t1:fe = x
@@ -171,6 +178,7 @@ struct fe: CustomDebugStringConvertible {
     {
         let mask:UInt32 = UInt32(bitPattern:Int32(b) * -1)
         for i in 0..<32 {
+			// ^ means xor
             r.v[i] ^= mask & (x.v[i] ^ r.v[i])
         }
     }
