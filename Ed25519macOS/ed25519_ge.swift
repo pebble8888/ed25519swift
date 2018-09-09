@@ -9,7 +9,34 @@
 import Foundation
 
 // group element
-// point 
+// point
+// an auxiliary coordinate t = xy to represent a point (x,y)
+// - x^2 + y^2 = 1 - 121665 / 121666 x^2 y^2
+// d = -121665/121666
+//
+// twisted edwards curve
+// - x^2 + y^2 = 1 + d x^2 y^2
+//
+// addition low
+// (x1, y1) + (x2, y2)
+// = ((x1 y2 y1 x2)/(1 + d x1 y1 x2 y2, (y1 y2 + x1 x2)/(1 - d x1 y1 x2 y2))
+//
+// doubling formulae
+// 2 (x1, y1) = ((2 x1 y1)/(y1^2 - x1^2), (y1^2 + x1^2)/(2-y1^2 + x1^2))
+//
+// extended twisted edwards coordinates
+// x = X/Z
+// y = Y/Z
+// t = T/Z
+// ->  ZT = XY
+//
+// (- X^2 + Y^2) Z^2 = Z^4 + d X^2 Y^2
+//  - X^2 + Y^2 = Z^2 + d T^2
+//
+//    (x, y, t=xy, z=1) : affine
+// -> (X/Z, Y/Z, XY/Z^2, 1)
+// -> (XZ, YZ, XY, Z^2)
+// 
 struct ge: CustomDebugStringConvertible {
     var x:fe
     var y:fe
@@ -59,19 +86,22 @@ struct ge: CustomDebugStringConvertible {
     private static let sqrtm1:fe = fe([0xB0, 0xA0, 0x0E, 0x4A, 0x27, 0x1B, 0xEE, 0xC4, 0x78, 0xE4, 0x2F, 0xAD, 0x06, 0x18, 0x43, 0x2F,
     0xA7, 0xD7, 0xFB, 0x3D, 0x99, 0x00, 0x4D, 0x2B, 0x0B, 0xDF, 0xC1, 0x4F, 0x80, 0x24, 0x83, 0x2B])
 
+    // point
+    // 
     private struct P1P1 {
-        var x:fe
-        var y:fe
-        var z:fe
-        var t:fe
+        var e:fe // x e
+        var h:fe // y h
+        var g:fe // z g
+        var f:fe // t f 
         init(){
-            x = fe()
-            y = fe()
-            z = fe()
-            t = fe()
+            e = fe()
+            h = fe()
+            g = fe()
+            f = fe()
         }
     } 
-    
+	
+    // projective coordinates
     private struct P2 {
         var x:fe
         var y:fe
@@ -87,7 +117,8 @@ struct ge: CustomDebugStringConvertible {
             self.z = z
         }
     }
-    
+	
+	// affine coordinate point
     private struct aff
     {
         var x:fe
@@ -113,19 +144,25 @@ struct ge: CustomDebugStringConvertible {
     fe([0xA3, 0xDD, 0xB7, 0xA5, 0xB3, 0x8A, 0xDE, 0x6D, 0xF5, 0x52, 0x51, 0x77, 0x80, 0x9F, 0xF0, 0x20,
         0x7D, 0xE3, 0xAB, 0x64, 0x8E, 0x4E, 0xEA, 0x66, 0x65, 0x76, 0x8B, 0xD7, 0x0F, 0x5F, 0x87, 0x67]))
 
+    // x = E F
+    // y = H G
+    // z = F G
+	// (t = E H)
     private static func p1p1_to_p2(_ r:inout P2, _ p:P1P1)
     {
-        fe.fe25519_mul(&r.x, p.x, p.t)
-        fe.fe25519_mul(&r.y, p.y, p.z)
-        fe.fe25519_mul(&r.z, p.z, p.t)
+        fe.fe25519_mul(&r.x, p.e, p.f)
+        fe.fe25519_mul(&r.y, p.g, p.h)
+        fe.fe25519_mul(&r.z, p.f, p.g)
     }
     
+    // 
     private static func p1p1_to_p3(_ r:inout ge, _ p:P1P1)
     {
         var p2 = P2()
         p1p1_to_p2(&p2, p)
         r.setFromP2(p2)
-        fe.fe25519_mul(&r.t, p.x, p.y)
+        // t = E H
+        fe.fe25519_mul(&r.t, p.e, p.h)
     }
     
     private static func ge25519_mixadd2(_ r: inout ge, _ q:aff)
@@ -141,26 +178,29 @@ struct ge: CustomDebugStringConvertible {
         var g:fe = fe()
         var h:fe = fe()
         var qt:fe = fe()
-        fe.fe25519_mul(&qt, q.x, q.y)
-        fe.fe25519_sub(&a, r.y, r.x) /* A = (Y1-X1)*(Y2-X2) */
-        fe.fe25519_add(&b, r.y, r.x) /* B = (Y1+X1)*(Y2+X2) */
-        fe.fe25519_sub(&t1, q.y, q.x)
-        fe.fe25519_add(&t2, q.y, q.x)
-        fe.fe25519_mul(&a, a, t1)
-        fe.fe25519_mul(&b, b, t2)
+        fe.fe25519_mul(&qt, q.x, q.y) /* t = x y */
+        fe.fe25519_sub(&a, r.y, r.x) /* A = Ry-Rx */
+        fe.fe25519_add(&b, r.y, r.x) /* B = Ry+Rx */
+        fe.fe25519_sub(&t1, q.y, q.x) /* t1 = y-x */ 
+        fe.fe25519_add(&t2, q.y, q.x) /* t2 = y+x */
+        fe.fe25519_mul(&a, a, t1) /* A = (Ry-Rx)(y-x) */
+        fe.fe25519_mul(&b, b, t2) /* B = (Ry+Rx)(y+x) */
         fe.fe25519_sub(&e, b, a) /* E = B-A */
         fe.fe25519_add(&h, b, a) /* H = B+A */
-        fe.fe25519_mul(&c, r.t, qt) /* C = T1*k*T2 */
-        fe.fe25519_mul(&c, c, ge.ec2d)
-        fe.fe25519_add(&d, r.z, r.z) /* D = Z1*2 */
+
+        fe.fe25519_mul(&c, r.t, qt) /* c = Rt t */ 
+        fe.fe25519_mul(&c, c, ge.ec2d) /* C = Rt t 2 d */
+
+        fe.fe25519_add(&d, r.z, r.z) /* D = 2 Rz */
         fe.fe25519_sub(&f, d, c) /* F = D-C */
         fe.fe25519_add(&g, d, c) /* G = D+C */
-        fe.fe25519_mul(&r.x, e, f)
-        fe.fe25519_mul(&r.y, h, g)
-        fe.fe25519_mul(&r.z, g, f)
-        fe.fe25519_mul(&r.t, e, h)
+        fe.fe25519_mul(&r.x, e, f) /* Rx = E F */
+        fe.fe25519_mul(&r.y, h, g) /* Ry = H G */
+        fe.fe25519_mul(&r.z, g, f) /* Rz = G F */
+        fe.fe25519_mul(&r.t, e, h) /* Rt = E H */
     }
 
+    // r = p (E coordinates) + q (E coordinates)
     private static func add_p1p1(_ r: inout ge.P1P1, _ p:ge, _ q:ge)
     {
         var a = fe()
@@ -169,41 +209,50 @@ struct ge: CustomDebugStringConvertible {
         var d = fe()
         var t = fe()
     
-        fe.fe25519_sub(&a, p.y, p.x) /* A = (Y1-X1)*(Y2-X2) */
-        fe.fe25519_sub(&t, q.y, q.x)
-        fe.fe25519_mul(&a, a, t)
-        fe.fe25519_add(&b, p.x, p.y) /* B = (Y1+X1)*(Y2+X2) */
-        fe.fe25519_add(&t, q.x, q.y)
-        fe.fe25519_mul(&b, b, t)
-        fe.fe25519_mul(&c, p.t, q.t) /* C = T1*k*T2 */
-        fe.fe25519_mul(&c, c, ge.ec2d)
-        fe.fe25519_mul(&d, p.z, q.z) /* D = Z1*2*Z2 */
-        fe.fe25519_add(&d, d, d)
-        fe.fe25519_sub(&r.x, b, a) /* E = B-A */
-        fe.fe25519_sub(&r.t, d, c) /* F = D-C */
-        fe.fe25519_add(&r.z, d, c) /* G = D+C */
-        fe.fe25519_add(&r.y, b, a) /* H = B+A */
+        fe.fe25519_sub(&a, p.y, p.x) /* a = y1-x1 */
+        fe.fe25519_sub(&t, q.y, q.x) /* t = y2-x2 */
+        fe.fe25519_mul(&a, a, t)     /* A = (y1-x1)(y2-x2) */
+
+        fe.fe25519_add(&b, p.x, p.y) /* b = x1+y1 */
+        fe.fe25519_add(&t, q.x, q.y) /* t = x2+y2 */
+		fe.fe25519_mul(&b, b, t)     /* B = (x1+y1)(x2+y2) */
+
+        fe.fe25519_mul(&c, p.t, q.t)   /* c = t1 t2 */
+        fe.fe25519_mul(&c, c, ge.ec2d) /* C = t1 t2 2 d */
+
+        fe.fe25519_mul(&d, p.z, q.z)   /* d = z1 z2 */ 
+        fe.fe25519_add(&d, d, d)       /* D = 2 z1 z2 */
+
+        fe.fe25519_sub(&r.e, b, a)   /* E = B-A */
+        fe.fe25519_sub(&r.f, d, c)   /* F = D-C */
+        fe.fe25519_add(&r.g, d, c)   /* G = D+C */
+        fe.fe25519_add(&r.h, b, a)   /* H = B+A */
     }
     
+    // r = 2 * p
+    // projective coordinate doubling 
     private static func dbl_p1p1(_ r:inout P1P1, _ p:P2)
     {
         var a = fe()
         var b = fe()
         var c = fe()
         var d = fe()
-        fe.fe25519_square(&a, p.x)
-        fe.fe25519_square(&b, p.y)
-        fe.fe25519_square(&c, p.z)
-        fe.fe25519_add(&c, c, c)
-        fe.fe25519_neg(&d, a)
+        fe.fe25519_square(&a, p.x) /* A = x^2 */
+        fe.fe25519_square(&b, p.y) /* B = y^2 */
+        fe.fe25519_square(&c, p.z) /* c = z^2 */ 
+        fe.fe25519_add(&c, c, c)   /* C = 2 z^2 */
+        fe.fe25519_neg(&d, a)      /* D = - x^2 */
         
-        fe.fe25519_add(&r.x, p.x, p.y)
-        fe.fe25519_square(&r.x, r.x)
-        fe.fe25519_sub(&r.x, r.x, a)
-        fe.fe25519_sub(&r.x, r.x, b)
-        fe.fe25519_add(&r.z, d, b)
-        fe.fe25519_sub(&r.t, r.z, c)
-        fe.fe25519_sub(&r.y, d, b)
+        fe.fe25519_add(&r.e, p.x, p.y) /* e = x+y */
+        fe.fe25519_square(&r.e, r.e)   /* e = (x+y)^2 */
+        fe.fe25519_sub(&r.e, r.e, a)   /* e = (x+y)^2 - x^2 */
+        fe.fe25519_sub(&r.e, r.e, b)   /* E = (x+y)^2 - x^2 - y^2 = 2xy */
+
+        fe.fe25519_add(&r.g, d, b)     /* G = - x^2 + y^2 */
+
+        fe.fe25519_sub(&r.f, r.g, c)   /* F = - x^2 + y^2 - 2 z^2 */
+
+        fe.fe25519_sub(&r.h, d, b)     /* H = - x^2 - y^2 */
     }
     
     /* Constant-time version of: if(b) r = p */
@@ -249,9 +298,9 @@ struct ge: CustomDebugStringConvertible {
         fe.fe25519_setzero(&r.t)
     }
     
-    /* ********************************************************************
-     *                    EXPORTED FUNCTIONS
-     ******************************************************************** */
+    /**
+     * EXPORTED FUNCTIONS
+     */
 
     /* return true on success, false otherwise */
     static func ge25519_unpackneg_vartime(_ r:inout ge, _ p:[UInt8] /* 32 */) -> Bool
