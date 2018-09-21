@@ -87,12 +87,11 @@ struct ge: CustomDebugStringConvertible {
     0xA7, 0xD7, 0xFB, 0x3D, 0x99, 0x00, 0x4D, 0x2B, 0x0B, 0xDF, 0xC1, 0x4F, 0x80, 0x24, 0x83, 0x2B])
 
     // point
-    // 
     private struct P1P1 {
-        var e:fe // x e
-        var h:fe // y h
-        var g:fe // z g
-        var f:fe // t f 
+        var e:fe
+        var h:fe
+        var g:fe
+        var f:fe
         init(){
             e = fe()
             h = fe()
