@@ -27,9 +27,8 @@ while 1:
   m = binascii.unhexlify(x[2])
   s = ed25519.signature(m,sk,pk)
 
-  """
   ed25519.checkvalid(s,m,pk)
-
+  """
   forgedsuccess = 0
   try:
     if len(m) == 0:
