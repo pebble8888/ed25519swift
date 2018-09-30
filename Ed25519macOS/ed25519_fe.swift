@@ -138,7 +138,7 @@ struct fe: CustomDebugStringConvertible {
     /* Assumes input x being reduced mod 2^255 */
     static func fe25519_pack(_ r:inout [UInt8] /* 32 */ , _ x:fe)
     {
-		assert(r.count == 32)
+		assert(r.count >= 32)
         var y:fe = x
         fe.fe25519_freeze(&y)
         for i in 0..<32 {
