@@ -93,7 +93,7 @@ public struct Ed25519 {
     // signing
 	// @param[out]   sm: 64 bytes signature + message
     // @param[in]     m: message
-	// @param[in]  skpk: 64 bytes secret key + 64 bytes public key
+	// @param[in]  skpk: 32 bytes secret key + 32 bytes public key
     public static func crypto_sign(_ sm:inout [UInt8], _ m:[UInt8], _ skpk:[UInt8])
     {
         assert(skpk.count == 64)

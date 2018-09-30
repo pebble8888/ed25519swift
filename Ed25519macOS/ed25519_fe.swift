@@ -132,11 +132,11 @@ struct fe: CustomDebugStringConvertible {
         for i in 0..<32 {
             r.v[i] = UInt32(x[i])
         }
-        r.v[31] &= 127
+        r.v[31] &= 127 // remove parity
     }
 
     /* Assumes input x being reduced mod 2^255 */
-    static func fe25519_pack(_ r:inout [UInt8] /* 32 */ , _ x:fe)
+    static func fe25519_pack(_ r:inout [UInt8] /* 32 or more */ , _ x:fe)
     {
 		assert(r.count >= 32)
         var y:fe = x
@@ -346,6 +346,7 @@ struct fe: CustomDebugStringConvertible {
 
     // q = 2^255-19
     // (q-5)/8 = 2^252 - 3
+	// r = x ^ (2^252 - 3)
     static func fe25519_pow2523(_ r:inout fe, _ x:fe)
     {
         var z2:fe = fe()

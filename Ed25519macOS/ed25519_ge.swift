@@ -82,7 +82,7 @@ struct ge: CustomDebugStringConvertible {
     /* 2*d */
     private static let ec2d:fe = fe([0x59, 0xF1, 0xB2, 0x26, 0x94, 0x9B, 0xD6, 0xEB, 0x56, 0xB1, 0x83, 0x82, 0x9A, 0x14, 0xE0, 0x00,
     0x30, 0xD1, 0xF3, 0xEE, 0xF2, 0x80, 0x8E, 0x19, 0xE7, 0xFC, 0xDF, 0x56, 0xDC, 0xD9, 0x06, 0x24])
-    /* sqrt(-1) */
+    /* sqrt(-1) = 2^((p-1)/4) */
     private static let sqrtm1:fe = fe([0xB0, 0xA0, 0x0E, 0x4A, 0x27, 0x1B, 0xEE, 0xC4, 0x78, 0xE4, 0x2F, 0xAD, 0x06, 0x18, 0x43, 0x2F,
     0xA7, 0xD7, 0xFB, 0x3D, 0x99, 0x00, 0x4D, 0x2B, 0x0B, 0xDF, 0xC1, 0x4F, 0x80, 0x24, 0x83, 0x2B])
 
@@ -304,47 +304,51 @@ struct ge: CustomDebugStringConvertible {
     /* return true on success, false otherwise */
     static func ge25519_unpackneg_vartime(_ r:inout ge, _ p:[UInt8] /* 32 */) -> Bool
     {
+		// x^2 = a mod q
+		// 1) x1 = uv^3 (uv^7)^((q-5)/8) or
+		// 2) x2 = uv^3 (uv^7)^((q-5)/8) 2^((q-1)/4)
+		assert(p.count == 32)
         var par:UInt8
         var t = fe()
         var chk = fe()
-        var num = fe()
-        var den = fe()
+        var u = fe()
+        var v = fe()
         var den2 = fe()
         var den4 = fe()
         var den6 = fe()
         fe.fe25519_setone(&r.z)
         par = p[31] >> 7
-        fe.fe25519_unpack(&r.y, p)
-        fe.fe25519_square(&num, r.y) /* x = y^2 */
-        fe.fe25519_mul(&den, num, ge.ecd) /* den = dy^2 */
-        fe.fe25519_sub(&num, num, r.z) /* x = y^2-1 */
-        fe.fe25519_add(&den, r.z, den) /* den = dy^2+1 */
+		assert(par == 0 || par == 1)
+        fe.fe25519_unpack(&r.y, p) // parity is omited
+        fe.fe25519_square(&u, r.y) /* u = y^2 */
+        fe.fe25519_mul(&v, u, ge.ecd) /* v = dy^2 */
+        fe.fe25519_sub(&u, u, r.z) /* u = y^2-1 */
+        fe.fe25519_add(&v, r.z, v) /* v = dy^2+1 */
         
-        /* Computation of sqrt(num/den) */
-        /* 1.: computation of num^((p-5)/8)*den^((7p-35)/8) = (num*den^7)^((p-5)/8) */
-        fe.fe25519_square(&den2, den)
+        fe.fe25519_square(&den2, v)
         fe.fe25519_square(&den4, den2)
         fe.fe25519_mul(&den6, den4, den2)
-        fe.fe25519_mul(&t, den6, num)
-        fe.fe25519_mul(&t, t, den)
+        fe.fe25519_mul(&t, den6, u)
+        fe.fe25519_mul(&t, t, v)
+        fe.fe25519_pow2523(&t, t) // t = (uv^7)^((q-5)/8)
+		
+        fe.fe25519_mul(&t, t, u) // t = u (uv^7)^((q-5)/8)
+        fe.fe25519_mul(&t, t, v)
+        fe.fe25519_mul(&t, t, v)
+        fe.fe25519_mul(&r.x, t, v) // t = uv^3 (uv^7)^((q-5)/8)
         
-        fe.fe25519_pow2523(&t, t)
-        /* 2. computation of r->x = t * num * den^3 */
-        fe.fe25519_mul(&t, t, num)
-        fe.fe25519_mul(&t, t, den)
-        fe.fe25519_mul(&t, t, den)
-        fe.fe25519_mul(&r.x, t, den)
-        
-        /* 3. Check whether sqrt computation gave correct result, multiply by sqrt(-1) if not: */
-        fe.fe25519_square(&chk, r.x)
-        fe.fe25519_mul(&chk, chk, den)
-        if (!fe.fe25519_iseq_vartime(chk, num)){
+		// x^2 = u/v
+		// x^2 v = u
+        fe.fe25519_square(&chk, r.x) // (r.x)^2
+        fe.fe25519_mul(&chk, chk, v) // v (r.x)^2
+        if !fe.fe25519_iseq_vartime(chk, u) {
             fe.fe25519_mul(&r.x, r.x, ge.sqrtm1)
         }
-        /* 4. Now we have one of the two square roots, except if input was not a square */
+		
+		/* check (r.x)^2 = u/v */
         fe.fe25519_square(&chk, r.x)
-        fe.fe25519_mul(&chk, chk, den)
-        if (!fe.fe25519_iseq_vartime(chk, num)){
+        fe.fe25519_mul(&chk, chk, v)
+        if !fe.fe25519_iseq_vartime(chk, u) {
             return false
         }
         
@@ -357,7 +361,7 @@ struct ge: CustomDebugStringConvertible {
         return true
     }
 
-    static func ge25519_pack(_ r:inout [UInt8] /* 32 */, _ p:ge)
+    static func ge25519_pack(_ r:inout [UInt8] /* 32 or more */, _ p:ge)
     {
 		assert(r.count >= 32)
         var tx = fe()
@@ -367,7 +371,8 @@ struct ge: CustomDebugStringConvertible {
         fe.fe25519_mul(&tx, p.x, zi)
         fe.fe25519_mul(&ty, p.y, zi)
         fe.fe25519_pack(&r, ty)
-        r[31] ^= fe.fe25519_getparity(tx) << 7
+		let par: UInt8 = fe.fe25519_getparity(tx) << 7
+        r[31] ^= par
     }
 
     static func ge25519_isneutral_vartime(_ p:ge) -> Int32
