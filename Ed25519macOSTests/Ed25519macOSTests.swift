@@ -117,4 +117,16 @@ class Ed25519macOSTests: XCTestCase {
             print(">", terminator:"")
         }
     }
+	
+	func testBytes() {
+		let publicKey:[UInt8] = [UInt8](repeating: 0, count:32)
+		var a : ge = ge()
+		let ret = ge.ge25519_unpackneg_vartime(&a, publicKey)
+		XCTAssert(ret)
+		ge.ge25519_negate(&a)
+
+		var Bv = [UInt8](repeating: 0, count: 32)
+		ge.ge25519_pack(&Bv, a)
+		XCTAssertEqual(publicKey, Bv)
+	}
 }

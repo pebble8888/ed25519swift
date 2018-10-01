@@ -360,6 +360,13 @@ struct ge: CustomDebugStringConvertible {
         fe.fe25519_mul(&r.t, r.x, r.y)
         return true
     }
+	
+	// @note  result is freezed
+	static func ge25519_negate(_ r:inout ge)
+	{
+		fe.fe25519_neg(&r.x, r.x)
+		fe.fe25519_neg(&r.t, r.t)
+	}
 
     static func ge25519_pack(_ r:inout [UInt8] /* 32 or more */, _ p:ge)
     {
