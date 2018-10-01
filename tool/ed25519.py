@@ -111,11 +111,13 @@ def checkvalid(s,m,pk):
 
   R = decodepoint(s[0:b/8])
   A = decodepoint(pk)
-  S = decodeint(s[b/8:b/4])
-  h = Hint(encodepoint(R) + pk + m)
-  s = scalarmult(B,S)
-  e = edwards(R, scalarmult(A,h))
-  if s != e:
+  s = decodeint(s[b/8:b/4])
+  k = Hint(encodepoint(R) + pk + m)
+  S = scalarmult(B,s)
+  # R + A k
+  E = edwards(R, scalarmult(A,k))
+  # G s = R + A k
+  if S != E:
     raise Exception("signature does not pass verification")
 
 #T = scalarmult(B, l)
