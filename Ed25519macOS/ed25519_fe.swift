@@ -235,6 +235,7 @@ struct fe: CustomDebugStringConvertible {
 	//  2 * 7f = fe
     //  2 * ff = 1fe
     //  2 * ed = 1da
+	// @note result is reduced
     static func fe25519_sub(_ r:inout fe, _ x:fe, _ y:fe)
     {
 		// t = 2 * q + x

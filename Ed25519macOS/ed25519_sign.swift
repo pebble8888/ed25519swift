@@ -66,7 +66,7 @@ public struct Ed25519 {
         // calc public key
         az[0] &= 248 // clear lowest 3bit
         az[31] &= 127 // clear highest bit
-        az[31] |= 64 // set bit
+        az[31] |= 64 // set second highest bit
         
         sc.sc25519_from32bytes(&scsk,az)
         
@@ -112,9 +112,9 @@ public struct Ed25519 {
         /* pk: 32-byte public key A */
         
         crypto_hash_sha512(&az, skpk, len: 32)
-        az[0] &= 248
-        az[31] &= 127
-        az[31] |= 64
+        az[0] &= 248 // clear lowest 3bit
+        az[31] &= 127 // clear highest bit
+        az[31] |= 64 // set second highest bit
         
         sm = [UInt8](repeating:0, count:mlen+64)
         for i in 0..<mlen {

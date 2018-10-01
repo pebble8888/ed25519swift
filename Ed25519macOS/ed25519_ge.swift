@@ -302,6 +302,7 @@ struct ge: CustomDebugStringConvertible {
      */
 
     /* return true on success, false otherwise */
+	// @warning  result is negated
     static func ge25519_unpackneg_vartime(_ r:inout ge, _ p:[UInt8] /* 32 */) -> Bool
     {
 		// x^2 = a mod q
@@ -351,9 +352,9 @@ struct ge: CustomDebugStringConvertible {
         if !fe.fe25519_iseq_vartime(chk, u) {
             return false
         }
-        
-        /* 5. Choose the desired square root according to parity: */
-        if(fe.fe25519_getparity(r.x) != (1-par)){
+		
+		// @warning negated
+        if fe.fe25519_getparity(r.x) != (1-par) {
             fe.fe25519_neg(&r.x, r.x)
         }
         
