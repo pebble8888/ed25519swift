@@ -26,7 +26,10 @@ public extension Ed25519 {
         
         if pk.count != 32 { return false }
         if smlen < 64 { return false }
-        if sm[63] & UInt8(224) != 0 { return false }
+        if sm[63] & UInt8(224) != 0 {
+			// S must smaller than group order L
+			return false
+		}
         if !ge.ge25519_unpackneg_vartime(&ge_a, pk) { return false }
         
         for i in 0..<32 {

@@ -21,7 +21,10 @@ struct sc {
         v = [UInt32](repeating:0, count:32)
     }
     
-    /*Arithmetic modulo the group order n = 2^252 +  27742317777372353535851937790883648493 = 7237005577332262213973186563042994240857116359379907606001950938285454250989 */
+    /* Arithmetic modulo the group order n = 2^252 + 27742317777372353535851937790883648493
+	  = 7237005577332262213973186563042994240857116359379907606001950938285454250989
+	  = 0x1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed
+	*/
     
     private static let m:[UInt32] = [0xED, 0xD3, 0xF5, 0x5C, 0x1A, 0x63, 0x12, 0x58, 0xD6, 0x9C, 0xF7, 0xA2, 0xDE, 0xF9, 0xDE, 0x14,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10]
@@ -128,7 +131,9 @@ struct sc {
 
     static func sc25519_from16bytes(_ r:inout shortsc, _ x:[UInt8] /* 16 */)
     {
-        for i in 0..<16 { r.v[i] = UInt32(x[i]) }
+        for i in 0..<16 {
+			r.v[i] = UInt32(x[i])
+		}
     }
 
     static func sc25519_from64bytes(_ r:inout sc, _ x:[UInt8] /* 64 */)
@@ -152,7 +157,9 @@ struct sc {
 
     static  func sc25519_to32bytes(_ r:inout [UInt8] /* 32 */, _ x:sc)
     {
-        for i in 0..<32 { r[i] = UInt8(x.v[i]) }
+        for i in 0..<32 {
+			r[i] = UInt8(x.v[i])
+		}
     }
 
     static func sc25519_iszero_vartime(_ x:sc) -> Int
