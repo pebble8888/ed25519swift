@@ -362,7 +362,7 @@ struct ge: CustomDebugStringConvertible {
         return true
     }
 	
-	// @note  result is freezed
+	/// @note  result is freezed
 	static func ge25519_negate(_ r:inout ge)
 	{
 		fe.fe25519_neg(&r.x, r.x)

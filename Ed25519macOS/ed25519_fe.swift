@@ -208,7 +208,7 @@ struct fe: CustomDebugStringConvertible {
         }
     }
 
-	// @brief  r = -x
+	/// r = -x
     static func fe25519_neg(_ r:inout fe, _ x:fe)
     {
         var t:fe = fe()
@@ -219,7 +219,7 @@ struct fe: CustomDebugStringConvertible {
         fe25519_sub(&r, r, t)
     }
 
-	// @brief  r = x + y
+	/// r = x + y
     static func fe25519_add(_ r:inout fe, _ x:fe, _ y:fe)
     {
         for i in 0..<32 {
@@ -228,14 +228,14 @@ struct fe: CustomDebugStringConvertible {
         fe.reduce_add_sub(&r)
     }
 
-	// @brief  r = x - y
-	//  q = 2 ** 255 - 19
-	//  7fff ffff ffff ffff ffff ffff ffff ffff
-	//  ffff ffff ffff ffff ffff ffff ffff ffed
-	//  2 * 7f = fe
-    //  2 * ff = 1fe
-    //  2 * ed = 1da
-	// @note result is reduced
+	///  r = x - y
+	///  q = 2 ** 255 - 19
+	///  7fff ffff ffff ffff ffff ffff ffff ffff
+	///  ffff ffff ffff ffff ffff ffff ffff ffed
+	///  2 * 7f = fe
+    ///  2 * ff = 1fe
+    ///  2 * ed = 1da
+	/// @note result is reduced
     static func fe25519_sub(_ r:inout fe, _ x:fe, _ y:fe)
     {
 		// t = 2 * q + x
@@ -248,7 +248,7 @@ struct fe: CustomDebugStringConvertible {
         fe.reduce_add_sub(&r)
     }
 
-    // @brief r = x * y
+    /// r = x * y
     static func fe25519_mul(_ r:inout fe, _ x:fe, _ y:fe)
     {
         var t:[UInt32] = [UInt32](repeating:0, count:63)
@@ -269,16 +269,16 @@ struct fe: CustomDebugStringConvertible {
         fe.reduce_mul(&r)
     }
 
-    // @brief r = x^2
+    /// r = x^2
     static func fe25519_square(_ r:inout fe, _ x:fe)
     {
         fe25519_mul(&r, x, x)
     }
 
-	// @brief r = 1/x
-    // q = 2^255-19
-    // 1/a = a^(q-2)
-    // q-2 = 2^255-21
+	/// r = 1/x
+    /// q = 2^255-19
+    /// 1/a = a^(q-2)
+    /// q-2 = 2^255-21
     static func fe25519_invert(_ r:inout fe, _ x:fe)
     {
         var z2:fe = fe()
@@ -345,9 +345,9 @@ struct fe: CustomDebugStringConvertible {
         /* 2^255 - 21 */ fe25519_mul(&r,t1,z11)
     }
 
-    // q = 2^255-19
-    // (q-5)/8 = 2^252 - 3
-	// r = x ^ (2^252 - 3)
+    /// q = 2^255-19
+    /// (q-5)/8 = 2^252 - 3
+	/// r = x ^ (2^252 - 3)
     static func fe25519_pow2523(_ r:inout fe, _ x:fe)
     {
         var z2:fe = fe()
@@ -401,4 +401,3 @@ struct fe: CustomDebugStringConvertible {
         /* 2^252 - 3 */ fe25519_mul(&r,t,x)
     }
 }
-

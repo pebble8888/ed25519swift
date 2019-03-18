@@ -40,10 +40,11 @@ public struct Ed25519 {
         return true
     }
 
-    // create keypair
-    // @param pk: 32bytes
-    // @param sk: 32bytes
-    public static func crypto_sign_keypair() -> (pk:[UInt8], sk:[UInt8])
+    /// create keypair
+	/// - Parameters:
+    ///   - pk: private key 32bytes
+    ///   - sk: secret key 32bytes
+    public static func crypto_sign_keypair() -> (pk: [UInt8], sk: [UInt8])
     {
         var sk:[UInt8] = [UInt8](repeating:0, count:32)
         // create secret key 32byte
@@ -52,8 +53,9 @@ public struct Ed25519 {
         return (pk, sk)
     }
     
-    // calc public key from secret key
-    // @param sk : secret key
+    /// calc public key from secret key
+	/// - Parameters:
+    ///   - sk: secret key
     public static func crypto_pk(_ sk:[UInt8]) -> [UInt8]
     {
         assert(sk.count == 32)
@@ -77,8 +79,9 @@ public struct Ed25519 {
         return pk
     }
 	
-	// @param[in] pk: public key 32bytes
-	// @param[in] sk: secret key 32bytes
+	/// - Parameters:
+	///   - pk: public key 32bytes
+	///   - sk: secret key 32bytes
     public static func crypto_isvalid_keypair(_ pk:[UInt8], _ sk:[UInt8]) -> Bool
     {
         if pk.count != 32 { return false }
@@ -90,10 +93,11 @@ public struct Ed25519 {
         return true
     }
 
-    // signing
-	// @param[out]   sm: 64 bytes signature + message
-    // @param[in]     m: message
-	// @param[in]  skpk: 32 bytes secret key + 32 bytes public key
+    /// signing
+	/// - Parameters:
+	///   - sm: 64 bytes signature + message
+    ///   - m: message
+	///   - skpk: 32 bytes secret key + 32 bytes public key
     public static func crypto_sign(_ sm:inout [UInt8], _ m:[UInt8], _ skpk:[UInt8])
     {
         assert(skpk.count == 64)

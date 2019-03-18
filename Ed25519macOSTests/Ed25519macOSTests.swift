@@ -32,7 +32,7 @@ class Ed25519macOSTests: XCTestCase {
 		//
         let x3 = "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b"
         let skpk:[UInt8] = x0.unhexlify()
-        let sk = String(Array(x0.characters)[0..<64]).unhexlify()
+        let sk = String(x0.prefix(64)).unhexlify()
 		let pk = Ed25519.crypto_pk(sk)
 		print("pk:\(pk.hexDescription())")
 		XCTAssert(pk.hexDescription() == x1)

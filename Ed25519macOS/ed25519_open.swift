@@ -9,9 +9,10 @@
 import Foundation
 
 public extension Ed25519 {
-    // verify
-    // @param[in] sm  signature 64bytes + message
-    // @param[in] pk  public key 32bytes
+    /// verify
+	/// - Parameters:
+	///   - sm: signature 64bytes + message
+	///   - pk: public key 32bytes
     public static func crypto_sign_open(_ sm:[UInt8], _ pk:[UInt8]) -> Bool {
         let smlen = sm.count
         var m:[UInt8] = [UInt8](repeating:0, count: smlen + 64)

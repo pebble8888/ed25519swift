@@ -7,19 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1859D1335D12CCB01240147C /* Pods_Ed25519refTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A10F4BC828B83FBE10B438 /* Pods_Ed25519refTests.framework */; };
-		3C8499EBFAB5A803775B2DDF /* Pods_Ed25519ref.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6082939BC80F8643CC3DCEF4 /* Pods_Ed25519ref.framework */; };
-		86EB8AE0FC9102418C68A0B4 /* Pods_Ed25519macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F59917A0CF8FCDB27CDF7F3 /* Pods_Ed25519macOS.framework */; };
+		A214191D223FF56D00FE28F8 /* Ed25519iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A22303681FD5700000CA0FE8 /* Ed25519iOS.framework */; };
+		A214192A223FF6B100FE28F8 /* Ed25519macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2141929223FF6B100FE28F8 /* Ed25519macOSTests.swift */; };
+		A214192C223FF6B100FE28F8 /* Ed25519macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A263768A1ECF280700EDC62D /* Ed25519macOS.framework */; };
+		A2141932223FF74000FE28F8 /* input.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2B45C921F91E1CB00249454 /* input.txt */; };
+		A2141933223FF78200FE28F8 /* Ed25519macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2141929223FF6B100FE28F8 /* Ed25519macOSTests.swift */; };
+		A2141934223FF7B200FE28F8 /* input.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2B45C921F91E1CB00249454 /* input.txt */; };
 		A22303721FD5701E00CA0FE8 /* ed25519_utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519_utility.swift */; };
 		A22303731FD5701E00CA0FE8 /* ed25519_fe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA21ED083E000A1B09F /* ed25519_fe.swift */; };
 		A22303741FD5701E00CA0FE8 /* ed25519_ge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA51ED084B100A1B09F /* ed25519_ge.swift */; };
 		A22303751FD5701E00CA0FE8 /* ed25519_sc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA81ED094E100A1B09F /* ed25519_sc.swift */; };
 		A22303761FD5701E00CA0FE8 /* ed25519_sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECAB1ED09ECA00A1B09F /* ed25519_sign.swift */; };
 		A22303771FD5701E00CA0FE8 /* ed25519_open.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29895CA1F91A06F000D8206 /* ed25519_open.swift */; };
-		A22303811FD5723A00CA0FE8 /* Ed25519iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A22303681FD5700000CA0FE8 /* Ed25519iOS.framework */; };
-		A22303871FD5740300CA0FE8 /* input.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2B45C921F91E1CB00249454 /* input.txt */; };
-		A22303881FD576D300CA0FE8 /* Ed25519macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */; };
-		A223038B1FD57D8500CA0FE8 /* Pods_Ed25519iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A223038C1FD57D8500CA0FE8 /* Pods_Ed25519iOS.framework */; };
 		A241E4FE1F91AB11003C435B /* Ed25519ref.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A241E4F51F91AB11003C435B /* Ed25519ref.framework */; };
 		A241E5031F91AB11003C435B /* Ed25519refTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A241E5021F91AB11003C435B /* Ed25519refTests.swift */; };
 		A241E5051F91AB11003C435B /* Ed25519ref.h in Headers */ = {isa = PBXBuildFile; fileRef = A241E4F71F91AB11003C435B /* Ed25519ref.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,9 +26,6 @@
 		A241E50E1F91AB3E003C435B /* ed25519s.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24C41151EC71E2A00B24AAF /* ed25519s.swift */; };
 		A241E50F1F91AB4E003C435B /* BigInt+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */; };
 		A241E5101F91AB81003C435B /* ed25519_utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519_utility.swift */; };
-		A25152491FD3D19F00898C36 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; };
-		A251524A1FD3D1A300898C36 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */; };
-		A26376931ECF280700EDC62D /* Ed25519macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A263768A1ECF280700EDC62D /* Ed25519macOS.framework */; };
 		A27AECA41ED083E000A1B09F /* ed25519_fe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA21ED083E000A1B09F /* ed25519_fe.swift */; };
 		A27AECA71ED084B100A1B09F /* ed25519_ge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA51ED084B100A1B09F /* ed25519_ge.swift */; };
 		A27AECAA1ED094E100A1B09F /* ed25519_sc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA81ED094E100A1B09F /* ed25519_sc.swift */; };
@@ -55,19 +51,24 @@
 		A294FA181F91D67800923D2C /* Ed25519sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A294FA171F91D67800923D2C /* Ed25519sTests.swift */; };
 		A29895CB1F91A06F000D8206 /* ed25519_open.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29895CA1F91A06F000D8206 /* ed25519_open.swift */; };
 		A2A5595D1F8F779700E396B5 /* api.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539ED1F8F777B00E396B5 /* api.h */; };
-		A2B45C931F91E1CB00249454 /* input.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2B45C921F91E1CB00249454 /* input.txt */; };
-		A2BB194B1F7696050056EC72 /* Ed25519macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */; };
-		ACC2F06424EA6B17F6FF68B3 /* Pods_Ed25519iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460BEB1A70416F968CA13831 /* Pods_Ed25519iOSTests.framework */; };
-		ADFD9C4D73C562B438BDBCC9 /* Pods_Ed25519macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258E772EA9450417954ECBA1 /* Pods_Ed25519macOSTests.framework */; };
+		A2DA61F9223FE9E200AEDDB0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D34B8D219B0F5C00E73202 /* XCTest.framework */; };
+		D995A3F54B6B925C34BF6E3E /* libPods-Ed25519refTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D755A2748563702013DD20F /* libPods-Ed25519refTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A22303821FD5723A00CA0FE8 /* PBXContainerItemProxy */ = {
+		A214191E223FF56D00FE28F8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A24C40D51EC71DA200B24AAF /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A22303671FD5700000CA0FE8;
 			remoteInfo = Ed25519iOS;
+		};
+		A214192D223FF6B100FE28F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A24C40D51EC71DA200B24AAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A26376891ECF280700EDC62D;
+			remoteInfo = Ed25519macOS;
 		};
 		A241E4FF1F91AB11003C435B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -76,49 +77,22 @@
 			remoteGlobalIDString = A241E4F41F91AB11003C435B;
 			remoteInfo = Ed25519ref;
 		};
-		A24BAC261ECF2CD2005064A6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A24C40D51EC71DA200B24AAF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A2BA808D1EC7249A00D66A14;
-			remoteInfo = CommonCrypto;
-		};
-		A26376941ECF280700EDC62D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A24C40D51EC71DA200B24AAF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A26376891ECF280700EDC62D;
-			remoteInfo = Ed25519macOS;
-		};
-		A294FA031F91AFA600923D2C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A24C40D51EC71DA200B24AAF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A2BA808D1EC7249A00D66A14;
-			remoteInfo = CommonCrypto;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		13ADE29827A8E66256429AF5 /* Pods-Ed25519iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519iOSTests/Pods-Ed25519iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		16E671638CC2C895C7E59F41 /* Pods-Ed25519iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519iOS/Pods-Ed25519iOS.release.xcconfig"; sourceTree = "<group>"; };
-		258E772EA9450417954ECBA1 /* Pods_Ed25519macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EB84485ACB772BEEE3B828A /* Pods-Ed25519ref.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519ref.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519ref/Pods-Ed25519ref.release.xcconfig"; sourceTree = "<group>"; };
-		3F59917A0CF8FCDB27CDF7F3 /* Pods_Ed25519macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42E5E78DD91DFE7DCD2A9F00 /* Pods-Ed25519iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519iOS/Pods-Ed25519iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		4305AF2EA076DA6FE7F292FE /* Pods-Ed25519refTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519refTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests.release.xcconfig"; sourceTree = "<group>"; };
-		460BEB1A70416F968CA13831 /* Pods_Ed25519iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A8B1CF5218753DB804CD13F /* Pods-Ed25519refTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519refTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests.debug.xcconfig"; sourceTree = "<group>"; };
-		56872B5A89A926B4E4B1DE03 /* Pods-Ed25519ref.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519ref.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519ref/Pods-Ed25519ref.debug.xcconfig"; sourceTree = "<group>"; };
-		6082939BC80F8643CC3DCEF4 /* Pods_Ed25519ref.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519ref.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		63A10F4BC828B83FBE10B438 /* Pods_Ed25519refTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519refTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A0FDF0A8FF5BC3151CCBE0E /* Pods-Ed25519macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		910B0C35171B51643DAD4BF9 /* Pods-Ed25519iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519iOSTests/Pods-Ed25519iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0B168D86B8EAA81ADF544F57 /* Pods_Ed25519macOS_Ed25519macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519macOS_Ed25519macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D755A2748563702013DD20F /* libPods-Ed25519refTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ed25519refTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5078DBEF19C43E50123AEFE7 /* libPods-Ed25519ref.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ed25519ref.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FA70DEACEE5F31DA27B50F9 /* libPods-Ed25519iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ed25519iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		709DE06D8B763068DB973620 /* libPods-Ed25519macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ed25519macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7299CA4E0A26E473C46C057C /* Pods_Ed25519macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98521BF4887D4CACCDC296E7 /* libPods-Ed25519macOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ed25519macOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2141918223FF56D00FE28F8 /* Ed25519iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ed25519iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2141927223FF6B100FE28F8 /* Ed25519macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ed25519macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2141929223FF6B100FE28F8 /* Ed25519macOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ed25519macOSTests.swift; sourceTree = "<group>"; };
+		A214192B223FF6B100FE28F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A22303681FD5700000CA0FE8 /* Ed25519iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ed25519iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A223036B1FD5700000CA0FE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A223037C1FD5723A00CA0FE8 /* Ed25519iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ed25519iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A22303801FD5723A00CA0FE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A223038C1FD57D8500CA0FE8 /* Pods_Ed25519iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Ed25519iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt+Extension.swift"; sourceTree = "<group>"; };
 		A241E4F51F91AB11003C435B /* Ed25519ref.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ed25519ref.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A241E4F71F91AB11003C435B /* Ed25519ref.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ed25519ref.h; sourceTree = "<group>"; };
@@ -129,7 +103,6 @@
 		A24C41151EC71E2A00B24AAF /* ed25519s.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519s.swift; sourceTree = "<group>"; };
 		A263768A1ECF280700EDC62D /* Ed25519macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ed25519macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A263768D1ECF280700EDC62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A26376921ECF280700EDC62D /* Ed25519macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ed25519macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A26376991ECF280700EDC62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A27AECA21ED083E000A1B09F /* ed25519_fe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_fe.swift; sourceTree = "<group>"; };
 		A27AECA51ED084B100A1B09F /* ed25519_ge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_ge.swift; sourceTree = "<group>"; };
@@ -143,7 +116,6 @@
 		A294FA121F91CF5C00923D2C /* Summable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summable.swift; sourceTree = "<group>"; };
 		A294FA171F91D67800923D2C /* Ed25519sTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ed25519sTests.swift; sourceTree = "<group>"; };
 		A29895CA1F91A06F000D8206 /* ed25519_open.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ed25519_open.swift; sourceTree = "<group>"; };
-		A29F64101ECF318E00289744 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/lib/system/libcommonCrypto.tbd; sourceTree = DEVELOPER_DIR; };
 		A2A539ED1F8F777B00E396B5 /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
 		A2A539EE1F8F777B00E396B5 /* fe25519.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fe25519.c; sourceTree = "<group>"; };
 		A2A539EF1F8F777B00E396B5 /* fe25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fe25519.h; sourceTree = "<group>"; };
@@ -158,34 +130,36 @@
 		A2A559921F8F881800E396B5 /* sign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sign.h; sourceTree = "<group>"; };
 		A2A559951F8F9E6000E396B5 /* ref_test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ref_test.m; sourceTree = "<group>"; };
 		A2B45C921F91E1CB00249454 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = input.txt; path = tool/input.txt; sourceTree = SOURCE_ROOT; };
-		A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2BA80911EC7249A00D66A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A2BA80A51EC7250100D66A14 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt+ExtensionTests.swift"; sourceTree = "<group>"; };
 		A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519macOSTests.swift; sourceTree = "<group>"; };
 		A2D235CC1ECF435600BAD20C /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = "../../Users/pebble8888/Library/Developer/Xcode/DerivedData/Ed25519-bgavysfvnlntnkhevpvsigfomvie/Build/Products/Debug/BigInt-OSX/BigInt.framework"; sourceTree = "<group>"; };
 		A2D235F21ECFFD2600BAD20C /* ed25519_utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_utility.swift; sourceTree = "<group>"; };
-		BE530EFC5913BFBAD042C462 /* Pods-Ed25519macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C33CD4F1CB9434DF4B31582E /* Pods-Ed25519macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOS/Pods-Ed25519macOS.release.xcconfig"; sourceTree = "<group>"; };
-		E13849EFEAF6E30E29E82F99 /* Pods-Ed25519macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ed25519macOS/Pods-Ed25519macOS.debug.xcconfig"; sourceTree = "<group>"; };
-		F4D092F4622AB4A55E51EA4D /* Pods_Ed25519iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2D34B8D219B0F5C00E73202 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A56128FECCD84A0292461836 /* Pods_Ed25519ref_Ed25519refTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519ref_Ed25519refTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB33583610E2845ABE93FDF9 /* libPods-Ed25519iOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ed25519iOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A2141915223FF56D00FE28F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A214191D223FF56D00FE28F8 /* Ed25519iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2141924223FF6B100FE28F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A214192C223FF6B100FE28F8 /* Ed25519macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A22303641FD5700000CA0FE8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A223038B1FD57D8500CA0FE8 /* Pods_Ed25519iOS.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A22303791FD5723A00CA0FE8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A22303811FD5723A00CA0FE8 /* Ed25519iOS.framework in Frameworks */,
-				ACC2F06424EA6B17F6FF68B3 /* Pods_Ed25519iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,8 +167,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A251524A1FD3D1A300898C36 /* CommonCrypto.framework in Frameworks */,
-				3C8499EBFAB5A803775B2DDF /* Pods_Ed25519ref.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,30 +174,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2DA61F9223FE9E200AEDDB0 /* XCTest.framework in Frameworks */,
 				A241E4FE1F91AB11003C435B /* Ed25519ref.framework in Frameworks */,
-				1859D1335D12CCB01240147C /* Pods_Ed25519refTests.framework in Frameworks */,
+				D995A3F54B6B925C34BF6E3E /* libPods-Ed25519refTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A26376861ECF280700EDC62D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A25152491FD3D19F00898C36 /* CommonCrypto.framework in Frameworks */,
-				86EB8AE0FC9102418C68A0B4 /* Pods_Ed25519macOS.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A263768F1ECF280700EDC62D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A26376931ECF280700EDC62D /* Ed25519macOS.framework in Frameworks */,
-				ADFD9C4D73C562B438BDBCC9 /* Pods_Ed25519macOSTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A2BA808A1EC7249A00D66A14 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -235,23 +190,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		92DCB316AAC6D13CF681FF20 /* Pods */ = {
+		A2141928223FF6B100FE28F8 /* Ed25519macOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				E13849EFEAF6E30E29E82F99 /* Pods-Ed25519macOS.debug.xcconfig */,
-				C33CD4F1CB9434DF4B31582E /* Pods-Ed25519macOS.release.xcconfig */,
-				BE530EFC5913BFBAD042C462 /* Pods-Ed25519macOSTests.debug.xcconfig */,
-				7A0FDF0A8FF5BC3151CCBE0E /* Pods-Ed25519macOSTests.release.xcconfig */,
-				56872B5A89A926B4E4B1DE03 /* Pods-Ed25519ref.debug.xcconfig */,
-				3EB84485ACB772BEEE3B828A /* Pods-Ed25519ref.release.xcconfig */,
-				4A8B1CF5218753DB804CD13F /* Pods-Ed25519refTests.debug.xcconfig */,
-				4305AF2EA076DA6FE7F292FE /* Pods-Ed25519refTests.release.xcconfig */,
-				42E5E78DD91DFE7DCD2A9F00 /* Pods-Ed25519iOS.debug.xcconfig */,
-				16E671638CC2C895C7E59F41 /* Pods-Ed25519iOS.release.xcconfig */,
-				910B0C35171B51643DAD4BF9 /* Pods-Ed25519iOSTests.debug.xcconfig */,
-				13ADE29827A8E66256429AF5 /* Pods-Ed25519iOSTests.release.xcconfig */,
+				A2141929223FF6B100FE28F8 /* Ed25519macOSTests.swift */,
+				A214192B223FF6B100FE28F8 /* Info.plist */,
 			);
-			name = Pods;
+			path = Ed25519macOSTests;
 			sourceTree = "<group>";
 		};
 		A22303691FD5700000CA0FE8 /* Ed25519iOS */ = {
@@ -260,14 +205,6 @@
 				A223036B1FD5700000CA0FE8 /* Info.plist */,
 			);
 			path = Ed25519iOS;
-			sourceTree = "<group>";
-		};
-		A223037D1FD5723A00CA0FE8 /* Ed25519iOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				A22303801FD5723A00CA0FE8 /* Info.plist */,
-			);
-			path = Ed25519iOSTests;
 			sourceTree = "<group>";
 		};
 		A241E4F61F91AB11003C435B /* Ed25519ref */ = {
@@ -298,15 +235,13 @@
 		A24C40D41EC71DA200B24AAF = {
 			isa = PBXGroup;
 			children = (
-				A2BA808F1EC7249A00D66A14 /* CommonCrypto */,
 				A263768B1ECF280700EDC62D /* Ed25519macOS */,
 				A26376961ECF280700EDC62D /* Ed25519macOSTests */,
 				A22303691FD5700000CA0FE8 /* Ed25519iOS */,
-				A223037D1FD5723A00CA0FE8 /* Ed25519iOSTests */,
 				A241E4F61F91AB11003C435B /* Ed25519ref */,
 				A241E5011F91AB11003C435B /* Ed25519refTests */,
+				A2141928223FF6B100FE28F8 /* Ed25519macOSTests */,
 				A24C40DF1EC71DA200B24AAF /* Products */,
-				92DCB316AAC6D13CF681FF20 /* Pods */,
 				E0F1840553068BE08294F334 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -314,13 +249,12 @@
 		A24C40DF1EC71DA200B24AAF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */,
 				A263768A1ECF280700EDC62D /* Ed25519macOS.framework */,
-				A26376921ECF280700EDC62D /* Ed25519macOSTests.xctest */,
 				A241E4F51F91AB11003C435B /* Ed25519ref.framework */,
 				A241E4FD1F91AB11003C435B /* Ed25519refTests.xctest */,
 				A22303681FD5700000CA0FE8 /* Ed25519iOS.framework */,
-				A223037C1FD5723A00CA0FE8 /* Ed25519iOSTests.xctest */,
+				A2141918223FF56D00FE28F8 /* Ed25519iOSTests.xctest */,
+				A2141927223FF6B100FE28F8 /* Ed25519macOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -397,27 +331,20 @@
 			path = ref;
 			sourceTree = "<group>";
 		};
-		A2BA808F1EC7249A00D66A14 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				A2BA80911EC7249A00D66A14 /* Info.plist */,
-				A2BA80A51EC7250100D66A14 /* CommonCrypto.xcconfig */,
-			);
-			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
 		E0F1840553068BE08294F334 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A223038C1FD57D8500CA0FE8 /* Pods_Ed25519iOS.framework */,
+				A2D34B8D219B0F5C00E73202 /* XCTest.framework */,
 				A2D235CC1ECF435600BAD20C /* BigInt.framework */,
-				A29F64101ECF318E00289744 /* libcommonCrypto.tbd */,
-				3F59917A0CF8FCDB27CDF7F3 /* Pods_Ed25519macOS.framework */,
-				258E772EA9450417954ECBA1 /* Pods_Ed25519macOSTests.framework */,
-				6082939BC80F8643CC3DCEF4 /* Pods_Ed25519ref.framework */,
-				63A10F4BC828B83FBE10B438 /* Pods_Ed25519refTests.framework */,
-				F4D092F4622AB4A55E51EA4D /* Pods_Ed25519iOS.framework */,
-				460BEB1A70416F968CA13831 /* Pods_Ed25519iOSTests.framework */,
+				0B168D86B8EAA81ADF544F57 /* Pods_Ed25519macOS_Ed25519macOSTests.framework */,
+				A56128FECCD84A0292461836 /* Pods_Ed25519ref_Ed25519refTests.framework */,
+				7299CA4E0A26E473C46C057C /* Pods_Ed25519macOSTests.framework */,
+				6FA70DEACEE5F31DA27B50F9 /* libPods-Ed25519iOS.a */,
+				DB33583610E2845ABE93FDF9 /* libPods-Ed25519iOSTests.a */,
+				709DE06D8B763068DB973620 /* libPods-Ed25519macOS.a */,
+				98521BF4887D4CACCDC296E7 /* libPods-Ed25519macOSTests.a */,
+				5078DBEF19C43E50123AEFE7 /* libPods-Ed25519ref.a */,
+				1D755A2748563702013DD20F /* libPods-Ed25519refTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -455,21 +382,49 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A2BA808B1EC7249A00D66A14 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		A2141917223FF56D00FE28F8 /* Ed25519iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2141920223FF56D00FE28F8 /* Build configuration list for PBXNativeTarget "Ed25519iOSTests" */;
+			buildPhases = (
+				A2141914223FF56D00FE28F8 /* Sources */,
+				A2141915223FF56D00FE28F8 /* Frameworks */,
+				A2141916223FF56D00FE28F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A214191F223FF56D00FE28F8 /* PBXTargetDependency */,
+			);
+			name = Ed25519iOSTests;
+			productName = Ed25519iOSTests;
+			productReference = A2141918223FF56D00FE28F8 /* Ed25519iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A2141926223FF6B100FE28F8 /* Ed25519macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A214192F223FF6B100FE28F8 /* Build configuration list for PBXNativeTarget "Ed25519macOSTests" */;
+			buildPhases = (
+				A2141923223FF6B100FE28F8 /* Sources */,
+				A2141924223FF6B100FE28F8 /* Frameworks */,
+				A2141925223FF6B100FE28F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A214192E223FF6B100FE28F8 /* PBXTargetDependency */,
+			);
+			name = Ed25519macOSTests;
+			productName = Ed25519macOSTests;
+			productReference = A2141927223FF6B100FE28F8 /* Ed25519macOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A22303671FD5700000CA0FE8 /* Ed25519iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A223036F1FD5700000CA0FE8 /* Build configuration list for PBXNativeTarget "Ed25519iOS" */;
 			buildPhases = (
-				381A3B10C3577797D65196C1 /* [CP] Check Pods Manifest.lock */,
 				A22303631FD5700000CA0FE8 /* Sources */,
 				A22303641FD5700000CA0FE8 /* Frameworks */,
 				A22303651FD5700000CA0FE8 /* Headers */,
@@ -484,31 +439,10 @@
 			productReference = A22303681FD5700000CA0FE8 /* Ed25519iOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		A223037B1FD5723A00CA0FE8 /* Ed25519iOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A22303841FD5723A00CA0FE8 /* Build configuration list for PBXNativeTarget "Ed25519iOSTests" */;
-			buildPhases = (
-				A06EC57D0D32FF4CC965F4CA /* [CP] Check Pods Manifest.lock */,
-				A22303781FD5723A00CA0FE8 /* Sources */,
-				A22303791FD5723A00CA0FE8 /* Frameworks */,
-				A223037A1FD5723A00CA0FE8 /* Resources */,
-				6CDD40233829B49366C066A8 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A22303831FD5723A00CA0FE8 /* PBXTargetDependency */,
-			);
-			name = Ed25519iOSTests;
-			productName = Ed25519iOSTests;
-			productReference = A223037C1FD5723A00CA0FE8 /* Ed25519iOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		A241E4F41F91AB11003C435B /* Ed25519ref */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A241E5061F91AB11003C435B /* Build configuration list for PBXNativeTarget "Ed25519ref" */;
 			buildPhases = (
-				38592C94CE09275F74EE5A0B /* [CP] Check Pods Manifest.lock */,
 				A241E4F01F91AB11003C435B /* Sources */,
 				A241E4F11F91AB11003C435B /* Frameworks */,
 				A241E4F21F91AB11003C435B /* Headers */,
@@ -517,7 +451,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A294FA041F91AFA600923D2C /* PBXTargetDependency */,
 			);
 			name = Ed25519ref;
 			productName = Ed25519ref;
@@ -528,11 +461,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A241E5091F91AB11003C435B /* Build configuration list for PBXNativeTarget "Ed25519refTests" */;
 			buildPhases = (
-				BC61F28383D35532A0E9D054 /* [CP] Check Pods Manifest.lock */,
 				A241E4F91F91AB11003C435B /* Sources */,
 				A241E4FA1F91AB11003C435B /* Frameworks */,
 				A241E4FB1F91AB11003C435B /* Resources */,
-				49F31C7A961085C01C571C04 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -548,58 +479,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A263769F1ECF280700EDC62D /* Build configuration list for PBXNativeTarget "Ed25519macOS" */;
 			buildPhases = (
-				8FFD5DB21D54BDA51D440775 /* [CP] Check Pods Manifest.lock */,
 				A26376851ECF280700EDC62D /* Sources */,
 				A26376861ECF280700EDC62D /* Frameworks */,
 				A26376871ECF280700EDC62D /* Headers */,
-				A26376881ECF280700EDC62D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A24BAC271ECF2CD2005064A6 /* PBXTargetDependency */,
 			);
 			name = Ed25519macOS;
 			productName = Ed25519macOS;
 			productReference = A263768A1ECF280700EDC62D /* Ed25519macOS.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		A26376911ECF280700EDC62D /* Ed25519macOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A26376A01ECF280700EDC62D /* Build configuration list for PBXNativeTarget "Ed25519macOSTests" */;
-			buildPhases = (
-				34E005E4D1B1FCD059CBB573 /* [CP] Check Pods Manifest.lock */,
-				A263768E1ECF280700EDC62D /* Sources */,
-				A263768F1ECF280700EDC62D /* Frameworks */,
-				A26376901ECF280700EDC62D /* Resources */,
-				42DE74C56617A26AA0A38E0D /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A26376951ECF280700EDC62D /* PBXTargetDependency */,
-			);
-			name = Ed25519macOSTests;
-			productName = Ed25519macOSTests;
-			productReference = A26376921ECF280700EDC62D /* Ed25519macOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		A2BA808D1EC7249A00D66A14 /* CommonCrypto */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A2BA80A31EC7249B00D66A14 /* Build configuration list for PBXNativeTarget "CommonCrypto" */;
-			buildPhases = (
-				A2BA80891EC7249A00D66A14 /* Sources */,
-				A2BA808A1EC7249A00D66A14 /* Frameworks */,
-				A2BA808B1EC7249A00D66A14 /* Headers */,
-				A2BA808C1EC7249A00D66A14 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CommonCrypto;
-			productName = CommonCrypto;
-			productReference = A2BA808E1EC7249A00D66A14 /* CommonCrypto.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -608,17 +498,20 @@
 		A24C40D51EC71DA200B24AAF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = pebble8888;
 				TargetAttributes = {
-					A22303671FD5700000CA0FE8 = {
-						CreatedOnToolsVersion = 9.1;
+					A2141917223FF56D00FE28F8 = {
+						CreatedOnToolsVersion = 10.1;
 						ProvisioningStyle = Automatic;
 					};
-					A223037B1FD5723A00CA0FE8 = {
+					A2141926223FF6B100FE28F8 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+					};
+					A22303671FD5700000CA0FE8 = {
 						CreatedOnToolsVersion = 9.1;
-						DevelopmentTeam = WAXDS76BRK;
 						ProvisioningStyle = Automatic;
 					};
 					A241E4F41F91AB11003C435B = {
@@ -630,16 +523,6 @@
 						ProvisioningStyle = Automatic;
 					};
 					A26376891ECF280700EDC62D = {
-						CreatedOnToolsVersion = 8.3.2;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-					};
-					A26376911ECF280700EDC62D = {
-						CreatedOnToolsVersion = 8.3.2;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-					};
-					A2BA808D1EC7249A00D66A14 = {
 						CreatedOnToolsVersion = 8.3.2;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
@@ -660,29 +543,36 @@
 			projectRoot = "";
 			targets = (
 				A26376891ECF280700EDC62D /* Ed25519macOS */,
-				A26376911ECF280700EDC62D /* Ed25519macOSTests */,
-				A2BA808D1EC7249A00D66A14 /* CommonCrypto */,
+				A2141926223FF6B100FE28F8 /* Ed25519macOSTests */,
 				A241E4F41F91AB11003C435B /* Ed25519ref */,
 				A241E4FC1F91AB11003C435B /* Ed25519refTests */,
 				A22303671FD5700000CA0FE8 /* Ed25519iOS */,
-				A223037B1FD5723A00CA0FE8 /* Ed25519iOSTests */,
+				A2141917223FF56D00FE28F8 /* Ed25519iOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A2141916223FF56D00FE28F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2141934223FF7B200FE28F8 /* input.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2141925223FF6B100FE28F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2141932223FF74000FE28F8 /* input.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A22303661FD5700000CA0FE8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A223037A1FD5723A00CA0FE8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A22303871FD5740300CA0FE8 /* input.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,208 +590,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A26376881ECF280700EDC62D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A26376901ECF280700EDC62D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A2B45C931F91E1CB00249454 /* input.txt in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A2BA808C1EC7249A00D66A14 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		34E005E4D1B1FCD059CBB573 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Ed25519macOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		381A3B10C3577797D65196C1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Ed25519iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		38592C94CE09275F74EE5A0B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Ed25519ref-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		42DE74C56617A26AA0A38E0D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BigInt-macOS10.9/BigInt.framework",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift-macOS10.9/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SipHash-macOS10.9/SipHash.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519macOSTests/Pods-Ed25519macOSTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		49F31C7A961085C01C571C04 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BigInt-macOS10.12/BigInt.framework",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift-macOS10.12/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SipHash-macOS10.12/SipHash.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6CDD40233829B49366C066A8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519iOSTests/Pods-Ed25519iOSTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BigInt-iOS10.3/BigInt.framework",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS10.3/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SipHash-iOS10.3/SipHash.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ed25519iOSTests/Pods-Ed25519iOSTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8FFD5DB21D54BDA51D440775 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Ed25519macOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A06EC57D0D32FF4CC965F4CA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Ed25519iOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BC61F28383D35532A0E9D054 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Ed25519refTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
+		A2141914223FF56D00FE28F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2141933223FF78200FE28F8 /* Ed25519macOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2141923223FF6B100FE28F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A214192A223FF6B100FE28F8 /* Ed25519macOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A22303631FD5700000CA0FE8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -912,14 +619,6 @@
 				A22303751FD5701E00CA0FE8 /* ed25519_sc.swift in Sources */,
 				A22303761FD5701E00CA0FE8 /* ed25519_sign.swift in Sources */,
 				A22303771FD5701E00CA0FE8 /* ed25519_open.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A22303781FD5723A00CA0FE8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A22303881FD576D300CA0FE8 /* Ed25519macOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,55 +665,121 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A263768E1ECF280700EDC62D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A2BB194B1F7696050056EC72 /* Ed25519macOSTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A2BA80891EC7249A00D66A14 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A22303831FD5723A00CA0FE8 /* PBXTargetDependency */ = {
+		A214191F223FF56D00FE28F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A22303671FD5700000CA0FE8 /* Ed25519iOS */;
-			targetProxy = A22303821FD5723A00CA0FE8 /* PBXContainerItemProxy */;
+			targetProxy = A214191E223FF56D00FE28F8 /* PBXContainerItemProxy */;
+		};
+		A214192E223FF6B100FE28F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A26376891ECF280700EDC62D /* Ed25519macOS */;
+			targetProxy = A214192D223FF6B100FE28F8 /* PBXContainerItemProxy */;
 		};
 		A241E5001F91AB11003C435B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A241E4F41F91AB11003C435B /* Ed25519ref */;
 			targetProxy = A241E4FF1F91AB11003C435B /* PBXContainerItemProxy */;
 		};
-		A24BAC271ECF2CD2005064A6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A2BA808D1EC7249A00D66A14 /* CommonCrypto */;
-			targetProxy = A24BAC261ECF2CD2005064A6 /* PBXContainerItemProxy */;
-		};
-		A26376951ECF280700EDC62D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A26376891ECF280700EDC62D /* Ed25519macOS */;
-			targetProxy = A26376941ECF280700EDC62D /* PBXContainerItemProxy */;
-		};
-		A294FA041F91AFA600923D2C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A2BA808D1EC7249A00D66A14 /* CommonCrypto */;
-			targetProxy = A294FA031F91AFA600923D2C /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		A2141921223FF56D00FE28F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Ed25519iOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519iOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A2141922223FF56D00FE28F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Ed25519iOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519iOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A2141930223FF6B100FE28F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Ed25519macOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519macOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		A2141931223FF6B100FE28F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Ed25519macOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519macOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 		A223036D1FD5700000CA0FE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 42E5E78DD91DFE7DCD2A9F00 /* Pods-Ed25519iOS.debug.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -1027,8 +792,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Ed25519iOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519iOS;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
@@ -1040,7 +805,6 @@
 		};
 		A223036E1FD5700000CA0FE8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 16E671638CC2C895C7E59F41 /* Pods-Ed25519iOS.release.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -1054,8 +818,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Ed25519iOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519iOS;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
@@ -1065,51 +829,8 @@
 			};
 			name = Release;
 		};
-		A22303851FD5723A00CA0FE8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 910B0C35171B51643DAD4BF9 /* Pods-Ed25519iOSTests.debug.xcconfig */;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WAXDS76BRK;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Ed25519iOSTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519iOSTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		A22303861FD5723A00CA0FE8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 13ADE29827A8E66256429AF5 /* Pods-Ed25519iOSTests.release.xcconfig */;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WAXDS76BRK;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Ed25519iOSTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519iOSTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		A241E5071F91AB11003C435B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56872B5A89A926B4E4B1DE03 /* Pods-Ed25519ref.debug.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -1124,7 +845,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Ed25519ref/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519ref;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1134,7 +855,6 @@
 		};
 		A241E5081F91AB11003C435B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3EB84485ACB772BEEE3B828A /* Pods-Ed25519ref.release.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -1150,7 +870,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Ed25519ref/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519ref;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1160,7 +880,6 @@
 		};
 		A241E50A1F91AB11003C435B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A8B1CF5218753DB804CD13F /* Pods-Ed25519refTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1170,7 +889,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Ed25519refTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519refTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1179,7 +898,6 @@
 		};
 		A241E50B1F91AB11003C435B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4305AF2EA076DA6FE7F292FE /* Pods-Ed25519refTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1189,7 +907,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Ed25519refTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pebble8888.Ed25519refTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1199,6 +917,7 @@
 		A24C40F01EC71DA300B24AAF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1244,14 +963,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-D NO_USE_CryptoSwift";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1261,6 +981,7 @@
 		A24C40F11EC71DA300B24AAF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1300,12 +1021,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-D NO_USE_CryptoSwift";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1315,7 +1037,6 @@
 		};
 		A263769B1ECF280700EDC62D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E13849EFEAF6E30E29E82F99 /* Pods-Ed25519macOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1326,25 +1047,24 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = Ed25519macOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = pebble8888.Ed25519macOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
 		A263769C1ECF280700EDC62D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C33CD4F1CB9434DF4B31582E /* Pods-Ed25519macOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1356,120 +1076,48 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = Ed25519macOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = pebble8888.Ed25519macOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
-		A263769D1ECF280700EDC62D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE530EFC5913BFBAD042C462 /* Pods-Ed25519macOSTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Ed25519macOSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = pebble8888.Ed25519macOSTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		A263769E1ECF280700EDC62D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A0FDF0A8FF5BC3151CCBE0E /* Pods-Ed25519macOSTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Ed25519macOSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = pebble8888.Ed25519macOSTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
-		A2BA809F1EC7249B00D66A14 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2BA80A51EC7250100D66A14 /* CommonCrypto.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = CommonCrypto/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = pebble8888.CommonCrypto;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		A2BA80A01EC7249B00D66A14 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2BA80A51EC7250100D66A14 /* CommonCrypto.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = CommonCrypto/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = pebble8888.CommonCrypto;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A2141920223FF56D00FE28F8 /* Build configuration list for PBXNativeTarget "Ed25519iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2141921223FF56D00FE28F8 /* Debug */,
+				A2141922223FF56D00FE28F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A214192F223FF6B100FE28F8 /* Build configuration list for PBXNativeTarget "Ed25519macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2141930223FF6B100FE28F8 /* Debug */,
+				A2141931223FF6B100FE28F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A223036F1FD5700000CA0FE8 /* Build configuration list for PBXNativeTarget "Ed25519iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A223036D1FD5700000CA0FE8 /* Debug */,
 				A223036E1FD5700000CA0FE8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A22303841FD5723A00CA0FE8 /* Build configuration list for PBXNativeTarget "Ed25519iOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A22303851FD5723A00CA0FE8 /* Debug */,
-				A22303861FD5723A00CA0FE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1506,24 +1154,6 @@
 			buildConfigurations = (
 				A263769B1ECF280700EDC62D /* Debug */,
 				A263769C1ECF280700EDC62D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A26376A01ECF280700EDC62D /* Build configuration list for PBXNativeTarget "Ed25519macOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A263769D1ECF280700EDC62D /* Debug */,
-				A263769E1ECF280700EDC62D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A2BA80A31EC7249B00D66A14 /* Build configuration list for PBXNativeTarget "CommonCrypto" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A2BA809F1EC7249B00D66A14 /* Debug */,
-				A2BA80A01EC7249B00D66A14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
