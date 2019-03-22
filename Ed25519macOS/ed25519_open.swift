@@ -14,24 +14,31 @@ public extension Ed25519 {
 	///   - sm: signature 64bytes + message
 	///   - pk: public key 32bytes
     public static func crypto_sign_open(_ sm: [UInt8], _ pk: [UInt8]) -> Bool {
+		if pk.count != 32 {
+			return false
+		}
+		if sm.count < 64 {
+			return false
+		}
         let smlen = sm.count
-        var m: [UInt8] = [UInt8](repeating: 0, count: smlen + 64)
-		var pkcopy: [UInt8] = [UInt8](repeating: 0, count: 32)
-		var rcopy: [UInt8] = [UInt8](repeating: 0, count: 32) // point R
-		var k: [UInt8] = [UInt8](repeating: 0, count: 64)
-		var rcheck: [UInt8] = [UInt8](repeating: 0, count: 32)
+        var m = [UInt8](repeating: 0, count: smlen + 64)
+		var pkcopy = [UInt8](repeating: 0, count: 32)
+		var rcopy = [UInt8](repeating: 0, count: 32) // point R
+		var k = [UInt8](repeating: 0, count: 64)
+		var rcheck = [UInt8](repeating: 0, count: 32)
 		var ge_a = ge() // unpacked public info from pk argument
 		var ge_b = ge()
 		var sc_k = sc() // integer k
 		var sc_s = sc()
 
-        if pk.count != 32 { return false }
-        if smlen < 64 { return false }
         if sm[63] & UInt8(224) != 0 {
 			// S must smaller than group order L
+			// FIXME: simplified check to exact check
 			return false
 		}
-        if !ge.ge25519_unpackneg_vartime(&ge_a, pk) { return false }
+        if !ge.ge25519_unpackneg_vartime(&ge_a, pk) {
+			return false
+		}
 
         for i in 0..<32 {
             pkcopy[i] = pk[i]

@@ -9,28 +9,40 @@
 import Foundation
 
 struct shortsc {
-    var v: [UInt32]
+    var v: [UInt32] // 16
     init() {
         v = [UInt32](repeating: 0, count: 16)
     }
 }
 
 struct sc {
-    var v: [UInt32]
+    var v: [UInt32] // 32
     init() {
         v = [UInt32](repeating: 0, count: 32)
     }
 
-    /* Arithmetic modulo the group order n = 2^252 + 27742317777372353535851937790883648493
-	  = 7237005577332262213973186563042994240857116359379907606001950938285454250989
-	  = 0x1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed
+    /* Arithmetic modulo the group order
+	  order = 2^252 + 27742317777372353535851937790883648493
+	    = 7237005577332262213973186563042994240857116359379907606001950938285454250989
+	    = 0x1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed
+
+	  p = 2^256 - 19
+	    = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed
 	*/
 
-    private static let m: [UInt32] = [0xED, 0xD3, 0xF5, 0x5C, 0x1A, 0x63, 0x12, 0x58, 0xD6, 0x9C, 0xF7, 0xA2, 0xDE, 0xF9, 0xDE, 0x14,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10]
+	// little endian group order
+    private static let m: [UInt32] =
+		[0xED, 0xD3, 0xF5, 0x5C, 0x1A, 0x63, 0x12, 0x58, 0xD6, 0x9C, 0xF7, 0xA2, 0xDE, 0xF9, 0xDE, 0x14,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10]
 
-    private static let mu: [UInt32] = [0x1B, 0x13, 0x2C, 0x0A, 0xA3, 0xE5, 0x9C, 0xED, 0xA7, 0x29, 0x63, 0x08, 0x5D, 0x21, 0x06, 0x21,
-    0xEB, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F]
+	/*
+	  mu = 2^512 // m
+	  mu = 1852673427797059126777135760139006525645217721299241702126143248052143860224795
+	       0x0fffffffffffffffffffffffffffffffeb2106215d086329a7ed9ce5a30a2c131b
+	 */
+    private static let mu: [UInt32] =
+		[0x1B, 0x13, 0x2C, 0x0A, 0xA3, 0xE5, 0x9C, 0xED, 0xA7, 0x29, 0x63, 0x08, 0x5D, 0x21, 0x06, 0x21,
+         0xEB, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F]
 
     private static func lt(_ a: UInt32, _ b: UInt32) -> UInt32 /* 16-bit inputs */ {
         if a < b {
@@ -62,7 +74,8 @@ struct sc {
 
     /* Reduce coefficients of x before calling barrett_reduce */
     private static func barrett_reduce(_ r: inout sc, _ x: [UInt32] /* 64 */) {
-        /* See HAC, Alg. 14.42 */
+		assert(x.count == 64)
+        /* See HAC(HANDBOOK OF APPLIED CRYPTOGRAPHY), Alg. 14.42 */
         var q2: [UInt32] = [UInt32](repeating: 0, count: 66)
         var r1: [UInt32] = [UInt32](repeating: 0, count: 33)
         var r2: [UInt32] = [UInt32](repeating: 0, count: 33)
@@ -73,7 +86,7 @@ struct sc {
         for i in 0..<33 {
             for j in 0..<33 {
                 if i+j >= 31 {
-                    q2[i+j] += mu[i]*x[j+31]
+                    q2[i+j] += mu[i] * x[j+31]
                 }
             }
         }
@@ -82,11 +95,13 @@ struct sc {
         carry = q2[32] >> 8
         q2[33] += carry
 
-        for i in 0..<33 { r1[i] = x[i] }
+        for i in 0..<33 {
+			r1[i] = x[i]
+		}
         for i in 0..<32 {
             for j in 0..<33 {
                 if i+j < 33 {
-                    r2[i+j] += m[i]*q2[33+j]
+                    r2[i+j] += m[i] * q2[33+j]
                 }
             }
         }
@@ -115,6 +130,7 @@ struct sc {
     }
 
     static func sc25519_from32bytes(_ r: inout sc, _ x: [UInt8] /* 32 */) {
+		assert(x.count == 32)
         var t: [UInt32] = [UInt32](repeating: 0, count: 64)
         for i in 0..<32 {
             t[i] = UInt32(x[i])
@@ -126,12 +142,14 @@ struct sc {
     }
 
     static func sc25519_from16bytes(_ r: inout shortsc, _ x: [UInt8] /* 16 */) {
+		assert(x.count == 16)
         for i in 0..<16 {
 			r.v[i] = UInt32(x[i])
 		}
     }
 
     static func sc25519_from64bytes(_ r: inout sc, _ x: [UInt8] /* 64 */) {
+		assert(x.count == 64)
         var t: [UInt32] = [UInt32](repeating: 0, count: 64)
         for i in 0..<64 {
             t[i] = UInt32(x[i])
@@ -149,6 +167,7 @@ struct sc {
     }
 
     static func sc25519_to32bytes(_ r: inout [UInt8] /* 32 */, _ x: sc) {
+		assert(r.count == 32)
         for i in 0..<32 {
 			r[i] = UInt8(x.v[i])
 		}
@@ -229,6 +248,7 @@ struct sc {
 
     // divide to 3bits
     static func sc25519_window3(_ r: inout [Int8] /* 85 */, _ s: sc) {
+		assert(r.count == 85)
         for i in 0..<10 {
             r[8*i+0]  = Int8(bitPattern: UInt8(s.v[3*i+0]       & 7))
             r[8*i+1]  = Int8(bitPattern: UInt8((s.v[3*i+0] >> 3) & 7))
@@ -265,6 +285,7 @@ struct sc {
 
     // divide to 5bits
     static func sc25519_window5(_ r: inout [Int8] /* 51 */, _ s: sc) {
+		assert(r.count == 51)
         var carry: Int8
         for i in 0..<6 {
             r[8*i+0]  =  Int8(s.v[5*i+0])       & 31
@@ -299,6 +320,7 @@ struct sc {
     }
 
     static func sc25519_2interleave2(_ r: inout [UInt8] /* 127 */, _ s1: sc, _ s2: sc) {
+		assert(r.count == 127)
         for i in 0..<31 {
             let a1 = UInt8(s1.v[i] & 0xff)
             let a2 = UInt8(s2.v[i] & 0xff)
