@@ -13,7 +13,7 @@ extension BigInt {
     public func parity() -> Int {
         return self.magnitude.parity()
     }
-    
+
     public init(word: Word) {
         let m = BigUInt(word)
         self.init(sign: word >= 0 ? .plus : .minus, magnitude: m)
@@ -30,7 +30,7 @@ extension BigUInt {
 }
 
 extension BigInt {
-    
+
     /* python, ruby
     >>> 7 % 3
     1
@@ -41,26 +41,26 @@ extension BigInt {
     >>> -7 % -3
     -1
      */
-    public func modulo(_ divider:BigInt) -> BigInt {
+    public func modulo(_ divider: BigInt) -> BigInt {
         let v = self.magnitude % divider.magnitude
         if v == 0 {
             return 0
         }
         if self.sign == .plus {
             if divider.sign == .plus {
-                return BigInt(sign:.plus, magnitude:v)
+                return BigInt(sign: .plus, magnitude: v)
             } else {
-                return BigInt(sign:.plus, magnitude:v) + divider
+                return BigInt(sign: .plus, magnitude: v) + divider
             }
         } else {
             if divider.sign == .plus {
-                return BigInt(sign:.minus, magnitude:v) + divider
+                return BigInt(sign: .minus, magnitude: v) + divider
             } else {
-                return BigInt(sign:.minus, magnitude:v)
+                return BigInt(sign: .minus, magnitude: v)
             }
         }
     }
-    
+
     /** python, ruby
     >>> 7 / 2
     3
@@ -71,33 +71,33 @@ extension BigInt {
     >>> -7 / -2
     3
     */
-    public func divide(_ divider:BigInt) -> BigInt {
+    public func divide(_ divider: BigInt) -> BigInt {
         let v = self.magnitude / divider.magnitude
         if self.sign == .plus {
             if divider.sign == .plus {
-                return BigInt(sign:.plus, magnitude:v)
+                return BigInt(sign: .plus, magnitude: v)
             } else {
                 if (self.magnitude % divider.magnitude) == 0 {
-                    return BigInt(sign:.minus, magnitude:v)
+                    return BigInt(sign: .minus, magnitude: v)
                 } else {
-                    return BigInt(sign:.minus, magnitude:v+1)
+                    return BigInt(sign: .minus, magnitude: v+1)
                 }
             }
         } else {
             if divider.sign == .plus {
                 if (self.magnitude % divider.magnitude) == 0 {
-                    return BigInt(sign:.minus, magnitude:v)
+                    return BigInt(sign: .minus, magnitude: v)
                 } else {
-                    return BigInt(sign:.minus, magnitude:v+1)
+                    return BigInt(sign: .minus, magnitude: v+1)
                 }
             } else {
-                return BigInt(sign:.plus, magnitude:v)
+                return BigInt(sign: .plus, magnitude: v)
             }
         }
     }
-    
+
     // return val is less than q
-    public static func expmod(_ b:BigInt, _ e:BigInt, _ q:BigInt) -> BigInt {
+    public static func expmod(_ b: BigInt, _ e: BigInt, _ q: BigInt) -> BigInt {
         if e == 0 { return 1 }
         var t = expmod(b, e.divide(2), q).power(2).modulo(q)
         if e.parity() != 0 {
@@ -105,9 +105,9 @@ extension BigInt {
         }
         return t
     }
-    
+
     // return val is less than q
-    public static func inv(_ x:BigInt, _ q:BigInt) -> BigInt {
-        return expmod(x,q-2,q)
+    public static func inv(_ x: BigInt, _ q: BigInt) -> BigInt {
+        return expmod(x, q-2, q)
     }
 }

@@ -11,7 +11,7 @@ import BigInt
 
 protocol Summable {
     static var Zero: Self { get }
-    static func +(lhs: Self, rhs: Self) -> Self
+    static func + (lhs: Self, rhs: Self) -> Self
 }
 
 extension Sequence where Iterator.Element: Summable {

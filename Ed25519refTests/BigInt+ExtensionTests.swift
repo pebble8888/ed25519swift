@@ -11,18 +11,18 @@ import Ed25519ref
 import BigInt
 
 class BigInt_ExtensionTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
-    
+
     func testFundamental_0() {
-        let x = BigInt(sign:.minus, magnitude:1)
-        let y = BigInt(sign:.plus, magnitude:2)
+        let x = BigInt(sign: .minus, magnitude: 1)
+        let y = BigInt(sign: .plus, magnitude: 2)
         let _ = x % y
     }
 
@@ -31,7 +31,7 @@ class BigInt_ExtensionTests: XCTestCase {
         let y = BigUInt(2)
         let _ = x % y
     }
-    
+
     func testModulo() {
         XCTAssertEqual(BigUInt(1) % BigUInt(2), 1)
         XCTAssertEqual(BigInt(7).modulo(3), BigInt(1))
@@ -44,7 +44,7 @@ class BigInt_ExtensionTests: XCTestCase {
         XCTAssertEqual(BigInt(-6).modulo(3), BigInt(0))
         XCTAssertEqual(BigInt(-6).modulo(-3), BigInt(0))
     }
-    
+
     func testDivide() {
         XCTAssertEqual(BigInt(7).divide(2), BigInt(3))
         XCTAssertEqual(BigInt(7).divide(-2), BigInt(-4))
@@ -56,7 +56,7 @@ class BigInt_ExtensionTests: XCTestCase {
         XCTAssertEqual(BigInt(-6).divide(2), BigInt(-3))
         XCTAssertEqual(BigInt(-6).divide(-2), BigInt(3))
     }
-    
+
     func testOdd() {
         XCTAssertEqual(BigInt(3).parity(), 1)
         XCTAssertEqual(BigInt(2).parity(), 0)
@@ -66,8 +66,8 @@ class BigInt_ExtensionTests: XCTestCase {
         XCTAssertEqual(BigInt(-2).parity(), 0)
         XCTAssertEqual(BigInt(-3).parity(), 1)
         XCTAssertEqual(BigInt("1000000000000000000000000000000").parity(), 0)
-        XCTAssertEqual(BigInt(sign:.minus, magnitude:BigUInt("1000000000000000000000000000001")!).parity(), 1)
+        XCTAssertEqual(BigInt(sign: .minus, magnitude: BigUInt("1000000000000000000000000000001")!).parity(), 1)
         XCTAssertEqual(BigInt("1000000000000000000000000000000").parity(), 0)
-        XCTAssertEqual(BigInt(sign:.minus, magnitude:BigUInt("1000000000000000000000000000001")!).parity(), 1)
+        XCTAssertEqual(BigInt(sign: .minus, magnitude: BigUInt("1000000000000000000000000000001")!).parity(), 1)
     }
 }

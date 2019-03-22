@@ -28,9 +28,9 @@ extension Collection where Iterator.Element == UInt8 {
     }
 }
 
-func sha512(_ s:[UInt8]) -> [UInt8] {
+func sha512(_ s: [UInt8]) -> [UInt8] {
 #if NO_USE_CryptoSwift
-    let data = Data(bytes:s)
+    let data = Data(bytes: s)
     var digest = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
     data.withUnsafeBytes({
         _ = CC_SHA512($0, CC_LONG(data.count), &digest)
