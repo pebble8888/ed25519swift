@@ -1,0 +1,6 @@
+identifier_name:
+  min_length: 1 
+type_name:
+  min_length: 1
+excluded:
+- Pods/
