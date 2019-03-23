@@ -70,8 +70,8 @@ public struct Ed25519 {
     ///   - sk: secret key
     public static func calcPublicKey(_ sk: [UInt8]) -> [UInt8] {
         assert(sk.count == 32)
-        var scsk = sc()
-        var gepk = ge()
+        var sc_sk = sc()
+        var ge_pk = ge()
         var az = [UInt8](repeating: 0, count: 64)
         var pk = [UInt8](repeating: 0, count: 32)
         // sha512 of sk
@@ -81,11 +81,11 @@ public struct Ed25519 {
         az[31] &= 127 // clear highest bit
         az[31] |= 64 // set second highest bit
 
-        sc.sc25519_from32bytes(&scsk, az)
+        sc.sc25519_from32bytes(&sc_sk, az)
 
         // gepk = a * G
-        ge.ge25519_scalarmult_base(&gepk, scsk)
-        ge.ge25519_pack(&pk, gepk)
+        ge.ge25519_scalarmult_base(&ge_pk, sc_sk)
+        ge.ge25519_pack(&pk, ge_pk)
         assert(pk.count == 32)
         return pk
     }
@@ -115,10 +115,10 @@ public struct Ed25519 {
         var az = [UInt8](repeating: 0, count: 64)
         var nonce = [UInt8](repeating: 0, count: 64)
         var hram = [UInt8](repeating: 0, count: 64)
-        var sck = sc()
-        var scs = sc()
-        var scsk = sc()
-        var ger = ge()
+        var sc_k = sc()
+        var sc_s = sc()
+        var sc_sk = sc()
+        var ge_r = ge()
         /* pk: 32-byte public key A */
 		var pk = calcPublicKey(sk)
         crypto_hash_sha512(&az, sk, len: 32)
@@ -139,28 +139,28 @@ public struct Ed25519 {
         crypto_hash_sha512(&nonce, data, len: mlen+32)
         /* nonce: 64-byte H(z,m) */
         // sck = r
-        sc.sc25519_from64bytes(&sck, nonce)
+        sc.sc25519_from64bytes(&sc_k, nonce)
         // r * B
-        ge.ge25519_scalarmult_base(&ger, sck)
+        ge.ge25519_scalarmult_base(&ge_r, sc_k)
         // R
-        ge.ge25519_pack(&sm, ger)
+        ge.ge25519_pack(&sm, ge_r)
         // set pk
         for i in 0..<32 {
             sm[i+32] = pk[i]
         }
         // k
         crypto_hash_sha512(&hram, sm, len: mlen+64)
-        // scs = k
-        sc.sc25519_from64bytes(&scs, hram)
-        // scsk = s
-        sc.sc25519_from32bytes(&scsk, az)
-        // scs = k * s
-        sc.sc25519_mul(&scs, scs, scsk)
+        // sc_s = k
+        sc.sc25519_from64bytes(&sc_s, hram)
+        // sc_sk = s
+        sc.sc25519_from32bytes(&sc_sk, az)
+        // sc_s = k * s
+        sc.sc25519_mul(&sc_s, sc_s, sc_sk)
         // add, modulo L
-        sc.sc25519_add(&scs, scs, sck)
+        sc.sc25519_add(&sc_s, sc_s, sc_k)
         // S
         var a = [UInt8](repeating: 0, count: 32)
-        sc.sc25519_to32bytes(&a, scs) /* cat s */
+        sc.sc25519_to32bytes(&a, sc_s) /* cat s */
         // set S
         for i in 0..<32 {
             sm[32+i] = a[i]
