@@ -31,25 +31,22 @@ class Ed25519macOSTests: XCTestCase {
         let x2 = ""
 		//
         let x3 = "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b"
-        let skpk: [UInt8] = x0.unhexlify()
         let sk = String(x0.prefix(64)).unhexlify()
-		let pk = Ed25519.crypto_pk(sk)
+		let pk = Ed25519.calcPublicKey(sk)
 		print("pk:\(pk.hexDescription())")
 		XCTAssert(pk.hexDescription() == x1)
 
         let m = x2.unhexlify()
-		// signed message
-        var sm: [UInt8] = [UInt8](repeating: 0, count: 32)
-        Ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
-        XCTAssertEqual(sm.count, 64 + m.count)
-		print("sm:\(sm.hexDescription())")
-		XCTAssertEqual(sm.hexDescription(), x3)
+		// sig
+		var sig = [UInt8](repeating: 0, count: 64)
+        Ed25519.sign(&sig, x2.unhexlify(), sk)
+		XCTAssertEqual(sig.count, 64)
+		XCTAssertEqual(sig.hexDescription(), x3)
 
-        //let pk: [UInt8] = x1.unhexlify()
-        let result = Ed25519.crypto_sign_open(sm, pk)
+        let result = Ed25519.verify(sig, m, pk)
         XCTAssert(result)
 
-        XCTAssertEqual(x3, sm.hexDescription())
+        XCTAssertEqual(x3, sig.hexDescription())
     }
 
     func test1_fastlogic() {
@@ -59,19 +56,17 @@ class Ed25519macOSTests: XCTestCase {
         let x1 = "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
         let x2 = "72"
         let x3 = "92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072"
-        //let sk = String(Array(x0.characters)[0..<64]).unhexlify()
-        let skpk: [UInt8] = x0.unhexlify()
-        //let pk = Ed25519.publickey(sk)
+		let sk = String(x0.prefix(64)).unhexlify()
         let m = x2.unhexlify()
-        var sm: [UInt8] = [UInt8](repeating: 0, count: 0)
-        Ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
-        XCTAssertEqual(sm.count, 64 + m.count)
+		var sig = [UInt8](repeating: 0, count: 0)
+        Ed25519.sign(&sig, x2.unhexlify(), sk)
+        XCTAssertEqual(sig.count, 64)
 
         let pk: [UInt8] = x1.unhexlify()
-        let result = Ed25519.crypto_sign_open(sm, pk)
+        let result = Ed25519.verify(sig, m, pk)
         XCTAssert(result)
 
-        XCTAssertEqual(x3, sm.hexDescription())
+        XCTAssertEqual(String(x3.prefix(128)), sig.hexDescription())
     }
 
     // Debug: 558sec macOS
@@ -92,19 +87,18 @@ class Ed25519macOSTests: XCTestCase {
                     let x3 = ary[3]
                     let sk: [UInt8] = String(x0.prefix(64)).unhexlify()
                     XCTAssert(sk.count == 32)
-                    let skpk: [UInt8] = x0.unhexlify()
                     let m = x2.unhexlify()
-                    var sm: [UInt8] = [UInt8](repeating: 0, count: 0)
-                    Ed25519.crypto_sign(&sm, x2.unhexlify(), skpk)
-                    XCTAssertEqual(sm.count, 64 + m.count)
+					var sig = [UInt8](repeating: 0, count: 0)
+                    Ed25519.sign(&sig, x2.unhexlify(), sk)
+                    XCTAssertEqual(sig.count, 64)
 
                     let pk: [UInt8] = x1.unhexlify()
-                    let result = Ed25519.crypto_sign_open(sm, pk)
+                    let result = Ed25519.verify(sig, m, pk)
                     XCTAssert(result)
 
-                    XCTAssertEqual(x3, sm.hexDescription())
+                    XCTAssertEqual(String(x3.prefix(128)), sig.hexDescription())
 
-                    let r2 = Ed25519.crypto_isvalid_keypair(pk, sk)
+                    let r2 = Ed25519.isValidKeypair(pk, sk)
                     XCTAssert(r2)
 
                     //print(".", terminator:"")
@@ -119,15 +113,15 @@ class Ed25519macOSTests: XCTestCase {
     // Debug: 248 sec macOS
     func test256_create_keypair() {
         for _ in 0..<1024 {
-            let pair = Ed25519.crypto_sign_keypair()
-            let result = Ed25519.crypto_isvalid_keypair(pair.pk, pair.sk)
+            let pair = Ed25519.generateKeyPair()
+            let result = Ed25519.isValidKeypair(pair.pk, pair.sk)
             XCTAssert(result)
             print(">", terminator: "")
         }
     }
 
 	func testBytes() {
-		let publicKey: [UInt8] = [UInt8](repeating: 0, count: 32)
+		let publicKey = [UInt8](repeating: 0, count: 32)
 		var a = ge()
 		let ret = ge.ge25519_unpackneg_vartime(&a, publicKey)
 		XCTAssert(ret)

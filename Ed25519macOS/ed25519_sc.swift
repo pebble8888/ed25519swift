@@ -1,9 +1,25 @@
 //
-//  sc.swift
-//  Ed25519
+//  ed25519_sc.swift
 //
-//  Created by pebble8888 on 2017/05/21.
 //  Copyright 2017 pebble8888. All rights reserved.
+//
+//  This software is provided 'as-is', without any express or implied
+//  warranty. In no event will the authors be held liable for any damages
+//	arising from the use of this software.
+//
+//  Permission is granted to anyone to use this software for any purpose,
+//	including commercial applications, and to alter it and redistribute it
+//	freely, subject to the following restrictions:
+//
+//	1. The origin of this software must not be misrepresented; you must not
+//	claim that you wrote the original software. If you use this software
+//	in a product, an acknowledgment in the product documentation would be
+//	appreciated but is not required.
+//
+//	2. Altered source versions must be plainly marked as such, and must not be
+//	misrepresented as being the original software.
+//
+//	3. This notice may not be removed or altered from any source distribution.
 //
 
 import Foundation
@@ -130,7 +146,7 @@ struct sc {
     }
 
     static func sc25519_from32bytes(_ r: inout sc, _ x: [UInt8] /* 32 */) {
-		assert(x.count == 32)
+		assert(x.count >= 32)
         var t: [UInt32] = [UInt32](repeating: 0, count: 64)
         for i in 0..<32 {
             t[i] = UInt32(x[i])
@@ -142,7 +158,7 @@ struct sc {
     }
 
     static func sc25519_from16bytes(_ r: inout shortsc, _ x: [UInt8] /* 16 */) {
-		assert(x.count == 16)
+		assert(x.count >= 16)
         for i in 0..<16 {
 			r.v[i] = UInt32(x[i])
 		}
