@@ -27,7 +27,7 @@ import Foundation
 public extension Ed25519 {
     /// verify
 	/// - Parameters:
-	///   - sig: signature 64bytes
+	///   - sig: signature 64bytes (R 32byte + S 32byte)
 	///   - m: message
 	///   - pk: public key 32bytes
 	public static func verify(_ sig: [UInt8], _ m: [UInt8], _ pk: [UInt8]) -> Bool {
@@ -47,9 +47,12 @@ public extension Ed25519 {
 		var sc_k = sc() // integer k
 		var sc_s = sc()
 
+		// rapid check if S is smaller than group order
         if sig[63] & UInt8(224) != 0 {
-			// S must smaller than group order L
-			// FIXME: simplified check to exact check
+			return false
+		}
+		// exact check if S is smaller than group order
+		if !sc.sc25519_less_order(Array(sig[32..<64])) {
 			return false
 		}
         if !ge.ge25519_unpackneg_vartime(&ge_a, pk) {
@@ -61,7 +64,6 @@ public extension Ed25519 {
         }
 
         sc.sc25519_from32bytes(&sc_s, Array(sig[32..<64])) // integer S
-		// FIXME:if sc_s >= L else { return false }
 
 		// signature 64 bytes(R 32byte + S 32byte)
 		for i in 0..<32 {

@@ -147,6 +147,24 @@ struct sc {
         reduce_add_sub(&r)
     }
 
+	// check x is [0, m)
+	static func sc25519_less_order(_ x: [UInt8] /* 32 */) -> Bool {
+		if x.count != 32 {
+			return false
+		}
+		for i in (0..<32).reversed() {
+			if x[i] < m[i] {
+				// less
+				return true
+			} else if x[i] > m[i] {
+				// large
+				return false
+			}
+		}
+		// equal m
+		return false
+	}
+
     static func sc25519_from32bytes(_ r: inout sc, _ x: [UInt8] /* 32 */) {
 		assert(x.count >= 32)
         var t = [UInt32](repeating: 0, count: 64)
