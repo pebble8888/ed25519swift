@@ -235,7 +235,7 @@ struct fe: CustomDebugStringConvertible {
 	/// @note result is reduced
     static func fe25519_sub(_ r: inout fe, _ x: fe, _ y: fe) {
 		// t = 2 * q + x
-        var t: [UInt32] = [UInt32](repeating: 0, count: 32)
+        var t = [UInt32](repeating: 0, count: 32)
         t[0] = x.v[0] + 0x1da	// LSB
         for i in 1..<31 { t[i] = x.v[i] + 0x1fe }
         t[31] = x.v[31] + 0xfe	// MSB
@@ -246,7 +246,7 @@ struct fe: CustomDebugStringConvertible {
 
     /// r = x * y
     static func fe25519_mul(_ r: inout fe, _ x: fe, _ y: fe) {
-        var t: [UInt32] = [UInt32](repeating: 0, count: 63)
+        var t = [UInt32](repeating: 0, count: 63)
 
         for i in 0..<32 {
             for j in 0..<32 {

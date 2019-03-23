@@ -38,12 +38,13 @@ struct sc {
     }
 
     /* Arithmetic modulo the group order
-	  order = 2^252 + 27742317777372353535851937790883648493
-	    = 7237005577332262213973186563042994240857116359379907606001950938285454250989
-	    = 0x1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed
+	  order
+	     = 2^252 + 27742317777372353535851937790883648493
+	     = 7237005577332262213973186563042994240857116359379907606001950938285454250989
+	     = 0x1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed
 
-	  p = 2^256 - 19
-	    = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed
+	  p  = 2^256 - 19
+	     = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed
 	*/
 
 	// little endian group order
@@ -52,9 +53,10 @@ struct sc {
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10]
 
 	/*
+	  barrett_reduce algorithm
 	  mu = 2^512 // m
-	  mu = 1852673427797059126777135760139006525645217721299241702126143248052143860224795
-	       0x0fffffffffffffffffffffffffffffffeb2106215d086329a7ed9ce5a30a2c131b
+	     = 1852673427797059126777135760139006525645217721299241702126143248052143860224795
+	     = 0x0fffffffffffffffffffffffffffffffeb2106215d086329a7ed9ce5a30a2c131b
 	 */
     private static let mu: [UInt32] =
 		[0x1B, 0x13, 0x2C, 0x0A, 0xA3, 0xE5, 0x9C, 0xED, 0xA7, 0x29, 0x63, 0x08, 0x5D, 0x21, 0x06, 0x21,
@@ -72,7 +74,7 @@ struct sc {
     private static func reduce_add_sub(_ r: inout sc) {
         var pb: UInt32 = 0
         var b: UInt32 = 0
-        var t: [UInt8] = [UInt8](repeating: 0, count: 32)
+        var t = [UInt8](repeating: 0, count: 32)
 
         for i in 0..<32 {
             pb += m[i]
@@ -92,9 +94,9 @@ struct sc {
     private static func barrett_reduce(_ r: inout sc, _ x: [UInt32] /* 64 */) {
 		assert(x.count == 64)
         /* See HAC(HANDBOOK OF APPLIED CRYPTOGRAPHY), Alg. 14.42 */
-        var q2: [UInt32] = [UInt32](repeating: 0, count: 66)
-        var r1: [UInt32] = [UInt32](repeating: 0, count: 33)
-        var r2: [UInt32] = [UInt32](repeating: 0, count: 33)
+        var q2 = [UInt32](repeating: 0, count: 66)
+        var r1 = [UInt32](repeating: 0, count: 33)
+        var r2 = [UInt32](repeating: 0, count: 33)
         var carry: UInt32
         var pb: UInt32 = 0
         var b: UInt32
@@ -131,7 +133,7 @@ struct sc {
         for i in 0..<32 {
             pb += r2[i]
             b = lt(r1[i], pb)
-            let vv: Int64 = Int64(r1[i]) - Int64(pb) + Int64(b<<8)
+            let vv = Int64(r1[i]) - Int64(pb) + Int64(b<<8)
             assert(vv>=0 && vv <= 0xff)
             r.v[i] = UInt32(vv)
             pb = b
@@ -147,7 +149,7 @@ struct sc {
 
     static func sc25519_from32bytes(_ r: inout sc, _ x: [UInt8] /* 32 */) {
 		assert(x.count >= 32)
-        var t: [UInt32] = [UInt32](repeating: 0, count: 64)
+        var t = [UInt32](repeating: 0, count: 64)
         for i in 0..<32 {
             t[i] = UInt32(x[i])
         }
@@ -166,7 +168,7 @@ struct sc {
 
     static func sc25519_from64bytes(_ r: inout sc, _ x: [UInt8] /* 64 */) {
 		assert(x.count == 64)
-        var t: [UInt32] = [UInt32](repeating: 0, count: 64)
+        var t = [UInt32](repeating: 0, count: 64)
         for i in 0..<64 {
             t[i] = UInt32(x[i])
         }
@@ -238,7 +240,7 @@ struct sc {
 
     static func sc25519_mul(_ r: inout sc, _ x: sc, _ y: sc) {
         var carry: UInt32
-        var t: [UInt32] = [UInt32](repeating: 0, count: 64)
+        var t = [UInt32](repeating: 0, count: 64)
 
         for i in 0..<32 {
             for j in 0..<32 {

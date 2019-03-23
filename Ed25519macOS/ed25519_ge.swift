@@ -399,8 +399,8 @@ struct ge: CustomDebugStringConvertible {
     /* computes [s1]p1 + [s2]p2 */
     static func ge25519_double_scalarmult_vartime(_ r: inout ge, _ p1: ge, _ s1: sc, _ p2: ge, _ s2: sc) {
         var tp1p1 = ge.P1P1()
-        var pre: [ge] = [ge](repeating: ge(), count: 16)
-        var b: [UInt8] = [UInt8](repeating: 0, count: 127)
+        var pre = [ge](repeating: ge(), count: 16)
+        var b = [UInt8](repeating: 0, count: 127)
 
         /* precomputation                                                          s2 s1 */
         ge.setneutral(&pre[0])                                                  /* 00 00 */
@@ -446,8 +446,8 @@ struct ge: CustomDebugStringConvertible {
     }
 
     static func ge25519_scalarmult_base(_ r: inout ge, _ s: sc) {
-        var b: [Int8] = [Int8](repeating: 0, count: 85)
-        var t: aff = ge.aff()
+        var b = [Int8](repeating: 0, count: 85)
+        var t = ge.aff()
         sc.sc25519_window3(&b, s)
 
         var tmpaff: aff = ge.aff()
