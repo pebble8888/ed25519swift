@@ -30,7 +30,7 @@ public extension Ed25519 {
 	///   - sig: signature 64bytes (R 32byte + S 32byte)
 	///   - m: message
 	///   - pk: public key 32bytes
-	public static func verify(_ sig: [UInt8], _ m: [UInt8], _ pk: [UInt8]) -> Bool {
+	static func verify(_ sig: [UInt8], _ m: [UInt8], _ pk: [UInt8]) -> Bool {
 		if pk.count != 32 {
 			return false
 		}
