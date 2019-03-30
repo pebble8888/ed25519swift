@@ -54,6 +54,9 @@ struct sc {
 
 	/*
 	  barrett_reduce algorithm
+	  b = 256 = 2^8
+      k = 32 = 2^5
+      b^(2k) = (2^8)^64 = 2^512
 	  mu = 2^512 // m
 	     = 1852673427797059126777135760139006525645217721299241702126143248052143860224795
 	     = 0x0fffffffffffffffffffffffffffffffeb2106215d086329a7ed9ce5a30a2c131b
@@ -79,70 +82,87 @@ struct sc {
         for i in 0..<32 {
             pb += m[i]
             b = lt(r.v[i], pb)
-            let vv = Int64(r.v[i])-Int64(pb)+Int64(b<<8)
+            let vv = Int64(r.v[i]) - Int64(pb) + Int64(b << 8)
             assert(vv >= 0 && vv <= 0xff)
             t[i] = UInt8(vv)
             pb = b
         }
-        let mask: UInt32 = UInt32(bitPattern: Int32(b)-1) //b &- 1
+        let mask = UInt32(bitPattern: Int32(b)-1) //b &- 1
         for i in 0..<32 {
             r.v[i] ^= mask & (r.v[i] ^ UInt32(t[i]))
         }
     }
 
     /* Reduce coefficients of x before calling barrett_reduce */
+	// b = 256 = 2^8
+	// k = 32 = 2^5
+	// x < b^(2k)
+	// x: LSB
     private static func barrett_reduce(_ r: inout sc, _ x: [UInt32] /* 64 */) {
 		assert(x.count == 64)
         /* See HAC(HANDBOOK OF APPLIED CRYPTOGRAPHY), Alg. 14.42 */
-        var q2 = [UInt32](repeating: 0, count: 66)
-        var r1 = [UInt32](repeating: 0, count: 33)
-        var r2 = [UInt32](repeating: 0, count: 33)
-        var carry: UInt32
-        var pb: UInt32 = 0
-        var b: UInt32
-
-        for i in 0..<33 {
-            for j in 0..<33 {
-                if i+j >= 31 {
-                    q2[i+j] += mu[i] * x[j+31]
+		// STEP1
+		let k = 32
+		// q1 = floor(x / b^(k-1))
+		// q2 <- q1 * mu
+		var q2 = [UInt32](repeating: 0, count: 2*k+2) // LSB
+        for i in 0...k {
+            for j in 0...k {
+                if i+j >= k-1 {
+                    q2[i+j] += x[j+k-1] * mu[i]
                 }
             }
         }
-        carry = q2[31] >> 8
-        q2[32] += carry
-        carry = q2[32] >> 8
-        q2[33] += carry
 
-        for i in 0..<33 {
+		// q3 = floor(q2 / b^(k+1))
+		// q3 = (... + b^(k+1) * q2[k+1] + b^(k+2) * q2[k+2] + ... + b^(2k) * q2[2k] + b^(2k+1) * q2[2k+1])
+		//    = q2[k+1] + b^1 * q2[k+1] + ... + b^(k-1) * q2[2k] + b^k * q2[2k+1]
+		// Since q2[2k] has carry q2[2k+1] is zero.
+		let carry1 = q2[k-1] >> 8
+        q2[k] += carry1
+        let carry2 = q2[k] >> 8
+        q2[k+1] += carry2
+
+		// STEP2,3
+		// r1 = x (mod b^(k+1))
+		var r1 = [UInt32](repeating: 0, count: k+1)
+        for i in 0...k {
 			r1[i] = x[i]
 		}
-        for i in 0..<32 {
-            for j in 0..<33 {
-                if i+j < 33 {
-                    r2[i+j] += m[i] * q2[33+j]
+
+		// r2 = q3 * m (mod b^(k+1))
+		var r2 = [UInt32](repeating: 0, count: k+1)
+        for i in 0...k-1 {
+            for j in 0...k {
+                if i+j < k+1 {
+                    r2[i+j] += q2[j+k+1] * m[i]
                 }
             }
         }
-
-        for i in 0..<32 {
-            carry = r2[i] >> 8
+        for i in 0...k-1 {
+            let carry = r2[i] >> 8
             r2[i+1] += carry
             r2[i] &= 0xff
         }
+		r2[k] &= 0xff
 
-        for i in 0..<32 {
-            pb += r2[i]
-            b = lt(r1[i], pb)
-            let vv = Int64(r1[i]) - Int64(pb) + Int64(b<<8)
-            assert(vv>=0 && vv <= 0xff)
+		// r = r1 - r2 (or + b^(k+1))
+		// last borrow means STEP3 for r < 0
+		// r = (Q-q3) * m + R <= 2m
+		// 2m = 2 * (0x10 * b^(k-1) + ...) = 0x20 * b^(k-1) + ... < b^k
+		// so r can represented for b^0 y\_0 + b^1 y\_1 + ... + b^(k-1) y\_(k-1)
+		// it means r[v] is zero
+		var val: UInt32 = 0
+        for i in 0...k-1 {
+            val += r2[i]
+			let borrow = lt(r1[i], val)
+			let vv = Int64(r1[i]) - Int64(val) + Int64(borrow << 8)
+            assert(vv >= 0 && vv <= 0xff)
             r.v[i] = UInt32(vv)
-            pb = b
+            val = borrow
         }
 
-        /* XXX: Can it really happen that r<0?, See HAC, Alg 14.42, Step 3 
-         * If so: Handle  it here!
-         */
-
+		// STEP4: twice or once or none
         reduce_add_sub(&r)
         reduce_add_sub(&r)
     }
@@ -257,7 +277,6 @@ struct sc {
     }
 
     static func sc25519_mul(_ r: inout sc, _ x: sc, _ y: sc) {
-        var carry: UInt32
         var t = [UInt32](repeating: 0, count: 64)
 
         for i in 0..<32 {
@@ -268,7 +287,7 @@ struct sc {
 
         /* Reduce coefficients */
         for i in 0..<63 {
-            carry = t[i] >> 8
+            let carry = t[i] >> 8
             t[i+1] += carry
             t[i] &= 0xff
         }
