@@ -30,7 +30,7 @@ import CryptoSwift
 #endif
 
 extension String {
-    public func unhexlify() -> [UInt8] {
+    func unhexlify() -> [UInt8] {
         var pos = startIndex
         return (0..<count/2).compactMap { _ in
             defer { pos = index(pos, offsetBy: 2) }
@@ -40,7 +40,7 @@ extension String {
 }
 
 extension Collection where Iterator.Element == UInt8 {
-    public func hexDescription() -> String {
+    func hexDescription() -> String {
         return self.map({ String(format: "%02x", $0) }).joined()
     }
 }
