@@ -45,11 +45,11 @@ struct sc {
 	     = 7237005577332262213973186563042994240857116359379907606001950938285454250989
 	     = 0x1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed
 
-	  p  = 2^256 - 19
+	  p  = 2^255 - 19
 	     = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed
 	*/
 
-	// little endian group order
+	// little endian group order m
     private static let m: [UInt32] =
 		[0xED, 0xD3, 0xF5, 0x5C, 0x1A, 0x63, 0x12, 0x58, 0xD6, 0x9C, 0xF7, 0xA2, 0xDE, 0xF9, 0xDE, 0x14,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10]
@@ -205,7 +205,7 @@ struct sc {
         sc.barrett_reduce(&r, t)
     }
 
-    static func sc25519_from16bytes(_ r: inout shortsc, _ x: [UInt8] /* 16 */) {
+    static func sc25519_from16bytes(_ r: inout shortsc, _ x: [UInt8] /* 16 */) throws {
 		assert(x.count >= 16)
         for i in 0..<16 {
 			r.v[i] = UInt32(x[i])
@@ -249,15 +249,21 @@ struct sc {
 
     static func sc25519_isshort_vartime(_ x: sc) -> Int {
         for i in stride(from: 31, to: 15, by: -1) {
-            if x.v[i] != 0 { return 0 }
+            if x.v[i] != 0 {
+                return 0
+            }
         }
         return 1
     }
 
     static func sc25519_lt_vartime(_ x: sc, _ y: sc) -> UInt {
         for i in stride(from: 31, through: 0, by: -1) {
-            if x.v[i] < y.v[i] { return 1 }
-            if x.v[i] > y.v[i] { return 0 }
+            if x.v[i] < y.v[i] {
+                return 1
+            }
+            if x.v[i] > y.v[i] {
+                return 0
+            }
         }
         return 0
     }
@@ -311,6 +317,7 @@ struct sc {
     }
 
     // divide to 3bits
+    // 3 * 85 = 255
     static func sc25519_window3(_ r: inout [Int8] /* 85 */, _ s: sc) {
 		assert(r.count == 85)
         for i in 0..<10 {
@@ -347,6 +354,7 @@ struct sc {
         r[84] += Int8(carry)
     }
 
+    #if false
     // divide to 5bits
     static func sc25519_window5(_ r: inout [Int8] /* 51 */, _ s: sc) {
 		assert(r.count == 51)
@@ -382,6 +390,7 @@ struct sc {
         }
         r[50] += carry
     }
+    #endif
 
     static func sc25519_2interleave2(_ r: inout [UInt8] /* 127 */, _ s1: sc, _ s2: sc) {
 		assert(r.count == 127)

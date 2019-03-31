@@ -47,11 +47,11 @@ public extension Ed25519 {
 		var sc_k = sc() // integer k
 		var sc_s = sc()
 
-		// rapid check if S is smaller than group order
+		// rapid check whether S is smaller than group order
         if sig[63] & UInt8(224) != 0 {
 			return false
 		}
-		// exact check if S is smaller than group order
+		// exact check whether S is smaller than group order
 		if !sc.sc25519_less_order(Array(sig[32..<64])) {
 			return false
 		}
@@ -59,11 +59,13 @@ public extension Ed25519 {
 			return false
 		}
 
+        // point R
         for i in 0..<32 {
-            rcopy[i] = sig[i] // point R
+            rcopy[i] = sig[i]
         }
 
-        sc.sc25519_from32bytes(&sc_s, Array(sig[32..<64])) // integer S
+        // integer S
+        sc.sc25519_from32bytes(&sc_s, Array(sig[32..<64]))
 
 		// signature 64 bytes(R 32byte + S 32byte)
 		for i in 0..<32 {
@@ -78,7 +80,8 @@ public extension Ed25519 {
 			sm[64+i] = m[i]
 		}
         crypto_hash_sha512(&k, sm, len: smlen)
-        sc.sc25519_from64bytes(&sc_k, k) // integer k
+        // integer k
+        sc.sc25519_from64bytes(&sc_k, k)
 
         // - A k + G s
         ge.ge25519_double_scalarmult_vartime(&ge_b, ge_a, sc_k, ge.ge25519_base, sc_s)

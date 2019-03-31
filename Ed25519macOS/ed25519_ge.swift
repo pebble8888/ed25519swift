@@ -25,34 +25,43 @@
 import Foundation
 
 // group element
-// point
-// an auxiliary coordinate t = xy to represent a point (x,y)
-// - x^2 + y^2 = 1 - 121665 / 121666 x^2 y^2
-// d = -121665/121666
+//   point
+//   an auxiliary coordinate t = xy to represent a point (x,y)
+//   - x^2 + y^2 = 1 - 121665 / 121666 x^2 y^2
+//   d = -121665/121666
 //
 // twisted edwards curve
-// - x^2 + y^2 = 1 + d x^2 y^2
+//   - x^2 + y^2 = 1 + d x^2 y^2
 //
 // addition low
-// (x1, y1) + (x2, y2)
-// = ((x1 y2 y1 x2)/(1 + d x1 y1 x2 y2, (y1 y2 + x1 x2)/(1 - d x1 y1 x2 y2))
+//   (x1, y1) + (x2, y2)
+//   = ((x1 y2 y1 x2)/(1 + d x1 y1 x2 y2, (y1 y2 + x1 x2)/(1 - d x1 y1 x2 y2))
 //
 // doubling formulae
-// 2 (x1, y1) = ((2 x1 y1)/(y1^2 - x1^2), (y1^2 + x1^2)/(2-y1^2 + x1^2))
+//   2 (x1, y1) = ((2 x1 y1)/(y1^2 - x1^2), (y1^2 + x1^2)/(2-y1^2 + x1^2))
 //
 // extended twisted edwards coordinates
-// x = X/Z
-// y = Y/Z
-// t = T/Z
-// ->  ZT = XY
+//   x = X/Z
+//   y = Y/Z
+//   t = T/Z
+//   ->  ZT = XY
 //
-// (- X^2 + Y^2) Z^2 = Z^4 + d X^2 Y^2
-//  - X^2 + Y^2 = Z^2 + d T^2
+//   (- X^2 + Y^2) Z^2 = Z^4 + d X^2 Y^2
+//    - X^2 + Y^2 = Z^2 + d T^2
 //
-//    (x, y, t=xy, z=1) : affine
-// -> (X/Z, Y/Z, XY/Z^2, 1)
-// -> (XZ, YZ, XY, Z^2)
-// 
+// affine coordinates to extended twisted edwards coordinates
+//      (x, y, z=1, t=xy)
+//   -> (X/Z, Y/Z, 1, XY/Z^2)
+//   -> (XZ, YZ, Z^2, XY)
+//
+// extended twisted edwards coordinates to affine coordinates
+//      (X, Y, Z, T)
+//   -> (X/Z, Y/Z, 1, T/Z)
+//   -> (X/Z, Y/Z, 1, XY/Z^2)
+//   -> (XZ, YZ, Z^2, XY)
+//
+//      (0, 1, 1, 0) : neutral point
+//
 struct ge: CustomDebugStringConvertible {
     var x: fe
     var y: fe
@@ -152,15 +161,18 @@ struct ge: CustomDebugStringConvertible {
     }
 
     /* Packed coordinates of the base point */
+    // Little Endian
+    // x = 15112221349535400772501151409588531511454012693041857206046113283949847762202
+    // y = 46316835694926478169428394003475163141307993866256225615783033603165251855960
     static let ge25519_base: ge = ge(
-    fe([0x1A, 0xD5, 0x25, 0x8F, 0x60, 0x2D, 0x56, 0xC9, 0xB2, 0xA7, 0x25, 0x95, 0x60, 0xC7, 0x2C, 0x69,
-        0x5C, 0xDC, 0xD6, 0xFD, 0x31, 0xE2, 0xA4, 0xC0, 0xFE, 0x53, 0x6E, 0xCD, 0xD3, 0x36, 0x69, 0x21]),
-    fe([0x58, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66,
-        0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66]),
-    fe([0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]),
-    fe([0xA3, 0xDD, 0xB7, 0xA5, 0xB3, 0x8A, 0xDE, 0x6D, 0xF5, 0x52, 0x51, 0x77, 0x80, 0x9F, 0xF0, 0x20,
-        0x7D, 0xE3, 0xAB, 0x64, 0x8E, 0x4E, 0xEA, 0x66, 0x65, 0x76, 0x8B, 0xD7, 0x0F, 0x5F, 0x87, 0x67]))
+        fe([0x1A, 0xD5, 0x25, 0x8F, 0x60, 0x2D, 0x56, 0xC9, 0xB2, 0xA7, 0x25, 0x95, 0x60, 0xC7, 0x2C, 0x69,
+            0x5C, 0xDC, 0xD6, 0xFD, 0x31, 0xE2, 0xA4, 0xC0, 0xFE, 0x53, 0x6E, 0xCD, 0xD3, 0x36, 0x69, 0x21]),
+        fe([0x58, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66,
+            0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66]),
+        fe([0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]),
+        fe([0xA3, 0xDD, 0xB7, 0xA5, 0xB3, 0x8A, 0xDE, 0x6D, 0xF5, 0x52, 0x51, 0x77, 0x80, 0x9F, 0xF0, 0x20,
+            0x7D, 0xE3, 0xAB, 0x64, 0x8E, 0x4E, 0xEA, 0x66, 0x65, 0x76, 0x8B, 0xD7, 0x0F, 0x5F, 0x87, 0x67]))
 
     // x = E F
     // y = H G
@@ -181,6 +193,8 @@ struct ge: CustomDebugStringConvertible {
         fe.fe25519_mul(&r.t, p.e, p.h)
     }
 
+    // r = r + q
+    // Point addition
     private static func ge25519_mixadd2(_ r: inout ge, _ q: aff) {
         var a = fe()
         var b = fe()
@@ -260,11 +274,8 @@ struct ge: CustomDebugStringConvertible {
         fe.fe25519_square(&r.e, r.e)   /* e = (x+y)^2 */
         fe.fe25519_sub(&r.e, r.e, a)   /* e = (x+y)^2 - x^2 */
         fe.fe25519_sub(&r.e, r.e, b)   /* E = (x+y)^2 - x^2 - y^2 = 2xy */
-
         fe.fe25519_add(&r.g, d, b)     /* G = - x^2 + y^2 */
-
         fe.fe25519_sub(&r.f, r.g, c)   /* F = - x^2 + y^2 - 2 z^2 */
-
         fe.fe25519_sub(&r.h, d, b)     /* H = - x^2 - y^2 */
     }
 
@@ -284,7 +295,7 @@ struct ge: CustomDebugStringConvertible {
         return b < 0 ? 1 : 0
     }
 
-	// t
+    // t:
 	// pos:
 	// b:
     private static func choose_t(_ t: inout aff, _ pos: Int, _ b: Int8) {
@@ -391,8 +402,12 @@ struct ge: CustomDebugStringConvertible {
 
     static func ge25519_isneutral_vartime(_ p: ge) -> Int32 {
         var ret: Int32 = 1
-        if !fe.fe25519_iszero(p.x) { ret = 0 }
-        if !fe.fe25519_iseq_vartime(p.y, p.z) { ret = 0 }
+        if !fe.fe25519_iszero(p.x) {
+            ret = 0
+        }
+        if !fe.fe25519_iseq_vartime(p.y, p.z) {
+            ret = 0
+        }
         return ret
     }
 
@@ -416,9 +431,9 @@ struct ge: CustomDebugStringConvertible {
         ge.dbl_p1p1(&tp1p1, pre[5].toP2);         ge.p1p1_to_p3(&pre[10], tp1p1) /* 10 10 */
         ge.add_p1p1(&tp1p1, pre[3], pre[8]);      ge.p1p1_to_p3(&pre[11], tp1p1) /* 10 11 */
         ge.add_p1p1(&tp1p1, pre[4], pre[8]);      ge.p1p1_to_p3(&pre[12], tp1p1) /* 11 00 */
-        ge.add_p1p1(&tp1p1, pre[1], pre[12]);      ge.p1p1_to_p3(&pre[13], tp1p1) /* 11 01 */
-        ge.add_p1p1(&tp1p1, pre[2], pre[12]);      ge.p1p1_to_p3(&pre[14], tp1p1) /* 11 10 */
-        ge.add_p1p1(&tp1p1, pre[3], pre[12]);      ge.p1p1_to_p3(&pre[15], tp1p1) /* 11 11 */
+        ge.add_p1p1(&tp1p1, pre[1], pre[12]);     ge.p1p1_to_p3(&pre[13], tp1p1) /* 11 01 */
+        ge.add_p1p1(&tp1p1, pre[2], pre[12]);     ge.p1p1_to_p3(&pre[14], tp1p1) /* 11 10 */
+        ge.add_p1p1(&tp1p1, pre[3], pre[12]);     ge.p1p1_to_p3(&pre[15], tp1p1) /* 11 11 */
 
         sc.sc25519_2interleave2(&b, s1, s2)
 

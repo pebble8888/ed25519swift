@@ -95,11 +95,17 @@ public struct Ed25519 {
 	///   - pk: public key 32bytes
 	///   - sk: secret key 32bytes
     public static func isValidKeypair(_ pk: [UInt8], _ sk: [UInt8]) -> Bool {
-        if pk.count != 32 { return false }
-        if sk.count != 32 { return false }
+        if pk.count != 32 {
+            return false
+        }
+        if sk.count != 32 {
+            return false
+        }
         let calc_pk = calcPublicKey(sk)
         for i in 0..<32 {
-            if calc_pk[i] != pk[i] { return false }
+            if calc_pk[i] != pk[i] {
+                return false
+            }
         }
         return true
     }
@@ -160,7 +166,7 @@ public struct Ed25519 {
         sc.sc25519_add(&sc_s, sc_s, sc_k)
         // S
         var a = [UInt8](repeating: 0, count: 32)
-        sc.sc25519_to32bytes(&a, sc_s) /* cat s */
+        sc.sc25519_to32bytes(&a, sc_s)
         // set S
         for i in 0..<32 {
             sm[32+i] = a[i]

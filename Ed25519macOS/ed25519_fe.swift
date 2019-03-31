@@ -192,7 +192,7 @@ struct fe: CustomDebugStringConvertible {
         return UInt8(t.v[0] & 1)
     }
 
-    // @brief  r = 1
+    /// r = 1
     static func fe25519_setone(_ r: inout fe) {
         r.v[0] = 1
         for i in 1..<32 {
@@ -200,7 +200,7 @@ struct fe: CustomDebugStringConvertible {
         }
     }
 
-    // @brief  r = 0
+    /// r = 0
     static func fe25519_setzero(_ r: inout fe) {
         for i in 0..<32 {
             r.v[i] = 0
