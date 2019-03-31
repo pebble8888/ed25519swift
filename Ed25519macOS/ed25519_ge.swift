@@ -85,14 +85,14 @@ struct ge: CustomDebugStringConvertible {
         self.t = t
     }
 
-    private var toP2: P2 {
-        return P2(self.x, self.y, self.z)
+    private var toProj: Proj {
+        return Proj(self.x, self.y, self.z)
     }
 
-    mutating private func setFromP2(_ p2: P2) {
-        x = p2.x
-        y = p2.y
-        z = p2.z
+    mutating private func setFromProj(_ proj: Proj) {
+        x = proj.x
+        y = proj.y
+        z = proj.z
     }
 
     /* 
@@ -130,7 +130,7 @@ struct ge: CustomDebugStringConvertible {
     }
 
     // projective coordinates
-    private struct P2 {
+    private struct Proj {
         var x: fe
         var y: fe
         var z: fe
@@ -178,7 +178,7 @@ struct ge: CustomDebugStringConvertible {
     // y = H G
     // z = F G
 	// (t = E H)
-    private static func p1p1_to_p2(_ r: inout P2, _ p: P1P1) {
+    private static func p1p1_to_proj(_ r: inout Proj, _ p: P1P1) {
         fe.fe25519_mul(&r.x, p.e, p.f)
         fe.fe25519_mul(&r.y, p.g, p.h)
         fe.fe25519_mul(&r.z, p.f, p.g)
@@ -186,9 +186,9 @@ struct ge: CustomDebugStringConvertible {
 
     // 
     private static func p1p1_to_p3(_ r: inout ge, _ p: P1P1) {
-        var p2 = P2()
-        p1p1_to_p2(&p2, p)
-        r.setFromP2(p2)
+        var proj = Proj()
+        p1p1_to_proj(&proj, p)
+        r.setFromProj(proj)
         // t = E H
         fe.fe25519_mul(&r.t, p.e, p.h)
     }
@@ -259,18 +259,18 @@ struct ge: CustomDebugStringConvertible {
 
     // r = 2 * p
     // projective coordinate doubling 
-    private static func dbl_p1p1(_ r: inout P1P1, _ p: P2) {
+    private static func dbl_p1p1(_ r: inout P1P1, _ proj: Proj) {
         var a = fe()
         var b = fe()
         var c = fe()
         var d = fe()
-        fe.fe25519_square(&a, p.x) /* A = x^2 */
-        fe.fe25519_square(&b, p.y) /* B = y^2 */
-        fe.fe25519_square(&c, p.z) /* c = z^2 */ 
+        fe.fe25519_square(&a, proj.x) /* A = x^2 */
+        fe.fe25519_square(&b, proj.y) /* B = y^2 */
+        fe.fe25519_square(&c, proj.z) /* c = z^2 */
         fe.fe25519_add(&c, c, c)   /* C = 2 z^2 */
         fe.fe25519_neg(&d, a)      /* D = - x^2 */
 
-        fe.fe25519_add(&r.e, p.x, p.y) /* e = x+y */
+        fe.fe25519_add(&r.e, proj.x, proj.y) /* e = x+y */
         fe.fe25519_square(&r.e, r.e)   /* e = (x+y)^2 */
         fe.fe25519_sub(&r.e, r.e, a)   /* e = (x+y)^2 - x^2 */
         fe.fe25519_sub(&r.e, r.e, b)   /* E = (x+y)^2 - x^2 - y^2 = 2xy */
@@ -420,15 +420,15 @@ struct ge: CustomDebugStringConvertible {
         /* precomputation                                                          s2 s1 */
         ge.setneutral(&pre[0])                                                  /* 00 00 */
         pre[1] = p1                                                             /* 00 01 */
-        ge.dbl_p1p1(&tp1p1, p1.toP2);             ge.p1p1_to_p3(&pre[2], tp1p1) /* 00 10 */
+        ge.dbl_p1p1(&tp1p1, p1.toProj);           ge.p1p1_to_p3(&pre[2], tp1p1) /* 00 10 */
         ge.add_p1p1(&tp1p1, pre[1], pre[2]);      ge.p1p1_to_p3(&pre[3], tp1p1) /* 00 11 */
         pre[4] = p2                                                             /* 01 00 */
         ge.add_p1p1(&tp1p1, pre[1], pre[4]);      ge.p1p1_to_p3(&pre[5], tp1p1) /* 01 01 */
         ge.add_p1p1(&tp1p1, pre[2], pre[4]);      ge.p1p1_to_p3(&pre[6], tp1p1) /* 01 10 */
         ge.add_p1p1(&tp1p1, pre[3], pre[4]);      ge.p1p1_to_p3(&pre[7], tp1p1) /* 01 11 */
-        ge.dbl_p1p1(&tp1p1, p2.toP2);             ge.p1p1_to_p3(&pre[8], tp1p1) /* 10 00 */
+        ge.dbl_p1p1(&tp1p1, p2.toProj);           ge.p1p1_to_p3(&pre[8], tp1p1) /* 10 00 */
         ge.add_p1p1(&tp1p1, pre[1], pre[8]);      ge.p1p1_to_p3(&pre[9], tp1p1) /* 10 01 */
-        ge.dbl_p1p1(&tp1p1, pre[5].toP2);         ge.p1p1_to_p3(&pre[10], tp1p1) /* 10 10 */
+        ge.dbl_p1p1(&tp1p1, pre[5].toProj);       ge.p1p1_to_p3(&pre[10], tp1p1) /* 10 10 */
         ge.add_p1p1(&tp1p1, pre[3], pre[8]);      ge.p1p1_to_p3(&pre[11], tp1p1) /* 10 11 */
         ge.add_p1p1(&tp1p1, pre[4], pre[8]);      ge.p1p1_to_p3(&pre[12], tp1p1) /* 11 00 */
         ge.add_p1p1(&tp1p1, pre[1], pre[12]);     ge.p1p1_to_p3(&pre[13], tp1p1) /* 11 01 */
@@ -440,20 +440,20 @@ struct ge: CustomDebugStringConvertible {
         /* scalar multiplication */
         r = pre[Int(b[126])]
         for i in stride(from: 125, through: 0, by: -1) {
-            ge.dbl_p1p1(&tp1p1, r.toP2)
-            var t = ge.P2()
-            ge.p1p1_to_p2(&t, tp1p1)
-            r.setFromP2(t)
+            ge.dbl_p1p1(&tp1p1, r.toProj)
+            var t = ge.Proj()
+            ge.p1p1_to_proj(&t, tp1p1)
+            r.setFromProj(t)
 
-            ge.dbl_p1p1(&tp1p1, r.toP2)
+            ge.dbl_p1p1(&tp1p1, r.toProj)
             if b[i] != 0 {
                 ge.p1p1_to_p3(&r, tp1p1)
                 ge.add_p1p1(&tp1p1, r, pre[Int(b[i])])
             }
             if i != 0 {
-                var t = ge.P2()
-                ge.p1p1_to_p2(&t, tp1p1)
-                r.setFromP2(t)
+                var t = ge.Proj()
+                ge.p1p1_to_proj(&t, tp1p1)
+                r.setFromProj(t)
             } else {
                 ge.p1p1_to_p3(&r, tp1p1)
             }

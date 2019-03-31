@@ -111,10 +111,10 @@ struct fe: CustomDebugStringConvertible {
         }
     }
 
-    /* reduction modulo 2^255-19 */
-	// 0x7f = 127
-	// 0xff = 255
-	// 0xed = 237
+    /// reduction modulo 2^255-19
+	/// 0x7f = 127
+	/// 0xff = 255
+	/// 0xed = 237
     static func fe25519_freeze(_ r: inout fe) {
 		assert(r.v[31] <= 0xff)
         var m: UInt32 = equal(r.v[31], 127)
@@ -141,19 +141,19 @@ struct fe: CustomDebugStringConvertible {
         r.v[31] &= 127 // remove parity
     }
 
-    /* Assumes input x being reduced mod 2^255 */
+    /// Assumes input x being reduced mod 2^255
     static func fe25519_pack(_ r: inout [UInt8] /* 32 or more */, _ x: fe) {
 		assert(r.count >= 32)
-        var y: fe = x
+        var y = x
         fe.fe25519_freeze(&y)
         for i in 0..<32 {
             r[i] = UInt8(y.v[i])
         }
     }
 
-    // freeze input before calling iszero
+    /// freeze input before calling iszero
     static func fe25519_iszero(_ x: fe) -> Bool {
-        var t: fe = x
+        var t = x
         fe.fe25519_freeze(&t)
         var r = fe.equal(t.v[0], 0)
         for i in 1..<32 {
@@ -162,7 +162,7 @@ struct fe: CustomDebugStringConvertible {
         return r != 0
     }
 
-    // is equal after freeze
+    /// is equal after freeze
     static func fe25519_iseq_vartime(_ x: fe, _ y: fe) -> Bool {
         var t1 = x
         var t2 = y
@@ -176,16 +176,16 @@ struct fe: CustomDebugStringConvertible {
         return true
     }
 
-	// conditional move
+	/// conditional move
     static func fe25519_cmov(_ r: inout fe, _ x: fe, _ b: UInt8) {
-        let mask: UInt32 = UInt32(bitPattern: Int32(b) * -1)
+        let mask = UInt32(bitPattern: Int32(b) * -1)
         for i in 0..<32 {
 			// ^ means xor
             r.v[i] ^= mask & (x.v[i] ^ r.v[i])
         }
     }
 
-    // odd:1 even:0
+    /// odd:1 even:0
     static func fe25519_getparity(_ x: fe) -> UInt8 {
         var t = x
         fe.fe25519_freeze(&t)
