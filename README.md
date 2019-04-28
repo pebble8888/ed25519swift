@@ -7,7 +7,7 @@ Ed25519 by pure swift
 Ed25519 can be used, distributed and modified user the zlib license.
 
 ## Requirements
-Ed25519 requires Swift 4.
+Ed25519 requires Swift5.
 
 macOS, iOS
 
@@ -33,17 +33,27 @@ import Ed25519macOS // direct
 or
 import ed25519swift // pods
 
-static func crypto_sign_keypair() -> (pk:[UInt8], sk:[UInt8])
+static func generateKeyPair() -> (pk: [UInt8], sk: [UInt8])
 ```
 
 ### Signing 
 ``` swift
-static func crypto_sign(_ sm:inout [UInt8], _ m:[UInt8], _ skpk:[UInt8])
+static func sign(_ sig: inout [UInt8], _ m: [UInt8], _ sk: [UInt8])
 ```
 
 ### Validation
 ``` swift
-static func crypto_sign_open(_ sm:[UInt8], _ pk:[UInt8]) -> Bool
+static func verify(_ sig: [UInt8], _ m: [UInt8], _ pk: [UInt8]) -> Bool
+```
+
+### Calc public key from secret key
+``` swift
+static func calcPublicKey(_ sk: [UInt8]) -> [UInt8]
+```
+
+### Check valid keypair
+``` swift
+static func isValidKeypair(_ pk: [UInt8], _ sk: [UInt8]) -> Bool
 ```
 
 ## Implemantation
