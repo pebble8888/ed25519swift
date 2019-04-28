@@ -27,17 +27,17 @@ import Foundation
 public extension Ed25519 {
     /// verify
 	/// - Parameters:
-	///   - sig: signature 64bytes (R 32byte + S 32byte)
-	///   - m: message
-	///   - pk: public key 32bytes
-	static func verify(_ sig: [UInt8], _ m: [UInt8], _ pk: [UInt8]) -> Bool {
-		if pk.count != 32 {
+	///   - signature: signature 64bytes (R 32byte + S 32byte)
+	///   - message: message
+	///   - publicKey: public key 32bytes
+	static func verify(signature: [UInt8], message: [UInt8], publicKey: [UInt8]) -> Bool {
+		if publicKey.count != 32 {
 			return false
 		}
-		if sig.count != 64 {
+		if signature.count != 64 {
 			return false
 		}
-		let smlen = 64 + m.count
+		let smlen = 64 + message.count
         var sm = [UInt8](repeating: 0, count: smlen)
 		var rcopy = [UInt8](repeating: 0, count: 32) // point R
 		var k = [UInt8](repeating: 0, count: 64)
@@ -48,36 +48,36 @@ public extension Ed25519 {
 		var sc_s = sc()
 
 		// rapid check whether S is smaller than group order
-        if sig[63] & UInt8(224) != 0 {
+        if signature[63] & UInt8(224) != 0 {
 			return false
 		}
 		// exact check whether S is smaller than group order
-		if !sc.sc25519_less_order(Array(sig[32..<64])) {
+		if !sc.sc25519_less_order(Array(signature[32..<64])) {
 			return false
 		}
-        if !ge.ge25519_unpackneg_vartime(&ge_a, pk) {
+        if !ge.ge25519_unpackneg_vartime(&ge_a, publicKey) {
 			return false
 		}
 
         // point R
         for i in 0..<32 {
-            rcopy[i] = sig[i]
+            rcopy[i] = signature[i]
         }
 
         // integer S
-        sc.sc25519_from32bytes(&sc_s, Array(sig[32..<64]))
+        sc.sc25519_from32bytes(&sc_s, Array(signature[32..<64]))
 
 		// signature 64 bytes(R 32byte + S 32byte)
 		for i in 0..<32 {
-			sm[i] = sig[i]
+			sm[i] = signature[i]
 		}
 		// R 32byte + A 32byte
 		for i in 0..<32 {
-			sm[32+i] = pk[i]
+			sm[32+i] = publicKey[i]
 		}
 		// R 32byte + A 32byte + message
-		for i in 0..<m.count {
-			sm[64+i] = m[i]
+		for i in 0..<message.count {
+			sm[64+i] = message[i]
 		}
         crypto_hash_sha512(&k, sm, len: smlen)
         // integer k

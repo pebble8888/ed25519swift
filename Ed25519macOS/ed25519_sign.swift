@@ -55,27 +55,28 @@ public struct Ed25519 {
 
     /// create keypair
 	/// - Parameters:
-    ///   - pk: private key 32bytes
-    ///   - sk: secret key 32bytes
-    public static func generateKeyPair() -> (pk: [UInt8], sk: [UInt8]) {
-        var sk = [UInt8](repeating: 0, count: 32)
+    ///   - publicKey: private key 32bytes
+    ///   - secretKey: secret key 32bytes
+    public static func generateKeyPair() -> (publicKey: [UInt8], secretKey: [UInt8]) {
+        var secretKey = [UInt8](repeating: 0, count: 32)
         // create secret key 32byte
-        randombytes(&sk, len: 32)
-        let pk = calcPublicKey(sk)
-        return (pk, sk)
+        randombytes(&secretKey, len: 32)
+        let publicKey = calcPublicKey(secretKey: secretKey)
+        return (publicKey, secretKey)
     }
 
     /// calc public key from secret key
 	/// - Parameters:
-    ///   - sk: secret key
-    public static func calcPublicKey(_ sk: [UInt8]) -> [UInt8] {
-        assert(sk.count == 32)
+    ///   - secretKey: secret key 32bytes
+    /// - Return: public key 32bytes
+    public static func calcPublicKey(secretKey: [UInt8]) -> [UInt8] {
+        assert(secretKey.count == 32)
         var sc_sk = sc()
         var ge_pk = ge()
         var az = [UInt8](repeating: 0, count: 64)
         var pk = [UInt8](repeating: 0, count: 32)
         // sha512 of sk
-        crypto_hash_sha512(&az, sk, len: 32)
+        crypto_hash_sha512(&az, secretKey, len: 32)
         // calc public key
         az[0] &= 248 // clear lowest 3bit
         az[31] &= 127 // clear highest bit
@@ -92,18 +93,18 @@ public struct Ed25519 {
 
 	/// validate key pair
 	/// - Parameters:
-	///   - pk: public key 32bytes
-	///   - sk: secret key 32bytes
-    public static func isValidKeypair(_ pk: [UInt8], _ sk: [UInt8]) -> Bool {
-        if pk.count != 32 {
+	///   - publicKey: public key 32bytes
+	///   - secretKey: secret key 32bytes
+    public static func isValidKeyPair(publicKey: [UInt8], secretKey: [UInt8]) -> Bool {
+        if publicKey.count != 32 {
             return false
         }
-        if sk.count != 32 {
+        if secretKey.count != 32 {
             return false
         }
-        let calc_pk = calcPublicKey(sk)
+        let calc_pk = calcPublicKey(secretKey: secretKey)
         for i in 0..<32 {
-            if calc_pk[i] != pk[i] {
+            if calc_pk[i] != publicKey[i] {
                 return false
             }
         }
@@ -112,12 +113,13 @@ public struct Ed25519 {
 
     /// signing
 	/// - Parameters:
-	///   - sig: 64 bytes signature
-    ///   - m: message
-	///   - sk: 32 bytes secret key
-	public static func sign(_ sig: inout [UInt8], _ m: [UInt8], _ sk: [UInt8]) {
-		assert(sk.count == 32)
-        let mlen: Int = m.count
+    ///   - message: message
+	///   - secretKey: 32 bytes secret key
+    /// - Return: 64 bytes signature
+	public static func sign(message: [UInt8], secretKey: [UInt8]) -> [UInt8]
+    {
+		assert(secretKey.count == 32)
+        let mlen: Int = message.count
         var az = [UInt8](repeating: 0, count: 64)
         var nonce = [UInt8](repeating: 0, count: 64)
         var hram = [UInt8](repeating: 0, count: 64)
@@ -126,15 +128,15 @@ public struct Ed25519 {
         var sc_sk = sc()
         var ge_r = ge()
         /* pk: 32-byte public key A */
-		var pk = calcPublicKey(sk)
-        crypto_hash_sha512(&az, sk, len: 32)
+        var pk = calcPublicKey(secretKey: secretKey)
+        crypto_hash_sha512(&az, secretKey, len: 32)
         az[0] &= 248 // clear lowest 3bit
         az[31] &= 127 // clear highest bit
         az[31] |= 64 // set second highest bit
 
         var sm = [UInt8](repeating: 0, count: mlen+64)
         for i in 0..<mlen {
-            sm[64+i] = m[i]
+            sm[64+i] = message[i]
         }
         for i in 0..<32 {
             sm[32+i] = az[32+i]
@@ -172,9 +174,10 @@ public struct Ed25519 {
             sm[32+i] = a[i]
         }
 
-		sig = [UInt8](repeating: 0, count: 64)
+		var signature = [UInt8](repeating: 0, count: 64)
 		for i in 0..<64 {
-			sig[i] = sm[i]
+			signature[i] = sm[i]
 		}
+        return signature
     }
 }
