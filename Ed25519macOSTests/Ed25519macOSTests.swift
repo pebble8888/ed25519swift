@@ -32,18 +32,17 @@ class Ed25519macOSTests: XCTestCase {
 		//
         let x3 = "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b"
         let sk = String(x0.prefix(64)).unhexlify()
-		let pk = Ed25519.calcPublicKey(sk)
+        let pk = Ed25519.calcPublicKey(secretKey: sk)
 		print("pk:\(pk.hexDescription())")
 		XCTAssert(pk.hexDescription() == x1)
 
         let m = x2.unhexlify()
 		// sig
-		var sig = [UInt8](repeating: 0, count: 64)
-        Ed25519.sign(&sig, x2.unhexlify(), sk)
+        let sig = Ed25519.sign(message: x2.unhexlify(), secretKey: sk)
 		XCTAssertEqual(sig.count, 64)
 		XCTAssertEqual(sig.hexDescription(), x3)
 
-        let result = Ed25519.verify(sig, m, pk)
+        let result = Ed25519.verify(signature: sig, message: m, publicKey: pk)
         XCTAssert(result)
 
         XCTAssertEqual(x3, sig.hexDescription())
@@ -58,12 +57,11 @@ class Ed25519macOSTests: XCTestCase {
         let x3 = "92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072"
 		let sk = String(x0.prefix(64)).unhexlify()
         let m = x2.unhexlify()
-		var sig = [UInt8](repeating: 0, count: 0)
-        Ed25519.sign(&sig, x2.unhexlify(), sk)
+        let sig = Ed25519.sign(message: x2.unhexlify(), secretKey: sk)
         XCTAssertEqual(sig.count, 64)
 
         let pk: [UInt8] = x1.unhexlify()
-        let result = Ed25519.verify(sig, m, pk)
+        let result = Ed25519.verify(signature: sig, message: m, publicKey: pk)
         XCTAssert(result)
 
         XCTAssertEqual(String(x3.prefix(128)), sig.hexDescription())
@@ -88,17 +86,16 @@ class Ed25519macOSTests: XCTestCase {
                     let sk: [UInt8] = String(x0.prefix(64)).unhexlify()
                     XCTAssert(sk.count == 32)
                     let m = x2.unhexlify()
-					var sig = [UInt8](repeating: 0, count: 0)
-                    Ed25519.sign(&sig, x2.unhexlify(), sk)
+                    let sig = Ed25519.sign(message: x2.unhexlify(), secretKey: sk)
                     XCTAssertEqual(sig.count, 64)
 
                     let pk: [UInt8] = x1.unhexlify()
-                    let result = Ed25519.verify(sig, m, pk)
+                    let result = Ed25519.verify(signature: sig, message: m, publicKey: pk)
                     XCTAssert(result)
 
                     XCTAssertEqual(String(x3.prefix(128)), sig.hexDescription())
 
-                    let r2 = Ed25519.isValidKeypair(pk, sk)
+                    let r2 = Ed25519.isValidKeyPair(publicKey: pk, secretKey: sk)
                     XCTAssert(r2)
 
                     //print(".", terminator:"")
@@ -114,7 +111,7 @@ class Ed25519macOSTests: XCTestCase {
     func test256_create_keypair() {
         for _ in 0..<1024 {
             let pair = Ed25519.generateKeyPair()
-            let result = Ed25519.isValidKeypair(pair.pk, pair.sk)
+            let result = Ed25519.isValidKeyPair(publicKey: pair.publicKey,  secretKey: pair.secretKey)
             XCTAssert(result)
             print(">", terminator: "")
         }
@@ -131,4 +128,10 @@ class Ed25519macOSTests: XCTestCase {
 		ge.ge25519_pack(&Bv, a)
 		XCTAssertEqual(publicKey, Bv)
 	}
+
+    func testIsValidKeyPair() {
+        let secretKey: [UInt8] = "3A56538A050F6E553112DC87EEACC08166A5F76E55248DE4CA4551E2091B602D".unhexlify()
+        let publicKey: [UInt8] = "d3f750911c174a264a3c5c6e49009d1a19b5612adbec980a1f4cd516a93b1b36".unhexlify()
+        XCTAssert(Ed25519.isValidKeyPair(publicKey: publicKey, secretKey: secretKey))
+    }
 }
