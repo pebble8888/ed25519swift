@@ -85,10 +85,12 @@ struct ge: CustomDebugStringConvertible {
         self.t = t
     }
 
+    // not use self.t
     private var toProj: Proj {
         return Proj(self.x, self.y, self.z)
     }
 
+    // @warning t remains gabage
     mutating private func setFromProj(_ proj: Proj) {
         x = proj.x
         y = proj.y
@@ -194,7 +196,6 @@ struct ge: CustomDebugStringConvertible {
         fe.fe25519_mul(&r.z, p.f, p.g)
     }
 
-    // 
     private static func p1p1_to_ge(_ r: inout ge, _ p: P1P1) {
         var proj = Proj()
         p1p1_to_proj(&proj, p)
@@ -423,30 +424,50 @@ struct ge: CustomDebugStringConvertible {
         return ret
     }
 
-    /* computes [s1]p1 + [s2]p2 */
+    // computes  s1 * p1 + s2 * p2
+    // s means scalar
+    // p means point
     static func ge25519_double_scalarmult_vartime(_ r: inout ge, _ p1: ge, _ s1: sc, _ p2: ge, _ s2: sc) {
         var tp1p1 = ge.P1P1()
         var pre = [ge](repeating: ge(), count: 16)
+
+        // precomputation
+        // pre = s1 * p1 + s2 * p2
+        // s2 s1
+        // 00 00
+        ge.setneutral(&pre[0])
+        // 00 01 
+        pre[1] = p1
+        // 00 10
+        ge.dbl_p1p1(&tp1p1, p1.toProj);           ge.p1p1_to_ge(&pre[2], tp1p1)
+        // 00 11
+        ge.add_p1p1(&tp1p1, pre[1], pre[2]);      ge.p1p1_to_ge(&pre[3], tp1p1)
+        // 01 00
+        pre[4] = p2                                                            
+        // 01 01
+        ge.add_p1p1(&tp1p1, pre[1], pre[4]);      ge.p1p1_to_ge(&pre[5], tp1p1)
+        // 01 10
+        ge.add_p1p1(&tp1p1, pre[2], pre[4]);      ge.p1p1_to_ge(&pre[6], tp1p1)
+        // 01 11
+        ge.add_p1p1(&tp1p1, pre[3], pre[4]);      ge.p1p1_to_ge(&pre[7], tp1p1)
+        // 10 00
+        ge.dbl_p1p1(&tp1p1, p2.toProj);           ge.p1p1_to_ge(&pre[8], tp1p1)
+        // 10 01
+        ge.add_p1p1(&tp1p1, pre[1], pre[8]);      ge.p1p1_to_ge(&pre[9], tp1p1)
+        // 10 10
+        ge.dbl_p1p1(&tp1p1, pre[5].toProj);       ge.p1p1_to_ge(&pre[10], tp1p1)
+        // 10 11
+        ge.add_p1p1(&tp1p1, pre[3], pre[8]);      ge.p1p1_to_ge(&pre[11], tp1p1)
+        // 11 00
+        ge.add_p1p1(&tp1p1, pre[4], pre[8]);      ge.p1p1_to_ge(&pre[12], tp1p1)
+        // 11 01
+        ge.add_p1p1(&tp1p1, pre[1], pre[12]);     ge.p1p1_to_ge(&pre[13], tp1p1)
+        // 11 10
+        ge.add_p1p1(&tp1p1, pre[2], pre[12]);     ge.p1p1_to_ge(&pre[14], tp1p1)
+        // 11 11
+        ge.add_p1p1(&tp1p1, pre[3], pre[12]);     ge.p1p1_to_ge(&pre[15], tp1p1)
+
         var b = [UInt8](repeating: 0, count: 127)
-
-        /* precomputation                                                          s2 s1 */
-        ge.setneutral(&pre[0])                                                  /* 00 00 */
-        pre[1] = p1                                                             /* 00 01 */
-        ge.dbl_p1p1(&tp1p1, p1.toProj);           ge.p1p1_to_ge(&pre[2], tp1p1) /* 00 10 */
-        ge.add_p1p1(&tp1p1, pre[1], pre[2]);      ge.p1p1_to_ge(&pre[3], tp1p1) /* 00 11 */
-        pre[4] = p2                                                             /* 01 00 */
-        ge.add_p1p1(&tp1p1, pre[1], pre[4]);      ge.p1p1_to_ge(&pre[5], tp1p1) /* 01 01 */
-        ge.add_p1p1(&tp1p1, pre[2], pre[4]);      ge.p1p1_to_ge(&pre[6], tp1p1) /* 01 10 */
-        ge.add_p1p1(&tp1p1, pre[3], pre[4]);      ge.p1p1_to_ge(&pre[7], tp1p1) /* 01 11 */
-        ge.dbl_p1p1(&tp1p1, p2.toProj);           ge.p1p1_to_ge(&pre[8], tp1p1) /* 10 00 */
-        ge.add_p1p1(&tp1p1, pre[1], pre[8]);      ge.p1p1_to_ge(&pre[9], tp1p1) /* 10 01 */
-        ge.dbl_p1p1(&tp1p1, pre[5].toProj);       ge.p1p1_to_ge(&pre[10], tp1p1) /* 10 10 */
-        ge.add_p1p1(&tp1p1, pre[3], pre[8]);      ge.p1p1_to_ge(&pre[11], tp1p1) /* 10 11 */
-        ge.add_p1p1(&tp1p1, pre[4], pre[8]);      ge.p1p1_to_ge(&pre[12], tp1p1) /* 11 00 */
-        ge.add_p1p1(&tp1p1, pre[1], pre[12]);     ge.p1p1_to_ge(&pre[13], tp1p1) /* 11 01 */
-        ge.add_p1p1(&tp1p1, pre[2], pre[12]);     ge.p1p1_to_ge(&pre[14], tp1p1) /* 11 10 */
-        ge.add_p1p1(&tp1p1, pre[3], pre[12]);     ge.p1p1_to_ge(&pre[15], tp1p1) /* 11 11 */
-
         sc.sc25519_2interleave2(&b, s1, s2)
 
         /* scalar multiplication */

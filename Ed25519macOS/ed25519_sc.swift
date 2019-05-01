@@ -354,11 +354,14 @@ struct sc {
         r[84] += Int8(carry)
     }
 
+    // scalar is less than 2^255 - 19, so 256bit value always zero.
     static func sc25519_2interleave2(_ r: inout [UInt8] /* 127 */, _ s1: sc, _ s2: sc) {
 		assert(r.count == 127)
         for i in 0..<31 {
             let a1 = UInt8(s1.v[i] & 0xff)
             let a2 = UInt8(s2.v[i] & 0xff)
+            // 8bits = 2bits * 4
+            // s2 s1
             r[4*i]   = ((a1 >> 0) & 3) ^ (((a2 >> 0) & 3) << 2)
             r[4*i+1] = ((a1 >> 2) & 3) ^ (((a2 >> 2) & 3) << 2)
             r[4*i+2] = ((a1 >> 4) & 3) ^ (((a2 >> 4) & 3) << 2)
