@@ -354,44 +354,6 @@ struct sc {
         r[84] += Int8(carry)
     }
 
-    #if false
-    // divide to 5bits
-    static func sc25519_window5(_ r: inout [Int8] /* 51 */, _ s: sc) {
-		assert(r.count == 51)
-        var carry: Int8
-        for i in 0..<6 {
-            r[8*i+0]  =  Int8(s.v[5*i+0])       & 31
-            r[8*i+1]  = (Int8(s.v[5*i+0]) >> 5) & 31
-            r[8*i+1] ^= (Int8(s.v[5*i+1]) << 3) & 31
-            r[8*i+2]  = (Int8(s.v[5*i+1]) >> 2) & 31
-            r[8*i+3]  = (Int8(s.v[5*i+1]) >> 7) & 31
-            r[8*i+3] ^= (Int8(s.v[5*i+2]) << 1) & 31
-            r[8*i+4]  = (Int8(s.v[5*i+2]) >> 4) & 31
-            r[8*i+4] ^= (Int8(s.v[5*i+3]) << 4) & 31
-            r[8*i+5]  = (Int8(s.v[5*i+3]) >> 1) & 31
-            r[8*i+6]  = (Int8(s.v[5*i+3]) >> 6) & 31
-            r[8*i+6] ^= (Int8(s.v[5*i+4]) << 2) & 31
-            r[8*i+7]  = (Int8(s.v[5*i+4]) >> 3) & 31
-        }
-        let i = 6
-        r[8*i+0]  =  Int8(s.v[5*i+0]     ) & 31
-        r[8*i+1]  = (Int8(s.v[5*i+0]) >> 5) & 31
-        r[8*i+1] ^= (Int8(s.v[5*i+1]) << 3) & 31
-        r[8*i+2]  = (Int8(s.v[5*i+1]) >> 2) & 31
-
-        /* Making it signed */
-        carry = 0
-        for i in 0..<50 {
-            r[i] += carry
-            r[i+1] += r[i] >> 5
-            r[i] &= 31
-            carry = r[i] >> 4
-            r[i] -= (carry << 5)
-        }
-        r[50] += carry
-    }
-    #endif
-
     static func sc25519_2interleave2(_ r: inout [UInt8] /* 127 */, _ s1: sc, _ s2: sc) {
 		assert(r.count == 127)
         for i in 0..<31 {

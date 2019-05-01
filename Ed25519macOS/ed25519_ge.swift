@@ -55,10 +55,10 @@ import Foundation
 //   -> (XZ, YZ, Z^2, XY)
 //
 // extended twisted edwards coordinates to affine coordinates
-//      (X, Y, Z, T)
-//   -> (X/Z, Y/Z, 1, T/Z)
+//      (XZ, YZ, Z^2, XY)
 //   -> (X/Z, Y/Z, 1, XY/Z^2)
-//   -> (XZ, YZ, Z^2, XY)
+//   -> (X/Z, Y/Z, 1, T/Z)
+//   -> (x, y, z=1, t=xy)
 //
 //      (0, 1, 1, 0) : neutral point
 //
@@ -115,7 +115,11 @@ struct ge: CustomDebugStringConvertible {
 		fe([0xB0, 0xA0, 0x0E, 0x4A, 0x27, 0x1B, 0xEE, 0xC4, 0x78, 0xE4, 0x2F, 0xAD, 0x06, 0x18, 0x43, 0x2F,
             0xA7, 0xD7, 0xFB, 0x3D, 0x99, 0x00, 0x4D, 0x2B, 0x0B, 0xDF, 0xC1, 0x4F, 0x80, 0x24, 0x83, 0x2B])
 
-    // point
+    // intermediate point
+    // ge.x = E F
+    // ge.y = H G
+    // ge.z = G F
+    // ge.t = E H
     private struct P1P1 {
         var e: fe
         var h: fe
@@ -160,10 +164,16 @@ struct ge: CustomDebugStringConvertible {
         }
     }
 
-    /* Packed coordinates of the base point */
-    // Little Endian
+    // base point
     // x = 15112221349535400772501151409588531511454012693041857206046113283949847762202
     // y = 46316835694926478169428394003475163141307993866256225615783033603165251855960
+    //
+    // x = 0x21 * 2^31 + 0x69 * 2^30 + ... + 0x1a * 2^0
+    // y = 0x66 * 2^31 + 0x66 * 2^30 + ... + 0x58 * 2^0
+    // z = 1
+    // t = x y (mod 2^255 -19)
+    //   = 46827403850823179245072216630277197565144205554125654976674165829533817101731
+    //   = 0x67 * 2^31 + 0x87 * 2^30 + ... + 0xa3 * 2^0
     static let ge25519_base: ge = ge(
         fe([0x1A, 0xD5, 0x25, 0x8F, 0x60, 0x2D, 0x56, 0xC9, 0xB2, 0xA7, 0x25, 0x95, 0x60, 0xC7, 0x2C, 0x69,
             0x5C, 0xDC, 0xD6, 0xFD, 0x31, 0xE2, 0xA4, 0xC0, 0xFE, 0x53, 0x6E, 0xCD, 0xD3, 0x36, 0x69, 0x21]),
@@ -185,7 +195,7 @@ struct ge: CustomDebugStringConvertible {
     }
 
     // 
-    private static func p1p1_to_p3(_ r: inout ge, _ p: P1P1) {
+    private static func p1p1_to_ge(_ r: inout ge, _ p: P1P1) {
         var proj = Proj()
         p1p1_to_proj(&proj, p)
         r.setFromProj(proj)
@@ -195,6 +205,8 @@ struct ge: CustomDebugStringConvertible {
 
     // r = r + q
     // Point addition
+    // r: extened twisted edward coordinates point
+    // q: affine point
     private static func ge25519_mixadd2(_ r: inout ge, _ q: aff) {
         var a = fe()
         var b = fe()
@@ -420,20 +432,20 @@ struct ge: CustomDebugStringConvertible {
         /* precomputation                                                          s2 s1 */
         ge.setneutral(&pre[0])                                                  /* 00 00 */
         pre[1] = p1                                                             /* 00 01 */
-        ge.dbl_p1p1(&tp1p1, p1.toProj);           ge.p1p1_to_p3(&pre[2], tp1p1) /* 00 10 */
-        ge.add_p1p1(&tp1p1, pre[1], pre[2]);      ge.p1p1_to_p3(&pre[3], tp1p1) /* 00 11 */
+        ge.dbl_p1p1(&tp1p1, p1.toProj);           ge.p1p1_to_ge(&pre[2], tp1p1) /* 00 10 */
+        ge.add_p1p1(&tp1p1, pre[1], pre[2]);      ge.p1p1_to_ge(&pre[3], tp1p1) /* 00 11 */
         pre[4] = p2                                                             /* 01 00 */
-        ge.add_p1p1(&tp1p1, pre[1], pre[4]);      ge.p1p1_to_p3(&pre[5], tp1p1) /* 01 01 */
-        ge.add_p1p1(&tp1p1, pre[2], pre[4]);      ge.p1p1_to_p3(&pre[6], tp1p1) /* 01 10 */
-        ge.add_p1p1(&tp1p1, pre[3], pre[4]);      ge.p1p1_to_p3(&pre[7], tp1p1) /* 01 11 */
-        ge.dbl_p1p1(&tp1p1, p2.toProj);           ge.p1p1_to_p3(&pre[8], tp1p1) /* 10 00 */
-        ge.add_p1p1(&tp1p1, pre[1], pre[8]);      ge.p1p1_to_p3(&pre[9], tp1p1) /* 10 01 */
-        ge.dbl_p1p1(&tp1p1, pre[5].toProj);       ge.p1p1_to_p3(&pre[10], tp1p1) /* 10 10 */
-        ge.add_p1p1(&tp1p1, pre[3], pre[8]);      ge.p1p1_to_p3(&pre[11], tp1p1) /* 10 11 */
-        ge.add_p1p1(&tp1p1, pre[4], pre[8]);      ge.p1p1_to_p3(&pre[12], tp1p1) /* 11 00 */
-        ge.add_p1p1(&tp1p1, pre[1], pre[12]);     ge.p1p1_to_p3(&pre[13], tp1p1) /* 11 01 */
-        ge.add_p1p1(&tp1p1, pre[2], pre[12]);     ge.p1p1_to_p3(&pre[14], tp1p1) /* 11 10 */
-        ge.add_p1p1(&tp1p1, pre[3], pre[12]);     ge.p1p1_to_p3(&pre[15], tp1p1) /* 11 11 */
+        ge.add_p1p1(&tp1p1, pre[1], pre[4]);      ge.p1p1_to_ge(&pre[5], tp1p1) /* 01 01 */
+        ge.add_p1p1(&tp1p1, pre[2], pre[4]);      ge.p1p1_to_ge(&pre[6], tp1p1) /* 01 10 */
+        ge.add_p1p1(&tp1p1, pre[3], pre[4]);      ge.p1p1_to_ge(&pre[7], tp1p1) /* 01 11 */
+        ge.dbl_p1p1(&tp1p1, p2.toProj);           ge.p1p1_to_ge(&pre[8], tp1p1) /* 10 00 */
+        ge.add_p1p1(&tp1p1, pre[1], pre[8]);      ge.p1p1_to_ge(&pre[9], tp1p1) /* 10 01 */
+        ge.dbl_p1p1(&tp1p1, pre[5].toProj);       ge.p1p1_to_ge(&pre[10], tp1p1) /* 10 10 */
+        ge.add_p1p1(&tp1p1, pre[3], pre[8]);      ge.p1p1_to_ge(&pre[11], tp1p1) /* 10 11 */
+        ge.add_p1p1(&tp1p1, pre[4], pre[8]);      ge.p1p1_to_ge(&pre[12], tp1p1) /* 11 00 */
+        ge.add_p1p1(&tp1p1, pre[1], pre[12]);     ge.p1p1_to_ge(&pre[13], tp1p1) /* 11 01 */
+        ge.add_p1p1(&tp1p1, pre[2], pre[12]);     ge.p1p1_to_ge(&pre[14], tp1p1) /* 11 10 */
+        ge.add_p1p1(&tp1p1, pre[3], pre[12]);     ge.p1p1_to_ge(&pre[15], tp1p1) /* 11 11 */
 
         sc.sc25519_2interleave2(&b, s1, s2)
 
@@ -447,7 +459,7 @@ struct ge: CustomDebugStringConvertible {
 
             ge.dbl_p1p1(&tp1p1, r.toProj)
             if b[i] != 0 {
-                ge.p1p1_to_p3(&r, tp1p1)
+                ge.p1p1_to_ge(&r, tp1p1)
                 ge.add_p1p1(&tp1p1, r, pre[Int(b[i])])
             }
             if i != 0 {
@@ -455,7 +467,7 @@ struct ge: CustomDebugStringConvertible {
                 ge.p1p1_to_proj(&t, tp1p1)
                 r.setFromProj(t)
             } else {
-                ge.p1p1_to_p3(&r, tp1p1)
+                ge.p1p1_to_ge(&r, tp1p1)
             }
         }
     }
