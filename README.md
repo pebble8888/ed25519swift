@@ -1,5 +1,5 @@
 # Ed25519
-Ed25519 by pure swift
+Ed25519(EdDSA) by pure swift
 
 [ed25519](https://ed25519.cr.yp.to)
 
@@ -62,7 +62,9 @@ It is ported from [SUPERCOP](https://bench.cr.yp.to/supercop.html)
   
 You can check the algorithm in these papers and RFC.  
 [Daniel J. Bernstein, Niels Duif, Tanja Lange, Peter Schwabe, and Bo-Yin Yang, High-speed high-security signatures. 2012](https://ed25519.cr.yp.to/ed25519-20110926.pdf)  
+
 [Huseyin Hisl, Kenneth Koon-Ho Wong, Gary Carter, Ed Dawson, Twisted Edwards curves revisited. 2008](http://eprint.iacr.org/2008/522)  
+
 [RFC8032 Edward-Curve Digital Signature Algorithm (EdDSA)](https://tools.ietf.org/html/rfc8032)  
 
 ## Performance
