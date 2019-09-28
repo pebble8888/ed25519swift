@@ -18,6 +18,19 @@ macOS, iOS
 ```
 pod 'ed25519swift'
 ```
+
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler.
+
+Once you have your Swift package set up, adding Ed25519 as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/pebble8888/ed25519swift.git", from: "1.2.1")
+]
+```
+
 ## Dependency
 
 [CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift) for sha512
@@ -31,7 +44,7 @@ pod 'ed25519swift'
 ``` swift
 import Ed25519macOS // direct
 or
-import ed25519swift // pods
+import ed25519swift // pods or Swift Package Manager
 
 static func generateKeyPair() -> (publicKey: [UInt8], secretKey: [UInt8])
 ```
