@@ -128,7 +128,7 @@ public struct Ed25519 {
         var sc_sk = sc()
         var ge_r = ge()
         /* pk: 32-byte public key A */
-        var pk = calcPublicKey(secretKey: secretKey)
+        let pk = calcPublicKey(secretKey: secretKey)
         crypto_hash_sha512(&az, secretKey, len: 32)
         az[0] &= 248 // clear lowest 3bit
         az[31] &= 127 // clear highest bit
