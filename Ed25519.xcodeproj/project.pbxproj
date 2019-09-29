@@ -14,23 +14,12 @@
 		A2141932223FF74000FE28F8 /* input.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2B45C921F91E1CB00249454 /* input.txt */; };
 		A2141933223FF78200FE28F8 /* Ed25519macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2141929223FF6B100FE28F8 /* Ed25519macOSTests.swift */; };
 		A2141934223FF7B200FE28F8 /* input.txt in Resources */ = {isa = PBXBuildFile; fileRef = A2B45C921F91E1CB00249454 /* input.txt */; };
-		A22303721FD5701E00CA0FE8 /* ed25519_utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519_utility.swift */; };
-		A22303731FD5701E00CA0FE8 /* ed25519_fe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA21ED083E000A1B09F /* ed25519_fe.swift */; };
-		A22303741FD5701E00CA0FE8 /* ed25519_ge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA51ED084B100A1B09F /* ed25519_ge.swift */; };
-		A22303751FD5701E00CA0FE8 /* ed25519_sc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA81ED094E100A1B09F /* ed25519_sc.swift */; };
-		A22303761FD5701E00CA0FE8 /* ed25519_sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECAB1ED09ECA00A1B09F /* ed25519_sign.swift */; };
-		A22303771FD5701E00CA0FE8 /* ed25519_verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29895CA1F91A06F000D8206 /* ed25519_verify.swift */; };
 		A241E4FE1F91AB11003C435B /* Ed25519ref.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A241E4F51F91AB11003C435B /* Ed25519ref.framework */; };
 		A241E5031F91AB11003C435B /* Ed25519refTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A241E5021F91AB11003C435B /* Ed25519refTests.swift */; };
 		A241E5051F91AB11003C435B /* Ed25519ref.h in Headers */ = {isa = PBXBuildFile; fileRef = A241E4F71F91AB11003C435B /* Ed25519ref.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A241E50C1F91AB3E003C435B /* BigInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22F451C1EC8625000A0BC64 /* BigInt+Extension.swift */; };
 		A241E50E1F91AB3E003C435B /* Ed25519s.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24C41151EC71E2A00B24AAF /* Ed25519s.swift */; };
 		A241E50F1F91AB4E003C435B /* BigInt+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */; };
-		A241E5101F91AB81003C435B /* ed25519_utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519_utility.swift */; };
-		A27AECA41ED083E000A1B09F /* ed25519_fe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA21ED083E000A1B09F /* ed25519_fe.swift */; };
-		A27AECA71ED084B100A1B09F /* ed25519_ge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA51ED084B100A1B09F /* ed25519_ge.swift */; };
-		A27AECAA1ED094E100A1B09F /* ed25519_sc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECA81ED094E100A1B09F /* ed25519_sc.swift */; };
-		A27AECAD1ED09ECA00A1B09F /* ed25519_sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AECAB1ED09ECA00A1B09F /* ed25519_sign.swift */; };
 		A2896FDD1F918BFD008A2029 /* hash_sha512.h in Headers */ = {isa = PBXBuildFile; fileRef = A2896FDB1F918BFD008A2029 /* hash_sha512.h */; };
 		A2896FE11F918D74008A2029 /* verify.h in Headers */ = {isa = PBXBuildFile; fileRef = A2896FDF1F918D74008A2029 /* verify.h */; };
 		A294FA051F91B0C000923D2C /* fe25519.c in Sources */ = {isa = PBXBuildFile; fileRef = A2A539EE1F8F777B00E396B5 /* fe25519.c */; };
@@ -47,15 +36,25 @@
 		A294FA101F91B29C00923D2C /* fe25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539EF1F8F777B00E396B5 /* fe25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A294FA111F91B2A300923D2C /* sc25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539F71F8F777B00E396B5 /* sc25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A294FA131F91CF5C00923D2C /* Summable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A294FA121F91CF5C00923D2C /* Summable.swift */; };
-		A294FA141F91D03700923D2C /* ed25519_utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D235F21ECFFD2600BAD20C /* ed25519_utility.swift */; };
 		A294FA161F91D23A00923D2C /* ge25519.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539F11F8F777B00E396B5 /* ge25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A294FA181F91D67800923D2C /* Ed25519sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A294FA171F91D67800923D2C /* Ed25519sTests.swift */; };
-		A29895CB1F91A06F000D8206 /* ed25519_verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29895CA1F91A06F000D8206 /* ed25519_verify.swift */; };
 		A2A5595D1F8F779700E396B5 /* api.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A539ED1F8F777B00E396B5 /* api.h */; };
 		A2DA61F9223FE9E200AEDDB0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D34B8D219B0F5C00E73202 /* XCTest.framework */; };
 		BB1363D972441FF85CFCB2F1 /* libPods-Ed25519iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA70DEACEE5F31DA27B50F9 /* libPods-Ed25519iOS.a */; };
 		CF85F9DEF04DD97F63F5A67A /* libPods-Ed25519macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 709DE06D8B763068DB973620 /* libPods-Ed25519macOS.a */; };
 		D995A3F54B6B925C34BF6E3E /* libPods-Ed25519refTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D755A2748563702013DD20F /* libPods-Ed25519refTests.a */; };
+		F0798B0D233FBC6700FCBA8F /* ed25519_fe.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B07233FBC6700FCBA8F /* ed25519_fe.swift */; };
+		F0798B0E233FBC6700FCBA8F /* ed25519_fe.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B07233FBC6700FCBA8F /* ed25519_fe.swift */; };
+		F0798B0F233FBC6700FCBA8F /* ed25519_verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B08233FBC6700FCBA8F /* ed25519_verify.swift */; };
+		F0798B10233FBC6700FCBA8F /* ed25519_verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B08233FBC6700FCBA8F /* ed25519_verify.swift */; };
+		F0798B11233FBC6700FCBA8F /* ed25519_sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B09233FBC6700FCBA8F /* ed25519_sign.swift */; };
+		F0798B12233FBC6700FCBA8F /* ed25519_sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B09233FBC6700FCBA8F /* ed25519_sign.swift */; };
+		F0798B13233FBC6700FCBA8F /* ed25519_ge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B0A233FBC6700FCBA8F /* ed25519_ge.swift */; };
+		F0798B14233FBC6700FCBA8F /* ed25519_ge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B0A233FBC6700FCBA8F /* ed25519_ge.swift */; };
+		F0798B15233FBC6700FCBA8F /* ed25519_utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B0B233FBC6700FCBA8F /* ed25519_utility.swift */; };
+		F0798B16233FBC6700FCBA8F /* ed25519_utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B0B233FBC6700FCBA8F /* ed25519_utility.swift */; };
+		F0798B17233FBC6700FCBA8F /* ed25519_sc.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B0C233FBC6700FCBA8F /* ed25519_sc.swift */; };
+		F0798B18233FBC6700FCBA8F /* ed25519_sc.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0798B0C233FBC6700FCBA8F /* ed25519_sc.swift */; };
 		FD82660763617926BB84CB19 /* libPods-Ed25519macOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98521BF4887D4CACCDC296E7 /* libPods-Ed25519macOSTests.a */; };
 		FF22C509D06F5555D917532E /* libPods-Ed25519ref.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5078DBEF19C43E50123AEFE7 /* libPods-Ed25519ref.a */; };
 /* End PBXBuildFile section */
@@ -116,10 +115,6 @@
 		A263768A1ECF280700EDC62D /* Ed25519macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ed25519macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A263768D1ECF280700EDC62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A26376991ECF280700EDC62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A27AECA21ED083E000A1B09F /* ed25519_fe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_fe.swift; sourceTree = "<group>"; };
-		A27AECA51ED084B100A1B09F /* ed25519_ge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_ge.swift; sourceTree = "<group>"; };
-		A27AECA81ED094E100A1B09F /* ed25519_sc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_sc.swift; sourceTree = "<group>"; };
-		A27AECAB1ED09ECA00A1B09F /* ed25519_sign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_sign.swift; sourceTree = "<group>"; };
 		A2896FDA1F918BFD008A2029 /* hash_sha512.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hash_sha512.c; sourceTree = "<group>"; };
 		A2896FDB1F918BFD008A2029 /* hash_sha512.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hash_sha512.h; sourceTree = "<group>"; };
 		A2896FDE1F918D74008A2029 /* verify.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = verify.c; sourceTree = "<group>"; };
@@ -127,7 +122,6 @@
 		A2896FE21F91914F008A2029 /* open.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = open.h; sourceTree = "<group>"; };
 		A294FA121F91CF5C00923D2C /* Summable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summable.swift; sourceTree = "<group>"; };
 		A294FA171F91D67800923D2C /* Ed25519sTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ed25519sTests.swift; sourceTree = "<group>"; };
-		A29895CA1F91A06F000D8206 /* ed25519_verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ed25519_verify.swift; sourceTree = "<group>"; };
 		A2A539ED1F8F777B00E396B5 /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
 		A2A539EE1F8F777B00E396B5 /* fe25519.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fe25519.c; sourceTree = "<group>"; };
 		A2A539EF1F8F777B00E396B5 /* fe25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fe25519.h; sourceTree = "<group>"; };
@@ -145,13 +139,18 @@
 		A2BB19481F7696050056EC72 /* BigInt+ExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt+ExtensionTests.swift"; sourceTree = "<group>"; };
 		A2BB19491F7696050056EC72 /* Ed25519macOSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519macOSTests.swift; sourceTree = "<group>"; };
 		A2D235CC1ECF435600BAD20C /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = "../../Users/pebble8888/Library/Developer/Xcode/DerivedData/Ed25519-bgavysfvnlntnkhevpvsigfomvie/Build/Products/Debug/BigInt-OSX/BigInt.framework"; sourceTree = "<group>"; };
-		A2D235F21ECFFD2600BAD20C /* ed25519_utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_utility.swift; sourceTree = "<group>"; };
 		A2D34B8D219B0F5C00E73202 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A56128FECCD84A0292461836 /* Pods_Ed25519ref_Ed25519refTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ed25519ref_Ed25519refTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB90314FB65A1783DDB2B931 /* Pods-Ed25519iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519iOS.release.xcconfig"; path = "Target Support Files/Pods-Ed25519iOS/Pods-Ed25519iOS.release.xcconfig"; sourceTree = "<group>"; };
 		B2B4DBA94232723883E0659C /* Pods-Ed25519refTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519refTests.release.xcconfig"; path = "Target Support Files/Pods-Ed25519refTests/Pods-Ed25519refTests.release.xcconfig"; sourceTree = "<group>"; };
 		DB33583610E2845ABE93FDF9 /* libPods-Ed25519iOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ed25519iOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EABCA32E3E9DF1BB26E56133 /* Pods-Ed25519iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519iOSTests.release.xcconfig"; path = "Target Support Files/Pods-Ed25519iOSTests/Pods-Ed25519iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		F0798B07233FBC6700FCBA8F /* ed25519_fe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_fe.swift; sourceTree = "<group>"; };
+		F0798B08233FBC6700FCBA8F /* ed25519_verify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_verify.swift; sourceTree = "<group>"; };
+		F0798B09233FBC6700FCBA8F /* ed25519_sign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_sign.swift; sourceTree = "<group>"; };
+		F0798B0A233FBC6700FCBA8F /* ed25519_ge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_ge.swift; sourceTree = "<group>"; };
+		F0798B0B233FBC6700FCBA8F /* ed25519_utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_utility.swift; sourceTree = "<group>"; };
+		F0798B0C233FBC6700FCBA8F /* ed25519_sc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ed25519_sc.swift; sourceTree = "<group>"; };
 		F0A4B17BF84636574619F6E0 /* Pods-Ed25519iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Ed25519iOSTests/Pods-Ed25519iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FEDA153FF21CD178B237F427 /* Pods-Ed25519macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ed25519macOS.debug.xcconfig"; path = "Target Support Files/Pods-Ed25519macOS/Pods-Ed25519macOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -257,6 +256,7 @@
 		A24C40D41EC71DA200B24AAF = {
 			isa = PBXGroup;
 			children = (
+				F0798B05233FBC6700FCBA8F /* Sources */,
 				A263768B1ECF280700EDC62D /* Ed25519macOS */,
 				A26376961ECF280700EDC62D /* Ed25519macOSTests */,
 				A22303691FD5700000CA0FE8 /* Ed25519iOS */,
@@ -285,12 +285,6 @@
 		A263768B1ECF280700EDC62D /* Ed25519macOS */ = {
 			isa = PBXGroup;
 			children = (
-				A2D235F21ECFFD2600BAD20C /* ed25519_utility.swift */,
-				A27AECA21ED083E000A1B09F /* ed25519_fe.swift */,
-				A27AECA51ED084B100A1B09F /* ed25519_ge.swift */,
-				A27AECA81ED094E100A1B09F /* ed25519_sc.swift */,
-				A27AECAB1ED09ECA00A1B09F /* ed25519_sign.swift */,
-				A29895CA1F91A06F000D8206 /* ed25519_verify.swift */,
 				A263768D1ECF280700EDC62D /* Info.plist */,
 			);
 			path = Ed25519macOS;
@@ -389,6 +383,27 @@
 				1D755A2748563702013DD20F /* libPods-Ed25519refTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0798B05233FBC6700FCBA8F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F0798B06233FBC6700FCBA8F /* ed25519swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		F0798B06233FBC6700FCBA8F /* ed25519swift */ = {
+			isa = PBXGroup;
+			children = (
+				F0798B07233FBC6700FCBA8F /* ed25519_fe.swift */,
+				F0798B08233FBC6700FCBA8F /* ed25519_verify.swift */,
+				F0798B09233FBC6700FCBA8F /* ed25519_sign.swift */,
+				F0798B0A233FBC6700FCBA8F /* ed25519_ge.swift */,
+				F0798B0B233FBC6700FCBA8F /* ed25519_utility.swift */,
+				F0798B0C233FBC6700FCBA8F /* ed25519_sc.swift */,
+			);
+			path = ed25519swift;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -797,12 +812,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A22303721FD5701E00CA0FE8 /* ed25519_utility.swift in Sources */,
-				A22303731FD5701E00CA0FE8 /* ed25519_fe.swift in Sources */,
-				A22303741FD5701E00CA0FE8 /* ed25519_ge.swift in Sources */,
-				A22303751FD5701E00CA0FE8 /* ed25519_sc.swift in Sources */,
-				A22303761FD5701E00CA0FE8 /* ed25519_sign.swift in Sources */,
-				A22303771FD5701E00CA0FE8 /* ed25519_verify.swift in Sources */,
+				F0798B10233FBC6700FCBA8F /* ed25519_verify.swift in Sources */,
+				F0798B16233FBC6700FCBA8F /* ed25519_utility.swift in Sources */,
+				F0798B14233FBC6700FCBA8F /* ed25519_ge.swift in Sources */,
+				F0798B12233FBC6700FCBA8F /* ed25519_sign.swift in Sources */,
+				F0798B18233FBC6700FCBA8F /* ed25519_sc.swift in Sources */,
+				F0798B0E233FBC6700FCBA8F /* ed25519_fe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,7 +831,6 @@
 				A294FA061F91B0C400923D2C /* ge25519.cpp in Sources */,
 				A241E50C1F91AB3E003C435B /* BigInt+Extension.swift in Sources */,
 				A294FA091F91B0D400923D2C /* sc25519.c in Sources */,
-				A294FA141F91D03700923D2C /* ed25519_utility.swift in Sources */,
 				A294FA0A1F91B0D800923D2C /* sign.c in Sources */,
 				A294FA051F91B0C000923D2C /* fe25519.c in Sources */,
 				A294FA0B1F91B0DC00923D2C /* hash_sha512.c in Sources */,
@@ -840,12 +854,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A241E5101F91AB81003C435B /* ed25519_utility.swift in Sources */,
-				A27AECAA1ED094E100A1B09F /* ed25519_sc.swift in Sources */,
-				A27AECA71ED084B100A1B09F /* ed25519_ge.swift in Sources */,
-				A27AECAD1ED09ECA00A1B09F /* ed25519_sign.swift in Sources */,
-				A27AECA41ED083E000A1B09F /* ed25519_fe.swift in Sources */,
-				A29895CB1F91A06F000D8206 /* ed25519_verify.swift in Sources */,
+				F0798B0F233FBC6700FCBA8F /* ed25519_verify.swift in Sources */,
+				F0798B15233FBC6700FCBA8F /* ed25519_utility.swift in Sources */,
+				F0798B13233FBC6700FCBA8F /* ed25519_ge.swift in Sources */,
+				F0798B11233FBC6700FCBA8F /* ed25519_sign.swift in Sources */,
+				F0798B17233FBC6700FCBA8F /* ed25519_sc.swift in Sources */,
+				F0798B0D233FBC6700FCBA8F /* ed25519_fe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

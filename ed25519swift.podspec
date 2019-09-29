@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.12"
   s.pod_target_xcconfig = { "SWIFT_VERSION" => "4.2" }
   s.source       = { :git => "https://github.com/pebble8888/ed25519swift.git", :tag => s.version.to_s }
-  s.source_files  = "Ed25519macOS"
+  s.source_files  = "Sources/ed25519swift"
   s.dependency "CryptoSwift"
 end
