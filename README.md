@@ -27,7 +27,7 @@ Once you have your Swift package set up, adding Ed25519 as a dependency is as ea
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/pebble8888/ed25519swift.git", from: "1.2.1")
+    .package(url: "https://github.com/pebble8888/ed25519swift.git", from: "1.2.2")
 ]
 ```
 
