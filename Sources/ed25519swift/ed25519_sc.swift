@@ -37,34 +37,34 @@ struct sc {
         v = [UInt32](repeating: 0, count: 32)
     }
 
-	private static let k = 32
+    private static let k = 32
 
     /* Arithmetic modulo the group order
-	  order
-	     = 2^252 + 27742317777372353535851937790883648493
-	     = 7237005577332262213973186563042994240857116359379907606001950938285454250989
-	     = 0x1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed
+     order
+     = 2^252 + 27742317777372353535851937790883648493
+     = 7237005577332262213973186563042994240857116359379907606001950938285454250989
+     = 0x1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed
 
-	  p  = 2^255 - 19
-	     = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed
-	*/
+     p  = 2^255 - 19
+     = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed
+     */
 
-	// little endian group order m
+    // little endian group order m
     private static let m: [UInt32] =
-		[0xED, 0xD3, 0xF5, 0x5C, 0x1A, 0x63, 0x12, 0x58, 0xD6, 0x9C, 0xF7, 0xA2, 0xDE, 0xF9, 0xDE, 0x14,
+        [0xED, 0xD3, 0xF5, 0x5C, 0x1A, 0x63, 0x12, 0x58, 0xD6, 0x9C, 0xF7, 0xA2, 0xDE, 0xF9, 0xDE, 0x14,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10]
 
-	/*
-	  for barrett_reduce algorithm
-	  b = 256 = 2^8
-      k = 32 = 2^5
-      b^(2k) = (2^8)^64 = 2^512
-	  mu = 2^512 // m
-	     = 1852673427797059126777135760139006525645217721299241702126143248052143860224795
-	     = 0x0fffffffffffffffffffffffffffffffeb2106215d086329a7ed9ce5a30a2c131b
-	 */
+    /*
+     for barrett_reduce algorithm
+     b = 256 = 2^8
+     k = 32 = 2^5
+     b^(2k) = (2^8)^64 = 2^512
+     mu = 2^512 // m
+     = 1852673427797059126777135760139006525645217721299241702126143248052143860224795
+     = 0x0fffffffffffffffffffffffffffffffeb2106215d086329a7ed9ce5a30a2c131b
+     */
     private static let mu: [UInt32] =
-		[0x1B, 0x13, 0x2C, 0x0A, 0xA3, 0xE5, 0x9C, 0xED, 0xA7, 0x29, 0x63, 0x08, 0x5D, 0x21, 0x06, 0x21,
+        [0x1B, 0x13, 0x2C, 0x0A, 0xA3, 0xE5, 0x9C, 0xED, 0xA7, 0x29, 0x63, 0x08, 0x5D, 0x21, 0x06, 0x21,
          0xEB, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F]
 
     private static func lt(_ a: UInt32, _ b: UInt32) -> UInt32 /* 16-bit inputs */ {
@@ -75,12 +75,12 @@ struct sc {
         }
     }
 
-	/// if r > m: r = r - m
-	/// else    : r = r
+    /// if r > m: r = r - m
+    /// else    : r = r
     private static func reduce_add_sub(_ r: inout sc) {
         var val: UInt32 = 0
         var borrow: UInt32 = 0
-		// r - m
+        // r - m
         var t = [UInt8](repeating: 0, count: 32)
 
         for i in 0..<k {
@@ -91,8 +91,8 @@ struct sc {
             t[i] = UInt8(vv)
             val = borrow
         }
-		// no borrow: mask = 0xffffffff -> r = r - m
-		// borrow   : mask = 0x0        -> r = r
+        // no borrow: mask = 0xffffffff -> r = r - m
+        // borrow   : mask = 0x0        -> r = r
         let mask = UInt32(bitPattern: Int32(borrow)-1)
         for i in 0..<k {
             r.v[i] ^= mask & (r.v[i] ^ UInt32(t[i]))
@@ -100,19 +100,19 @@ struct sc {
     }
 
     /// Reduce coefficients of x before calling barrett_reduce
-	/// r = x mod m
-	///
-	/// b = 256 = 2^8
-	/// k = 32 = 2^5
-	/// x < b^(2k)
-	/// x: LSB
+    /// r = x mod m
+    ///
+    /// b = 256 = 2^8
+    /// k = 32 = 2^5
+    /// x < b^(2k)
+    /// x: LSB
     private static func barrett_reduce(_ r: inout sc, _ x: [UInt32] /* 64 */) {
-		assert(x.count == 64)
+        assert(x.count == 64)
         /* See HAC(HANDBOOK OF APPLIED CRYPTOGRAPHY), Alg. 14.42 */
-		// STEP1
-		// q1 = floor(x / b^(k-1))
-		// q2 <- q1 * mu
-		var q2 = [UInt32](repeating: 0, count: 2*k+2) // LSB
+        // STEP1
+        // q1 = floor(x / b^(k-1))
+        // q2 <- q1 * mu
+        var q2 = [UInt32](repeating: 0, count: 2*k+2) // LSB
         for i in 0...k {
             for j in 0...k {
                 if i+j >= k-1 {
@@ -121,24 +121,24 @@ struct sc {
             }
         }
 
-		// q3 = floor(q2 / b^(k+1))
-		// q3 = (... + b^(k+1) * q2[k+1] + b^(k+2) * q2[k+2] + ... + b^(2k) * q2[2k] + b^(2k+1) * q2[2k+1])
-		//    = q2[k+1] + b^1 * q2[k+1] + ... + b^(k-1) * q2[2k] + b^k * q2[2k+1]
-		// Since q2[2k] has carry q2[2k+1] is zero.
-		let carry1 = q2[k-1] >> 8
+        // q3 = floor(q2 / b^(k+1))
+        // q3 = (... + b^(k+1) * q2[k+1] + b^(k+2) * q2[k+2] + ... + b^(2k) * q2[2k] + b^(2k+1) * q2[2k+1])
+        //    = q2[k+1] + b^1 * q2[k+1] + ... + b^(k-1) * q2[2k] + b^k * q2[2k+1]
+        // Since q2[2k] has carry q2[2k+1] is zero.
+        let carry1 = q2[k-1] >> 8
         q2[k] += carry1
         let carry2 = q2[k] >> 8
         q2[k+1] += carry2
 
-		// STEP2,3
-		// r1 = x (mod b^(k+1))
-		var r1 = [UInt32](repeating: 0, count: k+1)
+        // STEP2,3
+        // r1 = x (mod b^(k+1))
+        var r1 = [UInt32](repeating: 0, count: k+1)
         for i in 0...k {
-			r1[i] = x[i]
-		}
+            r1[i] = x[i]
+        }
 
-		// r2 = q3 * m (mod b^(k+1))
-		var r2 = [UInt32](repeating: 0, count: k+1)
+        // r2 = q3 * m (mod b^(k+1))
+        var r2 = [UInt32](repeating: 0, count: k+1)
         for i in 0...k-1 {
             for j in 0...k {
                 if i+j < k+1 {
@@ -151,49 +151,49 @@ struct sc {
             r2[i+1] += carry
             r2[i] &= 0xff
         }
-		r2[k] &= 0xff
+        r2[k] &= 0xff
 
-		// r = r1 - r2 (or + b^(k+1))
-		// last borrow means STEP3 for r < 0
-		// r = (Q-q3) * m + R <= 2m
-		// 2m = 2 * (0x10 * b^(k-1) + ...) = 0x20 * b^(k-1) + ... < b^k
-		// so r can represented for b^0 y\_0 + b^1 y\_1 + ... + b^(k-1) y\_(k-1)
-		// it means r[v] is zero
-		var val: UInt32 = 0
+        // r = r1 - r2 (or + b^(k+1))
+        // last borrow means STEP3 for r < 0
+        // r = (Q-q3) * m + R <= 2m
+        // 2m = 2 * (0x10 * b^(k-1) + ...) = 0x20 * b^(k-1) + ... < b^k
+        // so r can represented for b^0 y\_0 + b^1 y\_1 + ... + b^(k-1) y\_(k-1)
+        // it means r[v] is zero
+        var val: UInt32 = 0
         for i in 0...k-1 {
             val += r2[i]
-			let borrow = lt(r1[i], val)
-			let vv = Int64(r1[i]) - Int64(val) + Int64(borrow << 8)
+            let borrow = lt(r1[i], val)
+            let vv = Int64(r1[i]) - Int64(val) + Int64(borrow << 8)
             assert(vv >= 0 && vv <= 0xff)
             r.v[i] = UInt32(vv)
             val = borrow
         }
 
-		// STEP4: twice or once or none
+        // STEP4: twice or once or none
         reduce_add_sub(&r)
         reduce_add_sub(&r)
     }
 
-	// check x is [0, m)
-	static func sc25519_less_order(_ x: [UInt8] /* 32 */) -> Bool {
-		if x.count != k {
-			return false
-		}
-		for i in (0..<k).reversed() {
-			if x[i] < m[i] {
-				// less
-				return true
-			} else if x[i] > m[i] {
-				// large
-				return false
-			}
-		}
-		// equal to m
-		return false
-	}
+    // check x is [0, m)
+    static func sc25519_less_order(_ x: [UInt8] /* 32 */) -> Bool {
+        if x.count != k {
+            return false
+        }
+        for i in (0..<k).reversed() {
+            if x[i] < m[i] {
+                // less
+                return true
+            } else if x[i] > m[i] {
+                // large
+                return false
+            }
+        }
+        // equal to m
+        return false
+    }
 
     static func sc25519_from32bytes(_ r: inout sc, _ x: [UInt8] /* 32 */) {
-		assert(x.count >= k)
+        assert(x.count >= k)
         var t = [UInt32](repeating: 0, count: k*2)
         for i in 0..<k {
             t[i] = UInt32(x[i])
@@ -201,24 +201,24 @@ struct sc {
         for i in k..<k*2 {
             t[i] = 0
         }
-		// r = t mod m
+        // r = t mod m
         sc.barrett_reduce(&r, t)
     }
 
     static func sc25519_from16bytes(_ r: inout shortsc, _ x: [UInt8] /* 16 */) throws {
-		assert(x.count >= 16)
+        assert(x.count >= 16)
         for i in 0..<16 {
-			r.v[i] = UInt32(x[i])
-		}
+            r.v[i] = UInt32(x[i])
+        }
     }
 
     static func sc25519_from64bytes(_ r: inout sc, _ x: [UInt8] /* 64 */) {
-		assert(x.count == k*2)
+        assert(x.count == k*2)
         var t = [UInt32](repeating: 0, count: k*2)
         for i in 0..<k*2 {
             t[i] = UInt32(x[i])
         }
-		// r = t mod b
+        // r = t mod b
         sc.barrett_reduce(&r, t)
     }
 
@@ -232,10 +232,10 @@ struct sc {
     }
 
     static func sc25519_to32bytes(_ r: inout [UInt8] /* 32 */, _ x: sc) {
-		assert(r.count == k)
+        assert(r.count == k)
         for i in 0..<k {
-			r[i] = UInt8(x.v[i])
-		}
+            r[i] = UInt8(x.v[i])
+        }
     }
 
     static func sc25519_iszero_vartime(_ x: sc) -> Int {
@@ -319,7 +319,7 @@ struct sc {
     // divide to 3bits
     // 3 * 85 = 255
     static func sc25519_window3(_ r: inout [Int8] /* 85 */, _ s: sc) {
-		assert(r.count == 85)
+        assert(r.count == 85)
         for i in 0..<10 {
             r[8*i+0]  = Int8(bitPattern: UInt8(s.v[3*i+0]       & 7))
             r[8*i+1]  = Int8(bitPattern: UInt8((s.v[3*i+0] >> 3) & 7))
@@ -356,7 +356,7 @@ struct sc {
 
     // scalar is less than 2^255 - 19, so 256bit value always zero.
     static func sc25519_2interleave2(_ r: inout [UInt8] /* 127 */, _ s1: sc, _ s2: sc) {
-		assert(r.count == 127)
+        assert(r.count == 127)
         for i in 0..<31 {
             let a1 = UInt8(s1.v[i] & 0xff)
             let a2 = UInt8(s2.v[i] & 0xff)

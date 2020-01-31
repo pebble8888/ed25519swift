@@ -27,20 +27,20 @@ class Ed25519macOSTests: XCTestCase {
         let x0 = "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
         // pk
         let x1 = "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
-		// message
+        // message
         let x2 = ""
-		//
+        //
         let x3 = "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b"
         let sk = String(x0.prefix(64)).unhexlify()
         let pk = Ed25519.calcPublicKey(secretKey: sk)
-		print("pk:\(pk.hexDescription())")
-		XCTAssert(pk.hexDescription() == x1)
+        print("pk:\(pk.hexDescription())")
+        XCTAssert(pk.hexDescription() == x1)
 
         let m = x2.unhexlify()
-		// sig
+        // sig
         let sig = Ed25519.sign(message: x2.unhexlify(), secretKey: sk)
-		XCTAssertEqual(sig.count, 64)
-		XCTAssertEqual(sig.hexDescription(), x3)
+        XCTAssertEqual(sig.count, 64)
+        XCTAssertEqual(sig.hexDescription(), x3)
 
         let result = Ed25519.verify(signature: sig, message: m, publicKey: pk)
         XCTAssert(result)
@@ -55,7 +55,7 @@ class Ed25519macOSTests: XCTestCase {
         let x1 = "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
         let x2 = "72"
         let x3 = "92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c0072"
-		let sk = String(x0.prefix(64)).unhexlify()
+        let sk = String(x0.prefix(64)).unhexlify()
         let m = x2.unhexlify()
         let sig = Ed25519.sign(message: x2.unhexlify(), secretKey: sk)
         XCTAssertEqual(sig.count, 64)
@@ -75,7 +75,7 @@ class Ed25519macOSTests: XCTestCase {
             let s = try String(contentsOf: url.appendingPathComponent("input.txt"))
             let lines = s.components(separatedBy: "\n")
             for line in lines {
-				let ary: [String] = line.components(separatedBy: ":")
+                let ary: [String] = line.components(separatedBy: ":")
                 if ary.count == 5 {
                     // sk + pk
                     let x0 = ary[0]
@@ -111,23 +111,23 @@ class Ed25519macOSTests: XCTestCase {
     func test256_create_keypair() {
         for _ in 0..<1024 {
             let pair = Ed25519.generateKeyPair()
-            let result = Ed25519.isValidKeyPair(publicKey: pair.publicKey,  secretKey: pair.secretKey)
+            let result = Ed25519.isValidKeyPair(publicKey: pair.publicKey, secretKey: pair.secretKey)
             XCTAssert(result)
             print(">", terminator: "")
         }
     }
 
-	func testBytes() {
-		let publicKey = [UInt8](repeating: 0, count: 32)
-		var a = ge()
-		let ret = ge.ge25519_unpackneg_vartime(&a, publicKey)
-		XCTAssert(ret)
-		ge.ge25519_negate(&a)
+    func testBytes() {
+        let publicKey = [UInt8](repeating: 0, count: 32)
+        var a = ge()
+        let ret = ge.ge25519_unpackneg_vartime(&a, publicKey)
+        XCTAssert(ret)
+        ge.ge25519_negate(&a)
 
-		var Bv = [UInt8](repeating: 0, count: 32)
-		ge.ge25519_pack(&Bv, a)
-		XCTAssertEqual(publicKey, Bv)
-	}
+        var Bv = [UInt8](repeating: 0, count: 32)
+        ge.ge25519_pack(&Bv, a)
+        XCTAssertEqual(publicKey, Bv)
+    }
 
     func testIsValidKeyPair() {
         let secretKey: [UInt8] = "3A56538A050F6E553112DC87EEACC08166A5F76E55248DE4CA4551E2091B602D".unhexlify()

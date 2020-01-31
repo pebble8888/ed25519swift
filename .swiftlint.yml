@@ -1,6 +1,11 @@
-identifier_name:
-  min_length: 1 
-type_name:
-  min_length: 1
+disabled_rules:
+  - identifier_name
+  - type_body_length
+  - type_name
+  - function_body_length
+  - for_where
+  - file_length
+  - line_length
+
 excluded:
 - Pods/

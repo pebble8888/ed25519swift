@@ -23,13 +23,13 @@ class BigInt_ExtensionTests: XCTestCase {
     func testFundamental_0() {
         let x = BigInt(sign: .minus, magnitude: 1)
         let y = BigInt(sign: .plus, magnitude: 2)
-        let _ = x % y
+        _ = x % y
     }
 
     func testFundamental_1() {
         let x = BigUInt(1)
         let y = BigUInt(2)
-        let _ = x % y
+        _ = x % y
     }
 
     func testModulo() {

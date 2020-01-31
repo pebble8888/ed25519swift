@@ -46,14 +46,14 @@ extension Collection where Iterator.Element == UInt8 {
 }
 
 func sha512(_ s: [UInt8]) -> [UInt8] {
-#if NO_USE_CryptoSwift
+    #if NO_USE_CryptoSwift
     let data = Data(s)
     var digest = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
-	data.withUnsafeBytes { (p: UnsafeRawBufferPointer) -> Void in
-		CC_SHA512(p.baseAddress, CC_LONG(data.count), &digest)
+    data.withUnsafeBytes { (p: UnsafeRawBufferPointer) -> Void in
+        CC_SHA512(p.baseAddress, CC_LONG(data.count), &digest)
     }
     return digest
-#else
+    #else
     return s.sha512()
-#endif
+    #endif
 }

@@ -54,7 +54,7 @@ public struct Ed25519 {
     }
 
     /// create keypair
-	/// - Parameters:
+    /// - Parameters:
     ///   - publicKey: private key 32bytes
     ///   - secretKey: secret key 32bytes
     public static func generateKeyPair() -> (publicKey: [UInt8], secretKey: [UInt8]) {
@@ -66,7 +66,7 @@ public struct Ed25519 {
     }
 
     /// calc public key from secret key
-	/// - Parameters:
+    /// - Parameters:
     ///   - secretKey: secret key 32bytes
     /// - Return: public key 32bytes
     public static func calcPublicKey(secretKey: [UInt8]) -> [UInt8] {
@@ -91,10 +91,10 @@ public struct Ed25519 {
         return pk
     }
 
-	/// validate key pair
-	/// - Parameters:
-	///   - publicKey: public key 32bytes
-	///   - secretKey: secret key 32bytes
+    /// validate key pair
+    /// - Parameters:
+    ///   - publicKey: public key 32bytes
+    ///   - secretKey: secret key 32bytes
     public static func isValidKeyPair(publicKey: [UInt8], secretKey: [UInt8]) -> Bool {
         if publicKey.count != 32 {
             return false
@@ -112,13 +112,12 @@ public struct Ed25519 {
     }
 
     /// signing
-	/// - Parameters:
+    /// - Parameters:
     ///   - message: message
-	///   - secretKey: 32 bytes secret key
+    ///   - secretKey: 32 bytes secret key
     /// - Return: 64 bytes signature
-	public static func sign(message: [UInt8], secretKey: [UInt8]) -> [UInt8]
-    {
-		assert(secretKey.count == 32)
+    public static func sign(message: [UInt8], secretKey: [UInt8]) -> [UInt8] {
+        assert(secretKey.count == 32)
         let mlen: Int = message.count
         var az = [UInt8](repeating: 0, count: 64)
         var nonce = [UInt8](repeating: 0, count: 64)
@@ -174,10 +173,10 @@ public struct Ed25519 {
             sm[32+i] = a[i]
         }
 
-		var signature = [UInt8](repeating: 0, count: 64)
-		for i in 0..<64 {
-			signature[i] = sm[i]
-		}
+        var signature = [UInt8](repeating: 0, count: 64)
+        for i in 0..<64 {
+            signature[i] = sm[i]
+        }
         return signature
     }
 }

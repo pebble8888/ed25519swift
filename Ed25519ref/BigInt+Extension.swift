@@ -32,14 +32,14 @@ extension BigUInt {
 extension BigInt {
 
     /* python, ruby
-    >>> 7 % 3
-    1
-    >>> 7 % -3
-    -2
-    >>> -7 % 3
-    2
-    >>> -7 % -3
-    -1
+     >>> 7 % 3
+     1
+     >>> 7 % -3
+     -2
+     >>> -7 % 3
+     2
+     >>> -7 % -3
+     -1
      */
     public func modulo(_ divider: BigInt) -> BigInt {
         let v = self.magnitude % divider.magnitude
@@ -62,15 +62,15 @@ extension BigInt {
     }
 
     /** python, ruby
-    >>> 7 / 2
-    3
-    >>> 7 / -2
-    -4
-    >>> -7 / 2
-    -4
-    >>> -7 / -2
-    3
-    */
+     >>> 7 / 2
+     3
+     >>> 7 / -2
+     -4
+     >>> -7 / 2
+     -4
+     >>> -7 / -2
+     3
+     */
     public func divide(_ divider: BigInt) -> BigInt {
         let v = self.magnitude / divider.magnitude
         if self.sign == .plus {

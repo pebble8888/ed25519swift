@@ -7,10 +7,10 @@ let package = Package(
     products: [
         .library(
             name: "ed25519swift",
-            targets: ["ed25519swift"]),
+            targets: ["ed25519swift"])
     ],
     dependencies: [
-		.package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.0.0"),
+        .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.0.0")
     ],
     targets: [
         .target(
