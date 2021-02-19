@@ -16,7 +16,7 @@ extension BigInt {
 
     public init(word: Word) {
         let m = BigUInt(word)
-        self.init(sign: word >= 0 ? .plus : .minus, magnitude: m)
+        self.init(sign: .plus, magnitude: m)
     }
 }
 

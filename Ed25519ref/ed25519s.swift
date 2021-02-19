@@ -19,7 +19,7 @@ import BigInt
 public struct Ed25519s {
     public static let b: Int = 256
     public static let q: BigInt = BigInt(2).power(255) - 19
-    public static let L: BigInt = BigInt(2).power(252) + BigInt("27742317777372353535851937790883648493")!
+    public static let L: BigInt = BigInt(2).power(252) + BigInt("27742317777372353535851937790883648493")
     static let By: BigInt = 4 * BigInt.inv(5, q)
     static let Bx: BigInt = xrecover(By)
     public static let B: [BigInt] = [Bx.modulo(q), By.modulo(q)]
