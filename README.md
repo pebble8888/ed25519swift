@@ -46,27 +46,27 @@ import Ed25519macOS // direct
 or
 import ed25519swift // pods or Swift Package Manager
 
-static func generateKeyPair() -> (publicKey: [UInt8], secretKey: [UInt8])
+static func Ed25519.generateKeyPair() -> (publicKey: [UInt8], secretKey: [UInt8])
 ```
 
 ### Signing 
 ``` swift
-static func sign(message: [UInt8], secretKey: [UInt8]) -> [UInt8]
+static func Ed25519.sign(message: [UInt8], secretKey: [UInt8]) -> [UInt8]
 ```
 
 ### Validation
 ``` swift
-static func verify(signature: [UInt8], message: [UInt8], publicKey: [UInt8]) -> Bool
+static func Ed25519.verify(signature: [UInt8], message: [UInt8], publicKey: [UInt8]) -> Bool
 ```
 
 ### Calc public key from secret key
 ``` swift
-static func calcPublicKey(secretKey: [UInt8]) -> [UInt8]
+static func Ed25519.calcPublicKey(secretKey: [UInt8]) -> [UInt8]
 ```
 
 ### Check valid keypair
 ``` swift
-static func isValidKeyPair(publicKey: [UInt8], secretKey: [UInt8]) -> Bool
+static func Ed25519.isValidKeyPair(publicKey: [UInt8], secretKey: [UInt8]) -> Bool
 ```
 
 ## Implemantation
