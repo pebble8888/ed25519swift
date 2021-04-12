@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "ed25519swift",
     platforms: [
-        .macOS(.v10_14),
+        .macOS(.v10_12),
         .iOS(.v12)
     ],
     products: [
