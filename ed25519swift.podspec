@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ed25519swift"
-  s.version      = "1.2.5"
+  s.version      = "1.2.8"
   s.summary      = "ed25199 implementation by pure swift except sha512"
   s.homepage     = "https://github.com/pebble8888/ed25519swift"
   s.license      = "ZLIB"
